@@ -23,40 +23,6 @@ LaTeX source for the full manuscript
 
 Optional extensions for real-data examples (EEG/MEG using MNE)
 
-📁 Repository Structure
-harmonic-field-consciousness/
-│
-├── figures/
-│   ├── fig1_harmonic_modes.png
-│   ├── fig2_mode_power_states.png
-│   ├── fig3_consciousness_components.png
-│   ├── fig4_delta_paradox.png
-│   ├── fig5_oscillatory_gating.png
-│
-├── code/
-│   ├── generate_fig1_modes.py
-│   ├── generate_fig2_states.py
-│   ├── generate_fig3_functional.py
-│   ├── generate_fig4_delta_paradox.py
-│   ├── generate_fig5_gating.py
-│   └── utils.py
-│
-├── latex/
-│   ├── main.tex
-│   ├── macros.tex
-│   ├── refs.bib
-│   └── sections/
-│       ├── 01_intro.tex
-│       ├── 02_geometry.tex
-│       ├── 03_modes_dynamics.tex
-│       ├── 04_consciousness_functional.tex
-│       ├── 05_delta_paradox.tex
-│       ├── 06_vfd_bridge.tex
-│       ├── 07_discussion_future.tex
-│       └── 08_appendix_math.tex
-│
-└── README.md
-
 🔬 Reproducibility
 
 All figures in the paper can be reproduced by running:
