@@ -1,0 +1,132 @@
+\section{Brain as a Harmonic Field Medium}
+\label{sec:geometry}
+
+The central premise of this work is that the brain can be fruitfully modeled as a harmonic field medium---a spatially extended system whose activity is naturally decomposed into a basis of standing waves determined by its structural connectivity. This perspective shifts attention away from localized neural activations toward global patterns of coordinated activity, providing a principled mathematical framework for understanding large-scale brain dynamics.
+
+\subsection{The Structural Connectome as a Graph}
+
+We begin by representing the brain's white-matter architecture as a graph $G = (V, E)$, where $V$ is a set of $N$ nodes (cortical and subcortical regions) and $E$ is a set of edges encoding structural connections between them \cite{sporns2005human, hagmann2008mapping}. The choice of parcellation---whether into hundreds or thousands of regions---determines the resolution of the model, but the formalism remains general.
+
+Each edge $(i,j) \in E$ carries a weight $w_{ij} \geq 0$ reflecting the strength of the anatomical connection, typically estimated from diffusion-weighted MRI tractography as the number or density of streamlines connecting regions $i$ and $j$ \cite{behrens2003characterization}. These weights populate the \emph{adjacency matrix} $A \in \mathbb{R}^{N \times N}$, a symmetric matrix with entries
+\begin{equation}
+A_{ij} = \begin{cases}
+w_{ij} & \text{if } (i,j) \in E, \\
+0 & \text{otherwise}.
+\end{cases}
+\end{equation}
+For the present treatment we assume $A_{ii} = 0$ (no self-loops), though extensions incorporating local recurrence are straightforward.
+
+The \emph{degree matrix} $D \in \mathbb{R}^{N \times N}$ is diagonal, with entries
+\begin{equation}
+D_{ii} = \sum_{j=1}^{N} A_{ij},
+\end{equation}
+representing the total connection strength of node $i$. The \emph{graph Laplacian} is then defined as
+\begin{equation}
+\label{eq:laplacian}
+L = D - A.
+\end{equation}
+This matrix is symmetric and positive semi-definite, with a zero eigenvalue corresponding to the constant eigenvector when the graph is connected. The Laplacian encodes how activity at each node relates to activity at its neighbors: $(L\mathbf{x})_i = D_{ii} x_i - \sum_j A_{ij} x_j$ measures the deviation of node $i$ from the weighted average of its neighbors.
+
+\subsection{Eigenmodes of the Graph Laplacian}
+
+Because $L$ is real and symmetric, it admits a complete orthonormal eigenbasis. Solving the eigenproblem
+\begin{equation}
+\label{eq:eigenproblem}
+L \psi_k = \lambda_k \psi_k, \quad k = 1, \dots, N,
+\end{equation}
+yields eigenvalues $0 = \lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_N$ and corresponding eigenvectors $\psi_k \in \mathbb{R}^N$, normalized so that $\psi_k^T \psi_j = \delta_{kj}$.
+
+These eigenvectors are the \emph{connectome harmonics}---the natural modes of oscillation supported by the brain's structural network \cite{atasoy2016human, robinson2016eigenmodes}. They are the graph-theoretic analogues of Fourier modes on a continuous domain or spherical harmonics on a sphere. The associated eigenvalue $\lambda_k$ quantifies the spatial frequency of mode $k$: low-$\lambda$ modes vary smoothly across the network, engaging large, contiguous communities of regions, while high-$\lambda$ modes exhibit rapid spatial variation and fine-grained structure. Fig.~\ref{fig:harmonic-modes} illustrates this progression on a toy graph.
+
+Crucially, this harmonic decomposition is not one of many possible bases---it is the unique eigenbasis of the connectivity operator. Any network with a well-defined Laplacian admits exactly this decomposition; the harmonic basis is therefore not a modeling choice but a mathematical consequence of structured connectivity.
+
+Several properties of this spectral decomposition merit emphasis:
+
+\begin{enumerate}
+\item \textbf{Smoothness and spatial scale.} The first nontrivial eigenmode $\psi_2$ (the Fiedler vector) partitions the network into two communities with minimal cut, capturing the coarsest spatial contrast \cite{fiedler1973algebraic}. Successive modes introduce progressively finer subdivisions.
+
+\item \textbf{Completeness.} Any pattern of activity over the $N$ nodes can be exactly represented as a linear combination of the $N$ eigenmodes. No information is lost in projecting onto this basis.
+
+\item \textbf{Anatomical grounding.} Unlike Fourier modes on a regular grid, connectome harmonics are shaped by the idiosyncratic geometry and topology of the brain's wiring. They respect anatomical boundaries and long-range projections.
+
+\item \textbf{Invariance.} For a fixed parcellation and tractography, the eigenmodes are structural invariants of the individual brain. They provide a canonical coordinate system for describing time-varying activity.
+\end{enumerate}
+
+Empirical studies have demonstrated that resting-state fMRI activity preferentially occupies low-frequency connectome harmonics, suggesting that the brain's spontaneous dynamics are constrained by its structural eigenmodes \cite{atasoy2016human, preti2019decoupling}.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/fig1_harmonic_modes}
+\caption{Visualization of the first three harmonic modes on a toy graph. (A) The graph structure $G = (V, E)$, a 24-node small-world network. (B--D) The first three nontrivial Laplacian eigenmodes $\psi_1$, $\psi_2$, $\psi_3$, with nodes colored by mode amplitude (red positive, blue negative). Low-index modes capture coarse spatial structure; higher modes exhibit progressively finer patterns.}
+\label{fig:harmonic-modes}
+\end{figure}
+
+\subsection{Neural Activity as a Field}
+
+We now introduce a time-dependent \emph{neural activity field} $X(t) \in \mathbb{R}^N$, where $X_i(t)$ represents the aggregate activity of region $i$ at time $t$. Depending on the measurement modality, $X_i(t)$ may correspond to the BOLD signal (fMRI), the local field potential (intracranial EEG), the electric or magnetic field (scalp EEG/MEG), or a more abstract measure such as firing rate averaged over a neuronal population.
+
+Because the eigenmodes $\{\psi_k\}_{k=1}^N$ form a complete orthonormal basis for $\mathbb{R}^N$, we can expand $X(t)$ as
+\begin{equation}
+\label{eq:expansion}
+X(t) = \sum_{k=1}^{N} a_k(t) \, \psi_k,
+\end{equation}
+where the \emph{mode amplitudes} $a_k(t) = \psi_k^T X(t)$ are the projections of the instantaneous activity onto each eigenmode. This decomposition is exact and invertible: given $\{a_k(t)\}$, we recover $X(t)$ via Eq.~\eqref{eq:expansion}; given $X(t)$, we obtain $a_k(t)$ by projection.
+
+The representation \eqref{eq:expansion} reframes brain activity as the superposition of standing waves, each with a characteristic spatial pattern $\psi_k$ and a time-varying amplitude $a_k(t)$. In this view, the brain is a resonant medium in which structural connectivity determines which patterns are geometrically privileged, while dynamics select which modes are energized at any moment.
+
+\subsection{Interpretation as Standing Waves}
+
+The analogy to standing waves in physical media is more than metaphorical. Consider a vibrating membrane or an acoustic cavity: the spatial eigenmodes are determined by the geometry and boundary conditions, and the temporal evolution of each mode is governed by a wave equation with mode-specific frequency. In the brain, the graph Laplacian plays the role of the spatial operator, and the eigenvalues $\lambda_k$ are related to the natural frequencies of the modes.
+
+To make this precise, suppose the dynamics of $X(t)$ are approximately governed by a wave-like equation of the form
+\begin{equation}
+\label{eq:wave}
+\ddot{X}(t) = -\Omega^2 L \, X(t) + \text{(damping, nonlinearity, input, noise)},
+\end{equation}
+where $\Omega$ sets an overall frequency scale. Substituting the expansion \eqref{eq:expansion} and using the eigenvalue equation \eqref{eq:eigenproblem}, we obtain decoupled equations for each mode amplitude:
+\begin{equation}
+\ddot{a}_k(t) = -\Omega^2 \lambda_k \, a_k(t) + \cdots
+\end{equation}
+Thus $\omega_k = \Omega \sqrt{\lambda_k}$ serves as the natural angular frequency of mode $k$ in the absence of damping and coupling. Low-eigenvalue modes oscillate slowly; high-eigenvalue modes oscillate rapidly. This mapping provides a bridge between the structural (spectral) and temporal (oscillatory) properties of brain activity, a theme we develop fully in Section~\ref{sec:modes-dynamics}.
+
+The standing-wave picture also clarifies the relationship between spatial scale and temporal frequency. Low-frequency oscillations (e.g., delta, theta) are dominated by low-index modes that engage broad swathes of cortex, while high-frequency oscillations (e.g., gamma) reflect high-index modes with fine spatial structure. This is consistent with empirical observations that slow oscillations tend to be globally coherent, whereas fast oscillations are more spatially localized \cite{buzsaki2006rhythms, von2000neural}.
+
+This framework also illuminates the role of oscillatory phase in gating neural computations. Recent work on mixed selectivity has shown that oscillatory phase determines which combinations of variables reach downstream readout circuits \cite{padillacoreano2024mixed}. In the harmonic model, each mode $\psi_k$ carries both a spatial signature and a phase $\theta_k(t)$. The phase relationships among modes determine which harmonic combinations are functionally active at any instant: when modes are phase-aligned, their contributions sum constructively and can influence downstream processing; when out of phase, they cancel or remain functionally segregated. Oscillatory gating, in this view, is implemented through mode-phase coordination, with the harmonic basis providing the structured substrate on which gating operations act.
+
+Recent work on mixed selectivity has clarified that population codes dynamically reconfigure depending on oscillatory phase, neuromodulatory tone, and local circuit state. In this view, oscillations do not ``carry'' information directly; they act as gating variables that select which combinations of features can reach downstream readout circuits. The harmonic framework provides an immediate geometric substrate: each $\psi_k$ defines a structured spatial pattern, and oscillatory gating corresponds to selective activation and phase-alignment among these harmonics. When multiple modes become conjunctively active, their nonlinear combinations implement high-dimensional mixed-selectivity codes. Thus, the connectome harmonic structure provides the anatomical coordinate system in which oscillatory gating naturally operates.
+
+\subsection{Relationship to Electromagnetic Fields}
+
+Neural activity is inherently electromagnetic. Action potentials and synaptic currents generate electric and magnetic fields that superpose throughout brain tissue and can be measured at the scalp (EEG, MEG) or intracranially \cite{nunez2006electric, baillet2017magnetoencephalography}. The neural activity field $X(t)$ defined above is intimately related to the sources of these electromagnetic signals.
+
+In the forward model of EEG/MEG, the measured signal $Y(t)$ at sensor locations is a linear transformation of the source activity:
+\begin{equation}
+Y(t) = M \, X(t) + \epsilon(t),
+\end{equation}
+where $M$ is a lead-field matrix encoding the propagation of electric or magnetic fields from sources to sensors, and $\epsilon(t)$ is measurement noise. Substituting the harmonic expansion \eqref{eq:expansion}, we obtain
+\begin{equation}
+Y(t) = \sum_{k=1}^{N} a_k(t) \, (M \psi_k) + \epsilon(t).
+\end{equation}
+Each connectome harmonic $\psi_k$ has a corresponding scalp topography $M\psi_k$, and the measured signal is the amplitude-weighted superposition of these topographies.
+
+This formulation has practical implications for source reconstruction. Rather than estimating the full $N$-dimensional source vector $X(t)$, one can estimate the lower-dimensional mode amplitudes $a_k(t)$, exploiting the smoothness prior implicit in the harmonic basis \cite{atasoy2016human}. It also suggests that the classical EEG frequency bands (delta, theta, alpha, beta, gamma) are emergent spectral signatures of the underlying harmonic dynamics, not fundamental categories in themselves---a point central to our resolution of the delta paradox in Section~\ref{sec:delta-paradox}.
+
+Beyond measurement, there is growing interest in whether endogenous electromagnetic fields play a functional role in brain dynamics, perhaps through ephaptic coupling or field-mediated integration \cite{anastassiou2011ephaptic, mcfadden2020integrating}. In such scenarios, the connectome harmonics could serve as the natural modes of the brain's electromagnetic field, with the field itself acting as a substrate for large-scale integration. While our primary focus is on the formal structure of the harmonic model, we note its compatibility with these electromagnetic field theories of consciousness.
+
+\subsection{Summary}
+
+In this section we have established the mathematical foundations of the harmonic field model:
+
+\begin{itemize}
+\item The brain's structural connectivity is represented as a weighted graph $G = (V, E)$ with adjacency matrix $A$ and graph Laplacian $L = D - A$.
+
+\item The Laplacian eigenmodes $\psi_k$ and eigenvalues $\lambda_k$ define the connectome harmonics---a complete, orthonormal basis of standing-wave patterns shaped by anatomy.
+
+\item Time-varying neural activity $X(t)$ is expanded as $X(t) = \sum_k a_k(t) \, \psi_k$, with mode amplitudes $a_k(t)$ capturing the instantaneous contribution of each harmonic.
+
+\item The eigenvalue $\lambda_k$ relates to the spatial frequency and, under wave-like dynamics, the natural temporal frequency of mode $k$.
+
+\item The harmonic expansion provides a principled basis for understanding EEG/MEG signals and is compatible with electromagnetic field theories of brain function.
+\end{itemize}
+
+With the static geometry in place, we turn in the next section to the dynamics governing the evolution of the mode amplitudes $a_k(t)$.

@@ -1,0 +1,50 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{hyperref}
+
+\hypersetup{
+    pdfauthor={Lee Smart},
+    pdftitle={A Harmonic Field Model of Consciousness in the Human Brain},
+    pdfsubject={Theoretical Neuroscience, Harmonic Modes, Consciousness},
+    pdfkeywords={harmonic modes, connectome harmonics, consciousness, mixed selectivity, oscillatory gating},
+}
+
+\input{macros}
+
+\begin{document}
+
+\title{A Harmonic Field Model of Consciousness in the Human Brain}
+
+\author{
+Lee Smart\textsuperscript{1,*}\thanks{*Corresponding author. Email: \texttt{contact@vibrationalfielddynamics.org}} \\[0.5em]
+\small{\textsuperscript{1} Independent Researcher, Vibrational Field Dynamics Project} \\
+\small{Twitter/X: @vfd\_org} \\
+\small{\texttt{contact@vibrationalfielddynamics.org}}
+}
+
+\date{}
+
+\maketitle
+
+\begin{abstract}
+Traditional approaches to the neural correlates of consciousness emphasize spectral power in discrete frequency bands, yet this framework fails to explain key empirical puzzles---most notably, the coexistence of strong delta activity with conscious experience. We present a harmonic field model that reconceptualizes brain activity as a spatially distributed field expanded in connectome harmonics: the unique eigenmodes of the graph Laplacian derived from structural connectivity. This harmonic basis is not a modeling choice but a mathematical consequence of network structure. Neural dynamics are governed by coupled second-order equations for mode amplitudes, linking spatial (eigenvalue-based) and temporal (frequency-based) properties within a unified formalism. We define a consciousness functional that combines five components---mode entropy, participation ratio, phase coherence, entropy production rate, and criticality index---to quantify the degree of consciousness supported by a given field configuration. This functional depends on the global distribution and dynamics of mode amplitudes rather than power in any single frequency band. We demonstrate that the model resolves the delta paradox: states with high delta power can exhibit high or low consciousness depending on mode diversity, coherence, and proximity to criticality. The framework generates testable predictions for sleep, anesthesia, psychedelics, and disorders of consciousness, and provides a principled bridge between empirical neuroscience and geometric field theories. By shifting focus from frequency bands to field configurations, the harmonic model offers a mathematically rigorous, empirically grounded approach to understanding how the brain generates conscious experience.
+\end{abstract}
+
+\input{sections/01_intro}
+\input{sections/02_geometry}
+\input{sections/03_modes_dynamics}
+\input{sections/04_consciousness_functional}
+\input{sections/05_delta_paradox}
+\input{sections/06_vfd_bridge}
+\input{sections/07_discussion_future}
+\input{sections/08_appendix_math}
+
+\section*{Acknowledgements}
+The author thanks the open neuroscience community for ongoing discussions on mixed selectivity, oscillatory gating, and large-scale structure--function coupling, which contributed to the conceptual clarity of this work.
+
+\bibliographystyle{unsrt}
+\bibliography{refs}
+
+\end{document}

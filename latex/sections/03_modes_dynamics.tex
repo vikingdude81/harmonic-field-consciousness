@@ -1,0 +1,193 @@
+\section{Dynamics of Harmonic Modes}
+\label{sec:modes-dynamics}
+
+Having established the harmonic basis in which brain activity is represented, we now specify the dynamical equations governing the temporal evolution of the mode amplitudes $a_k(t)$. The goal is a system of equations that captures the essential physics of large-scale neural dynamics: inertia, dissipation, nonlinear interactions, external drive, and stochastic fluctuations.
+
+\subsection{Field-Level Dynamics}
+
+We posit that the spatially distributed neural activity $X(t) \in \mathbb{R}^N$ evolves according to a second-order dynamical equation of the form
+\begin{equation}
+\label{eq:field-dynamics}
+\ddot{X}(t) + \Gamma \dot{X}(t) + \Omega^2 X(t) + \nabla_X V(X) = I(t) + \eta(t).
+\end{equation}
+Here, $\Gamma$ is a damping operator (generally a positive semi-definite matrix), $\Omega^2$ encodes linear restoring forces, $V(X)$ is a nonlinear potential whose gradient introduces interactions beyond the linear regime, $I(t)$ represents external inputs (sensory, thalamic, or volitional), and $\eta(t)$ is a noise term capturing unmodeled fluctuations.
+
+This second-order structure is motivated by several considerations:
+
+\begin{enumerate}
+\item \textbf{Neural mass models.} Classical models of cortical columns and thalamocortical circuits, such as the Jansen--Rit \cite{jansen1995electroencephalogram} and Liley models \cite{liley2002spatially}, feature second-order dynamics arising from the interplay of excitatory and inhibitory populations with distinct time constants.
+
+\item \textbf{Wave phenomena.} Empirical observations of traveling waves and standing-wave patterns in cortical activity \cite{muller2018cortical} are naturally accommodated by wave-like equations with second time derivatives.
+
+\item \textbf{Oscillatory phenomenology.} EEG and MEG are dominated by rhythmic activity across multiple frequency bands. Second-order equations with appropriate parameters generate sustained or damped oscillations, matching this phenomenology.
+\end{enumerate}
+
+The operators $\Gamma$ and $\Omega^2$ may in general be non-diagonal in the node basis, coupling the dynamics of different regions. However, we will see that projection onto the harmonic basis diagonalizes the linear part under natural assumptions, yielding tractable equations for the mode amplitudes.
+
+\subsection{Projection onto Harmonic Modes}
+
+We substitute the harmonic expansion $X(t) = \sum_{k=1}^N a_k(t) \, \psi_k$ into Eq.~\eqref{eq:field-dynamics}. Because the eigenmodes $\psi_k$ are time-independent, the derivatives pass through:
+\begin{equation}
+\sum_k \ddot{a}_k(t) \, \psi_k + \Gamma \sum_k \dot{a}_k(t) \, \psi_k + \Omega^2 \sum_k a_k(t) \, \psi_k + \nabla_X V(X) = I(t) + \eta(t).
+\end{equation}
+
+Projecting both sides onto $\psi_j$ (i.e., taking the inner product with $\psi_j$) and using orthonormality, we obtain
+\begin{equation}
+\ddot{a}_j(t) + \sum_k (\psi_j^T \Gamma \psi_k) \dot{a}_k(t) + \sum_k (\psi_j^T \Omega^2 \psi_k) a_k(t) + \psi_j^T \nabla_X V(X) = I_j(t) + \xi_j(t),
+\end{equation}
+where $I_j(t) = \psi_j^T I(t)$ and $\xi_j(t) = \psi_j^T \eta(t)$ are the projections of input and noise onto mode $j$.
+
+\subsubsection{Diagonal Approximation}
+
+A significant simplification arises if the damping and stiffness operators are diagonal in the harmonic basis---or equivalently, if they commute with the Laplacian $L$. In the simplest case, we assume
+\begin{equation}
+\Gamma = \text{diag}(\gamma_1, \dots, \gamma_N) \quad \text{and} \quad \Omega^2 = \text{diag}(\omega_1^2, \dots, \omega_N^2)
+\end{equation}
+in the $\{\psi_k\}$ basis, where $\gamma_k \geq 0$ is the damping coefficient and $\omega_k > 0$ is the natural angular frequency of mode $k$. Under this assumption, the linear terms decouple across modes.
+
+The nonlinear term $\nabla_X V(X)$, however, generically couples all modes. Defining the \emph{mode-space potential} $U(a_1, \dots, a_N) = V\bigl(\sum_k a_k \psi_k\bigr)$, we have
+\begin{equation}
+\psi_j^T \nabla_X V(X) = \frac{\partial U}{\partial a_j}(a_1, \dots, a_N).
+\end{equation}
+
+Collecting terms, we arrive at the \emph{modewise dynamical equation}:
+\begin{equation}
+\label{eq:mode-dynamics}
+\boxed{
+\ddot{a}_k(t) + \gamma_k \dot{a}_k(t) + \omega_k^2 a_k(t) + \frac{\partial U}{\partial a_k}(a_1, \dots, a_N) = I_k(t) + \xi_k(t).
+}
+\end{equation}
+This is the central dynamical equation of the harmonic field model. Each mode amplitude $a_k(t)$ evolves as a damped, driven, nonlinear oscillator coupled to all other modes through the potential $U$.
+
+\subsection{Physical Interpretation of Parameters}
+
+\subsubsection{Damping Coefficients $\gamma_k$}
+
+The damping coefficient $\gamma_k$ controls how quickly mode $k$ relaxes in the absence of sustained drive. Large $\gamma_k$ corresponds to overdamped dynamics (rapid decay without oscillation), while small $\gamma_k$ permits underdamped ringing. Physiologically, damping arises from membrane time constants, synaptic decay, and homeostatic feedback. Different modes may have different effective damping depending on the spatial distribution of inhibitory interneurons and other regulatory mechanisms \cite{wilson1972excitatory}.
+
+\subsubsection{Natural Frequencies $\omega_k$}
+
+The natural frequency $\omega_k$ sets the intrinsic oscillation rate of mode $k$ when decoupled from other modes and in the absence of nonlinearity. As discussed in Section~\ref{sec:geometry}, a natural choice is $\omega_k = \Omega_0 \sqrt{\lambda_k}$, where $\Omega_0$ is a global frequency scale and $\lambda_k$ is the Laplacian eigenvalue. This links structural (spatial) and temporal (oscillatory) properties: low-eigenvalue modes oscillate slowly, high-eigenvalue modes oscillate rapidly.
+
+Alternatively, $\omega_k$ can be fit empirically to match observed spectral peaks, or derived from more detailed biophysical models. The key requirement is that the set $\{\omega_k\}$ spans the physiological range of brain rhythms, from delta ($\sim$1--4 Hz) to gamma ($\sim$30--100 Hz) and beyond.
+
+\subsubsection{Coupling Potential $U$}
+
+The potential $U(a_1, \dots, a_N)$ encodes nonlinear interactions among modes. In the simplest case, $U = 0$ and the modes evolve independently---a linear superposition of damped oscillators. More realistically, $U$ includes terms such as:
+
+\begin{itemize}
+\item \textbf{Self-interaction:} $U \supset \sum_k \frac{\mu_k}{4} a_k^4$, which saturates the growth of individual modes and prevents divergence.
+
+\item \textbf{Pairwise coupling:} $U \supset \sum_{j < k} \nu_{jk} a_j^2 a_k^2$, representing cross-frequency interactions such as phase-amplitude coupling observed in EEG \cite{canolty2010oscillatory}.
+
+\item \textbf{Higher-order terms:} More complex polynomial or non-polynomial forms can capture resonance conditions, bifurcations, and other nonlinear phenomena.
+\end{itemize}
+
+The structure of $U$ determines the repertoire of dynamical states accessible to the system---fixed points, limit cycles, quasiperiodic orbits, and chaos. In the context of consciousness, $U$ shapes the landscape of attractor states and transitions between them, a theme we return to in Section~\ref{sec:consciousness-functional}.
+
+Importantly, the coupling potential $U$ provides a natural implementation of the dynamic gating mechanisms described in recent mixed-selectivity research \cite{padillacoreano2024mixed}. The pairwise and higher-order coupling terms determine which modes interact and under what phase conditions, effectively specifying the ``gating rules'' that govern which variable combinations can be read out. When certain mode pairs have strong coupling ($\nu_{jk}$ large), their joint activation produces mixed representations; when coupling is weak or phase-misaligned, the modes remain functionally segregated. In this way, $U$ implements mixed selectivity in a continuous, network-wide harmonic basis, with the nonlinear structure emerging from the geometry of inter-mode interactions rather than from the tuning properties of individual neurons.
+
+\subsubsection{Input and Noise}
+
+The term $I_k(t)$ represents deterministic input to mode $k$, arising from sensory afferents, thalamic relay nuclei, or top-down modulation. In a closed-eyes resting state, $I_k(t)$ may be approximately constant or slowly varying; during active perception or task performance, it carries stimulus-specific structure.
+
+The noise term $\xi_k(t)$ models fluctuations from sources not explicitly represented in the model: synaptic noise, channel stochasticity, and unmodeled interactions with other brain regions. We typically assume $\xi_k(t)$ is Gaussian white noise with
+\begin{equation}
+\langle \xi_k(t) \rangle = 0, \quad \langle \xi_k(t) \xi_j(t') \rangle = \sigma_k^2 \delta_{kj} \delta(t - t'),
+\end{equation}
+though correlated or colored noise can be incorporated if warranted by data.
+
+\subsection{Stochastic Approximation: The Ornstein--Uhlenbeck Process}
+
+For analytic tractability and connection to statistical physics, it is useful to consider a linearized, stochastic version of the mode dynamics. Neglecting the nonlinear potential ($U = 0$) and the deterministic input ($I_k = 0$), and converting the second-order equation to a first-order system, we obtain
+\begin{equation}
+\frac{d}{dt} \begin{pmatrix} a_k \\ \dot{a}_k \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ -\omega_k^2 & -\gamma_k \end{pmatrix} \begin{pmatrix} a_k \\ \dot{a}_k \end{pmatrix} + \begin{pmatrix} 0 \\ \xi_k(t) \end{pmatrix}.
+\end{equation}
+
+Stacking all modes into a vector $\mathbf{a}(t) = (a_1, \dot{a}_1, \dots, a_N, \dot{a}_N)^T$, the system takes the form of a multivariate Ornstein--Uhlenbeck (OU) process:
+\begin{equation}
+\label{eq:OU}
+d\mathbf{a}(t) = -A \mathbf{a}(t) \, dt + \Sigma^{1/2} dW_t,
+\end{equation}
+where $A$ is a $2N \times 2N$ drift matrix encoding damping and restoring forces, $\Sigma$ is the noise covariance matrix, and $W_t$ is a standard Wiener process.
+
+The OU process has well-known stationary statistics. If all eigenvalues of $A$ have positive real parts (i.e., the system is stable), the stationary covariance $C_\infty = \lim_{t \to \infty} \langle \mathbf{a}(t) \mathbf{a}(t)^T \rangle$ satisfies the Lyapunov equation
+\begin{equation}
+A C_\infty + C_\infty A^T = \Sigma.
+\end{equation}
+The power spectral density of each mode can be computed analytically, yielding Lorentzian peaks centered at frequencies $\omega_k$ with widths controlled by $\gamma_k$. This provides a principled link between the harmonic model and empirical spectral analysis of EEG/MEG data.
+
+\subsection{Relationship to EEG/MEG Frequency Bands}
+
+A key insight of the harmonic field model is that the classical EEG frequency bands---delta (1--4 Hz), theta (4--8 Hz), alpha (8--13 Hz), beta (13--30 Hz), gamma (30--100 Hz)---are not fundamental dynamical entities but emergent spectral signatures of the mode amplitude dynamics. This is not merely a reinterpretation; it follows necessarily from the structure of the model. Once activity is represented in the harmonic basis, frequency bands become derived quantities---summaries of power across modes with similar natural frequencies---rather than primary objects of analysis.
+
+Each mode $k$ contributes power at frequencies near $\omega_k / (2\pi)$, broadened by damping $\gamma_k$ and modulated by nonlinear coupling. The observed EEG spectrum is the superposition of contributions from all $N$ modes, weighted by their amplitudes and filtered by the measurement lead field. Different brain states (wakefulness, sleep stages, anesthesia, task engagement) correspond to different distributions of mode amplitudes $\{a_k(t)\}$, which manifest as different spectral profiles.
+
+This perspective has several implications:
+
+\begin{enumerate}
+\item \textbf{Delta is not a frequency.} Delta power arises from the excitation of low-index, low-frequency modes. High delta power does not imply the brain is ``oscillating at delta frequency'' in a monolithic sense; it means the global, spatially smooth modes are strongly activated.
+
+\item \textbf{Cross-frequency coupling is mode coupling.} Phenomena such as theta-gamma coupling \cite{canolty2010oscillatory} reflect interactions among modes with different natural frequencies, mediated by the nonlinear potential $U$.
+
+\item \textbf{Spectral changes reflect mode redistribution.} The shift from delta-dominated sleep to alpha-dominated wakefulness corresponds to a redistribution of energy across the mode spectrum, not a change in the modes themselves.
+\end{enumerate}
+
+This reframing is essential for understanding the delta paradox---how delta-rich states can support conscious experience---which we address in Section~\ref{sec:delta-paradox}.
+
+\subsection{Oscillatory Gating as Mode-Level Routing}
+
+Recent work on mixed selectivity and dynamic population coding has emphasized that oscillations serve not merely as carriers of information, but as gating variables that determine which latent variables propagate forward in the brain's computational graph \cite{padillacoreano2024mixed}. Within the harmonic field model, this gating mechanism acquires a precise mathematical form.
+
+Consider the mode amplitudes in polar representation: $a_k(t) = r_k(t) e^{i\theta_k(t)}$, where the magnitude $r_k(t)$ encodes the energy in mode $k$ and the phase $\theta_k(t)$ encodes timing. The gating interpretation proceeds as follows:
+
+\begin{itemize}
+\item \textbf{Spatial carriers.} Each eigenmode $\psi_k$ defines a structured spatial pattern that serves as a carrier for variable combinations. Low-index modes span global, community-level patterns; high-index modes encode fine-grained spatial distinctions.
+
+\item \textbf{Phase-dependent propagation.} The phase $\theta_k(t)$ determines whether mode $k$ contributes constructively or destructively to downstream circuits at any given instant. When multiple modes are phase-aligned, their contributions sum and can influence readout; when out of phase, they cancel or remain segregated.
+
+\item \textbf{Nonlinear mixing rules.} The coupling potential $U(a_1, \ldots, a_N)$ specifies which modes interact and under what conditions. The pairwise terms $\nu_{jk} a_j^2 a_k^2$ and higher-order couplings implement the ``mixing rules''---determining which mode combinations can produce conjunctive, high-dimensional representations characteristic of mixed selectivity.
+\end{itemize}
+
+This framework provides a rigorous mathematical expression of the oscillatory gating mechanism proposed in recent syntheses of population coding research \cite{padillacoreano2024mixed, miller2024neuron}. In traditional accounts, gating is described at the level of single neurons or local circuits; here, it emerges as a global, network-wide phenomenon operating on the harmonic basis. The advantage is that gating rules inherit the anatomical structure of the connectome: the eigenmodes $\psi_k$ are shaped by white-matter geometry, and so the gating operations respect the brain's physical constraints.
+
+From this perspective, oscillatory gating and harmonic field dynamics are two descriptions of the same underlying process. The question ``which variables are currently being processed?'' becomes ``which modes are active and phase-aligned?'' The rich phenomenology of cross-frequency coupling, phase-amplitude modulation, and state-dependent information routing can all be understood as manifestations of the mode-level gating structure encoded in the dynamics \eqref{eq:mode-dynamics}. Fig.~\ref{fig:oscillatory-gating} illustrates these relationships schematically.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/fig5_oscillatory_gating}
+\caption{Oscillatory gating as mode-level routing. (A--B) Mode oscillations under high vs. intermediate phase coherence $R$. (C) Gating flexibility peaks at intermediate coherence. (D) Coupling matrix $\nu_{jk}$ specifies mode interaction strengths. (E) Effective representational dimensionality is highest when gating is flexible (intermediate $R$). (F) Summary of the oscillatory gating framework: spatial patterns $\psi_k$, phase-dependent routing $\theta_k(t)$, and nonlinear mixing rules $U$ together implement the dynamic gating described in mixed-selectivity research \cite{padillacoreano2024mixed}.}
+\label{fig:oscillatory-gating}
+\end{figure}
+
+\subsection{Stability, Criticality, and the Edge of Chaos}
+
+The stability of the linearized system \eqref{eq:OU} depends on the eigenvalues of the drift matrix $A$. If all eigenvalues have strictly positive real parts, small perturbations decay exponentially and the system settles to a stable fixed point (modulo noise-driven fluctuations). As parameters change, eigenvalues may approach zero or the imaginary axis, signaling a bifurcation.
+
+Near such bifurcations---often termed the ``edge of chaos'' or critical regime---the system exhibits enhanced sensitivity, long-range correlations, and power-law statistics \cite{beggs2003neuronal, hesse2014self}. Empirical evidence suggests that the healthy brain operates near criticality, balancing stability and flexibility \cite{tagliazucchi2012criticality}.
+
+We formalize this intuition via a \emph{criticality index} $\kappa(t)$, defined in terms of the leading eigenvalue $\lambda_{\max}$ of $A$:
+\begin{equation}
+\kappa(t) = 1 - \frac{|\Re(\lambda_{\max})|}{\lambda_{\text{crit}}},
+\end{equation}
+where $\lambda_{\text{crit}}$ is a reference scale such that $\kappa \approx 1$ when the system is near criticality and $\kappa \ll 1$ when it is far from criticality (deeply stable or unstable). This index will enter our consciousness functional in Section~\ref{sec:consciousness-functional}.
+
+\subsection{Summary}
+
+In this section we have derived the dynamical equations for the harmonic mode amplitudes:
+
+\begin{itemize}
+\item The field-level dynamics \eqref{eq:field-dynamics}, projected onto the harmonic basis, yield the modewise equation \eqref{eq:mode-dynamics}: a system of coupled, damped, driven nonlinear oscillators.
+
+\item Key parameters are the damping coefficients $\gamma_k$, natural frequencies $\omega_k$, and nonlinear coupling potential $U$.
+
+\item The linearized, stochastic approximation is a multivariate Ornstein--Uhlenbeck process, amenable to analytic treatment.
+
+\item Classical EEG frequency bands are emergent from the superposition of mode contributions, not fundamental categories.
+
+\item Oscillatory gating---the dynamic routing of information through phase-dependent mode coordination---is naturally implemented by the coupling potential $U$ and the phase structure of the mode amplitudes.
+
+\item Proximity to criticality, quantified by the index $\kappa(t)$, captures the system's dynamical regime.
+\end{itemize}
+
+With the dynamics in hand, we are now prepared to define a functional that quantifies consciousness in terms of the statistical and dynamical properties of the mode amplitudes.

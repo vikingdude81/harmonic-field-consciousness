@@ -1,0 +1,314 @@
+\appendix
+
+\section{Mathematical Details}
+\label{sec:appendix-math}
+
+This appendix provides detailed derivations and technical elaborations of the mathematical framework presented in the main text. We include derivations of the mode dynamics from the field equation, the linearization yielding the Ornstein--Uhlenbeck process, formal expressions for entropy production, and alternative formulations of the coherence and criticality indices.
+
+\subsection{Derivation of Mode Dynamics from the Field Equation}
+
+We begin with the field-level dynamical equation (Eq.~\ref{eq:field-dynamics} in the main text):
+\begin{equation}
+\ddot{X}(t) + \Gamma \dot{X}(t) + \Omega^2 X(t) + \nabla_X V(X) = I(t) + \eta(t),
+\end{equation}
+where $X(t) \in \mathbb{R}^N$ is the neural activity vector, $\Gamma$ and $\Omega^2$ are $N \times N$ matrices representing damping and restoring forces, $V(X)$ is a nonlinear potential, $I(t)$ is external input, and $\eta(t)$ is noise.
+
+\subsubsection{Expansion in Eigenmodes}
+
+Substitute the harmonic expansion $X(t) = \sum_{k=1}^N a_k(t) \psi_k$, where $\psi_k$ are the orthonormal eigenvectors of the graph Laplacian $L$ with eigenvalues $\lambda_k$. Since the $\psi_k$ are time-independent:
+\begin{equation}
+\dot{X}(t) = \sum_k \dot{a}_k(t) \psi_k, \quad \ddot{X}(t) = \sum_k \ddot{a}_k(t) \psi_k.
+\end{equation}
+
+Substituting into the field equation:
+\begin{equation}
+\sum_k \ddot{a}_k \psi_k + \Gamma \sum_k \dot{a}_k \psi_k + \Omega^2 \sum_k a_k \psi_k + \nabla_X V = I + \eta.
+\end{equation}
+
+\subsubsection{Projection onto Mode $j$}
+
+Taking the inner product with $\psi_j$ and using orthonormality ($\psi_j^T \psi_k = \delta_{jk}$):
+\begin{equation}
+\ddot{a}_j + \sum_k (\psi_j^T \Gamma \psi_k) \dot{a}_k + \sum_k (\psi_j^T \Omega^2 \psi_k) a_k + \psi_j^T \nabla_X V = \psi_j^T I + \psi_j^T \eta.
+\end{equation}
+
+\subsubsection{Diagonal Assumption}
+
+If $\Gamma$ and $\Omega^2$ are diagonal in the $\{\psi_k\}$ basis (i.e., they commute with $L$), then:
+\begin{equation}
+\psi_j^T \Gamma \psi_k = \gamma_j \delta_{jk}, \quad \psi_j^T \Omega^2 \psi_k = \omega_j^2 \delta_{jk}.
+\end{equation}
+
+This yields the simplified equation:
+\begin{equation}
+\ddot{a}_j + \gamma_j \dot{a}_j + \omega_j^2 a_j + \psi_j^T \nabla_X V = I_j + \xi_j,
+\end{equation}
+where $I_j = \psi_j^T I$ and $\xi_j = \psi_j^T \eta$.
+
+\subsubsection{Mode-Space Potential}
+
+Define the mode-space potential $U(a_1, \ldots, a_N) = V\left(\sum_k a_k \psi_k\right)$. By the chain rule:
+\begin{equation}
+\frac{\partial U}{\partial a_j} = \sum_i \frac{\partial V}{\partial X_i} \frac{\partial X_i}{\partial a_j} = \sum_i \frac{\partial V}{\partial X_i} (\psi_j)_i = \psi_j^T \nabla_X V.
+\end{equation}
+
+Thus, we obtain the final modewise equation:
+\begin{equation}
+\boxed{\ddot{a}_k(t) + \gamma_k \dot{a}_k(t) + \omega_k^2 a_k(t) + \frac{\partial U}{\partial a_k} = I_k(t) + \xi_k(t).}
+\end{equation}
+
+\subsection{Linearization and the Ornstein--Uhlenbeck Process}
+
+For analytic tractability, we linearize the mode dynamics by neglecting the nonlinear potential ($U = 0$) and deterministic input ($I_k = 0$).
+
+\subsubsection{State-Space Formulation}
+
+Define the state vector for mode $k$ as $\mathbf{z}_k = (a_k, \dot{a}_k)^T$. The linearized second-order equation becomes a first-order system:
+\begin{equation}
+\frac{d\mathbf{z}_k}{dt} = \begin{pmatrix} 0 & 1 \\ -\omega_k^2 & -\gamma_k \end{pmatrix} \mathbf{z}_k + \begin{pmatrix} 0 \\ \xi_k(t) \end{pmatrix}.
+\end{equation}
+
+Let $A_k = \begin{pmatrix} 0 & -1 \\ \omega_k^2 & \gamma_k \end{pmatrix}$ (note the sign convention for the drift matrix). Then:
+\begin{equation}
+\frac{d\mathbf{z}_k}{dt} = -A_k \mathbf{z}_k + \mathbf{b}_k \xi_k(t),
+\end{equation}
+where $\mathbf{b}_k = (0, 1)^T$.
+
+\subsubsection{Full System}
+
+Stacking all modes into a $2N$-dimensional vector $\mathbf{z} = (\mathbf{z}_1, \ldots, \mathbf{z}_N)^T$:
+\begin{equation}
+d\mathbf{z}(t) = -A \mathbf{z}(t) \, dt + B \, d\mathbf{W}_t,
+\end{equation}
+where $A = \text{diag}(A_1, \ldots, A_N)$ is a block-diagonal $2N \times 2N$ matrix, $B$ encodes the noise injection, and $\mathbf{W}_t$ is a standard $N$-dimensional Wiener process.
+
+If the noise has covariance $\langle \xi_k(t) \xi_j(t') \rangle = \sigma_k^2 \delta_{kj} \delta(t-t')$, then the noise covariance matrix is $\Sigma = B \, \text{diag}(\sigma_1^2, \ldots, \sigma_N^2) \, B^T$.
+
+This is a multivariate Ornstein--Uhlenbeck (OU) process:
+\begin{equation}
+d\mathbf{z}(t) = -A \mathbf{z}(t) \, dt + \Sigma^{1/2} d\mathbf{W}_t.
+\end{equation}
+
+\subsubsection{Stationary Distribution}
+
+If all eigenvalues of $A$ have positive real parts (stable system), the process has a Gaussian stationary distribution with mean zero and covariance $C_\infty$ satisfying the Lyapunov equation:
+\begin{equation}
+A C_\infty + C_\infty A^T = \Sigma.
+\end{equation}
+
+For the block-diagonal structure, this decouples into $N$ independent $2 \times 2$ Lyapunov equations, one per mode.
+
+\subsubsection{Power Spectral Density}
+
+The power spectral density (PSD) of mode $k$ is:
+\begin{equation}
+S_k(\omega) = \frac{\sigma_k^2}{(\omega_k^2 - \omega^2)^2 + (\gamma_k \omega)^2}.
+\end{equation}
+
+This is a Lorentzian centered at $\omega \approx \omega_k$ (for underdamped modes with $\gamma_k < 2\omega_k$), with width proportional to $\gamma_k$. The total power in mode $k$ is:
+\begin{equation}
+\langle a_k^2 \rangle = \int_{-\infty}^{\infty} \frac{S_k(\omega)}{2\pi} d\omega = \frac{\sigma_k^2}{2 \gamma_k \omega_k^2}.
+\end{equation}
+
+\subsection{Entropy Production Rate}
+
+\subsubsection{General Formula}
+
+For a multivariate OU process $d\mathbf{z} = -A\mathbf{z} \, dt + \Sigma^{1/2} d\mathbf{W}_t$, the entropy production rate in the stationary state is \cite{tome2015entropy, seifert2012stochastic}:
+\begin{equation}
+\dot{S} = \text{Tr}\left( (A - A^T) \Sigma^{-1} C_\infty \right),
+\end{equation}
+where $C_\infty$ is the stationary covariance.
+
+An equivalent expression is:
+\begin{equation}
+\dot{S} = \text{Tr}\left( A \Sigma^{-1} A^T C_\infty \right) - \text{Tr}(A).
+\end{equation}
+
+\subsubsection{Interpretation}
+
+Entropy production measures the irreversibility of the dynamics---the rate at which the system produces entropy in its environment. For equilibrium systems (satisfying detailed balance), $\dot{S} = 0$. For driven, non-equilibrium systems, $\dot{S} > 0$.
+
+In the context of brain dynamics, high entropy production indicates that the system is actively maintained away from equilibrium by metabolic processes. This is associated with wakeful, conscious states.
+
+\subsubsection{Estimation from Data}
+
+Given time-series data, $A$ and $\Sigma$ can be estimated via maximum likelihood or moment matching. The covariance $C_\infty$ can be estimated directly from the data. These estimates allow computation of $\dot{S}$.
+
+\subsection{Alternative Formulations of Phase Coherence}
+
+\subsubsection{Kuramoto Order Parameter}
+
+The phase coherence $R(t)$ defined in the main text is the magnitude of the Kuramoto order parameter:
+\begin{equation}
+R(t) e^{i\Phi(t)} = \frac{1}{N} \sum_{k=1}^N e^{i\theta_k(t)},
+\end{equation}
+where $\Phi(t)$ is the mean phase. $R \in [0,1]$ measures the degree of phase synchronization.
+
+\subsubsection{Weighted Coherence}
+
+A weighted version accounts for differences in mode power:
+\begin{equation}
+R_w(t) = \left| \frac{\sum_k P_k(t) e^{i\theta_k(t)}}{\sum_k P_k(t)} \right| = \left| \sum_k p_k(t) e^{i\theta_k(t)} \right|.
+\end{equation}
+
+This gives more weight to high-power modes.
+
+\subsubsection{Pairwise Phase Locking}
+
+An alternative measure is the mean pairwise phase-locking value (PLV):
+\begin{equation}
+\text{PLV}(t) = \frac{2}{N(N-1)} \sum_{j < k} \left| \langle e^{i(\theta_j(t) - \theta_k(t))} \rangle_T \right|,
+\end{equation}
+where $\langle \cdot \rangle_T$ denotes a time average over a window. This captures the consistency of phase relationships.
+
+\subsubsection{Metastability}
+
+The variance of $R(t)$ over time measures metastability \cite{tognoli2014metastable}:
+\begin{equation}
+\chi = \text{Var}_t[R(t)].
+\end{equation}
+
+High metastability indicates the system fluctuates between coherent and incoherent states---a signature of flexible, adaptive dynamics.
+
+\subsection{Alternative Formulations of the Criticality Index}
+
+\subsubsection{Eigenvalue-Based Index}
+
+The criticality index $\kappa(t)$ in the main text is defined as:
+\begin{equation}
+\kappa(t) = 1 - \frac{|\Re(\lambda_{\max})|}{\lambda_{\text{crit}}},
+\end{equation}
+where $\lambda_{\max}$ is the eigenvalue of $A$ with the largest (least negative) real part. Near a bifurcation, $\Re(\lambda_{\max}) \to 0$, so $\kappa \to 1$.
+
+\subsubsection{Branching Ratio}
+
+In the theory of neuronal avalanches, criticality is characterized by the branching ratio $\sigma$---the average number of downstream activations per activation \cite{beggs2003neuronal}. At criticality, $\sigma = 1$; subcritical systems have $\sigma < 1$; supercritical systems have $\sigma > 1$. The branching ratio can be estimated from spike data and used as an alternative criticality index.
+
+\subsubsection{Power-Law Exponents}
+
+Critical systems exhibit power-law distributions of avalanche sizes and durations:
+\begin{equation}
+P(s) \propto s^{-\tau}, \quad P(d) \propto d^{-\alpha},
+\end{equation}
+with exponents $\tau \approx 1.5$ and $\alpha \approx 2$ for mean-field criticality. Deviations from these exponents indicate distance from criticality. A criticality index can be constructed from the deviation:
+\begin{equation}
+\kappa_{\text{exponent}} = 1 - \frac{|\tau - 1.5|}{0.5}.
+\end{equation}
+
+\subsubsection{Susceptibility}
+
+The susceptibility $\chi$ measures the system's response to perturbations. Near criticality, susceptibility diverges. A normalized susceptibility can serve as a criticality index:
+\begin{equation}
+\kappa_\chi = \frac{\chi}{\chi_{\text{max}}},
+\end{equation}
+where $\chi_{\text{max}}$ is a reference maximum.
+
+\subsection{Properties of the Mode Entropy}
+
+\subsubsection{Bounds}
+
+The mode entropy $H_{\text{mode}} = -\sum_k p_k \log p_k$ satisfies:
+\begin{equation}
+0 \leq H_{\text{mode}} \leq \log N,
+\end{equation}
+with the lower bound achieved when all power is in one mode ($p_j = 1$ for some $j$, $p_k = 0$ otherwise) and the upper bound achieved for the uniform distribution ($p_k = 1/N$ for all $k$).
+
+\subsubsection{Relationship to Participation Ratio}
+
+The participation ratio $\text{PR} = 1/\sum_k p_k^2$ satisfies:
+\begin{equation}
+1 \leq \text{PR} \leq N.
+\end{equation}
+
+For a distribution with $m$ equally weighted modes ($p_k = 1/m$ for $k = 1, \ldots, m$), $\text{PR} = m$ and $H_{\text{mode}} = \log m$. Thus:
+\begin{equation}
+H_{\text{mode}} = \log(\text{PR})
+\end{equation}
+for such distributions. More generally, for arbitrary distributions:
+\begin{equation}
+\log(\text{PR}) \leq H_{\text{mode}} \leq \log N,
+\end{equation}
+with equality on the left for flat-topped distributions.
+
+\subsubsection{Sensitivity to Tails}
+
+Mode entropy is more sensitive to small probabilities than the participation ratio. If many modes have small but nonzero power, $H_{\text{mode}}$ increases significantly, while PR may remain modest. This justifies including both in the consciousness functional.
+
+\subsection{Normalization of the Consciousness Functional}
+
+The consciousness functional is:
+\begin{equation}
+C(t) = \alpha \frac{H_{\text{mode}}}{H_{\max}} + \beta \frac{\text{PR}}{\text{PR}_{\max}} + \gamma R + \delta \frac{\dot{S}}{\dot{S}_{\max}} + \varepsilon \kappa.
+\end{equation}
+
+Each term is normalized to $[0,1]$:
+\begin{itemize}
+\item $H_{\text{mode}}/H_{\max} \in [0,1]$ with $H_{\max} = \log N$.
+\item $\text{PR}/\text{PR}_{\max} \in [0,1]$ with $\text{PR}_{\max} = N$.
+\item $R \in [0,1]$ by definition.
+\item $\dot{S}/\dot{S}_{\max} \in [0,1]$ where $\dot{S}_{\max}$ is an empirically determined or theoretically motivated upper bound.
+\item $\kappa \in (-\infty, 1]$, but in practice is bounded; if needed, $\kappa$ can be clipped to $[0,1]$.
+\end{itemize}
+
+With positive weights $\alpha + \beta + \gamma + \delta + \varepsilon = 1$, the functional $C(t)$ lies in $[0,1]$, facilitating interpretation as a normalized consciousness level.
+
+\subsection{Stability Analysis of Mode Dynamics}
+
+\subsubsection{Linear Stability}
+
+For the linearized single-mode equation $\ddot{a}_k + \gamma_k \dot{a}_k + \omega_k^2 a_k = 0$, the characteristic equation is:
+\begin{equation}
+s^2 + \gamma_k s + \omega_k^2 = 0,
+\end{equation}
+with roots:
+\begin{equation}
+s_{\pm} = \frac{-\gamma_k \pm \sqrt{\gamma_k^2 - 4\omega_k^2}}{2}.
+\end{equation}
+
+\begin{itemize}
+\item \textbf{Underdamped} ($\gamma_k < 2\omega_k$): Complex conjugate roots with negative real parts. Oscillatory decay.
+\item \textbf{Critically damped} ($\gamma_k = 2\omega_k$): Repeated real root. Fastest non-oscillatory decay.
+\item \textbf{Overdamped} ($\gamma_k > 2\omega_k$): Two distinct negative real roots. Exponential decay without oscillation.
+\end{itemize}
+
+For all $\gamma_k > 0$ and $\omega_k > 0$, the equilibrium $a_k = 0$ is stable.
+
+\subsubsection{Bifurcations}
+
+As parameters vary, the system may undergo bifurcations:
+\begin{itemize}
+\item \textbf{Hopf bifurcation}: If $\gamma_k \to 0$, eigenvalues approach the imaginary axis, and a limit cycle may emerge.
+\item \textbf{Saddle-node bifurcation}: Changes in the nonlinear potential $U$ can create or destroy fixed points.
+\item \textbf{Pitchfork bifurcation}: Symmetry-breaking transitions in $U$ can split stable equilibria.
+\end{itemize}
+
+The criticality index $\kappa$ tracks proximity to such bifurcations.
+
+\subsection{Summary of Key Equations}
+
+For reference, we collect the key equations of the harmonic field model:
+
+\begin{enumerate}
+\item \textbf{Graph Laplacian:} $L = D - A$, with eigenproblem $L\psi_k = \lambda_k \psi_k$.
+
+\item \textbf{Harmonic expansion:} $X(t) = \sum_{k=1}^N a_k(t) \psi_k$.
+
+\item \textbf{Mode dynamics:} $\ddot{a}_k + \gamma_k \dot{a}_k + \omega_k^2 a_k + \frac{\partial U}{\partial a_k} = I_k + \xi_k$.
+
+\item \textbf{Mode power:} $P_k(t) = |a_k(t)|^2$, normalized distribution $p_k = P_k / \sum_j P_j$.
+
+\item \textbf{Mode entropy:} $H_{\text{mode}} = -\sum_k p_k \log p_k$.
+
+\item \textbf{Participation ratio:} $\text{PR} = 1/\sum_k p_k^2$.
+
+\item \textbf{Phase coherence:} $R = \left| \frac{1}{N} \sum_k e^{i\theta_k} \right|$.
+
+\item \textbf{Entropy production:} $\dot{S} = \text{Tr}(A\Sigma^{-1}A^T C) - \text{Tr}(A)$.
+
+\item \textbf{Criticality index:} $\kappa = 1 - |\Re(\lambda_{\max})| / \lambda_{\text{crit}}$.
+
+\item \textbf{Consciousness functional:} $C(t) = \alpha \frac{H_{\text{mode}}}{H_{\max}} + \beta \frac{\text{PR}}{\text{PR}_{\max}} + \gamma R + \delta \frac{\dot{S}}{\dot{S}_{\max}} + \varepsilon \kappa$.
+\end{enumerate}
+
+These equations form the mathematical core of the harmonic field model of consciousness.
