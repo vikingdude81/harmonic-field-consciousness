@@ -65,6 +65,15 @@ pip install -r requirements.txt
 
 ## Quick Start
 
+### Installation
+
+First, install the required dependencies:
+
+```bash
+cd experiments
+pip install -r requirements.txt
+```
+
 ### Run All Experiments
 
 Execute all experiments with a single command:
@@ -73,7 +82,24 @@ Execute all experiments with a single command:
 python run_all.py
 ```
 
-This will run all 16 experiments in parallel and generate a comprehensive report.
+This will discover and run all experiments with progress tracking.
+
+### Run Specific Experiments
+
+Filter by category:
+```bash
+python run_all.py --category category1_network_topology
+```
+
+Run a specific experiment:
+```bash
+python run_all.py --experiment exp1_topology_comparison
+```
+
+List all available experiments:
+```bash
+python run_all.py --list
+```
 
 ### Run Individual Experiments
 
@@ -82,7 +108,8 @@ Each experiment can be run independently:
 ```bash
 python category1_network_topology/exp1_topology_comparison.py
 python category2_dynamics/exp1_state_transitions.py
-# etc.
+python category3_functional_modifications/exp1_weighted_components.py
+python category4_applications/exp3_psychedelic_states.py
 ```
 
 ### Interactive Exploration
@@ -91,6 +118,15 @@ Launch the interactive Jupyter notebooks:
 
 ```bash
 jupyter notebook notebooks/interactive_explorer.ipynb
+jupyter notebook notebooks/results_analysis.ipynb
+```
+
+### Verify Installation
+
+Test that everything is working:
+
+```bash
+python -c "from utils import *; print('Framework operational!')"
 ```
 
 ## Core Utilities
