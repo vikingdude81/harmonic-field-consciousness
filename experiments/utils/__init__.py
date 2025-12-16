@@ -49,6 +49,51 @@ from .visualization import (
     plot_heatmap,
 )
 
+# GPU utilities
+from .gpu_utils import (
+    get_device_info,
+    get_array_module,
+    gpu_eigendecomposition,
+    batch_compute_metrics_gpu,
+    print_gpu_status,
+    GPUAccelerator,
+)
+
+# Caching utilities
+from .caching import (
+    ExperimentCache,
+    CheckpointManager,
+    cache_result,
+    quick_save,
+    quick_load,
+)
+
+# Parameter sweep utilities
+from .parameter_sweep import (
+    ParameterSpace,
+    ParameterSweep,
+    SweepResult,
+    quick_sweep,
+)
+
+# Cross-validation utilities
+from .cross_validation import (
+    CrossValidator,
+    CVResult,
+    MetricRobustnessTester,
+    paired_significance_test,
+    effect_size,
+)
+
+# Comparative analysis utilities
+from .comparative_analysis import (
+    ExperimentComparator,
+    ExperimentRecord,
+    BenchmarkSuite,
+    quick_compare,
+    rank_methods,
+)
+
 __all__ = [
     # Graph generators
     "generate_small_world",
@@ -81,4 +126,34 @@ __all__ = [
     "plot_time_series",
     "plot_phase_space",
     "plot_heatmap",
+    # GPU utilities
+    "get_device_info",
+    "get_array_module",
+    "gpu_eigendecomposition",
+    "batch_compute_metrics_gpu",
+    "print_gpu_status",
+    "GPUAccelerator",
+    # Caching
+    "ExperimentCache",
+    "CheckpointManager",
+    "cache_result",
+    "quick_save",
+    "quick_load",
+    # Parameter sweep
+    "ParameterSpace",
+    "ParameterSweep",
+    "SweepResult",
+    "quick_sweep",
+    # Cross-validation
+    "CrossValidator",
+    "CVResult",
+    "MetricRobustnessTester",
+    "paired_significance_test",
+    "effect_size",
+    # Comparative analysis
+    "ExperimentComparator",
+    "ExperimentRecord",
+    "BenchmarkSuite",
+    "quick_compare",
+    "rank_methods",
 ]

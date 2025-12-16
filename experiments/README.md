@@ -165,6 +165,48 @@ Generate realistic brain state power distributions:
 
 Comprehensive plotting utilities for all experimental results.
 
+### GPU Acceleration (`utils/gpu_utils.py`)
+
+CUDA/GPU support for computationally intensive operations:
+- Automatic CuPy/NumPy fallback
+- GPU-accelerated eigendecomposition
+- Batch metric computation
+- PyTorch CUDA integration
+
+### Result Caching (`utils/caching.py`)
+
+Save and resume experiment results:
+- Multi-format storage (pickle, JSON, HDF5, CSV)
+- Experiment versioning and metadata
+- Checkpoint manager for resumable experiments
+- Decorator-based automatic caching
+
+### Parameter Sweeps (`utils/parameter_sweep.py`)
+
+Systematic hyperparameter exploration:
+- Grid search, random search, Latin Hypercube
+- Parallel execution support
+- Result tracking and visualization
+- Heatmap and parameter importance plots
+
+### Cross-Validation (`utils/cross_validation.py`)
+
+Validate metric robustness:
+- K-fold, stratified, leave-one-out, bootstrap
+- Confidence interval estimation
+- Noise sensitivity testing
+- Statistical significance tests
+
+### Comparative Analysis (`utils/comparative_analysis.py`)
+
+Compare experiments side-by-side:
+- Multi-criteria ranking
+- Statistical comparison with p-values
+- LaTeX and Markdown table generation
+- Radar, bar, heatmap visualizations
+
+See [utils/README.md](utils/README.md) for detailed API documentation.
+
 ## Experiment Categories
 
 ### Category 1: Network Topology
