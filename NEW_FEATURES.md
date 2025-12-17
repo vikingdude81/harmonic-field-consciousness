@@ -1,53 +1,374 @@
-# 🎉 NEW FEATURES - Quantum Reality Steering Integration
+# 🎉 NEW FEATURES - Neuroscience Papers Integration
 
-## What's New
+## What's New (December 2025)
 
-This repository has been significantly enhanced with a **Quantum Reality Steering** framework, integrating concepts from the paper "Steering Alternative Realities through Local Quantum Memory Operations" (arXiv:2512.14377) by Xiongfeng Ma.
+This repository has been significantly enhanced with **four cutting-edge neuroscience papers** integration, adding state-of-the-art techniques for consciousness modeling:
+
+1. **Multiscale Dynamics** (arXiv:2512.12462)
+2. **BaRISTA Transformers** (arXiv:2512.12135)
+3. **CogniSNN Spiking Networks** (arXiv:2512.11743)
+4. **Meminductor Computing** (arXiv:2512.11002)
+
+---
 
 ## 🔬 New Capabilities
 
-### 1. Quantum Consciousness States
-- Model consciousness as quantum superposition of harmonic modes
-- Create and manipulate quantum consciousness states
-- Basis states for wake, sleep, anesthesia, meditation, and psychedelic states
-- Support for arbitrary superposition states
+### 1. Multiscale Dynamics (Category 6)
+- **Multiscale encoder** for different temporal resolutions
+- **Real-time decoder** with <100ms latency target
+- **Robust missing data handling** (up to 30% missing)
+- **Nonlinear temporal dynamics** across timescales
 
-### 2. Reality Steering Protocol
-- Steer between different consciousness states (wake ↔ sleep ↔ anesthesia)
-- Gradual transitions with probabilistic outcomes
-- Local operations affecting global consciousness state
-- Oscillatory state transitions (e.g., sleep-wake cycles)
+**Key Features**:
+- Process harmonic modes at multiple scales (1x, 2x, 4x, 8x)
+- Streaming consciousness state prediction
+- Graceful degradation with incomplete data
+- Integration with existing consciousness metrics
 
-### 3. Quantum Measurement
-- Projective measurements in consciousness basis
-- Weak measurements with partial collapse
-- Continuous monitoring of consciousness
-- Measurement back-action effects
-- Quantum Zeno effect demonstration
+### 2. BaRISTA Transformers (Category 7)
+- **Region-level encoding** (brain modules, not individual nodes)
+- **Multi-head attention** revealing important brain regions
+- **Masked reconstruction** for self-supervised learning
+- **Flexible spatial scales** (nodes → communities → hemispheres)
 
-### 4. Entanglement and Non-local Effects
-- Compute entanglement entropy between brain regions
-- Mutual information between regions
-- Model how local perturbations create non-local effects
-- Quantum correlations beyond classical information
+**Key Features**:
+- Attention weights show interpretable connectivity
+- Self-supervised pre-training strategy
+- Hierarchical spatial analysis
+- >85% state classification accuracy target
+
+### 3. CogniSNN Spiking Networks (Category 8)
+- **LIF neuron models** for biological realism
+- **Spike train encoding/decoding** (rate and temporal coding)
+- **Dynamic network growth** during learning
+- **Neuromorphic hardware** deployment (SpiNNaker/Loihi)
+
+**Key Features**:
+- Compute all consciousness metrics from spikes
+- Pathway reusability for efficient learning
+- Event-driven computation
+- <10W power, <10ms latency target for hardware
+
+### 4. Meminductor Computing (Category 9)
+- **Meminductor model** with memory-dependent inductance
+- **RLC oscillators** (richer than RC dynamics)
+- **Memory encoding** in magnetic flux
+- **Anticipatory behavior** via LC resonance
+
+**Key Features**:
+- Physical circuit implementation
+- Biological timing mechanisms
+- State prediction via resonance
+- SPICE circuit simulation support
+
+---
 
 ## 📂 New Files and Directories
 
 ### Core Implementation
 ```
-src/quantum/
-├── __init__.py                    # Package exports
-├── reality_register.py            # RealityRegister class
-├── steering_protocol.py           # Steering operations
-├── quantum_measurement.py         # Measurement and collapse
-└── entanglement.py               # Non-local correlations
+src/
+├── multiscale/
+│   ├── __init__.py
+│   ├── encoder.py              # Multiscale temporal encoder
+│   └── decoder.py              # Real-time consciousness decoder
+│
+├── transformers/
+│   ├── __init__.py
+│   ├── barista.py              # BaRISTA transformer model
+│   └── attention.py            # Attention visualization
+│
+├── snn/
+│   ├── __init__.py
+│   ├── lif_neuron.py           # Leaky integrate-and-fire neurons
+│   ├── spike_encoder.py        # Spike train encoding
+│   └── spike_metrics.py        # Consciousness metrics from spikes
+│
+└── memcomputing/
+    ├── __init__.py
+    ├── meminductor.py          # Meminductor model
+    └── rlc_dynamics.py         # RLC oscillator dynamics
 ```
 
 ### Experiments
 ```
-experiments/category5_quantum_steering/
-├── README.md                      # Category documentation
-├── exp1_steering_consciousness_states.py
+experiments/
+├── category6_multiscale_dynamics/
+│   ├── README.md
+│   ├── exp1_multiscale_encoder.py
+│   ├── exp2_realtime_decoding.py
+│   ├── exp3_missing_data_robustness.py
+│   └── exp4_nonlinear_dynamics.py
+│
+├── category7_spatiotemporal_transformers/
+│   ├── README.md
+│   ├── exp1_region_level_encoding.py
+│   ├── exp2_masked_reconstruction.py
+│   ├── exp3_transformer_consciousness.py
+│   └── exp4_spatial_scale_analysis.py
+│
+├── category8_spiking_consciousness/
+│   ├── README.md
+│   ├── exp1_snn_harmonic_oscillators.py
+│   ├── exp2_pathway_reuse_transitions.py
+│   ├── exp3_dynamic_network_growth.py
+│   └── exp4_neuromorphic_deployment.py
+│
+└── category9_memcomputing/
+    ├── README.md
+    ├── exp1_rlc_oscillators.py
+    ├── exp2_memory_encoding.py
+    ├── exp3_timing_anticipation.py
+    └── exp4_physical_consciousness.py
+```
+
+### Documentation
+```
+papers/neuroscience/
+├── 2512.12462_multiscale.md       # Multiscale dynamics
+├── 2512.12135_barista.md          # BaRISTA transformers
+├── 2512.11743_cognisnn.md         # CogniSNN spiking networks
+└── 2512.11002_meminductors.md     # Meminductor computing
+```
+
+---
+
+## 🚀 Quick Start
+
+### Example 1: Multiscale Encoding
+```python
+from src.multiscale import MultiscaleEncoder
+
+# Create encoder with multiple scales
+encoder = MultiscaleEncoder(n_modes=30, scales=[1, 2, 4, 8])
+
+# Encode time series at multiple resolutions
+encoded = encoder.encode(time_series)
+multiscale_power = encoder.compute_multiscale_power(time_series)
+
+# Handle missing data
+reconstructed = encoder.handle_missing_data(data, missing_mask)
+```
+
+### Example 2: Real-time Consciousness Prediction
+```python
+from src.multiscale import RealtimeDecoder
+
+# Initialize decoder for streaming
+decoder = RealtimeDecoder(n_modes=30, buffer_size=100)
+
+# Stream processing
+for sample in data_stream:
+    metrics = decoder.update(sample)
+    state = decoder.predict_state(metrics)
+    print(f"C(t): {metrics['C_t']:.3f}, State: {state}")
+    print(f"Latency: {metrics['latency_ms']:.1f}ms")
+```
+
+### Example 3: Transformer Analysis
+```python
+from src.transformers import BaRISTAModel, AttentionVisualizer
+
+# Create model for region-level analysis
+model = BaRISTAModel(n_regions=8, n_features=32, n_heads=4)
+
+# Predict consciousness state
+prediction = model.predict_consciousness_state(region_data)
+print(f"State: {prediction['state']}")
+print(f"C_score: {prediction['C_score']:.3f}")
+
+# Visualize attention
+viz = AttentionVisualizer(region_names=['V1', 'V2', 'PFC', ...])
+fig = viz.plot_attention_matrix(prediction['attention'])
+```
+
+### Example 4: Spiking Neural Network
+```python
+from src.snn import LIFNetwork, SpikeEncoder, compute_spike_metrics
+
+# Create spiking network
+network = LIFNetwork(n_neurons=100, connectivity=adjacency_matrix)
+
+# Simulate
+spike_matrix, spike_trains = network.simulate(input_sequence, n_steps=1000)
+
+# Compute consciousness metrics from spikes
+metrics = compute_spike_metrics(spike_matrix, dt=0.1)
+print(f"H_mode: {metrics['H_mode']:.3f}")
+print(f"C_t: {metrics['C_t']:.3f}")
+```
+
+### Example 5: Meminductor Oscillators
+```python
+from src.memcomputing import RLCOscillatorBank
+
+# Create oscillator bank with meminductors
+bank = RLCOscillatorBank(n_modes=30, R=1.0, C=1.0, L0=1.0)
+
+# Simulate RLC dynamics
+voltages, currents = bank.simulate(n_steps=1000)
+
+# Get consciousness state
+amplitudes = bank.get_amplitudes()
+```
+
+---
+
+## 🎯 Key Features
+
+### Multiscale Dynamics
+- ✅ Multiple temporal resolutions (1x, 2x, 4x, 8x)
+- ✅ Real-time streaming (<100ms target)
+- ✅ Missing data robustness (30%+ missing)
+- ✅ Nonlinear dynamics support
+
+### Transformers
+- ✅ Region-level encoding
+- ✅ Multi-head attention
+- ✅ Attention visualization
+- ✅ Masked reconstruction
+
+### Spiking Networks
+- ✅ LIF neuron models
+- ✅ Rate and temporal coding
+- ✅ Dynamic growth
+- ✅ Neuromorphic-ready
+
+### Memcomputing
+- ✅ Meminductor model
+- ✅ RLC oscillators
+- ✅ Memory encoding
+- ✅ Physical circuit design
+
+---
+
+## 📊 Running Experiments
+
+```bash
+# Category 6: Multiscale dynamics
+cd experiments/category6_multiscale_dynamics
+python exp1_multiscale_encoder.py
+
+# Category 7: Transformers
+cd experiments/category7_spatiotemporal_transformers
+python exp1_region_level_encoding.py
+
+# Category 8: Spiking networks
+cd experiments/category8_spiking_consciousness
+python exp1_snn_harmonic_oscillators.py
+
+# Category 9: Memcomputing
+cd experiments/category9_memcomputing
+python exp1_rlc_oscillators.py
+```
+
+---
+
+## 📖 Documentation
+
+Each paper integration includes comprehensive documentation:
+
+- **Multiscale**: `papers/neuroscience/2512.12462_multiscale.md`
+- **BaRISTA**: `papers/neuroscience/2512.12135_barista.md`
+- **CogniSNN**: `papers/neuroscience/2512.11743_cognisnn.md`
+- **Meminductors**: `papers/neuroscience/2512.11002_meminductors.md`
+
+Integration tracking: `PAPERS_INTEGRATION.md`
+
+---
+
+## 🔧 Dependencies
+
+Core dependencies (already included):
+- numpy, scipy, matplotlib
+- networkx, pandas, seaborn
+- scikit-learn, tqdm
+
+Optional enhancements:
+- PyTorch: Full transformer implementation
+- Norse/BindsNET: Advanced SNN libraries
+- PySpice: Circuit simulation
+
+---
+
+## 📝 Testing
+
+Unit tests for each module:
+- `tests/test_multiscale.py`
+- `tests/test_transformers.py`
+- `tests/test_snn.py`
+- `tests/test_memcomputing.py`
+
+---
+
+## 🎓 Citations
+
+If you use these integrations, please cite the original papers:
+
+```bibtex
+@article{multiscale2025,
+  title={Dynamical modeling of nonlinear latent factors in multiscale neural activity},
+  journal={arXiv:2512.12462},
+  year={2025}
+}
+
+@article{barista2025,
+  title={Brain Scale Informed Spatiotemporal Representation},
+  journal={arXiv:2512.12135},
+  year={2025}
+}
+
+@article{cognisnn2025,
+  title={Spiking Neural Networks with Random Graph Architectures},
+  journal={arXiv:2512.11743},
+  year={2025}
+}
+
+@article{meminductor2025,
+  title={Beyond Memristor: Neuromorphic Computing Using Meminductor},
+  journal={arXiv:2512.11002},
+  year={2025}
+}
+```
+
+---
+
+## 🤝 Contributing
+
+To extend these integrations:
+1. Fork the repository
+2. Create feature branch
+3. Implement enhancements
+4. Add tests and documentation
+5. Submit pull request
+
+See `CONTRIBUTING.md` for guidelines.
+
+---
+
+## 📅 Version History
+
+- **v2.0** (December 2025): Integrated 4 neuroscience papers
+  - Added multiscale dynamics (Category 6)
+  - Added BaRISTA transformers (Category 7)
+  - Added CogniSNN spiking networks (Category 8)
+  - Added meminductor computing (Category 9)
+
+- **v1.0** (December 2025): Quantum Reality Steering
+  - Added quantum consciousness framework (Category 5)
+
+---
+
+## 📬 Questions?
+
+For questions or suggestions about these integrations:
+- Open an issue on GitHub
+- Check the documentation in `papers/neuroscience/`
+- Review experiment code in `experiments/category[6-9]_*/`
+
+---
+
+**Previous Integration: Quantum Reality Steering** (arXiv:2512.14377)
 ├── exp2_local_to_global_steering.py
 ├── exp3_quantum_memory_harmonics.py
 └── exp4_measurement_collapse.py
