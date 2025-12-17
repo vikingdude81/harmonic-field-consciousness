@@ -52,6 +52,149 @@ This document tracks the integration of research papers into the harmonic field 
 
 ---
 
+### 2. Multiscale Dynamics (arXiv:2512.12462)
+
+**Paper**: "Dynamical modeling of nonlinear latent factors in multiscale neural activity"  
+**Integration Date**: December 2025  
+**Status**: 🔄 In Progress
+
+**Summary**: Integrates multiscale temporal dynamics for handling different harmonic mode frequencies and sampling rates, enabling real-time consciousness state decoding with robust missing data handling.
+
+**Key Contributions**:
+- Multiscale encoder for different temporal resolutions
+- Real-time recursive decoding (<100ms latency)
+- Robust handling of missing data
+- Nonlinear temporal dynamics
+
+**Implementation**:
+- Core modules: `src/multiscale/`
+  - `encoder.py` - Multiscale harmonic encoding
+  - `decoder.py` - Real-time consciousness prediction
+
+- Experiments: `experiments/category6_multiscale_dynamics/`
+  - exp1: Multiscale encoder comparison
+  - exp2: Real-time decoding benchmarks
+  - exp3: Missing data robustness
+  - exp4: Nonlinear dynamics
+
+- Documentation: `papers/neuroscience/2512.12462_multiscale.md`
+
+**Integration Quality**: Medium
+- ✅ Core modules implemented
+- 🔄 Experiments in progress
+- ⏳ Testing pending
+- ✅ Documentation complete
+
+---
+
+### 3. BaRISTA Transformers (arXiv:2512.12135)
+
+**Paper**: "Brain Scale Informed Spatiotemporal Representation"  
+**Integration Date**: December 2025  
+**Status**: 🔄 In Progress
+
+**Summary**: Integrates spatiotemporal transformer architecture for region-level consciousness analysis with attention mechanisms revealing important brain regions.
+
+**Key Contributions**:
+- Region-level encoding (not individual nodes)
+- Multi-head attention over brain regions
+- Masked reconstruction self-supervised learning
+- Flexible spatial scale analysis
+
+**Implementation**:
+- Core modules: `src/transformers/`
+  - `barista.py` - Transformer architecture
+  - `attention.py` - Attention visualization
+
+- Experiments: `experiments/category7_spatiotemporal_transformers/`
+  - exp1: Region-level vs node-level encoding
+  - exp2: Masked reconstruction learning
+  - exp3: Transformer consciousness prediction
+  - exp4: Spatial scale analysis
+
+- Documentation: `papers/neuroscience/2512.12135_barista.md`
+
+**Integration Quality**: Medium
+- ✅ Core modules implemented (simplified)
+- 🔄 Experiments in progress
+- ⏳ Testing pending
+- ✅ Documentation complete
+
+---
+
+### 4. CogniSNN Spiking Networks (arXiv:2512.11743)
+
+**Paper**: "Spiking Neural Networks with Random Graph Architectures"  
+**Integration Date**: December 2025  
+**Status**: 🔄 In Progress
+
+**Summary**: Integrates spiking neural network models with dynamic growth, pathway reusability, and neuromorphic hardware deployment for biologically realistic consciousness modeling.
+
+**Key Contributions**:
+- LIF neuron models for consciousness
+- Spike train encoding/decoding
+- Consciousness metrics from spikes
+- Dynamic network growth
+- Neuromorphic hardware compatibility
+
+**Implementation**:
+- Core modules: `src/snn/`
+  - `lif_neuron.py` - Leaky integrate-and-fire neurons
+  - `spike_encoder.py` - Spike encoding schemes
+  - `spike_metrics.py` - Metrics from spike trains
+
+- Experiments: `experiments/category8_spiking_consciousness/`
+  - exp1: SNN harmonic oscillators
+  - exp2: Pathway reuse for transitions
+  - exp3: Dynamic network growth
+  - exp4: Neuromorphic deployment
+
+- Documentation: `papers/neuroscience/2512.11743_cognisnn.md`
+
+**Integration Quality**: Medium
+- ✅ Core modules implemented
+- 🔄 Experiments in progress
+- ⏳ Testing pending
+- ✅ Documentation complete
+
+---
+
+### 5. Meminductor Computing (arXiv:2512.11002)
+
+**Paper**: "Beyond Memristor: Neuromorphic Computing Using Meminductor"  
+**Integration Date**: December 2025  
+**Status**: 🔄 In Progress
+
+**Summary**: Integrates meminductor-based RLC circuits for memory-encoded consciousness dynamics with resonance, anticipation, and physical hardware implementation possibilities.
+
+**Key Contributions**:
+- Meminductor model with memory effects
+- RLC oscillator dynamics (not just RC)
+- Memory encoding in magnetic flux
+- Biological timing and anticipation
+- Physical circuit design
+
+**Implementation**:
+- Core modules: `src/memcomputing/`
+  - `meminductor.py` - Meminductor model
+  - `rlc_dynamics.py` - RLC oscillator dynamics
+
+- Experiments: `experiments/category9_memcomputing/`
+  - exp1: RLC oscillators
+  - exp2: Memory encoding persistence
+  - exp3: Timing and anticipation
+  - exp4: Physical consciousness circuits
+
+- Documentation: `papers/neuroscience/2512.11002_meminductors.md`
+
+**Integration Quality**: Medium
+- ✅ Core modules implemented
+- 🔄 Experiments in progress
+- ⏳ Testing pending
+- ✅ Documentation complete
+
+---
+
 ## Integration Guidelines
 
 When integrating new papers:

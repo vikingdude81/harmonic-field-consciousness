@@ -47,3 +47,17 @@ h5py>=3.1.0
 # cupy-cuda11x>=11.0.0  # For CUDA 11.x
 # cupy-cuda12x>=12.0.0  # For CUDA 12.x
 # torch>=2.0.0          # For neural network experiments
+
+# ============================================================================
+# NEW: NEUROSCIENCE PAPERS INTEGRATION (Categories 6-9)
+# ============================================================================
+
+# For transformer models (Category 7)
+# torch>=2.0.0          # Optional: Full PyTorch transformer implementation
+
+# For SNN models (Category 8)
+# norse>=0.0.7          # Optional: PyTorch-based SNN library
+# bindsnet>=0.2.9       # Optional: Flexible SNN framework
+
+# For circuit simulation (Category 9)
+# PySpice>=1.5.0        # Optional: Circuit simulation
