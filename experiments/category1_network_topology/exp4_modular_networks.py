@@ -30,10 +30,13 @@ from utils import metrics as met
 from utils import state_generators as sg
 from utils import visualization as viz
 from utils.gpu_utils import get_device_info, gpu_eigendecomposition, print_gpu_status
+from utils.chaos_metrics import detect_avalanches, compute_branching_ratio, fit_power_law
+from utils.category_theory_metrics import compute_sheaf_consistency, compute_integration_phi
 
 # Configuration
 SEED = 42
-N_NODES = 120  # Divisible by 2, 3, 4, 6, 8
+N_NODES = 480  # Divisible by 2, 3, 4, 5, 6, 8, 10, 12, 16 for flexible modularity
+N_MODES = 100  # Higher resolution mode analysis
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp4_modular_networks'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -48,12 +51,14 @@ USE_GPU = gpu_info['cupy_available']
 
 np.random.seed(SEED)
 
-# Brain states for testing
+# Comprehensive brain states for testing
 states = {
-    'Wake': sg.generate_wake_state(n_modes=40, seed=SEED),
-    'NREM': sg.generate_nrem_unconscious(n_modes=40, seed=SEED),
-    'Dream': sg.generate_nrem_dreaming(n_modes=40, seed=SEED),
-    'Anesthesia': sg.generate_anesthesia_state(n_modes=40, seed=SEED),
+    'Wake': sg.generate_wake_state(n_modes=N_MODES, seed=SEED),
+    'NREM': sg.generate_nrem_unconscious(n_modes=N_MODES, seed=SEED),
+    'Dream': sg.generate_nrem_dreaming(n_modes=N_MODES, seed=SEED),
+    'Anesthesia': sg.generate_anesthesia_state(n_modes=N_MODES, seed=SEED),
+    'Psychedelic': sg.generate_psychedelic_state(n_modes=N_MODES, intensity=0.6, seed=SEED),
+    'Meditation': sg.generate_wake_state(n_modes=N_MODES, seed=SEED+100),  # Variant for meditation
 }
 
 # ============================================================================
@@ -62,7 +67,7 @@ states = {
 
 print("\n1. Testing different numbers of modules...")
 
-n_modules_list = [2, 3, 4, 6, 8]
+n_modules_list = [2, 3, 4, 5, 6, 8, 10, 12, 16]  # Extended module range
 intra_prob = 0.3  # Fixed intra-module connectivity
 inter_prob = 0.05  # Fixed inter-module connectivity
 

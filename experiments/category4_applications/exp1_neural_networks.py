@@ -30,9 +30,16 @@ from utils import metrics as met
 from utils import state_generators as sg
 from utils import visualization as viz
 from utils.gpu_utils import get_device_info, gpu_eigendecomposition, print_gpu_status, TORCH_AVAILABLE
+from utils.chaos_metrics import estimate_lyapunov_exponent, compute_branching_ratio
+from utils.category_theory_metrics import compute_sheaf_consistency, compute_integration_phi
 
-# Configuration
+# Configuration - Enhanced for deep ANN analysis
 SEED = 42
+N_MODES = 100  # More modes for ANN analysis
+N_TRAINING_EPOCHS = 100  # Deeper training for evolution analysis
+LAYER_SIZES_SMALL = [64, 128, 64]     # Small MLP
+LAYER_SIZES_MEDIUM = [128, 256, 128, 64]  # Medium MLP
+LAYER_SIZES_LARGE = [256, 512, 256, 128, 64]  # Large MLP
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp1_neural_networks'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 

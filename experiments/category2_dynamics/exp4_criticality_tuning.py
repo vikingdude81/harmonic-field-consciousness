@@ -32,11 +32,14 @@ from utils import metrics as met
 from utils import state_generators as sg
 from utils import visualization as viz
 from utils.gpu_utils import get_device_info, get_array_module, batch_compute_metrics_gpu, print_gpu_status
+from utils.chaos_metrics import estimate_lyapunov_exponent, detect_avalanches, fit_power_law
+from utils.category_theory_metrics import compute_sheaf_consistency
 
-# Configuration
+# Configuration - Enhanced for criticality analysis
 SEED = 42
-N_NODES = 100
-N_MODES = 30
+N_NODES = 300  # Larger network for better statistics
+N_MODES = 80   # More modes for phase transition detection
+N_ALPHA_STEPS = 60  # Denser alpha sweep for critical point detection
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp4_criticality_tuning'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 

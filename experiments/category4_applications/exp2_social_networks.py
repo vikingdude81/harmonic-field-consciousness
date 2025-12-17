@@ -31,9 +31,17 @@ from utils import metrics as met
 from utils import state_generators as sg
 from utils import visualization as viz
 from utils.gpu_utils import get_device_info, gpu_eigendecomposition, print_gpu_status
+from utils.chaos_metrics import detect_avalanches, compute_branching_ratio, fit_power_law
+from utils.category_theory_metrics import (
+    compute_sheaf_consistency, compute_integration_phi,
+    compute_functor_preservation
+)
 
-# Configuration
+# Configuration - Enhanced for large-scale social network analysis
 SEED = 42
+N_MODES = 100  # More modes for community detection
+NETWORK_SIZES = [100, 250, 500, 1000, 2000]  # Scale analysis
+N_COMMUNITIES_RANGE = [2, 4, 6, 8, 12, 16]   # Community structure sweep
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp2_social_networks'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 

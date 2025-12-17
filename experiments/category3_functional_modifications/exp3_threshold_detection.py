@@ -31,11 +31,15 @@ from utils import metrics as met
 from utils import state_generators as sg
 from utils import visualization as viz
 from utils.gpu_utils import get_device_info, batch_compute_metrics_gpu, print_gpu_status
+from utils.chaos_metrics import compute_branching_ratio
+from utils.category_theory_metrics import compute_integration_phi, compute_sheaf_consistency
 
-# Configuration
+# Configuration - Enhanced for clinical-grade threshold detection
 SEED = 42
-N_NODES = 100
-N_MODES = 30
+N_NODES = 300  # Larger network for robust statistics
+N_MODES = 80   # More modes for better discrimination
+N_CONSCIOUS_SAMPLES = 2000    # More samples for ROC curve precision
+N_UNCONSCIOUS_SAMPLES = 2000  # Balanced classes
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp3_threshold_detection'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 

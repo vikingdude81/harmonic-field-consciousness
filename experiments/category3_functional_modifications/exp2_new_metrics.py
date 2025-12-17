@@ -36,11 +36,17 @@ from utils import metrics as met
 from utils import state_generators as sg
 from utils import visualization as viz
 from utils.gpu_utils import get_device_info, get_array_module, print_gpu_status
+from utils.chaos_metrics import estimate_lyapunov_exponent, compute_branching_ratio, detect_avalanches
+from utils.category_theory_metrics import (
+    compute_sheaf_consistency, compute_integration_phi,
+    compute_persistence_diagram, compute_betti_numbers
+)
 
-# Configuration
+# Configuration - Enhanced for comprehensive metric comparison
 SEED = 42
-N_NODES = 100
-N_MODES = 30
+N_NODES = 300  # Larger network for robust metrics
+N_MODES = 80   # More modes for entropy calculations
+N_SAMPLES = 100  # Samples per state for statistical robustness
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp2_new_metrics'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -202,7 +208,8 @@ def permutation_entropy(signal: np.ndarray, order: int = 3, delay: int = 1, norm
     pe = -np.sum(probs * np.log2(probs))
     
     if normalize:
-        pe = pe / np.log2(np.math.factorial(order))
+        import math
+        pe = pe / np.log2(math.factorial(order))
     
     return pe
 

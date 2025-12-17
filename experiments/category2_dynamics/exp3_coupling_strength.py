@@ -20,6 +20,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import networkx as nx
 from pathlib import Path
 from tqdm import tqdm
 from scipy.integrate import odeint
@@ -31,11 +32,14 @@ from utils import metrics as met
 from utils import state_generators as sg
 from utils import visualization as viz
 from utils.gpu_utils import get_device_info, get_array_module, to_cpu, print_gpu_status
+from utils.chaos_metrics import estimate_lyapunov_exponent, compute_branching_ratio
+from utils.category_theory_metrics import compute_integration_phi
 
-# Configuration
+# Configuration - Enhanced for comprehensive analysis
 SEED = 42
-N_NODES = 100
-N_MODES = 30
+N_NODES = 300  # Larger network for dynamics
+N_MODES = 80   # More modes for finer resolution
+N_COUPLING_STEPS = 50  # Denser coupling strength sweep
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp3_coupling_strength'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 

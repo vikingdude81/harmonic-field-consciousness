@@ -30,10 +30,13 @@ from utils import metrics as met
 from utils import state_generators as sg
 from utils import visualization as viz
 from utils.gpu_utils import get_device_info, gpu_eigendecomposition, print_gpu_status
+from utils.chaos_metrics import estimate_lyapunov_exponent, compute_branching_ratio, compute_all_chaos_metrics
+from utils.category_theory_metrics import compute_sheaf_consistency, compute_integration_phi
 
 # Configuration
 SEED = 42
-N_NODES = 200  # Larger network for hub analysis
+N_NODES = 500  # Larger network for comprehensive hub analysis
+N_MODES = 100  # More modes for finer resolution
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp3_hub_disruption'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -78,100 +81,110 @@ strategies = {
     'random': random_ranked
 }
 
-# Define removal percentages
-removal_percentages = [0, 1, 2, 5, 10, 15, 20, 30]
+# Define removal percentages - denser sweep for higher resolution
+removal_percentages = [0, 0.5, 1, 2, 3, 5, 7, 10, 15, 20, 25, 30, 40, 50]
 
-# Brain state for testing
-wake_power = sg.generate_wake_state(n_modes=50, seed=SEED)
+# Multiple brain states for comprehensive testing
+brain_states = {
+    'wake': sg.generate_wake_state(n_modes=N_MODES, seed=SEED),
+    'nrem': sg.generate_nrem_unconscious(n_modes=N_MODES, seed=SEED),
+    'dream': sg.generate_nrem_dreaming(n_modes=N_MODES, seed=SEED),
+    'anesthesia': sg.generate_anesthesia_state(n_modes=N_MODES, seed=SEED),
+    'psychedelic': sg.generate_psychedelic_state(n_modes=N_MODES, intensity=0.6, seed=SEED),
+}
 
 # Store results
 results = []
 
-print("\nTesting hub disruption strategies...")
-for strategy_name, ranked_nodes in tqdm(strategies.items(), desc="Strategies"):
-    for pct in tqdm(removal_percentages, desc=f"  {strategy_name}", leave=False):
-        # Copy network
-        G_damaged = G.copy()
-        
-        # Calculate number of nodes to remove
-        n_remove = int(N_NODES * pct / 100)
-        
-        # Remove nodes
-        nodes_to_remove = ranked_nodes[:n_remove]
-        G_damaged.remove_nodes_from(nodes_to_remove)
-        
-        # Check if network is still connected
-        if G_damaged.number_of_nodes() < 10:
-            # Network too small
-            results.append({
-                'strategy': strategy_name,
-                'removal_pct': pct,
-                'n_removed': n_remove,
-                'n_nodes_remaining': G_damaged.number_of_nodes(),
-                'is_connected': False,
-                'largest_component_size': 0,
-                'n_components': 0,
-                'C': 0,
-                'H_mode': 0,
-                'PR': 0,
-                'R': 0,
-                'S_dot': 0,
-                'kappa': 0
-            })
-            continue
-        
-        # Get largest connected component
-        if not nx.is_connected(G_damaged):
-            largest_cc = max(nx.connected_components(G_damaged), key=len)
-            G_component = G_damaged.subgraph(largest_cc).copy()
-        else:
-            G_component = G_damaged
-            largest_cc = set(G_damaged.nodes())
-        
-        n_components = nx.number_connected_components(G_damaged)
-        
-        # Compute eigenmodes on the remaining network
-        try:
-            if USE_GPU and G_component.number_of_nodes() > 50:
-                # Use GPU for larger matrices
-                L = nx.laplacian_matrix(G_component).toarray()
-                eigenvalues, eigenvectors = gpu_eigendecomposition(L.astype(np.float64), use_gpu=True)
-                idx = np.argsort(eigenvalues)
-                eigenvalues = eigenvalues[idx]
+print("\nTesting hub disruption strategies across brain states...")
+for state_name, state_power in tqdm(brain_states.items(), desc="Brain States"):
+    for strategy_name, ranked_nodes in tqdm(strategies.items(), desc=f"  {state_name} strategies", leave=False):
+        for pct in removal_percentages:
+            # Copy network
+            G_damaged = G.copy()
+            
+            # Calculate number of nodes to remove
+            n_remove = int(N_NODES * pct / 100)
+            
+            # Remove nodes
+            nodes_to_remove = ranked_nodes[:n_remove]
+            G_damaged.remove_nodes_from(nodes_to_remove)
+            
+            # Check if network is still connected
+            if G_damaged.number_of_nodes() < 10:
+                # Network too small
+                results.append({
+                    'brain_state': state_name,
+                    'strategy': strategy_name,
+                    'removal_pct': pct,
+                    'n_removed': n_remove,
+                    'n_nodes_remaining': G_damaged.number_of_nodes(),
+                    'is_connected': False,
+                    'largest_component_size': 0,
+                    'n_components': 0,
+                    'C': 0,
+                    'H_mode': 0,
+                    'PR': 0,
+                    'R': 0,
+                    'S_dot': 0,
+                    'kappa': 0
+                })
+                continue
+            
+            # Get largest connected component
+            if not nx.is_connected(G_damaged):
+                largest_cc = max(nx.connected_components(G_damaged), key=len)
+                G_component = G_damaged.subgraph(largest_cc).copy()
             else:
-                L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G_component)
+                G_component = G_damaged
+                largest_cc = set(G_damaged.nodes())
             
-            # Truncate to available modes
-            n_modes = min(50, len(eigenvalues))
-            eigenvalues_trunc = eigenvalues[:n_modes]
-            power = wake_power[:n_modes]
-            power = power / power.sum()
+            n_components = nx.number_connected_components(G_damaged)
             
-            # Compute metrics
-            metrics = met.compute_all_metrics(power, eigenvalues_trunc)
-            
-            results.append({
-                'strategy': strategy_name,
-                'removal_pct': pct,
-                'n_removed': n_remove,
-                'n_nodes_remaining': G_damaged.number_of_nodes(),
-                'is_connected': nx.is_connected(G_damaged),
-                'largest_component_size': len(largest_cc),
-                'n_components': n_components,
-                **metrics
-            })
-        except Exception as e:
-            print(f"  Warning: Error computing metrics for {strategy_name} at {pct}%: {e}")
-            results.append({
-                'strategy': strategy_name,
-                'removal_pct': pct,
-                'n_removed': n_remove,
-                'n_nodes_remaining': G_damaged.number_of_nodes(),
-                'is_connected': False,
-                'largest_component_size': len(largest_cc) if 'largest_cc' in dir() else 0,
-                'n_components': n_components if 'n_components' in dir() else 0,
-                'C': 0, 'H_mode': 0, 'PR': 0, 'R': 0, 'S_dot': 0, 'kappa': 0
-            })
+            # Compute eigenmodes on the remaining network
+            try:
+                if USE_GPU and G_component.number_of_nodes() > 50:
+                    # Use GPU for larger matrices
+                    L = nx.laplacian_matrix(G_component).toarray()
+                    eigenvalues, eigenvectors = gpu_eigendecomposition(L.astype(np.float64), use_gpu=True)
+                    idx = np.argsort(eigenvalues)
+                    eigenvalues = eigenvalues[idx]
+                else:
+                    L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G_component)
+                
+                # Truncate to available modes
+                n_modes = min(N_MODES, len(eigenvalues))
+                eigenvalues_trunc = eigenvalues[:n_modes]
+                power = state_power[:n_modes]
+                power = power / power.sum()
+                
+                # Compute metrics
+                metrics = met.compute_all_metrics(power, eigenvalues_trunc)
+                
+                results.append({
+                    'brain_state': state_name,
+                    'strategy': strategy_name,
+                    'removal_pct': pct,
+                    'n_removed': n_remove,
+                    'n_nodes_remaining': G_damaged.number_of_nodes(),
+                    'is_connected': nx.is_connected(G_damaged),
+                    'largest_component_size': len(largest_cc),
+                    'n_components': n_components,
+                    **metrics
+                })
+            except Exception as e:
+                print(f"  Warning: Error computing metrics for {state_name}/{strategy_name} at {pct}%: {e}")
+                results.append({
+                    'brain_state': state_name,
+                    'strategy': strategy_name,
+                    'removal_pct': pct,
+                    'n_removed': n_remove,
+                    'n_nodes_remaining': G_damaged.number_of_nodes(),
+                    'is_connected': False,
+                    'largest_component_size': len(largest_cc) if 'largest_cc' in dir() else 0,
+                    'n_components': n_components if 'n_components' in dir() else 0,
+                    'C': 0, 'H_mode': 0, 'PR': 0, 'R': 0, 'S_dot': 0, 'kappa': 0
+                })
 
 # Convert to DataFrame
 df = pd.DataFrame(results)
