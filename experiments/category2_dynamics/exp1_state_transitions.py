@@ -41,8 +41,8 @@ print("\nGenerating network...")
 G = gg.generate_small_world(N_NODES, k_neighbors=6, rewiring_prob=0.3, seed=SEED)
 L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
 
-# Use first 30 modes
-n_modes = 30
+# Use first 20 modes (to match state generators)
+n_modes = 20
 eigenvalues = eigenvalues[:n_modes]
 
 # Generate state transition sequence
@@ -58,24 +58,27 @@ power_sequence, labels = sg.generate_state_transition_sequence(
 print("Computing metrics for each time step...")
 metrics_history = []
 for t in tqdm(range(N_STEPS), desc="Time steps"):
-    power = power_sequence[t][:n_modes]
+    power = power_sequence[t]
     power = power / power.sum()
     
-    # Generate random phases
-    phases = np.random.uniform(0, 2 * np.pi, n_modes)
+    # Generate random phases matching power dimensions
+    phases = np.random.uniform(0, 2 * np.pi, len(power))
     
     # Compute previous power with small change
     if t > 0:
-        power_prev = power_sequence[t-1][:n_modes]
+        power_prev = power_sequence[t-1]
         power_prev = power_prev / power_prev.sum()
     else:
-        power_prev = power + np.random.normal(0, 0.01, n_modes)
+        power_prev = power + np.random.normal(0, 0.01, len(power))
         power_prev = np.clip(power_prev, 0, None)
         power_prev = power_prev / power_prev.sum()
     
+    # Truncate eigenvalues to match power dimensions
+    eig_trunc = eigenvalues[:len(power)]
+    
     metrics = met.compute_all_metrics(
         power,
-        eigenvalues,
+        eig_trunc,
         phases=phases,
         power_previous=power_prev,
         dt=1.0

@@ -1,24 +1,24 @@
 {
-  "timestamp": "2025-12-15T18:19:01.760399",
+  "timestamp": "2025-12-15T22:42:47.689142",
   "total": 2,
   "successful": 2,
   "failed": 0,
   "results": [
     {
-      "category": "category1_network_topology",
-      "name": "exp1_topology_comparison",
+      "category": "category3_functional_modifications",
+      "name": "exp1_weighted_components",
       "success": true,
       "returncode": 0,
-      "stdout": "============================================================\nCategory 1, Experiment 1: Topology Comparison\n============================================================\n\nComputing metrics for all topology-state combinations...\n\n============================================================\nResults Summary:\n============================================================\n                          H_mode        PR  ...     kappa         C\ntopology    state                           ...                    \nLattice-2D  Anesthesia  0.480896  0.095039  ...  0.084298  0.421547\n            Dream       0.840043  0.457968  ...  0.228479  0.504836\n            NREM        0.625994  0.171486  ...  0.107285  0.449486\n            Wake        0.990638  0.936154  ...  0.446697  0.618484\nModular     Anesthesia  0.480896  0.095039  ...  0.207958  0.481179\n            Dream       0.840043  0.457968  ...  0.462277  0.547146\n            NREM        0.625994  0.171486  ...  0.289558  0.470565\n            Wake        0.990638  0.936154  ...  0.643842  0.652393\nRandom      Anesthesia  0.480896  0.095039  ...  0.173545  0.400196\n            Dream       0.840043  0.457968  ...  0.393479  0.493457\n            NREM        0.625994  0.171486  ...  0.239678  0.484197\n            Wake        0.990638  0.936154  ...  0.571384  0.643193\nScale-free  Anesthesia  0.480896  0.095039  ...  0.278343  0.430026\n            Dream       0.840043  0.457968  ...  0.587709  0.625736\n            NREM        0.625994  0.171486  ...  0.398795  0.485552\n            Wake        0.990638  0.936154  ...  0.718203  0.643508\nSmall-world Anesthesia  0.480896  0.095039  ...  0.157427  0.358964\n            Dream       0.840043  0.457968  ...  0.372476  0.545523\n            NREM        0.625994  0.171486  ...  0.218820  0.437243\n            Wake        0.990638  0.936154  ...  0.558958  0.634427\n\n[20 rows x 6 columns]\n\nResults saved to: /home/runner/work/harmonic-field-consciousness/harmonic-field-consciousness/experiments/category1_network_topology/results/exp1_topology_comparison/topology_comparison_results.csv\n\nGenerating visualizations...\n  Saved: c_comparison_bar.png\n  Saved: heatmap_H_mode.png\n  Saved: heatmap_PR.png\n  Saved: heatmap_R.png\n  Saved: heatmap_S_dot.png\n  Saved: heatmap_kappa.png\n  Saved: network_topologies.png\n\n============================================================\nStatistical Analysis:\n============================================================\n\nConsciousness Functional C(t) by Topology:\n                    C          \n                 mean       std\ntopology                       \nLattice-2D   0.498588  0.087102\nModular      0.537821  0.083557\nRandom       0.505261  0.101073\nScale-free   0.546206  0.104832\nSmall-world  0.494039  0.120872\n\nBest topology for consciousness: Scale-free\nSmall-world    : C range = 0.275\nScale-free     : C range = 0.213\nRandom         : C range = 0.243\nLattice-2D     : C range = 0.197\nModular        : C range = 0.182\n\n============================================================\nExperiment completed successfully!\nAll results saved to: /home/runner/work/harmonic-field-consciousness/harmonic-field-consciousness/experiments/category1_network_topology/results/exp1_topology_comparison\n============================================================\n",
-      "stderr": "\nTopologies:   0%|          | 0/5 [00:00<?, ?it/s]\nTopologies: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 5/5 [00:00<00:00, 171.72it/s]\n"
+      "stdout": null,
+      "stderr": null
     },
     {
-      "category": "category1_network_topology",
-      "name": "exp2_network_scaling",
+      "category": "category3_functional_modifications",
+      "name": "exp4_component_correlation",
       "success": true,
       "returncode": 0,
-      "stdout": "============================================================\nCategory 1, Experiment 2: Network Scaling\n============================================================\n\nExperiment completed! Results saved to: /home/runner/work/harmonic-field-consciousness/harmonic-field-consciousness/experiments/category1_network_topology/results/exp2_network_scaling\n",
-      "stderr": "\nNetwork sizes:   0%|          | 0/5 [00:00<?, ?it/s]\nNetwork sizes: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 5/5 [00:00<00:00, 20.17it/s]\nNetwork sizes: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 5/5 [00:00<00:00, 20.15it/s]\n"
+      "stdout": null,
+      "stderr": null
     }
   ]
 }
