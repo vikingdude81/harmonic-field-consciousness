@@ -26,6 +26,7 @@ from .quantum_measurement import (
 )
 from .entanglement import (
     compute_entanglement_entropy,
+    compute_mutual_information,
     compute_regional_correlations,
     model_nonlocal_effects
 )
@@ -40,6 +41,7 @@ __all__ = [
     'measure_consciousness_state',
     'apply_measurement_collapse',
     'compute_entanglement_entropy',
+    'compute_mutual_information',
     'compute_regional_correlations',
     'model_nonlocal_effects',
 ]

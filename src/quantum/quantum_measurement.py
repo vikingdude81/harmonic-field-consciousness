@@ -181,14 +181,20 @@ class QuantumMeasurement:
         # Weak measurement causes partial collapse
         # New state is a mixture of original and collapsed
         collapsed_amplitudes = observable @ state.amplitudes
-        collapsed_amplitudes /= np.linalg.norm(collapsed_amplitudes)
+        norm_collapsed = np.linalg.norm(collapsed_amplitudes)
         
-        # Interpolate between original and collapsed
-        new_amplitudes = (
-            (1 - strength) * state.amplitudes + 
-            strength * collapsed_amplitudes
-        )
-        new_amplitudes /= np.linalg.norm(new_amplitudes)
+        if norm_collapsed < 1e-12:
+            # If observable produces zero, just return original state
+            new_amplitudes = state.amplitudes
+        else:
+            collapsed_amplitudes /= norm_collapsed
+            
+            # Interpolate between original and collapsed
+            new_amplitudes = (
+                (1 - strength) * state.amplitudes + 
+                strength * collapsed_amplitudes
+            )
+            new_amplitudes /= np.linalg.norm(new_amplitudes)
         
         new_state = QuantumConsciousnessState(
             amplitudes=new_amplitudes,
