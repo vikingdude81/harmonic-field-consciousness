@@ -19,7 +19,7 @@ from experiments.utils import state_generators as sg
 from experiments.utils import metrics as met
 
 # Configuration
-SEED = 42
+SEED = 42  # Fixed seed for reproducibility across runs
 np.random.seed(SEED)
 N_MODES = 30
 N_TIMEPOINTS = 200

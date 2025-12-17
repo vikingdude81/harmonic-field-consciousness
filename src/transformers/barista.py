@@ -31,6 +31,8 @@ class BaRISTAModel:
         self.n_heads = n_heads
         
         # Initialize simple attention weights (can be learned)
+        # NOTE: In full PyTorch implementation, these would be learnable parameters
+        # Current values are placeholders for simplified non-learning version
         self.attention_weights = np.ones((n_heads, n_regions, n_regions)) / n_regions
         
         # Feature projections (simplified linear transformations)
