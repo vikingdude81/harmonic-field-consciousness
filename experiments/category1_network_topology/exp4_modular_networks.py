@@ -54,8 +54,8 @@ power = sg.generate_wake_state(N_MODES, seed=SEED)
 
 module_count_results = []
 
-for n_modules in tqdm(n_modules_range, desc="Module counts"):
-    G, communities = gg.generate_modular(N_NODES, n_communities=n_modules, seed=SEED)
+for n_mod in tqdm(n_modules_range, desc="Module counts"):
+    G, communities = gg.generate_modular(N_NODES, n_modules=n_mod, seed=SEED)
     L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
     
     n_modes = min(N_MODES, len(eigenvalues))
@@ -69,10 +69,10 @@ for n_modules in tqdm(n_modules_range, desc="Module counts"):
     avg_clustering = nx.average_clustering(G)
     
     module_count_results.append({
-        'n_modules': n_modules,
+        'n_modules': n_mod,
         'modularity': modularity,
         'avg_clustering': avg_clustering,
-        'module_size': N_NODES // n_modules,
+        'module_size': N_NODES // n_mod,
         **metrics
     })
 
@@ -241,7 +241,7 @@ topology_results = []
 
 # Modular (optimal from Part 1)
 best_n_modules = df_modules.loc[df_modules['C'].idxmax(), 'n_modules']
-G_mod, comm = gg.generate_modular(N_NODES, n_communities=int(best_n_modules), seed=SEED)
+G_mod, comm = gg.generate_modular(N_NODES, n_modules=int(best_n_modules), seed=SEED)
 L, eig, evec = gg.compute_laplacian_eigenmodes(G_mod)
 metrics = met.compute_all_metrics(power[:min(N_MODES, len(eig))], eig[:min(N_MODES, len(eig))])
 topology_results.append({'topology': f'Modular (n={int(best_n_modules)})', **metrics})
@@ -265,7 +265,7 @@ metrics = met.compute_all_metrics(power[:min(N_MODES, len(eig))], eig[:min(N_MOD
 topology_results.append({'topology': 'Random', **metrics})
 
 # Lattice
-G_lat = gg.generate_lattice_2d(int(np.sqrt(N_NODES)), int(np.sqrt(N_NODES)))
+G_lat = gg.generate_lattice(n_nodes=N_NODES, dimension=2)
 L, eig, evec = gg.compute_laplacian_eigenmodes(G_lat)
 n_m = min(N_MODES, len(eig))
 p = power[:n_m] / power[:n_m].sum()
