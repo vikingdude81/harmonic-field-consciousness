@@ -37,6 +37,30 @@ N_MODES = 20
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp4_modular_networks'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+# Simple Kuramoto dynamics for phase coherence R
+def simulate_phase_coherence(G: nx.Graph, K: float = 1.0, steps: int = 300, dt: float = 0.05, seed: int = SEED):
+    np.random.seed(seed)
+    n = G.number_of_nodes()
+    A = nx.to_numpy_array(G)
+    # Normalize by degree to avoid trivial blow-up on dense graphs
+    deg = A.sum(axis=1, keepdims=True) + 1e-9
+    W = A / deg
+    # Natural frequencies
+    omega = np.random.normal(0.0, 0.1, size=n)
+    # Initial phases
+    theta = np.random.uniform(0, 2*np.pi, size=n)
+    R_series = []
+    for _ in range(steps):
+        # Kuramoto update: dtheta_i = omega_i + K * sum_j W_ij * sin(theta_j - theta_i)
+        phase_diff = np.subtract.outer(theta, theta)  # theta_i - theta_j
+        coupling_term = (W * np.sin(-phase_diff)).sum(axis=1)
+        dtheta = omega + K * coupling_term
+        theta = (theta + dt * dtheta) % (2*np.pi)
+        Z = np.exp(1j * theta).mean()
+        R_series.append(np.abs(Z))
+    R_series = np.array(R_series)
+    return float(R_series.mean()), float(R_series.std())
+
 print("="*70)
 print("Category 1, Experiment 4: Modular Network Analysis")
 print("="*70)
@@ -63,6 +87,8 @@ for n_mod in tqdm(n_modules_range, desc="Module counts"):
     power_adj = power_adj / power_adj.sum()
     
     metrics = met.compute_all_metrics(power_adj, eigenvalues[:n_modes])
+    # Dynamic phase coherence via Kuramoto
+    R_dyn, meta = simulate_phase_coherence(G, K=1.0, steps=300, dt=0.05, seed=SEED)
     
     # Network metrics
     modularity = nx.community.modularity(G, communities)
@@ -73,12 +99,14 @@ for n_mod in tqdm(n_modules_range, desc="Module counts"):
         'modularity': modularity,
         'avg_clustering': avg_clustering,
         'module_size': N_NODES // n_mod,
+        'R_dyn': R_dyn,
+        'metastability': meta,
         **metrics
     })
 
 df_modules = pd.DataFrame(module_count_results)
 print("\nModule Count Results:")
-print(df_modules[['n_modules', 'modularity', 'C', 'PR', 'H_mode']].to_string(index=False))
+print(df_modules[['n_modules', 'modularity', 'R_dyn', 'metastability', 'C']].to_string(index=False))
 
 # ==============================================================================
 # PART 2: Intra vs Inter-Module Connectivity
@@ -139,6 +167,7 @@ for intra_p, inter_p in tqdm(list(product(intra_probs, inter_probs)), desc="Conn
     metrics = met.compute_all_metrics(power_adj, eigenvalues[:n_modes])
     
     modularity = nx.community.modularity(G, communities)
+    R_dyn, meta = simulate_phase_coherence(G, K=1.0, steps=300, dt=0.05, seed=SEED)
     
     connectivity_results.append({
         'intra_prob': intra_p,
@@ -146,12 +175,14 @@ for intra_p, inter_p in tqdm(list(product(intra_probs, inter_probs)), desc="Conn
         'ratio': intra_p / inter_p if inter_p > 0 else float('inf'),
         'n_edges': G.number_of_edges(),
         'modularity': modularity,
+        'R_dyn': R_dyn,
+        'metastability': meta,
         **metrics
     })
 
 df_conn = pd.DataFrame(connectivity_results)
 print("\nConnectivity Sweep Results (selected):")
-print(df_conn[['intra_prob', 'inter_prob', 'modularity', 'C']].head(10).to_string(index=False))
+print(df_conn[['intra_prob', 'inter_prob', 'modularity', 'R_dyn', 'C']].head(10).to_string(index=False))
 
 # ==============================================================================
 # PART 3: Module Size Distribution
@@ -217,17 +248,20 @@ for name, sizes in tqdm(size_distributions, desc="Size distributions"):
     power_adj = power_adj / power_adj.sum()
     
     metrics = met.compute_all_metrics(power_adj, eigenvalues[:n_modes])
+    R_dyn, meta = simulate_phase_coherence(G, K=1.0, steps=300, dt=0.05, seed=SEED)
     
     size_results.append({
         'distribution': name,
         'sizes': str(list(sizes)),
         'size_std': np.std(sizes),
+        'R_dyn': R_dyn,
+        'metastability': meta,
         **metrics
     })
 
 df_sizes = pd.DataFrame(size_results)
 print("\nModule Size Distribution Results:")
-print(df_sizes[['distribution', 'size_std', 'C', 'PR']].to_string(index=False))
+print(df_sizes[['distribution', 'size_std', 'R_dyn', 'C']].to_string(index=False))
 
 # ==============================================================================
 # PART 4: Comparison with Other Topologies
@@ -244,24 +278,28 @@ best_n_modules = df_modules.loc[df_modules['C'].idxmax(), 'n_modules']
 G_mod, comm = gg.generate_modular(N_NODES, n_modules=int(best_n_modules), seed=SEED)
 L, eig, evec = gg.compute_laplacian_eigenmodes(G_mod)
 metrics = met.compute_all_metrics(power[:min(N_MODES, len(eig))], eig[:min(N_MODES, len(eig))])
+R_dyn, meta = simulate_phase_coherence(G_mod, K=1.0, steps=300, dt=0.05, seed=SEED)
 topology_results.append({'topology': f'Modular (n={int(best_n_modules)})', **metrics})
 
 # Small-world
 G_sw = gg.generate_small_world(N_NODES, k_neighbors=6, rewiring_prob=0.3, seed=SEED)
 L, eig, evec = gg.compute_laplacian_eigenmodes(G_sw)
 metrics = met.compute_all_metrics(power[:min(N_MODES, len(eig))], eig[:min(N_MODES, len(eig))])
+R_dyn, meta = simulate_phase_coherence(G_sw, K=1.0, steps=300, dt=0.05, seed=SEED)
 topology_results.append({'topology': 'Small-world', **metrics})
 
 # Scale-free
 G_sf = gg.generate_scale_free(N_NODES, m_edges=3, seed=SEED)
 L, eig, evec = gg.compute_laplacian_eigenmodes(G_sf)
 metrics = met.compute_all_metrics(power[:min(N_MODES, len(eig))], eig[:min(N_MODES, len(eig))])
+R_dyn, meta = simulate_phase_coherence(G_sf, K=1.0, steps=300, dt=0.05, seed=SEED)
 topology_results.append({'topology': 'Scale-free', **metrics})
 
 # Random
 G_rand = gg.generate_random(N_NODES, edge_prob=0.1, seed=SEED)
 L, eig, evec = gg.compute_laplacian_eigenmodes(G_rand)
 metrics = met.compute_all_metrics(power[:min(N_MODES, len(eig))], eig[:min(N_MODES, len(eig))])
+R_dyn, meta = simulate_phase_coherence(G_rand, K=1.0, steps=300, dt=0.05, seed=SEED)
 topology_results.append({'topology': 'Random', **metrics})
 
 # Lattice
@@ -270,6 +308,7 @@ L, eig, evec = gg.compute_laplacian_eigenmodes(G_lat)
 n_m = min(N_MODES, len(eig))
 p = power[:n_m] / power[:n_m].sum()
 metrics = met.compute_all_metrics(p, eig[:n_m])
+R_dyn, meta = simulate_phase_coherence(G_lat, K=1.0, steps=300, dt=0.05, seed=SEED)
 topology_results.append({'topology': 'Lattice 2D', **metrics})
 
 df_topo = pd.DataFrame(topology_results)
@@ -285,7 +324,7 @@ print("PART 5: Generating Visualizations")
 print("-"*70)
 
 # Figure 1: Module count analysis
-fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+fig, axes = plt.subplots(2, 3, figsize=(16, 10))
 
 ax = axes[0, 0]
 ax.plot(df_modules['n_modules'], df_modules['C'], 'bo-', markersize=10, linewidth=2)
@@ -318,6 +357,29 @@ ax.set_title('D. Topology Comparison', fontsize=12, fontweight='bold')
 ax.tick_params(axis='x', rotation=45)
 ax.grid(True, alpha=0.3, axis='y')
 
+# New: C vs dynamic R across module counts
+ax = axes[0, 2]
+ax.scatter(df_modules['R_dyn'], df_modules['C'], s=100, c=df_modules['n_modules'], cmap='plasma', edgecolors='black')
+ax.set_xlabel('Dynamic Phase Coherence R', fontsize=12)
+ax.set_ylabel('Consciousness C(t)', fontsize=12)
+ax.set_title('E. C(t) vs R (Module Count)', fontsize=12, fontweight='bold')
+cb = plt.colorbar(ax.collections[0], ax=ax)
+cb.set_label('N Modules')
+
+# New: Heatmap of R over connectivity sweep
+ax = axes[1, 2]
+pivot_R = df_conn.pivot(index='intra_prob', columns='inter_prob', values='R_dyn')
+im2 = ax.imshow(pivot_R.values, cmap='magma', aspect='auto', vmin=0, vmax=1)
+ax.set_xticks(range(len(pivot_R.columns)))
+ax.set_xticklabels([f'{x:.2f}' for x in pivot_R.columns])
+ax.set_yticks(range(len(pivot_R.index)))
+ax.set_yticklabels([f'{x:.2f}' for x in pivot_R.index])
+ax.set_xlabel('Inter-module Connection Probability', fontsize=12)
+ax.set_ylabel('Intra-module Connection Probability', fontsize=12)
+ax.set_title('F. Dynamic Phase Coherence R', fontsize=12, fontweight='bold')
+cbar2 = plt.colorbar(im2, ax=ax)
+cbar2.set_label('R')
+
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'module_analysis.png', dpi=150, bbox_inches='tight')
 print(f"  Saved: module_analysis.png")
@@ -344,6 +406,22 @@ for i in range(len(pivot.index)):
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'connectivity_heatmap.png', dpi=150, bbox_inches='tight')
 print(f"  Saved: connectivity_heatmap.png")
+
+# Save an additional heatmap for R
+fig, ax = plt.subplots(figsize=(10, 8))
+im = ax.imshow(pivot_R.values, cmap='magma', aspect='auto', vmin=0, vmax=1)
+ax.set_xticks(range(len(pivot_R.columns)))
+ax.set_xticklabels([f'{x:.2f}' for x in pivot_R.columns])
+ax.set_yticks(range(len(pivot_R.index)))
+ax.set_yticklabels([f'{x:.2f}' for x in pivot_R.index])
+ax.set_xlabel('Inter-module Connection Probability', fontsize=12)
+ax.set_ylabel('Intra-module Connection Probability', fontsize=12)
+ax.set_title('Dynamic Phase Coherence R by Connectivity', fontsize=14, fontweight='bold')
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label('R')
+plt.tight_layout()
+plt.savefig(OUTPUT_DIR / 'connectivity_heatmap_R.png', dpi=150, bbox_inches='tight')
+print(f"  Saved: connectivity_heatmap_R.png")
 
 # Save data
 df_modules.to_csv(OUTPUT_DIR / 'module_count_analysis.csv', index=False)
