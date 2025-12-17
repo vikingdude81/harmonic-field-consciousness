@@ -33,6 +33,55 @@ N_MODES = 20
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp1_neural_networks'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+# ==============================================================================
+# PHASE COHERENCE (Kuramoto Dynamics)
+# ==============================================================================
+
+def simulate_phase_coherence(connectivity: np.ndarray, K: float = 1.0, steps: int = 300, dt: float = 0.05, seed: int = SEED):
+    """
+    Simulate phase coherence (Kuramoto model) on network connectivity.
+    
+    Args:
+        connectivity: Adjacency/connectivity matrix
+        K: Coupling strength
+        steps: Number of simulation steps
+        dt: Time step
+        seed: Random seed
+        
+    Returns:
+        R_dyn (mean), metastability (std) - phase coherence metrics
+    """
+    np.random.seed(seed)
+    n = connectivity.shape[0]
+    
+    # Normalize connectivity by degree
+    deg = connectivity.sum(axis=1, keepdims=True) + 1e-9
+    W = connectivity / deg
+    
+    # Natural frequencies (small random fluctuations)
+    omega = np.random.normal(0.0, 0.1, size=n)
+    
+    # Initial phases
+    theta = np.random.uniform(0, 2*np.pi, size=n)
+    
+    R_series = []
+    for _ in range(steps):
+        # Kuramoto coupling: dtheta_i = omega_i + K * sum_j W_ij * sin(theta_j - theta_i)
+        phase_diff = np.subtract.outer(theta, theta)  # theta_i - theta_j
+        coupling_term = (W * np.sin(-phase_diff)).sum(axis=1)
+        dtheta = omega + K * coupling_term
+        theta = (theta + dt * dtheta) % (2*np.pi)
+        
+        # Compute order parameter R (phase coherence)
+        Z = np.exp(1j * theta).mean()
+        R_series.append(np.abs(Z))
+    
+    R_series = np.array(R_series)
+    
+    # R_dyn: mean coherence over time
+    # Metastability: std (fluctuations in coherence)
+    return float(R_series.mean()), float(R_series.std())
+
 print("="*70)
 print("Category 4, Experiment 1: Neural Networks Consciousness Analysis")
 print("="*70)
@@ -179,6 +228,17 @@ def compute_network_consciousness(network, input_samples):
     metrics['sparsity'] = sparsity
     metrics['modularity'] = modularity
     
+    # Phase coherence (Kuramoto dynamics)
+    # Test multiple coupling strengths to find optimal
+    R_values = []
+    for K in [0.1, 0.5, 1.0, 2.0, 5.0]:
+        R_dyn, metastability = simulate_phase_coherence(connectivity, K=K, steps=200, seed=SEED)
+        R_values.append(R_dyn)
+    
+    metrics['R_dyn'] = np.mean(R_values)  # Mean phase coherence across coupling strengths
+    metrics['R_std'] = np.std(R_values)   # Variability in coherence
+    metrics['R_max'] = np.max(R_values)   # Maximum achievable coherence
+    
     return metrics
 
 
@@ -227,7 +287,7 @@ for stage_name, n_epochs in tqdm(stages):
 
 df_training = pd.DataFrame(training_results)
 print("\nTraining Stage Results:")
-print(df_training[['stage', 'epochs', 'H_mode', 'PR', 'C', 'sparsity']].to_string(index=False))
+print(df_training[['stage', 'epochs', 'H_mode', 'PR', 'C', 'R_dyn', 'sparsity']].to_string(index=False))
 
 # ==============================================================================
 # PART 2: Architecture Comparison
@@ -264,7 +324,7 @@ for arch_name, arch_type in tqdm(architectures.items(), desc="Architectures"):
 
 df_arch = pd.DataFrame(arch_results)
 print("\nArchitecture Comparison:")
-print(df_arch[['architecture', 'trained', 'H_mode', 'PR', 'C', 'modularity']].to_string(index=False))
+print(df_arch[['architecture', 'trained', 'H_mode', 'PR', 'C', 'R_dyn', 'modularity']].to_string(index=False))
 
 # ==============================================================================
 # PART 3: Network Size Scaling
@@ -305,7 +365,7 @@ for layers, size_name in tqdm(sizes, desc="Network sizes"):
 
 df_size = pd.DataFrame(size_results)
 print("\nNetwork Size Scaling:")
-print(df_size[['size_name', 'n_params', 'H_mode', 'PR', 'C']].to_string(index=False))
+print(df_size[['size_name', 'n_params', 'H_mode', 'PR', 'C', 'R_dyn']].to_string(index=False))
 
 # ==============================================================================
 # PART 4: Depth vs Width Analysis
@@ -341,7 +401,7 @@ for layers, config_name in tqdm(depth_width_configs, desc="Depth/Width"):
 
 df_dw = pd.DataFrame(dw_results)
 print("\nDepth vs Width Results:")
-print(df_dw[['config', 'depth', 'avg_width', 'H_mode', 'C']].to_string(index=False))
+print(df_dw[['config', 'depth', 'avg_width', 'H_mode', 'C', 'R_dyn']].to_string(index=False))
 
 # ==============================================================================
 # PART 5: Comparison with Biological Systems
