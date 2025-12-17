@@ -95,7 +95,8 @@ class TestPushPullOscillator:
         )
         
         # Simulate to generate oscillations
-        osc.simulate(1000, external_input=0.5 * np.ones(10000))
+        n_steps = int(1000 / osc.dt)
+        osc.simulate(1000, external_input=0.5 * np.ones(n_steps))
         
         freq = osc.compute_oscillation_frequency()
         

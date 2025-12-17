@@ -47,8 +47,6 @@ for i, input_level in enumerate(input_levels):
     print(f"\n  Input level {input_level:.1f}:")
     
     # Simulate with NMM
-    n_steps = int(1000 / nmm_model.dt)
-    external_input = input_level * np.ones(n_steps)
     result = nmm_model.simulate_and_convert(1000)
     
     # Get NMM prediction

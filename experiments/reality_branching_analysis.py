@@ -24,6 +24,10 @@ from src.quantum import (
     compute_entanglement_entropy,
     compute_mutual_information
 )
+from src.neural_mass.harmonic_bridge import (
+    compute_harmonic_richness,
+    compute_participation_ratio
+)
 
 print("="*80)
 print("Reality Branching Analysis")
@@ -203,11 +207,6 @@ richness_values = []
 participation_values = []
 
 for state in random_states:
-    from src.neural_mass.harmonic_bridge import (
-        compute_harmonic_richness,
-        compute_participation_ratio
-    )
-    
     richness = compute_harmonic_richness(state.power)
     participation = compute_participation_ratio(state.power)
     
@@ -303,10 +302,6 @@ scatter = ax4.scatter(richness_values, participation_values,
 # Add basis states
 for state_name in basis_states:
     state = register.get_basis_state(state_name)
-    from src.neural_mass.harmonic_bridge import (
-        compute_harmonic_richness,
-        compute_participation_ratio
-    )
     r = compute_harmonic_richness(state.power)
     p = compute_participation_ratio(state.power)
     ax4.scatter([r], [p], s=200, marker='*', edgecolors='red', 
