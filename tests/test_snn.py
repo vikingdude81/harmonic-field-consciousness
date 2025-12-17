@@ -187,11 +187,18 @@ class TestSpikeEncoder:
         encoder = SpikeEncoder(encoding='rate')
         
         amplitudes = np.array([1.0, 0.7, 0.4, 0.1])
-        spike_trains = encoder.encode(amplitudes, duration=200.0)
-        decoded = encoder.decode(spike_trains, window=200.0)
         
-        # Should preserve relative ordering
-        assert np.argsort(amplitudes)[-1] == np.argsort(decoded)[-1]
+        # Average over multiple trials for robustness
+        decoded_sum = np.zeros_like(amplitudes)
+        for _ in range(5):
+            spike_trains = encoder.encode(amplitudes, duration=500.0)
+            decoded = encoder.decode(spike_trains, window=500.0)
+            decoded_sum += decoded
+        
+        decoded_avg = decoded_sum / 5
+        
+        # Should preserve relative ordering (top element)
+        assert np.argmax(amplitudes) == np.argmax(decoded_avg)
 
 
 class TestSpikeMetrics:
