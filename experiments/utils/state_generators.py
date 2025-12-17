@@ -197,6 +197,319 @@ def generate_psychedelic_state(
     return power
 
 
+# ==============================================================================
+# MEDITATION STATES
+# ==============================================================================
+
+def generate_focused_attention_meditation(
+    n_modes: int = 20,
+    depth: float = 0.7,
+    seed: Optional[int] = None
+) -> np.ndarray:
+    """
+    Generate Focused Attention (FA) meditation state.
+    
+    Characteristics (based on EEG research):
+    - Enhanced theta (4-8 Hz) - corresponds to mid-modes
+    - Increased frontal alpha coherence
+    - Reduced high-frequency noise
+    - High concentration, narrow focus
+    - Lower entropy than wake (focused)
+    - Moderate participation ratio
+    
+    FA meditation: Concentration on single object (breath, mantra, etc.)
+    Examples: Shamatha, Zen counting breaths, mantra meditation
+    
+    Args:
+        n_modes: Number of modes
+        depth: Meditation depth (0=beginner, 1=adept)
+        seed: Random seed
+    
+    Returns:
+        Normalized power distribution
+    """
+    if seed is not None:
+        np.random.seed(seed)
+    
+    k = np.arange(n_modes)
+    
+    # Enhanced mid-range modes (theta-alpha equivalent)
+    theta_peak = 0.3 + 0.4 * depth
+    power = theta_peak * np.exp(-(k - n_modes * 0.25)**2 / (8 + 4 * depth))
+    
+    # Some low-mode presence (but not dominant like sleep)
+    power += 0.15 * np.exp(-k / 5)
+    
+    # Reduced high-mode activity (calm, focused)
+    high_mode_suppression = 1.0 - 0.6 * depth * (k / n_modes)
+    power *= np.maximum(high_mode_suppression, 0.1)
+    
+    # Add small noise (less than wake - more stable)
+    power += 0.03 * (1 - depth) * np.random.rand(n_modes)
+    
+    # Normalize
+    power = power / power.sum()
+    
+    return power
+
+
+def generate_open_monitoring_meditation(
+    n_modes: int = 20,
+    depth: float = 0.7,
+    seed: Optional[int] = None
+) -> np.ndarray:
+    """
+    Generate Open Monitoring (OM) meditation state.
+    
+    Characteristics (based on EEG research):
+    - Enhanced theta AND gamma
+    - Broader distribution than FA
+    - High entropy (open awareness)
+    - High participation ratio
+    - "Witnessing" quality - aware of all arising experiences
+    
+    OM meditation: Non-reactive awareness of whatever arises
+    Examples: Vipassana, Shikantaza, Dzogchen noting
+    
+    Args:
+        n_modes: Number of modes
+        depth: Meditation depth (0=beginner, 1=adept)
+        seed: Random seed
+    
+    Returns:
+        Normalized power distribution
+    """
+    if seed is not None:
+        np.random.seed(seed)
+    
+    k = np.arange(n_modes)
+    
+    # Broad distribution (open awareness)
+    base = 0.25 + 0.2 * np.exp(-k / 10)
+    
+    # Enhanced theta peak
+    theta_enhance = 0.3 * depth * np.exp(-(k - n_modes * 0.2)**2 / 12)
+    
+    # Enhanced gamma (high modes) - unique to OM
+    gamma_enhance = 0.25 * depth * np.exp(-(k - n_modes * 0.7)**2 / 15)
+    
+    power = base + theta_enhance + gamma_enhance
+    
+    # Minimal noise (stable attention)
+    power += 0.04 * np.random.rand(n_modes)
+    
+    # Normalize
+    power = power / power.sum()
+    
+    return power
+
+
+def generate_nondual_awareness(
+    n_modes: int = 20,
+    depth: float = 0.8,
+    seed: Optional[int] = None
+) -> np.ndarray:
+    """
+    Generate Non-dual Awareness state.
+    
+    Characteristics:
+    - Very flat, uniform distribution
+    - Extremely high entropy
+    - Maximum participation ratio
+    - Subject-object distinction dissolved
+    - All modes participate equally
+    - Similar to deep psychedelic but without chaos
+    - Stable, peaceful (low Lyapunov)
+    
+    States: Rigpa (Dzogchen), Turiya (Vedanta), Satori, Moksha glimpse
+    
+    Args:
+        n_modes: Number of modes
+        depth: Realization depth (0=glimpse, 1=stable abiding)
+        seed: Random seed
+    
+    Returns:
+        Normalized power distribution
+    """
+    if seed is not None:
+        np.random.seed(seed)
+    
+    k = np.arange(n_modes)
+    
+    # Near-uniform distribution (all modes equal)
+    uniform = np.ones(n_modes)
+    
+    # Slight wave pattern (not perfectly flat - natural coherence)
+    wave = 0.1 * np.sin(2 * np.pi * k / n_modes)
+    
+    # Blend based on depth
+    power = (1 - 0.8 * depth) * (0.5 + 0.5 * np.exp(-k / 8))  # Wake-like baseline
+    power += 0.8 * depth * uniform  # Approach uniformity
+    power += wave * (1 - depth)  # Wave diminishes with depth
+    
+    # Very little noise (extremely stable)
+    power += 0.02 * np.random.rand(n_modes)
+    
+    # Normalize
+    power = power / power.sum()
+    
+    return power
+
+
+def generate_jhana_state(
+    n_modes: int = 20,
+    jhana_level: int = 1,
+    seed: Optional[int] = None
+) -> np.ndarray:
+    """
+    Generate Jhana (absorption) meditation states.
+    
+    The 4 form jhanas have distinct characteristics:
+    - Jhana 1: Applied/sustained attention, rapture, happiness
+    - Jhana 2: Internal confidence, rapture, happiness (no thinking)
+    - Jhana 3: Equanimity, happiness (rapture fades)
+    - Jhana 4: Pure equanimity, neither pleasure nor pain
+    
+    Neuroimaging shows progressive:
+    - Reduction in default mode network
+    - Increased coherence
+    - Simplified yet rich experience
+    
+    Args:
+        n_modes: Number of modes
+        jhana_level: 1-4 (or 5-8 for formless)
+        seed: Random seed
+    
+    Returns:
+        Normalized power distribution
+    """
+    if seed is not None:
+        np.random.seed(seed)
+    
+    k = np.arange(n_modes)
+    jhana_level = max(1, min(jhana_level, 8))
+    
+    if jhana_level <= 4:
+        # Form jhanas: progressively simpler but still conscious
+        
+        # Concentration on fewer modes as jhana deepens
+        concentration = 1 + (jhana_level - 1) * 0.5  # 1.0 to 2.5
+        
+        # Central peak (not low like sleep, not high like psychedelic)
+        center = n_modes * 0.35 - (jhana_level - 1) * 0.05 * n_modes
+        
+        power = np.exp(-(k - center)**2 / (15 - jhana_level * 2))
+        
+        # Add bliss/rapture component (diminishes in higher jhanas)
+        if jhana_level <= 2:
+            bliss = 0.3 * (3 - jhana_level) * np.exp(-(k - n_modes * 0.5)**2 / 10)
+            power += bliss
+        
+        # Very stable
+        power += 0.02 * np.random.rand(n_modes)
+        
+    else:
+        # Formless jhanas (5-8): progressively more uniform
+        # Infinite space, infinite consciousness, nothingness, neither-perception
+        
+        formless_depth = (jhana_level - 4) / 4  # 0.25 to 1.0
+        
+        # Trend toward uniformity
+        power = (1 - formless_depth) * np.exp(-(k - n_modes * 0.4)**2 / 20)
+        power += formless_depth * np.ones(n_modes)
+        
+        # Extremely stable
+        power += 0.01 * np.random.rand(n_modes)
+    
+    # Normalize
+    power = power / power.sum()
+    
+    return power
+
+
+def generate_loving_kindness_meditation(
+    n_modes: int = 20,
+    intensity: float = 0.7,
+    seed: Optional[int] = None
+) -> np.ndarray:
+    """
+    Generate Loving-Kindness (Metta) meditation state.
+    
+    Characteristics:
+    - Enhanced positive affect circuits
+    - High gamma activity
+    - Strong connectivity (compassion = connection)
+    - Moderate entropy
+    - Distinct from FA/OM - emotional component
+    
+    Args:
+        n_modes: Number of modes
+        intensity: Practice intensity (0=start, 1=deep metta)
+        seed: Random seed
+    
+    Returns:
+        Normalized power distribution
+    """
+    if seed is not None:
+        np.random.seed(seed)
+    
+    k = np.arange(n_modes)
+    
+    # Baseline similar to positive wake state
+    power = 0.25 + 0.3 * np.exp(-k / 7)
+    
+    # Enhanced mid-to-high modes (positive affect, gamma)
+    affect_boost = 0.35 * intensity * np.exp(-(k - n_modes * 0.55)**2 / 12)
+    power += affect_boost
+    
+    # Moderate low-mode activity (grounded, not drowsy)
+    power += 0.15 * np.exp(-k / 4)
+    
+    # Some variability (emotional warmth)
+    power += 0.06 * np.random.rand(n_modes)
+    
+    # Normalize
+    power = power / power.sum()
+    
+    return power
+
+
+def generate_meditation_state(
+    state_type: str,
+    n_modes: int = 20,
+    depth: float = 0.7,
+    seed: Optional[int] = None
+) -> np.ndarray:
+    """
+    Generate any meditation state by name.
+    
+    Args:
+        state_type: One of 'focused_attention', 'open_monitoring', 
+                   'nondual', 'jhana_1' through 'jhana_8', 'metta'
+        n_modes: Number of modes
+        depth: Practice depth/intensity
+        seed: Random seed
+    
+    Returns:
+        Normalized power distribution
+    """
+    state_type = state_type.lower().replace(' ', '_').replace('-', '_')
+    
+    if state_type in ['fa', 'focused', 'focused_attention', 'concentration', 'shamatha']:
+        return generate_focused_attention_meditation(n_modes, depth, seed)
+    elif state_type in ['om', 'open', 'open_monitoring', 'vipassana', 'mindfulness']:
+        return generate_open_monitoring_meditation(n_modes, depth, seed)
+    elif state_type in ['nondual', 'non_dual', 'nondual_awareness', 'rigpa', 'turiya', 'satori']:
+        return generate_nondual_awareness(n_modes, depth, seed)
+    elif state_type.startswith('jhana'):
+        level = int(state_type.split('_')[1]) if '_' in state_type else 1
+        return generate_jhana_state(n_modes, level, seed)
+    elif state_type in ['metta', 'loving_kindness', 'compassion']:
+        return generate_loving_kindness_meditation(n_modes, depth, seed)
+    else:
+        raise ValueError(f"Unknown meditation state: {state_type}")
+
+
 def interpolate_states(
     state1: np.ndarray,
     state2: np.ndarray,

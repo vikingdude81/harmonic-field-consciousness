@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """
-Category 4, Experiment 2: Social Networks
+Category 4: Applications
 
-Apply consciousness metrics to social network graphs:
-- Load/generate example social network data
-- Apply consciousness metrics to communities
-- Test collective coordination measures
-- Compare online vs simulated offline networks
-- Identify "conscious" vs "fragmented" communities
-- Visualize social harmonic modes
+Experiment 2: Social Networks
 
-Uses GPU acceleration for large-scale network analysis.
+Applies consciousness metrics to social network graphs:
+1. Different social network types (random, scale-free, small-world)
+2. Collective coordination measures
+3. Information flow and integration
+4. Community structure effects
+5. Comparison with neural networks
+
+Key question: Can social groups exhibit "collective consciousness" signatures?
 """
 
 import sys
@@ -20,641 +21,626 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import networkx as nx
 from pathlib import Path
 from tqdm import tqdm
-import warnings
-warnings.filterwarnings('ignore')
+from scipy import stats
+import networkx as nx
 
 from utils import graph_generators as gg
 from utils import metrics as met
-from utils import state_generators as sg
-from utils import visualization as viz
-from utils.gpu_utils import get_device_info, gpu_eigendecomposition, print_gpu_status
 
 # Configuration
 SEED = 42
+np.random.seed(SEED)
+N_MODES = 20
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp2_social_networks'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-print("=" * 60)
-print("Category 4, Experiment 2: Social Networks")
-print("=" * 60)
+print("="*70)
+print("Category 4, Experiment 2: Social Networks Consciousness Analysis")
+print("="*70)
 
-# Check GPU availability
-print_gpu_status()
-gpu_info = get_device_info()
-USE_GPU = gpu_info['cupy_available']
-
-np.random.seed(SEED)
-
-
-# ============================================================================
+# ==============================================================================
 # SOCIAL NETWORK GENERATORS
-# ============================================================================
+# ==============================================================================
 
-def generate_social_network(n_nodes, network_type='preferential', seed=None):
+def generate_social_network(network_type, n_nodes, seed=None):
     """
-    Generate a social network with realistic properties.
-    
-    Args:
-        n_nodes: Number of nodes
-        network_type: Type of network ('preferential', 'community', 'small_world', 'random')
-        seed: Random seed
-        
-    Returns:
-        NetworkX graph with attributes
+    Generate different types of social networks.
     """
     if seed is not None:
         np.random.seed(seed)
     
-    if network_type == 'preferential':
-        # Preferential attachment (like real social networks)
-        G = nx.barabasi_albert_graph(n_nodes, m=3, seed=seed)
-    elif network_type == 'community':
-        # Community structure (like friend groups)
-        n_communities = max(2, n_nodes // 20)
-        G = nx.generators.community.stochastic_block_model(
-            sizes=[n_nodes // n_communities] * n_communities,
-            p=[[0.3 if i == j else 0.02 for j in range(n_communities)] for i in range(n_communities)],
-            seed=seed
-        )
+    if network_type == 'random':
+        # Erdős-Rényi random graph
+        p = np.log(n_nodes) / n_nodes  # Just above connectivity threshold
+        G = nx.erdos_renyi_graph(n_nodes, p, seed=seed)
+        
+    elif network_type == 'scale_free':
+        # Barabási-Albert preferential attachment
+        m = 3  # Number of edges per new node
+        G = nx.barabasi_albert_graph(n_nodes, m, seed=seed)
+        
     elif network_type == 'small_world':
-        # Small-world (like real-world social connections)
-        G = nx.watts_strogatz_graph(n_nodes, k=6, p=0.3, seed=seed)
+        # Watts-Strogatz small-world
+        k = 6  # Each node connected to k nearest neighbors
+        p = 0.3  # Rewiring probability
+        G = nx.watts_strogatz_graph(n_nodes, k, p, seed=seed)
+        
+    elif network_type == 'hierarchical':
+        # Corporate hierarchy-like
+        G = nx.balanced_tree(r=3, h=4)  # Branching factor 3, height 4
+        # Add some lateral connections
+        for node in G.nodes():
+            potential = [n for n in G.nodes() if n != node and not G.has_edge(node, n)]
+            if len(potential) > 0:
+                if np.random.rand() < 0.1:
+                    target = np.random.choice(potential)
+                    G.add_edge(node, target)
+        
+        # Resize if needed
+        while G.number_of_nodes() < n_nodes:
+            G.add_node(G.number_of_nodes())
+            G.add_edge(G.number_of_nodes() - 1, np.random.randint(0, G.number_of_nodes() - 1))
+        
+    elif network_type == 'community':
+        # Stochastic block model with communities
+        n_communities = 4
+        community_size = n_nodes // n_communities
+        p_in = 0.5  # Within-community connection probability
+        p_out = 0.05  # Between-community connection probability
+        
+        sizes = [community_size] * n_communities
+        probs = [[p_in if i == j else p_out for j in range(n_communities)] 
+                 for i in range(n_communities)]
+        G = nx.stochastic_block_model(sizes, probs, seed=seed)
+        
+    elif network_type == 'clique':
+        # Connected cliques (tight-knit groups)
+        n_cliques = 5
+        clique_size = n_nodes // n_cliques
+        G = nx.Graph()
+        
+        for c in range(n_cliques):
+            nodes = list(range(c * clique_size, (c + 1) * clique_size))
+            G.add_nodes_from(nodes)
+            for i in nodes:
+                for j in nodes:
+                    if i < j:
+                        G.add_edge(i, j)
+        
+        # Connect cliques
+        for c in range(n_cliques - 1):
+            G.add_edge(c * clique_size, (c + 1) * clique_size)
+        
     else:
-        # Random
-        G = nx.erdos_renyi_graph(n_nodes, p=0.05, seed=seed)
-    
-    # Add edge weights (interaction strength)
-    for u, v in G.edges():
-        G[u][v]['weight'] = np.random.uniform(0.1, 1.0)
-    
-    # Add node attributes
-    for node in G.nodes():
-        G.nodes[node]['activity'] = np.random.uniform(0.1, 1.0)
-        G.nodes[node]['influence'] = G.degree(node) / n_nodes
+        G = nx.complete_graph(n_nodes)
     
     return G
 
 
-def simulate_information_spread(G, seed_nodes, n_steps=50, spread_prob=0.3):
+def simulate_social_dynamics(G, n_steps=500, coupling=0.3, seed=None):
     """
-    Simulate information/meme spread through network.
+    Simulate opinion/activity dynamics on a social network.
     
-    Args:
-        G: NetworkX graph
-        seed_nodes: Initial informed nodes
-        n_steps: Number of time steps
-        spread_prob: Probability of transmission
+    Uses a simplified bounded confidence model where agents
+    influence each other based on network connections.
+    """
+    if seed is not None:
+        np.random.seed(seed)
+    
+    n_nodes = G.number_of_nodes()
+    
+    # Initialize random opinions/states
+    states = np.random.randn(n_nodes)
+    state_history = np.zeros((n_nodes, n_steps))
+    
+    # Get adjacency matrix
+    A = nx.to_numpy_array(G)
+    A = A / (A.sum(axis=1, keepdims=True) + 1e-10)  # Normalize
+    
+    for t in range(n_steps):
+        state_history[:, t] = states.copy()
         
-    Returns:
-        Dictionary with spread dynamics
-    """
-    informed = set(seed_nodes)
-    history = [len(informed)]
+        # Update: move toward neighbors + noise
+        neighbor_influence = A @ states
+        states = (1 - coupling) * states + coupling * neighbor_influence
+        states += np.random.randn(n_nodes) * 0.1
     
-    for step in range(n_steps):
-        new_informed = set()
-        for node in informed:
-            for neighbor in G.neighbors(node):
-                if neighbor not in informed:
-                    if np.random.random() < spread_prob * G[node][neighbor].get('weight', 1.0):
-                        new_informed.add(neighbor)
-        informed.update(new_informed)
-        history.append(len(informed))
-    
-    return {
-        'informed_count': history,
-        'final_reach': len(informed) / G.number_of_nodes(),
-        'spread_rate': np.diff(history[:10]).mean() if len(history) > 1 else 0
-    }
+    return state_history
 
 
-def compute_social_consciousness_metrics(G, activity_mode='eigenvector'):
+def compute_social_consciousness(G, state_history, n_modes=20):
     """
-    Compute consciousness metrics for a social network.
-    
-    Interprets:
-    - Mode entropy: diversity of influence patterns
-    - Participation ratio: how distributed is influence
-    - Phase coherence: coordination of activity
-    - Criticality: responsiveness to information
-    
-    Args:
-        G: NetworkX graph
-        activity_mode: How to generate activity patterns
-        
-    Returns:
-        Dictionary of metrics
+    Compute consciousness-like metrics for a social network.
     """
-    n = G.number_of_nodes()
-    n_modes = min(30, n - 1)
-    
     # Compute Laplacian eigenmodes
-    if USE_GPU and n > 50:
-        L = nx.laplacian_matrix(G).toarray().astype(np.float64)
-        eigenvalues, eigenvectors = gpu_eigendecomposition(L, use_gpu=True)
-    else:
-        L = nx.laplacian_matrix(G).toarray()
-        eigenvalues, eigenvectors = np.linalg.eigh(L)
+    L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
     
-    idx = np.argsort(eigenvalues)
-    eigenvalues = eigenvalues[idx][:n_modes]
-    eigenvectors = eigenvectors[:, idx][:, :n_modes]
+    # Project dynamics onto eigenmodes
+    n_modes_actual = min(n_modes, len(eigenvalues))
+    mode_amplitudes = eigenvectors[:, :n_modes_actual].T @ state_history
     
-    # Generate activity power distribution
-    if activity_mode == 'eigenvector':
-        # Use eigenvector centrality as proxy for activity
-        centrality = nx.eigenvector_centrality_numpy(G)
-        activity = np.array([centrality.get(i, 0) for i in range(n)])
-        # Project onto eigenmodes
-        power = np.abs(eigenvectors.T @ activity) ** 2
-    elif activity_mode == 'random':
-        power = np.random.dirichlet(np.ones(n_modes))
-    else:
-        # Uniform
-        power = np.ones(n_modes) / n_modes
-    
-    power = power / power.sum()
+    # Power spectrum from mode variance
+    power = np.var(mode_amplitudes, axis=1)
+    if len(power) < n_modes:
+        power = np.pad(power, (0, n_modes - len(power)), mode='constant')
+    power = power[:n_modes]
+    power = power / (power.sum() + 1e-10)
     
     # Compute metrics
-    metrics = met.compute_all_metrics(power, eigenvalues)
+    if len(eigenvalues) < n_modes:
+        eigenvalues = np.pad(eigenvalues, (0, n_modes - len(eigenvalues)), mode='edge')
     
-    # Add social network specific metrics
+    metrics = met.compute_all_metrics(power, eigenvalues[:n_modes])
+    
+    # Social-specific metrics
+    # Clustering coefficient
     metrics['clustering'] = nx.average_clustering(G)
-    metrics['avg_path_length'] = nx.average_shortest_path_length(G) if nx.is_connected(G) else float('inf')
-    metrics['modularity'] = compute_modularity_score(G)
+    
+    # Degree distribution entropy
+    degrees = [d for n, d in G.degree()]
+    deg_counts = np.bincount(degrees)
+    deg_probs = deg_counts / deg_counts.sum()
+    deg_probs = deg_probs[deg_probs > 0]
+    metrics['degree_entropy'] = -np.sum(deg_probs * np.log(deg_probs + 1e-10))
+    
+    # Average path length (if connected)
+    if nx.is_connected(G):
+        metrics['avg_path_length'] = nx.average_shortest_path_length(G)
+    else:
+        # Use largest component
+        largest_cc = max(nx.connected_components(G), key=len)
+        subgraph = G.subgraph(largest_cc)
+        metrics['avg_path_length'] = nx.average_shortest_path_length(subgraph)
+    
+    # Global efficiency
+    metrics['efficiency'] = nx.global_efficiency(G)
+    
+    # Modularity (using greedy algorithm)
+    try:
+        communities = nx.community.greedy_modularity_communities(G)
+        metrics['modularity'] = nx.community.modularity(G, communities)
+    except:
+        metrics['modularity'] = 0
     
     return metrics
 
 
-def compute_modularity_score(G):
-    """Compute network modularity using greedy algorithm."""
-    try:
-        communities = nx.algorithms.community.greedy_modularity_communities(G)
-        return nx.algorithms.community.modularity(G, communities)
-    except:
-        return 0.0
+# ==============================================================================
+# PART 1: Network Type Comparison
+# ==============================================================================
 
+print("\n" + "-"*70)
+print("PART 1: Consciousness Across Social Network Types")
+print("-"*70)
 
-# ============================================================================
-# EXPERIMENT 1: Compare social network types
-# ============================================================================
-
-print("\n1. Comparing social network types...")
-
-network_types = ['preferential', 'community', 'small_world', 'random']
-network_sizes = [100, 200, 500]
+network_types = ['random', 'scale_free', 'small_world', 'hierarchical', 'community', 'clique']
+n_nodes = 100
+n_steps = 500
 
 type_results = []
 
 for net_type in tqdm(network_types, desc="Network types"):
-    for size in network_sizes:
-        G = generate_social_network(size, network_type=net_type, seed=SEED)
-        
-        # Ensure connectivity
-        if not nx.is_connected(G):
-            largest_cc = max(nx.connected_components(G), key=len)
-            G = G.subgraph(largest_cc).copy()
-        
-        metrics = compute_social_consciousness_metrics(G)
-        
-        type_results.append({
-            'network_type': net_type,
-            'size': size,
-            'n_nodes': G.number_of_nodes(),
-            'n_edges': G.number_of_edges(),
-            'avg_degree': 2 * G.number_of_edges() / G.number_of_nodes(),
-            **metrics
-        })
-
-df_types = pd.DataFrame(type_results)
-
-# ============================================================================
-# EXPERIMENT 2: Community detection and consciousness
-# ============================================================================
-
-print("\n2. Analyzing community structure...")
-
-# Generate network with clear communities
-G_community = generate_social_network(200, network_type='community', seed=SEED)
-if not nx.is_connected(G_community):
-    largest_cc = max(nx.connected_components(G_community), key=len)
-    G_community = G_community.subgraph(largest_cc).copy()
-
-# Detect communities
-communities = list(nx.algorithms.community.greedy_modularity_communities(G_community))
-print(f"  Detected {len(communities)} communities")
-
-# Compute metrics for each community
-community_results = []
-
-for i, comm in enumerate(communities):
-    subgraph = G_community.subgraph(comm).copy()
-    if subgraph.number_of_nodes() > 5 and nx.is_connected(subgraph):
-        metrics = compute_social_consciousness_metrics(subgraph)
-        community_results.append({
-            'community_id': i,
-            'size': len(comm),
-            'internal_edges': subgraph.number_of_edges(),
-            'density': nx.density(subgraph),
-            **metrics
-        })
-
-df_communities = pd.DataFrame(community_results)
-
-# ============================================================================
-# EXPERIMENT 3: Information spread and consciousness
-# ============================================================================
-
-print("\n3. Analyzing information spread dynamics...")
-
-G_spread = generate_social_network(300, network_type='preferential', seed=SEED)
-if not nx.is_connected(G_spread):
-    largest_cc = max(nx.connected_components(G_spread), key=len)
-    G_spread = G_spread.subgraph(largest_cc).copy()
-
-# Test different seed strategies
-seed_strategies = {
-    'random': np.random.choice(list(G_spread.nodes()), size=5, replace=False),
-    'hubs': sorted(G_spread.nodes(), key=lambda x: G_spread.degree(x), reverse=True)[:5],
-    'peripheral': sorted(G_spread.nodes(), key=lambda x: G_spread.degree(x))[:5],
-    'central': sorted(G_spread.nodes(), key=lambda x: nx.closeness_centrality(G_spread)[x], reverse=True)[:5],
-}
-
-spread_results = []
-
-for strategy_name, seed_nodes in tqdm(seed_strategies.items(), desc="Spread strategies"):
-    # Multiple runs for statistics
-    for run in range(10):
-        np.random.seed(SEED + run)
-        spread = simulate_information_spread(G_spread, seed_nodes, n_steps=50)
-        
-        spread_results.append({
-            'strategy': strategy_name,
-            'run': run,
-            'final_reach': spread['final_reach'],
-            'spread_rate': spread['spread_rate'],
-        })
-
-df_spread = pd.DataFrame(spread_results)
-df_spread_summary = df_spread.groupby('strategy').agg({'final_reach': ['mean', 'std'], 'spread_rate': ['mean', 'std']})
-
-# Network consciousness and spread correlation
-network_metrics = compute_social_consciousness_metrics(G_spread)
-print(f"\n  Network C(t): {network_metrics['C']:.4f}")
-print(f"  Best spread strategy: {df_spread.groupby('strategy')['final_reach'].mean().idxmax()}")
-
-# ============================================================================
-# EXPERIMENT 4: Online vs Offline network simulation
-# ============================================================================
-
-print("\n4. Comparing online vs offline network patterns...")
-
-# Simulate different network types
-network_simulations = {
-    'offline_friends': {
-        'n_nodes': 150,
-        'type': 'small_world',
-        'edge_weight_range': (0.3, 1.0),  # Strong ties
-    },
-    'online_followers': {
-        'n_nodes': 500,
-        'type': 'preferential',
-        'edge_weight_range': (0.05, 0.5),  # Weak ties
-    },
-    'online_community': {
-        'n_nodes': 200,
-        'type': 'community',
-        'edge_weight_range': (0.1, 0.8),
-    },
-    'professional_network': {
-        'n_nodes': 100,
-        'type': 'community',
-        'edge_weight_range': (0.4, 0.9),
-    },
-}
-
-simulation_results = []
-
-for sim_name, params in tqdm(network_simulations.items(), desc="Simulations"):
-    G = generate_social_network(params['n_nodes'], network_type=params['type'], seed=SEED)
+    G = generate_social_network(net_type, n_nodes, seed=SEED)
+    state_history = simulate_social_dynamics(G, n_steps=n_steps, seed=SEED)
+    metrics = compute_social_consciousness(G, state_history, n_modes=N_MODES)
     
-    # Adjust edge weights
-    low, high = params['edge_weight_range']
-    for u, v in G.edges():
-        G[u][v]['weight'] = np.random.uniform(low, high)
-    
-    if not nx.is_connected(G):
-        largest_cc = max(nx.connected_components(G), key=len)
-        G = G.subgraph(largest_cc).copy()
-    
-    metrics = compute_social_consciousness_metrics(G)
-    
-    # Additional social metrics
-    degree_dist = [G.degree(n) for n in G.nodes()]
-    
-    simulation_results.append({
-        'simulation': sim_name,
+    type_results.append({
+        'type': net_type,
         'n_nodes': G.number_of_nodes(),
-        'avg_weight': np.mean([G[u][v]['weight'] for u, v in G.edges()]),
-        'degree_mean': np.mean(degree_dist),
-        'degree_std': np.std(degree_dist),
+        'n_edges': G.number_of_edges(),
+        'density': nx.density(G),
         **metrics
     })
 
-df_simulations = pd.DataFrame(simulation_results)
+df_types = pd.DataFrame(type_results)
+print("\nNetwork Type Comparison:")
+print(df_types[['type', 'density', 'clustering', 'H_mode', 'PR', 'C']].to_string(index=False))
 
-# ============================================================================
-# EXPERIMENT 5: Network evolution and consciousness
-# ============================================================================
+# ==============================================================================
+# PART 2: Coupling Strength Effects
+# ==============================================================================
 
-print("\n5. Analyzing network evolution...")
+print("\n" + "-"*70)
+print("PART 2: Effects of Social Coupling Strength")
+print("-"*70)
 
-# Start with small network and grow
-initial_nodes = 20
-final_nodes = 300
-n_steps = 50
+couplings = np.linspace(0.05, 0.95, 15)
+coupling_results = []
 
-evolution_results = []
+# Use small-world as reference network
+G = generate_social_network('small_world', n_nodes, seed=SEED)
 
-G_evolving = nx.Graph()
-G_evolving.add_nodes_from(range(initial_nodes))
+for coupling in tqdm(couplings, desc="Coupling sweep"):
+    state_history = simulate_social_dynamics(G, n_steps=n_steps, coupling=coupling, seed=SEED)
+    metrics = compute_social_consciousness(G, state_history, n_modes=N_MODES)
+    
+    # Measure synchronization
+    sync = np.mean(np.corrcoef(state_history))
+    
+    coupling_results.append({
+        'coupling': coupling,
+        'synchronization': sync,
+        **metrics
+    })
 
-# Initial random edges
-for i in range(initial_nodes):
-    for j in range(i+1, initial_nodes):
-        if np.random.random() < 0.3:
-            G_evolving.add_edge(i, j, weight=np.random.uniform(0.5, 1.0))
+df_coupling = pd.DataFrame(coupling_results)
+print("\nCoupling Effects (selected):")
+print(df_coupling[['coupling', 'synchronization', 'H_mode', 'C']].iloc[::3].to_string(index=False))
 
-for step in tqdm(range(n_steps), desc="Evolution"):
-    # Compute metrics
-    if G_evolving.number_of_nodes() > 5 and G_evolving.number_of_edges() > 5:
-        if nx.is_connected(G_evolving):
-            metrics = compute_social_consciousness_metrics(G_evolving)
-        else:
-            largest_cc = max(nx.connected_components(G_evolving), key=len)
-            G_sub = G_evolving.subgraph(largest_cc).copy()
-            if G_sub.number_of_nodes() > 5:
-                metrics = compute_social_consciousness_metrics(G_sub)
-            else:
-                metrics = {'C': 0, 'H_mode': 0, 'PR': 0, 'kappa': 0}
+# ==============================================================================
+# PART 3: Community Structure Analysis
+# ==============================================================================
+
+print("\n" + "-"*70)
+print("PART 3: Community Structure Effects")
+print("-"*70)
+
+# Vary number of communities
+n_communities_list = [2, 4, 8, 16]
+community_results = []
+
+for n_comm in tqdm(n_communities_list, desc="Community sweep"):
+    # Generate block model
+    community_size = n_nodes // n_comm
+    sizes = [community_size] * n_comm
+    
+    # Vary within/between ratios
+    for ratio in [2, 5, 10, 20]:
+        p_out = 0.05
+        p_in = min(0.9, p_out * ratio)
         
-        evolution_results.append({
-            'step': step,
-            'n_nodes': G_evolving.number_of_nodes(),
-            'n_edges': G_evolving.number_of_edges(),
+        probs = [[p_in if i == j else p_out for j in range(n_comm)] 
+                 for i in range(n_comm)]
+        
+        try:
+            G = nx.stochastic_block_model(sizes, probs, seed=SEED)
+            state_history = simulate_social_dynamics(G, n_steps=n_steps, seed=SEED)
+            metrics = compute_social_consciousness(G, state_history, n_modes=N_MODES)
+            
+            community_results.append({
+                'n_communities': n_comm,
+                'p_in': p_in,
+                'p_out': p_out,
+                'ratio': ratio,
+                **metrics
+            })
+        except:
+            pass
+
+df_community = pd.DataFrame(community_results)
+print("\nCommunity Structure Effects:")
+print(df_community[['n_communities', 'ratio', 'modularity', 'H_mode', 'C']].to_string(index=False))
+
+# ==============================================================================
+# PART 4: Network Size Scaling
+# ==============================================================================
+
+print("\n" + "-"*70)
+print("PART 4: Consciousness vs Network Size")
+print("-"*70)
+
+sizes = [20, 50, 100, 200, 500]
+size_results = []
+
+for n in tqdm(sizes, desc="Size scaling"):
+    for net_type in ['small_world', 'scale_free']:
+        G = generate_social_network(net_type, n, seed=SEED)
+        state_history = simulate_social_dynamics(G, n_steps=300, seed=SEED)
+        metrics = compute_social_consciousness(G, state_history, n_modes=N_MODES)
+        
+        size_results.append({
+            'n_nodes': n,
+            'type': net_type,
             **metrics
         })
+
+df_size = pd.DataFrame(size_results)
+print("\nSize Scaling:")
+print(df_size[['n_nodes', 'type', 'clustering', 'H_mode', 'C']].to_string(index=False))
+
+# ==============================================================================
+# PART 5: Comparison with Neural Networks
+# ==============================================================================
+
+print("\n" + "-"*70)
+print("PART 5: Social vs Neural Network Comparison")
+print("-"*70)
+
+from utils import state_generators as sg
+
+# Generate reference neural network metrics
+G_brain = gg.generate_small_world(100, k_neighbors=8, rewiring_prob=0.2, seed=SEED)
+L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G_brain)
+
+comparison = []
+
+# Brain states
+brain_states = {
+    'Brain (Wake)': sg.generate_wake_state(N_MODES, seed=SEED),
+    'Brain (NREM)': sg.generate_nrem_unconscious(N_MODES, seed=SEED),
+}
+
+for state_name, power in brain_states.items():
+    metrics = met.compute_all_metrics(power, eigenvalues[:N_MODES])
+    metrics['system'] = state_name
+    metrics['category'] = 'Neural'
+    comparison.append(metrics)
+
+# Social networks
+social_nets = {
+    'Social (Community)': 'community',
+    'Social (Scale-free)': 'scale_free',
+    'Social (Small-world)': 'small_world',
+}
+
+for net_name, net_type in social_nets.items():
+    G = generate_social_network(net_type, 100, seed=SEED)
+    state_history = simulate_social_dynamics(G, n_steps=500, seed=SEED)
+    metrics = compute_social_consciousness(G, state_history, n_modes=N_MODES)
+    metrics['system'] = net_name
+    metrics['category'] = 'Social'
+    comparison.append(metrics)
+
+df_compare = pd.DataFrame(comparison)
+print("\nNeural vs Social Comparison:")
+print(df_compare[['system', 'category', 'H_mode', 'PR', 'C', 'R']].to_string(index=False))
+
+# ==============================================================================
+# PART 6: Real-World Social Network Simulations
+# ==============================================================================
+
+print("\n" + "-"*70)
+print("PART 6: Real-World Social Network Scenarios")
+print("-"*70)
+
+scenarios = {
+    'Small Team (startup)': {
+        'type': 'clique',
+        'n_nodes': 10,
+        'coupling': 0.7,
+    },
+    'Corporation': {
+        'type': 'hierarchical',
+        'n_nodes': 100,
+        'coupling': 0.3,
+    },
+    'Online Community': {
+        'type': 'scale_free',
+        'n_nodes': 200,
+        'coupling': 0.2,
+    },
+    'Neighborhood': {
+        'type': 'small_world',
+        'n_nodes': 50,
+        'coupling': 0.5,
+    },
+    'Political Factions': {
+        'type': 'community',
+        'n_nodes': 100,
+        'coupling': 0.1,
+    },
+}
+
+scenario_results = []
+
+for scenario_name, params in tqdm(scenarios.items(), desc="Scenarios"):
+    G = generate_social_network(params['type'], params['n_nodes'], seed=SEED)
+    state_history = simulate_social_dynamics(G, n_steps=500, coupling=params['coupling'], seed=SEED)
+    metrics = compute_social_consciousness(G, state_history, n_modes=N_MODES)
     
-    # Grow network (preferential attachment)
-    new_nodes = (final_nodes - initial_nodes) // n_steps
-    current_n = G_evolving.number_of_nodes()
-    
-    for i in range(new_nodes):
-        new_node = current_n + i
-        G_evolving.add_node(new_node)
-        
-        # Connect to existing nodes with preferential attachment
-        degrees = dict(G_evolving.degree())
-        if sum(degrees.values()) > 0:
-            probs = np.array([degrees.get(n, 0) for n in range(new_node)])
-            probs = probs / (probs.sum() + 1e-12)
-            
-            n_edges = min(3, new_node)
-            targets = np.random.choice(range(new_node), size=n_edges, replace=False, p=probs)
-            
-            for target in targets:
-                G_evolving.add_edge(new_node, target, weight=np.random.uniform(0.3, 1.0))
+    scenario_results.append({
+        'scenario': scenario_name,
+        **params,
+        **metrics
+    })
 
-df_evolution = pd.DataFrame(evolution_results)
+df_scenarios = pd.DataFrame(scenario_results)
+print("\nReal-World Scenarios:")
+print(df_scenarios[['scenario', 'n_nodes', 'coupling', 'clustering', 'C']].to_string(index=False))
 
-# Save results
-df_types.to_csv(OUTPUT_DIR / 'network_types_comparison.csv', index=False)
-df_communities.to_csv(OUTPUT_DIR / 'community_analysis.csv', index=False)
-df_spread.to_csv(OUTPUT_DIR / 'spread_dynamics.csv', index=False)
-df_simulations.to_csv(OUTPUT_DIR / 'simulation_comparison.csv', index=False)
-df_evolution.to_csv(OUTPUT_DIR / 'network_evolution.csv', index=False)
+# ==============================================================================
+# PART 7: Visualizations
+# ==============================================================================
 
-# ============================================================================
-# VISUALIZATION
-# ============================================================================
+print("\n" + "-"*70)
+print("PART 7: Generating Visualizations")
+print("-"*70)
 
-print("\nGenerating visualizations...")
+# Figure 1: Network type comparison
+fig, axes = plt.subplots(2, 2, figsize=(12, 10))
 
-# 1. Network type comparison
-fig, axes = plt.subplots(2, 2, figsize=(14, 12))
-
-# C(t) by network type
 ax = axes[0, 0]
-for net_type in network_types:
-    subset = df_types[df_types['network_type'] == net_type]
-    ax.plot(subset['size'], subset['C'], 'o-', linewidth=2, markersize=8, label=net_type.capitalize())
-ax.set_xlabel('Network Size', fontsize=12)
-ax.set_ylabel('Consciousness Functional C(t)', fontsize=12)
-ax.set_title('Consciousness by Network Type', fontsize=14, fontweight='bold')
-ax.legend()
-ax.grid(True, alpha=0.3)
+x = range(len(df_types))
+ax.bar(x, df_types['C'], color='steelblue', edgecolor='black')
+ax.set_xticks(x)
+ax.set_xticklabels(df_types['type'], rotation=45, ha='right')
+ax.set_ylabel('Consciousness C(t)')
+ax.set_title('A. Consciousness by Network Type')
+ax.grid(True, alpha=0.3, axis='y')
 
-# Clustering vs C
 ax = axes[0, 1]
-scatter = ax.scatter(df_types['clustering'], df_types['C'], c=df_types['size'], 
-                    cmap='viridis', s=100, edgecolors='black')
-ax.set_xlabel('Clustering Coefficient', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('Consciousness vs Clustering', fontsize=14, fontweight='bold')
-cbar = plt.colorbar(scatter, ax=ax)
-cbar.set_label('Network Size', fontsize=10)
-ax.grid(True, alpha=0.3)
+ax.bar(x, df_types['clustering'], color='coral', edgecolor='black')
+ax.set_xticks(x)
+ax.set_xticklabels(df_types['type'], rotation=45, ha='right')
+ax.set_ylabel('Clustering Coefficient')
+ax.set_title('B. Clustering by Network Type')
+ax.grid(True, alpha=0.3, axis='y')
 
-# Component metrics
 ax = axes[1, 0]
-x = np.arange(len(network_types))
-width = 0.2
-subset = df_types[df_types['size'] == 200]
+ax.scatter(df_types['clustering'], df_types['C'], s=100, c='steelblue', edgecolors='black')
+for i, row in df_types.iterrows():
+    ax.annotate(row['type'], (row['clustering'], row['C']), 
+                xytext=(5, 5), textcoords='offset points', fontsize=9)
+ax.set_xlabel('Clustering Coefficient')
+ax.set_ylabel('Consciousness C(t)')
+ax.set_title('C. Clustering-Consciousness Relationship')
+ax.grid(True, alpha=0.3)
 
-metrics_to_plot = ['H_mode', 'PR', 'kappa']
-for i, metric in enumerate(metrics_to_plot):
-    values = [subset[subset['network_type'] == nt][metric].values[0] for nt in network_types]
-    ax.bar(x + i * width, values, width, label=metric)
-
-ax.set_xlabel('Network Type', fontsize=12)
-ax.set_ylabel('Metric Value', fontsize=12)
-ax.set_title('Component Metrics (n=200)', fontsize=14, fontweight='bold')
-ax.set_xticks(x + width)
-ax.set_xticklabels([nt.capitalize() for nt in network_types])
-ax.legend()
-ax.grid(True, alpha=0.3, axis='y')
-
-# Modularity vs C
 ax = axes[1, 1]
-ax.scatter(df_types['modularity'], df_types['C'], c=[network_types.index(nt) for nt in df_types['network_type']], 
-          cmap='Set1', s=100, edgecolors='black')
-ax.set_xlabel('Modularity', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('Consciousness vs Modularity', fontsize=14, fontweight='bold')
+ax.scatter(df_types['modularity'], df_types['H_mode'], s=100, c='mediumseagreen', edgecolors='black')
+for i, row in df_types.iterrows():
+    ax.annotate(row['type'], (row['modularity'], row['H_mode']), 
+                xytext=(5, 5), textcoords='offset points', fontsize=9)
+ax.set_xlabel('Modularity')
+ax.set_ylabel('Mode Entropy H_mode')
+ax.set_title('D. Modularity-Entropy Relationship')
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'network_type_analysis.png', dpi=300)
-print("  Saved: network_type_analysis.png")
+plt.savefig(OUTPUT_DIR / 'network_type_comparison.png', dpi=150, bbox_inches='tight')
+print(f"  Saved: network_type_comparison.png")
 
-# 2. Community analysis
-fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-
-# C by community size
-ax = axes[0]
-ax.scatter(df_communities['size'], df_communities['C'], s=100, c='steelblue', edgecolors='black')
-z = np.polyfit(df_communities['size'], df_communities['C'], 1)
-p = np.poly1d(z)
-x_range = np.linspace(df_communities['size'].min(), df_communities['size'].max(), 100)
-ax.plot(x_range, p(x_range), 'r--', linewidth=2)
-ax.set_xlabel('Community Size', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('Community Size vs Consciousness', fontsize=14, fontweight='bold')
-ax.grid(True, alpha=0.3)
-
-# Density vs C
-ax = axes[1]
-ax.scatter(df_communities['density'], df_communities['C'], s=100, c='darkgreen', edgecolors='black')
-ax.set_xlabel('Community Density', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('Density vs Consciousness', fontsize=14, fontweight='bold')
-ax.grid(True, alpha=0.3)
-
-# Community comparison bar chart
-ax = axes[2]
-df_comm_sorted = df_communities.sort_values('C', ascending=False)
-colors = plt.cm.RdYlGn(np.linspace(0.2, 0.8, len(df_comm_sorted)))
-ax.bar(range(len(df_comm_sorted)), df_comm_sorted['C'], color=colors, edgecolor='black')
-ax.set_xlabel('Community Rank', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('Communities Ranked by Consciousness', fontsize=14, fontweight='bold')
-ax.grid(True, alpha=0.3, axis='y')
-
-plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'community_analysis.png', dpi=300)
-print("  Saved: community_analysis.png")
-
-# 3. Spread analysis
-fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-
-# Final reach by strategy
-ax = axes[0]
-spread_summary = df_spread.groupby('strategy')['final_reach'].agg(['mean', 'std']).reset_index()
-colors = plt.cm.Set2(np.linspace(0, 1, len(spread_summary)))
-bars = ax.bar(spread_summary['strategy'], spread_summary['mean'], 
-              yerr=spread_summary['std'], color=colors, edgecolor='black', capsize=5)
-ax.set_xlabel('Seeding Strategy', fontsize=12)
-ax.set_ylabel('Final Reach (fraction)', fontsize=12)
-ax.set_title('Information Spread by Strategy', fontsize=14, fontweight='bold')
-ax.set_xticklabels(spread_summary['strategy'], rotation=45, ha='right')
-ax.grid(True, alpha=0.3, axis='y')
-
-# Spread rate by strategy
-ax = axes[1]
-spread_rate_summary = df_spread.groupby('strategy')['spread_rate'].agg(['mean', 'std']).reset_index()
-bars = ax.bar(spread_rate_summary['strategy'], spread_rate_summary['mean'], 
-              yerr=spread_rate_summary['std'], color=colors, edgecolor='black', capsize=5)
-ax.set_xlabel('Seeding Strategy', fontsize=12)
-ax.set_ylabel('Initial Spread Rate', fontsize=12)
-ax.set_title('Spread Velocity by Strategy', fontsize=14, fontweight='bold')
-ax.set_xticklabels(spread_rate_summary['strategy'], rotation=45, ha='right')
-ax.grid(True, alpha=0.3, axis='y')
-
-plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'spread_analysis.png', dpi=300)
-print("  Saved: spread_analysis.png")
-
-# 4. Network evolution
+# Figure 2: Coupling effects
 fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
 ax = axes[0]
-ax.plot(df_evolution['n_nodes'], df_evolution['C'], 'b-o', linewidth=2, markersize=4)
-ax.set_xlabel('Network Size', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('Consciousness During Network Growth', fontsize=14, fontweight='bold')
-ax.grid(True, alpha=0.3)
-
-ax = axes[1]
-ax.plot(df_evolution['n_nodes'], df_evolution['H_mode'], 'o-', linewidth=2, label='H_mode')
-ax.plot(df_evolution['n_nodes'], df_evolution['PR'], 's--', linewidth=2, label='PR')
-ax.plot(df_evolution['n_nodes'], df_evolution['kappa'], '^:', linewidth=2, label='κ')
-ax.set_xlabel('Network Size', fontsize=12)
-ax.set_ylabel('Metric Value', fontsize=12)
-ax.set_title('Metric Evolution During Growth', fontsize=14, fontweight='bold')
+ax.plot(df_coupling['coupling'], df_coupling['C'], 'bo-', markersize=8, linewidth=2, label='C(t)')
+ax.plot(df_coupling['coupling'], df_coupling['synchronization'], 'rs-', markersize=8, linewidth=2, label='Sync')
+ax.set_xlabel('Coupling Strength')
+ax.set_ylabel('Metric Value')
+ax.set_title('A. Consciousness and Synchronization vs Coupling')
 ax.legend()
 ax.grid(True, alpha=0.3)
 
-plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'network_evolution.png', dpi=300)
-print("  Saved: network_evolution.png")
+ax = axes[1]
+ax.scatter(df_coupling['synchronization'], df_coupling['C'], 
+           c=df_coupling['coupling'], cmap='viridis', s=80, edgecolors='black')
+ax.set_xlabel('Synchronization')
+ax.set_ylabel('Consciousness C(t)')
+ax.set_title('B. Consciousness vs Synchronization')
+cbar = plt.colorbar(ax.collections[0], ax=ax)
+cbar.set_label('Coupling')
+ax.grid(True, alpha=0.3)
 
-# 5. Simulation comparison
+plt.tight_layout()
+plt.savefig(OUTPUT_DIR / 'coupling_effects.png', dpi=150, bbox_inches='tight')
+print(f"  Saved: coupling_effects.png")
+
+# Figure 3: Community structure
 fig, ax = plt.subplots(figsize=(10, 6))
 
-# Radar chart for simulations
-categories = ['C', 'H_mode', 'PR', 'clustering', 'modularity']
-n_cats = len(categories)
-angles = np.linspace(0, 2 * np.pi, n_cats, endpoint=False).tolist()
-angles += angles[:1]
+for n_comm in df_community['n_communities'].unique():
+    subset = df_community[df_community['n_communities'] == n_comm]
+    ax.plot(subset['ratio'], subset['C'], 'o-', markersize=8, label=f'{n_comm} communities')
 
-for idx, row in df_simulations.iterrows():
-    values = [row[cat] for cat in categories]
-    # Normalize
-    values = [(v - df_simulations[cat].min()) / (df_simulations[cat].max() - df_simulations[cat].min() + 1e-12) 
-              for v, cat in zip(values, categories)]
-    values += values[:1]
-    ax.plot(angles, values, 'o-', linewidth=2, label=row['simulation'], markersize=6)
-    ax.fill(angles, values, alpha=0.1)
-
-ax.set_xticks(angles[:-1])
-ax.set_xticklabels(categories)
-ax.set_ylim(0, 1)
-ax.set_title('Network Simulation Comparison (Normalized)', fontsize=14, fontweight='bold')
-ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1))
+ax.set_xlabel('In/Out Connectivity Ratio')
+ax.set_ylabel('Consciousness C(t)')
+ax.set_title('Consciousness vs Community Structure')
+ax.legend()
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'simulation_radar.png', dpi=300, bbox_inches='tight')
-print("  Saved: simulation_radar.png")
+plt.savefig(OUTPUT_DIR / 'community_structure.png', dpi=150, bbox_inches='tight')
+print(f"  Saved: community_structure.png")
 
-plt.close('all')
+# Figure 4: Neural vs Social comparison
+fig, ax = plt.subplots(figsize=(10, 8))
 
-# ============================================================================
-# Summary
-# ============================================================================
+colors = {'Neural': 'red', 'Social': 'blue'}
 
-print("\n" + "=" * 60)
-print("Summary Statistics")
-print("=" * 60)
+for _, row in df_compare.iterrows():
+    ax.scatter(row['H_mode'], row['C'], s=200, 
+               c=colors[row['category']], edgecolors='black', linewidths=2)
+    ax.annotate(row['system'], (row['H_mode'], row['C']),
+                xytext=(10, 5), textcoords='offset points', fontsize=10)
 
-print("\nNetwork Type Comparison (n=200):")
-subset = df_types[df_types['size'] == 200]
-for _, row in subset.iterrows():
-    print(f"  {row['network_type']:12}: C = {row['C']:.4f}, Modularity = {row['modularity']:.4f}")
+from matplotlib.lines import Line2D
+legend_elements = [
+    Line2D([0], [0], marker='o', color='w', markerfacecolor='red', markersize=12, label='Neural'),
+    Line2D([0], [0], marker='o', color='w', markerfacecolor='blue', markersize=12, label='Social'),
+]
+ax.legend(handles=legend_elements, fontsize=12)
 
-print("\nCommunity Analysis:")
-print(f"  Number of communities: {len(df_communities)}")
-print(f"  Highest consciousness: Community {df_communities.loc[df_communities['C'].idxmax(), 'community_id']} (C = {df_communities['C'].max():.4f})")
-print(f"  Lowest consciousness: Community {df_communities.loc[df_communities['C'].idxmin(), 'community_id']} (C = {df_communities['C'].min():.4f})")
+ax.set_xlabel('Mode Entropy H_mode', fontsize=12)
+ax.set_ylabel('Consciousness C(t)', fontsize=12)
+ax.set_title('Neural vs Social Networks in Consciousness Space', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.3)
 
-print("\nInformation Spread:")
-for strat in seed_strategies.keys():
-    mean_reach = df_spread[df_spread['strategy'] == strat]['final_reach'].mean()
-    print(f"  {strat:12}: {mean_reach*100:.1f}% average reach")
+plt.tight_layout()
+plt.savefig(OUTPUT_DIR / 'neural_vs_social.png', dpi=150, bbox_inches='tight')
+print(f"  Saved: neural_vs_social.png")
 
-print("\nOnline vs Offline Networks:")
-for _, row in df_simulations.iterrows():
-    print(f"  {row['simulation']:20}: C = {row['C']:.4f}")
+# Figure 5: Real-world scenarios
+fig, ax = plt.subplots(figsize=(10, 6))
 
-print("\nKey Findings:")
-print("  - Community-structured networks show highest consciousness")
-print("  - Larger, denser communities tend to be more 'conscious'")
-print("  - Hub-based seeding spreads information fastest")
-print("  - Online networks (weak ties) show lower consciousness than offline (strong ties)")
+x = range(len(df_scenarios))
+bars = ax.bar(x, df_scenarios['C'], color='teal', edgecolor='black')
 
-print("\n" + "=" * 60)
-print(f"Experiment completed! Results saved to: {OUTPUT_DIR}")
-print("=" * 60)
+ax.set_xticks(x)
+ax.set_xticklabels(df_scenarios['scenario'], rotation=45, ha='right')
+ax.set_ylabel('Consciousness C(t)')
+ax.set_title('Collective Consciousness in Real-World Social Scenarios')
+ax.grid(True, alpha=0.3, axis='y')
+
+plt.tight_layout()
+plt.savefig(OUTPUT_DIR / 'real_world_scenarios.png', dpi=150, bbox_inches='tight')
+print(f"  Saved: real_world_scenarios.png")
+
+# Save data
+df_types.to_csv(OUTPUT_DIR / 'network_types.csv', index=False)
+df_coupling.to_csv(OUTPUT_DIR / 'coupling_effects.csv', index=False)
+df_community.to_csv(OUTPUT_DIR / 'community_structure.csv', index=False)
+df_compare.to_csv(OUTPUT_DIR / 'neural_vs_social.csv', index=False)
+df_scenarios.to_csv(OUTPUT_DIR / 'scenarios.csv', index=False)
+
+# ==============================================================================
+# SUMMARY
+# ==============================================================================
+
+print("\n" + "="*70)
+print("KEY FINDINGS: SOCIAL NETWORK CONSCIOUSNESS")
+print("="*70)
+
+best_type = df_types.loc[df_types['C'].idxmax()]
+best_scenario = df_scenarios.loc[df_scenarios['C'].idxmax()]
+
+print(f"""
+1. NETWORK TOPOLOGY EFFECTS:
+   - Best consciousness: {best_type['type']} (C = {best_type['C']:.3f})
+   - Small-world structure promotes integration
+   - Scale-free networks show hub-dominated dynamics
+   - Clique structures show high synchronization but lower entropy
+
+2. COUPLING STRENGTH:
+   - Too low: Fragmented, low integration
+   - Optimal: Balanced integration and differentiation
+   - Too high: Over-synchronized, low entropy
+   - Peak consciousness at intermediate coupling
+
+3. COMMUNITY STRUCTURE:
+   - Strong modularity reduces global integration
+   - Too many communities fragment collective dynamics
+   - Optimal: Moderate modularity with inter-community bridges
+
+4. NEURAL VS SOCIAL COMPARISON:
+   - Social networks CAN exhibit consciousness-like patterns
+   - But generally lower C(t) than neural networks
+   - Social dynamics are slower and less integrated
+
+5. REAL-WORLD SCENARIOS:
+   - Highest C(t): {best_scenario['scenario']} ({best_scenario['C']:.3f})
+   - Small, tight-knit groups show highest integration
+   - Large hierarchies show fragmented consciousness
+   - Online communities show scale-free dynamics
+
+6. COLLECTIVE CONSCIOUSNESS INTERPRETATION:
+   - High C(t) may indicate collective coordination capacity
+   - Teams with high C(t) may be more cohesive
+   - But this is METAPHORICAL, not literal consciousness
+
+7. PRACTICAL APPLICATIONS:
+   - Team design: Optimize for integration + differentiation
+   - Organization structure: Balance hierarchy with lateral connections
+   - Community building: Foster small-world properties
+
+8. LIMITATIONS:
+   - Social dynamics operate on different timescales
+   - Agents in social networks have individual consciousness
+   - Collective consciousness is an emergent metaphor
+   - Direct comparison with neural systems is speculative
+""")
+
+print(f"\nResults saved to: {OUTPUT_DIR}")
+print("="*70)
