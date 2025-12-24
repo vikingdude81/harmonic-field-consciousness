@@ -316,6 +316,36 @@ def compute_laplacian_eigenmodes(G: nx.Graph) -> Tuple[np.ndarray, np.ndarray, n
     return L, eigenvalues, eigenvectors
 
 
+def get_node_positions(G: nx.Graph, 
+                      layout: str = 'spring',
+                      seed: Optional[int] = None,
+                      **kwargs) -> dict:
+    """
+    Get 2D positions for network nodes for visualization and spatial analysis.
+    
+    Args:
+        G: NetworkX graph
+        layout: Layout algorithm ('spring', 'circular', 'kamada_kawai', 'spectral')
+        seed: Random seed for reproducible layouts
+        **kwargs: Additional arguments for layout algorithm
+        
+    Returns:
+        Dictionary mapping node IDs to (x, y) positions
+    """
+    if layout == 'spring':
+        pos = nx.spring_layout(G, seed=seed, **kwargs)
+    elif layout == 'circular':
+        pos = nx.circular_layout(G, **kwargs)
+    elif layout == 'kamada_kawai':
+        pos = nx.kamada_kawai_layout(G, **kwargs)
+    elif layout == 'spectral':
+        pos = nx.spectral_layout(G, **kwargs)
+    else:
+        raise ValueError(f"Unknown layout: {layout}")
+    
+    return pos
+
+
 if __name__ == "__main__":
     # Test all generators
     print("Testing graph generators...")
