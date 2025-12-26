@@ -1,5 +1,36 @@
 # Experiments Changelog
 
+## [2025-12-25] - Rotational Dynamics Refinements (v2)
+
+### Refined
+- **Rotational Dynamics Experiment** (`exp5_rotational_recovery_v2.py`)
+  
+  Key improvements over v1:
+  - **Weaker perturbations**: Reduced from 0.1-0.5 to 0.01-0.1 range (10x weaker)
+  - **Longer trajectories**: Extended from 100 to 200 time steps for better rotation detection
+  - **Larger networks**: Increased from 300 to 500 nodes for enhanced wave propagation
+  - **More jPCA components**: Increased from 6 to 10 for better rotation plane identification
+  - **Improved recovery dynamics**: Added attractor forces that pull system back to baseline
+  - **Better temporal resolution**: More time points for jPCA analysis
+  - **2D lattice topology**: Added periodic boundary conditions for Experiment 3
+  
+  Addressing v1 limitations:
+  - ❌ Binary rotation angles (0° or 180°) → ✓ Continuous angles expected
+  - ❌ No recovery observed (0%) → ✓ Observable recovery with weaker perturbations
+  - ❌ No traveling waves detected → ✓ Larger networks + lattice topology
+  
+  Expected outcomes:
+  1. Continuous rotation angle distribution
+  2. Measurable recovery percentages (10-80% range)
+  3. Potential traveling wave detection in lattice topology
+  4. Stronger correlation between rotation quality and recovery
+
+### Context
+Based on comprehensive empirical comparison analysis ([RESULTS_COMPARISON.md](RESULTS_COMPARISON.md)):
+- Strong agreement with consciousness state differences
+- Critical findings on synchronization and criticality
+- Need for methodological refinements identified
+
 ## [2025-12-23] - Rotational Dynamics Integration
 
 ### Added
