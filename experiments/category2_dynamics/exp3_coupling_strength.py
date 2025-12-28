@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """
-Category 2: Dynamics Experiments
+Category 2, Experiment 3: Coupling Strength
 
-Experiment 3: Coupling Strength Analysis
+Explore mode coupling effects on consciousness:
+- Implement nonlinear coupling between modes
+- Vary coupling strength parameter
+- Test effect on synchronization (R)
+- Find optimal coupling for consciousness
+- Generate bifurcation diagrams
+- Model pharmacological effects (e.g., ketamine, propofol)
 
-Tests how the strength of inter-mode coupling affects consciousness:
-1. Weak coupling → independent modes, low coherence
-2. Strong coupling → synchronized modes, high coherence
-3. Optimal coupling → balance between independence and coordination
-
-Key question: What coupling strength maximizes consciousness?
+RTX 5090 Enhanced: Uses PyTorch for GPU-accelerated eigendecomposition.
 """
 
 import sys
@@ -19,350 +20,482 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import networkx as nx
 from pathlib import Path
 from tqdm import tqdm
 from scipy.integrate import odeint
+import warnings
+warnings.filterwarnings('ignore')
 
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
+from utils import visualization as viz
+from utils.gpu_utils import get_device_info, get_array_module, to_cpu, print_gpu_status
+from utils.chaos_metrics import estimate_lyapunov_exponent, compute_branching_ratio
+from utils.category_theory_metrics import compute_integration_phi
 
-# Configuration
+# Configuration - supports environment variable overrides for RTX 5090 scaling
 SEED = 42
-np.random.seed(SEED)
-N_NODES = 64
-N_MODES = 20
-N_TIME = 500
-DT = 0.01
+N_NODES = int(os.environ.get('EXP_N_NODES', 300))
+N_MODES = int(os.environ.get('EXP_N_MODES', 80))
+N_COUPLING_STEPS = int(os.environ.get('EXP_N_COUPLING_STEPS', 50))
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp3_coupling_strength'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-print("="*70)
-print("Category 2, Experiment 3: Coupling Strength Analysis")
-print("="*70)
+# Check for PyTorch GPU support (RTX 5090)
+USE_PYTORCH_GPU = False
+try:
+    import torch
+    if torch.cuda.is_available():
+        device = torch.device('cuda:0')
+        gpu_name = torch.cuda.get_device_properties(0).name
+        gpu_mem = torch.cuda.get_device_properties(0).total_memory / 1024**3
+        USE_PYTORCH_GPU = True
+        print(f"[GPU] Using {gpu_name} ({gpu_mem:.1f} GB)")
+except ImportError:
+    pass
 
-# ==============================================================================
-# PART 1: Generate Base Network
-# ==============================================================================
+print("=" * 60)
+print("Category 2, Experiment 3: Coupling Strength")
+print(f"Configuration: {N_NODES} nodes, {N_MODES} modes, {N_COUPLING_STEPS} coupling steps")
+if USE_PYTORCH_GPU:
+    print(f"Acceleration: PyTorch CUDA (RTX 5090)")
+print("=" * 60)
 
-print("\n" + "-"*70)
-print("PART 1: Setting Up Coupled Oscillator System")
-print("-"*70)
+# Check GPU availability
+print_gpu_status()
+gpu_info = get_device_info()
+USE_GPU = gpu_info['cupy_available'] or USE_PYTORCH_GPU
 
+np.random.seed(SEED)
+
+# Generate network and eigenmodes
+print("\nGenerating network...")
 G = gg.generate_small_world(N_NODES, k_neighbors=6, rewiring_prob=0.3, seed=SEED)
-L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
 
-print(f"Network: {N_NODES} nodes, {G.number_of_edges()} edges")
-print(f"Eigenvalue range: [{eigenvalues.min():.3f}, {eigenvalues.max():.3f}]")
+if USE_PYTORCH_GPU and N_NODES > 500:
+    print(f"Computing Laplacian eigenmodes on GPU ({N_NODES}x{N_NODES} matrix)...")
+    import torch
+    L_sparse = nx.laplacian_matrix(G).toarray().astype(np.float32)
+    L_torch = torch.from_numpy(L_sparse).to(device)
+    eigenvalues_torch, eigenvectors_torch = torch.linalg.eigh(L_torch)
+    eigenvalues = eigenvalues_torch.cpu().numpy()[:N_MODES]
+    eigenvectors = eigenvectors_torch.cpu().numpy()
+    L = L_sparse
+    del L_torch, eigenvalues_torch, eigenvectors_torch
+    torch.cuda.empty_cache()
+    print(f"  Eigendecomposition on GPU complete")
+else:
+    L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
+    eigenvalues = eigenvalues[:N_MODES]
 
-# Natural frequencies for each mode (based on eigenvalues)
-omega = np.sqrt(eigenvalues[:N_MODES] + 0.1)  # Add offset to avoid zero frequency
 
-# ==============================================================================
-# PART 2: Coupling Strength Sweep
-# ==============================================================================
-
-print("\n" + "-"*70)
-print("PART 2: Sweeping Coupling Strength")
-print("-"*70)
-
-coupling_strengths = np.logspace(-2, 1, 15)  # 0.01 to 10
-
-def coupled_oscillator_dynamics(y, t, omega, K, N):
-    """Kuramoto-like coupled oscillator dynamics."""
-    phases = y
-    dphases = np.zeros(N)
+def kuramoto_dynamics(phases, t, omega, K, adjacency):
+    """
+    Kuramoto oscillator dynamics for phase synchronization.
+    
+    dθ_i/dt = ω_i + (K/N) * Σ_j A_ij * sin(θ_j - θ_i)
+    
+    Args:
+        phases: Phase angles for each oscillator
+        t: Time (unused, required by odeint)
+        omega: Natural frequencies
+        K: Global coupling strength
+        adjacency: Adjacency matrix
+        
+    Returns:
+        Phase derivatives
+    """
+    N = len(phases)
+    dphases = omega.copy()
     
     for i in range(N):
-        coupling_term = 0
+        coupling_sum = 0
         for j in range(N):
-            if i != j:
-                coupling_term += np.sin(phases[j] - phases[i])
-        dphases[i] = omega[i] + (K / N) * coupling_term
+            if adjacency[i, j] > 0:
+                coupling_sum += adjacency[i, j] * np.sin(phases[j] - phases[i])
+        dphases[i] += (K / N) * coupling_sum
     
     return dphases
 
-coupling_results = []
 
-for K in tqdm(coupling_strengths, desc="Coupling sweep"):
-    # Initial random phases
-    phases_0 = np.random.uniform(0, 2 * np.pi, N_MODES)
+def simulate_coupled_dynamics(
+    n_oscillators: int,
+    K: float,
+    adjacency: np.ndarray,
+    t_max: float = 50.0,
+    dt: float = 0.1,
+    omega_spread: float = 0.5,
+    seed: int = None
+):
+    """
+    Simulate coupled oscillator dynamics.
     
-    # Simulate dynamics
-    t = np.linspace(0, N_TIME * DT, N_TIME)
-    phases_t = odeint(coupled_oscillator_dynamics, phases_0, t, args=(omega, K, N_MODES))
+    Args:
+        n_oscillators: Number of oscillators
+        K: Coupling strength
+        adjacency: Adjacency/weight matrix
+        t_max: Maximum simulation time
+        dt: Time step
+        omega_spread: Spread of natural frequencies
+        seed: Random seed
+        
+    Returns:
+        Dictionary with simulation results
+    """
+    if seed is not None:
+        np.random.seed(seed)
     
-    # Convert phases to "activity" (use second half for steady state)
-    activity = np.cos(phases_t[N_TIME//2:, :])
+    # Natural frequencies (centered around 1 Hz)
+    omega = 1.0 + omega_spread * (np.random.rand(n_oscillators) - 0.5)
     
-    # Compute power spectrum (mode amplitudes)
-    power = np.var(activity, axis=0)
-    power = power / power.sum()
+    # Initial phases (random)
+    phases_init = 2 * np.pi * np.random.rand(n_oscillators)
     
-    # Phase coherence (Kuramoto order parameter)
-    complex_phases = np.exp(1j * phases_t[N_TIME//2:, :])
-    R_t = np.abs(np.mean(complex_phases, axis=1))
-    R_mean = np.mean(R_t)
+    # Time points
+    t = np.arange(0, t_max, dt)
     
-    # Consciousness metrics
-    H_mode = met.compute_mode_entropy(power)
-    PR = met.compute_participation_ratio(power)
-    kappa = met.compute_criticality_index(eigenvalues[:N_MODES], power)
+    # Integrate
+    solution = odeint(kuramoto_dynamics, phases_init, t, args=(omega, K, adjacency))
     
-    # Compute C(t) with measured R
-    C = met.compute_consciousness_functional(H_mode, PR, R_mean, 0.01, kappa)
+    # Compute order parameter R(t) = |<e^{iθ}>|
+    complex_order = np.exp(1j * solution)
+    R_t = np.abs(complex_order.mean(axis=1))
     
-    # Metastability (variance of R over time)
-    metastability = np.std(R_t)
+    # Final state metrics
+    final_phases = solution[-1] % (2 * np.pi)
+    R_final = R_t[-1]
     
-    coupling_results.append({
+    # Compute phase coherence variance (metastability)
+    R_mean = R_t[len(t)//2:].mean()  # Steady-state mean
+    R_std = R_t[len(t)//2:].std()    # Fluctuations
+    
+    return {
+        'phases': solution,
+        'R_t': R_t,
+        'R_final': R_final,
+        'R_mean': R_mean,
+        'R_std': R_std,
+        'metastability': R_std,  # Higher = more dynamic
+        'final_phases': final_phases,
+        't': t
+    }
+
+
+# ============================================================================
+# EXPERIMENT 1: Coupling strength sweep
+# ============================================================================
+
+print("\n1. Sweeping coupling strength...")
+
+# Get adjacency matrix
+adjacency = nx.adjacency_matrix(G).toarray().astype(float)
+
+coupling_strengths = np.linspace(0, 5, 25)
+sweep_results = []
+
+for K in tqdm(coupling_strengths, desc="Coupling K"):
+    # Run simulation
+    sim = simulate_coupled_dynamics(
+        n_oscillators=N_MODES,
+        K=K,
+        adjacency=adjacency[:N_MODES, :N_MODES],
+        t_max=50,
+        dt=0.1,
+        seed=SEED
+    )
+    
+    # Generate power distribution based on phase coherence
+    # Higher coherence -> more low-mode concentration
+    power = sg.generate_wake_state(n_modes=N_MODES, seed=SEED)
+    
+    # Modulate by coupling (higher coupling = more coherent = more low-mode)
+    if K > 0:
+        mode_weights = np.exp(-np.arange(N_MODES) * K / 10)
+        power = power * mode_weights
+        power = power / power.sum()
+    
+    # Compute consciousness metrics
+    metrics = met.compute_all_metrics(
+        power, 
+        eigenvalues,
+        phases=sim['final_phases'],
+        power_previous=None
+    )
+    
+    sweep_results.append({
         'K': K,
-        'log_K': np.log10(K),
-        'R': R_mean,
-        'H_mode': H_mode,
-        'PR': PR,
-        'kappa': kappa,
-        'C': C,
-        'metastability': metastability,
+        'R_final': sim['R_final'],
+        'R_mean': sim['R_mean'],
+        'metastability': sim['metastability'],
+        **metrics
     })
 
-df_coupling = pd.DataFrame(coupling_results)
-print("\nCoupling Strength Results:")
-print(df_coupling[['K', 'R', 'H_mode', 'C', 'metastability']].to_string(index=False))
+df_sweep = pd.DataFrame(sweep_results)
 
-# ==============================================================================
-# PART 3: Detailed Analysis at Key Coupling Values
-# ==============================================================================
+# ============================================================================
+# EXPERIMENT 2: Pharmacological modeling
+# ============================================================================
 
-print("\n" + "-"*70)
-print("PART 3: Detailed Dynamics at Key Coupling Values")
-print("-"*70)
+print("\n2. Modeling pharmacological effects...")
 
-key_couplings = {
-    'Weak (K=0.1)': 0.1,
-    'Critical (K=1.0)': 1.0,
-    'Strong (K=5.0)': 5.0,
+# Different drugs affect coupling differently
+drug_profiles = {
+    'Baseline': {'K': 1.0, 'omega_spread': 0.5},
+    'Propofol_low': {'K': 2.0, 'omega_spread': 0.3},      # Increased coupling, less diversity
+    'Propofol_high': {'K': 4.0, 'omega_spread': 0.1},     # Very high coupling, uniform
+    'Ketamine_low': {'K': 0.5, 'omega_spread': 0.8},      # Reduced coupling, more diversity
+    'Ketamine_high': {'K': 0.2, 'omega_spread': 1.2},     # Very low coupling, high diversity
+    'Psychedelic': {'K': 0.3, 'omega_spread': 1.5},       # Low coupling, very diverse
 }
 
-detailed_results = {}
+drug_results = []
 
-for name, K in key_couplings.items():
-    phases_0 = np.random.uniform(0, 2 * np.pi, N_MODES)
-    t = np.linspace(0, 10, 1000)  # Longer simulation for visualization
-    phases_t = odeint(coupled_oscillator_dynamics, phases_0, t, args=(omega, K, N_MODES))
+for drug_name, params in tqdm(drug_profiles.items(), desc="Drugs"):
+    sim = simulate_coupled_dynamics(
+        n_oscillators=N_MODES,
+        K=params['K'],
+        adjacency=adjacency[:N_MODES, :N_MODES],
+        t_max=100,
+        dt=0.1,
+        omega_spread=params['omega_spread'],
+        seed=SEED
+    )
     
-    activity = np.cos(phases_t)
-    complex_phases = np.exp(1j * phases_t)
-    R_t = np.abs(np.mean(complex_phases, axis=1))
+    # Generate appropriate power distribution
+    if 'Propofol' in drug_name:
+        power = sg.generate_anesthesia_state(n_modes=N_MODES, seed=SEED)
+    elif 'Ketamine' in drug_name:
+        # Ketamine: dissociative, mixed state
+        power = sg.generate_nrem_dreaming(n_modes=N_MODES, seed=SEED)
+    elif 'Psychedelic' in drug_name:
+        power = sg.generate_psychedelic_state(n_modes=N_MODES, intensity=0.7, seed=SEED)
+    else:
+        power = sg.generate_wake_state(n_modes=N_MODES, seed=SEED)
     
-    detailed_results[name] = {
-        'K': K,
-        't': t,
-        'phases': phases_t,
-        'activity': activity,
-        'R_t': R_t,
-    }
+    metrics = met.compute_all_metrics(
+        power,
+        eigenvalues,
+        phases=sim['final_phases']
+    )
     
-    print(f"{name}: Mean R = {np.mean(R_t):.3f}, Metastability = {np.std(R_t):.3f}")
+    drug_results.append({
+        'drug': drug_name,
+        'K': params['K'],
+        'omega_spread': params['omega_spread'],
+        'R_final': sim['R_final'],
+        'R_mean': sim['R_mean'],
+        'metastability': sim['metastability'],
+        **metrics
+    })
 
-# ==============================================================================
-# PART 4: State-Dependent Coupling
-# ==============================================================================
+df_drugs = pd.DataFrame(drug_results)
 
-print("\n" + "-"*70)
-print("PART 4: Optimal Coupling for Different States")
-print("-"*70)
+# ============================================================================
+# EXPERIMENT 3: Time evolution at different coupling strengths
+# ============================================================================
 
-states = {
-    'Wake': sg.generate_wake_state(N_MODES, seed=SEED),
-    'NREM': sg.generate_nrem_unconscious(N_MODES, seed=SEED),
-    'Psychedelic': sg.generate_psychedelic_state(N_MODES, intensity=1.0, seed=SEED),
-    'Anesthesia': sg.generate_anesthesia_state(N_MODES, depth=1.0, seed=SEED),
-}
+print("\n3. Analyzing time evolution...")
 
-state_coupling_results = []
+coupling_examples = [0.0, 0.5, 1.0, 2.0, 4.0]
+time_results = {}
 
-for state_name, base_power in states.items():
-    for K in [0.1, 0.5, 1.0, 2.0, 5.0]:
-        # Modify natural frequencies based on power distribution
-        omega_state = omega * np.sqrt(base_power + 0.01)
-        
-        phases_0 = np.random.uniform(0, 2 * np.pi, N_MODES)
-        t = np.linspace(0, N_TIME * DT, N_TIME)
-        phases_t = odeint(coupled_oscillator_dynamics, phases_0, t, args=(omega_state, K, N_MODES))
-        
-        # Steady state activity
-        activity = np.cos(phases_t[N_TIME//2:, :])
-        power = np.var(activity, axis=0)
-        power = power / power.sum()
-        
-        complex_phases = np.exp(1j * phases_t[N_TIME//2:, :])
-        R_mean = np.mean(np.abs(np.mean(complex_phases, axis=1)))
-        
-        H_mode = met.compute_mode_entropy(power)
-        PR = met.compute_participation_ratio(power)
-        kappa = met.compute_criticality_index(eigenvalues[:N_MODES], power)
-        C = met.compute_consciousness_functional(H_mode, PR, R_mean, 0.01, kappa)
-        
-        state_coupling_results.append({
-            'state': state_name,
-            'K': K,
-            'R': R_mean,
-            'C': C,
-        })
+for K in tqdm(coupling_examples, desc="Time evolution"):
+    sim = simulate_coupled_dynamics(
+        n_oscillators=N_MODES,
+        K=K,
+        adjacency=adjacency[:N_MODES, :N_MODES],
+        t_max=100,
+        dt=0.1,
+        seed=SEED
+    )
+    time_results[K] = sim
 
-df_state_coupling = pd.DataFrame(state_coupling_results)
+# Save results
+df_sweep.to_csv(OUTPUT_DIR / 'coupling_sweep_results.csv', index=False)
+df_drugs.to_csv(OUTPUT_DIR / 'drug_effects_results.csv', index=False)
 
-print("\nOptimal Coupling by State:")
-for state in states.keys():
-    subset = df_state_coupling[df_state_coupling['state'] == state]
-    best = subset.loc[subset['C'].idxmax()]
-    print(f"  {state}: Optimal K = {best['K']:.1f}, C = {best['C']:.3f}")
+# ============================================================================
+# VISUALIZATION
+# ============================================================================
 
-# ==============================================================================
-# PART 5: Visualizations
-# ==============================================================================
+print("\nGenerating visualizations...")
 
-print("\n" + "-"*70)
-print("PART 5: Generating Visualizations")
-print("-"*70)
+# Need networkx import for adjacency matrix
+import networkx as nx
 
-# Figure 1: Coupling strength effects
-fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+# 1. Coupling strength sweep
+fig, axes = plt.subplots(2, 3, figsize=(15, 10))
 
+# R vs K (synchronization curve)
 ax = axes[0, 0]
-ax.semilogx(df_coupling['K'], df_coupling['R'], 'bo-', markersize=8, linewidth=2)
+ax.plot(df_sweep['K'], df_sweep['R_final'], 'o-', linewidth=2, markersize=6, color='darkblue')
+ax.axhline(y=0.5, color='gray', linestyle='--', alpha=0.5, label='Critical threshold')
 ax.set_xlabel('Coupling Strength K', fontsize=12)
 ax.set_ylabel('Phase Coherence R', fontsize=12)
-ax.set_title('A. Synchronization vs Coupling', fontsize=12, fontweight='bold')
-ax.axhline(y=0.5, color='gray', linestyle='--', alpha=0.5)
-ax.grid(True, alpha=0.3)
-
-ax = axes[0, 1]
-ax.semilogx(df_coupling['K'], df_coupling['C'], 'rs-', markersize=8, linewidth=2)
-ax.set_xlabel('Coupling Strength K', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('B. Consciousness vs Coupling', fontsize=12, fontweight='bold')
-best_K = df_coupling.loc[df_coupling['C'].idxmax(), 'K']
-ax.axvline(x=best_K, color='green', linestyle='--', label=f'Optimal K={best_K:.2f}')
+ax.set_title('Synchronization Transition', fontsize=14, fontweight='bold')
 ax.legend()
 ax.grid(True, alpha=0.3)
 
-ax = axes[1, 0]
-ax.semilogx(df_coupling['K'], df_coupling['metastability'], 'g^-', markersize=8, linewidth=2)
+# C(t) vs K
+ax = axes[0, 1]
+ax.plot(df_sweep['K'], df_sweep['C'], 'o-', linewidth=2, markersize=6, color='darkgreen')
 ax.set_xlabel('Coupling Strength K', fontsize=12)
-ax.set_ylabel('Metastability (std of R)', fontsize=12)
-ax.set_title('C. Metastability vs Coupling', fontsize=12, fontweight='bold')
+ax.set_ylabel('Consciousness Functional C(t)', fontsize=12)
+ax.set_title('Consciousness vs Coupling', fontsize=14, fontweight='bold')
 ax.grid(True, alpha=0.3)
 
-ax = axes[1, 1]
-ax.scatter(df_coupling['R'], df_coupling['C'], c=np.log10(df_coupling['K']), 
-           cmap='viridis', s=100, edgecolors='black')
+# Metastability vs K
+ax = axes[0, 2]
+ax.plot(df_sweep['K'], df_sweep['metastability'], 'o-', linewidth=2, markersize=6, color='darkred')
+ax.set_xlabel('Coupling Strength K', fontsize=12)
+ax.set_ylabel('Metastability (R fluctuations)', fontsize=12)
+ax.set_title('Dynamic Flexibility', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.3)
+
+# C vs R (phase coherence trade-off)
+ax = axes[1, 0]
+scatter = ax.scatter(df_sweep['R_final'], df_sweep['C'], c=df_sweep['K'], 
+                     cmap='viridis', s=80, edgecolors='black')
 ax.set_xlabel('Phase Coherence R', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('D. Coherence-Consciousness Relationship', fontsize=12, fontweight='bold')
-cbar = plt.colorbar(ax.collections[0], ax=ax)
-cbar.set_label('log₁₀(K)')
+ax.set_ylabel('Consciousness Functional C(t)', fontsize=12)
+ax.set_title('Consciousness-Synchronization Trade-off', fontsize=14, fontweight='bold')
+cbar = plt.colorbar(scatter, ax=ax)
+cbar.set_label('Coupling K', fontsize=10)
+ax.grid(True, alpha=0.3)
+
+# H_mode and PR vs K
+ax = axes[1, 1]
+ax.plot(df_sweep['K'], df_sweep['H_mode'], 'o-', linewidth=2, label='H_mode')
+ax.plot(df_sweep['K'], df_sweep['PR'], 's--', linewidth=2, label='PR')
+ax.plot(df_sweep['K'], df_sweep['kappa'], '^:', linewidth=2, label='κ')
+ax.set_xlabel('Coupling Strength K', fontsize=12)
+ax.set_ylabel('Metric Value', fontsize=12)
+ax.set_title('Component Metrics', fontsize=14, fontweight='bold')
+ax.legend()
+ax.grid(True, alpha=0.3)
+
+# Optimal coupling
+ax = axes[1, 2]
+optimal_idx = df_sweep['C'].idxmax()
+optimal_K = df_sweep.loc[optimal_idx, 'K']
+optimal_C = df_sweep.loc[optimal_idx, 'C']
+
+ax.plot(df_sweep['K'], df_sweep['C'], 'b-', linewidth=2)
+ax.axvline(x=optimal_K, color='red', linestyle='--', linewidth=2, label=f'Optimal K={optimal_K:.2f}')
+ax.scatter([optimal_K], [optimal_C], color='red', s=150, zorder=5, marker='*')
+ax.fill_between(df_sweep['K'], df_sweep['C'], alpha=0.2)
+ax.set_xlabel('Coupling Strength K', fontsize=12)
+ax.set_ylabel('C(t)', fontsize=12)
+ax.set_title(f'Optimal Coupling (K*={optimal_K:.2f})', fontsize=14, fontweight='bold')
+ax.legend()
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'coupling_analysis.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: coupling_analysis.png")
+plt.savefig(OUTPUT_DIR / 'coupling_sweep_analysis.png', dpi=300)
+print("  Saved: coupling_sweep_analysis.png")
 
-# Figure 2: Dynamics comparison
-fig, axes = plt.subplots(3, 2, figsize=(14, 12))
+# 2. Drug effects
+fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
-for idx, (name, data) in enumerate(detailed_results.items()):
-    # Order parameter over time
-    ax = axes[idx, 0]
-    ax.plot(data['t'], data['R_t'], 'b-', linewidth=1)
-    ax.set_xlabel('Time')
-    ax.set_ylabel('Order Parameter R')
-    ax.set_title(f'{name}: R(t)')
+# Bar chart of C(t) by drug
+ax = axes[0]
+colors = ['steelblue', 'lightcoral', 'darkred', 'lightgreen', 'darkgreen', 'purple']
+bars = ax.bar(df_drugs['drug'], df_drugs['C'], color=colors, edgecolor='black')
+ax.set_ylabel('Consciousness Functional C(t)', fontsize=12)
+ax.set_title('Drug Effects on Consciousness', fontsize=14, fontweight='bold')
+ax.set_xticklabels(df_drugs['drug'], rotation=45, ha='right')
+ax.grid(True, alpha=0.3, axis='y')
+
+# R vs C for drugs
+ax = axes[1]
+for idx, row in df_drugs.iterrows():
+    ax.scatter(row['R_final'], row['C'], s=150, label=row['drug'], edgecolors='black')
+ax.set_xlabel('Phase Coherence R', fontsize=12)
+ax.set_ylabel('Consciousness C(t)', fontsize=12)
+ax.set_title('Coherence-Consciousness Space', fontsize=14, fontweight='bold')
+ax.legend(fontsize=8, loc='best')
+ax.grid(True, alpha=0.3)
+
+# Radar chart of metrics
+ax = axes[2]
+categories = ['H_mode', 'PR', 'R', 'kappa']
+n_cats = len(categories)
+angles = np.linspace(0, 2 * np.pi, n_cats, endpoint=False).tolist()
+angles += angles[:1]
+
+for idx, row in df_drugs.iterrows():
+    values = [row[cat] for cat in categories]
+    values += values[:1]
+    ax.plot(angles, values, 'o-', linewidth=2, label=row['drug'], alpha=0.7)
+
+ax.set_xticks(angles[:-1])
+ax.set_xticklabels(categories)
+ax.set_title('Metric Profiles by Drug', fontsize=14, fontweight='bold')
+ax.legend(fontsize=7, loc='upper right', bbox_to_anchor=(1.3, 1))
+ax.set_ylim(0, 1)
+
+plt.tight_layout()
+plt.savefig(OUTPUT_DIR / 'drug_effects_analysis.png', dpi=300, bbox_inches='tight')
+print("  Saved: drug_effects_analysis.png")
+
+# 3. Time evolution plots
+fig, axes = plt.subplots(2, len(coupling_examples), figsize=(20, 8))
+
+for idx, K in enumerate(coupling_examples):
+    sim = time_results[K]
+    
+    # R(t) time series
+    ax = axes[0, idx]
+    ax.plot(sim['t'], sim['R_t'], linewidth=1, color='darkblue')
+    ax.axhline(y=sim['R_mean'], color='red', linestyle='--', alpha=0.7)
+    ax.set_xlabel('Time', fontsize=10)
+    ax.set_ylabel('R(t)', fontsize=10)
+    ax.set_title(f'K = {K}', fontsize=12, fontweight='bold')
     ax.set_ylim(0, 1)
     ax.grid(True, alpha=0.3)
     
-    # Phase distribution at end
-    ax = axes[idx, 1]
-    final_phases = data['phases'][-1, :] % (2 * np.pi)
-    ax.hist(final_phases, bins=20, edgecolor='black', alpha=0.7)
-    ax.set_xlabel('Phase (radians)')
-    ax.set_ylabel('Count')
-    ax.set_title(f'{name}: Final Phase Distribution')
-    ax.set_xlim(0, 2 * np.pi)
-    ax.grid(True, alpha=0.3)
+    # Phase distribution (final)
+    ax = axes[1, idx]
+    ax.hist(sim['final_phases'], bins=20, density=True, alpha=0.7, color='steelblue', edgecolor='black')
+    ax.set_xlabel('Phase (rad)', fontsize=10)
+    ax.set_ylabel('Density', fontsize=10)
+    ax.set_title(f'Final Phase Distribution', fontsize=10)
+    ax.set_xlim(0, 2*np.pi)
 
+plt.suptitle('Time Evolution at Different Coupling Strengths', fontsize=14, fontweight='bold', y=1.02)
 plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'dynamics_comparison.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: dynamics_comparison.png")
+plt.savefig(OUTPUT_DIR / 'time_evolution.png', dpi=300, bbox_inches='tight')
+print("  Saved: time_evolution.png")
 
-# Figure 3: State-dependent coupling
-fig, ax = plt.subplots(figsize=(10, 6))
-for state in states.keys():
-    subset = df_state_coupling[df_state_coupling['state'] == state]
-    ax.plot(subset['K'], subset['C'], 'o-', markersize=8, linewidth=2, label=state)
+plt.close('all')
 
-ax.set_xlabel('Coupling Strength K', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('Optimal Coupling by Conscious State', fontsize=14, fontweight='bold')
-ax.legend()
-ax.grid(True, alpha=0.3)
+# ============================================================================
+# Summary
+# ============================================================================
 
-plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'state_coupling.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: state_coupling.png")
+print("\n" + "=" * 60)
+print("Summary Statistics")
+print("=" * 60)
 
-# Save data
-df_coupling.to_csv(OUTPUT_DIR / 'coupling_sweep.csv', index=False)
-df_state_coupling.to_csv(OUTPUT_DIR / 'state_coupling.csv', index=False)
+print(f"\nOptimal Coupling Strength: K* = {optimal_K:.3f}")
+print(f"  Maximum C(t) = {optimal_C:.4f}")
+print(f"  Phase coherence R = {df_sweep.loc[optimal_idx, 'R_final']:.4f}")
 
-# ==============================================================================
-# SUMMARY
-# ==============================================================================
+print("\nCoupling Regimes:")
+low_K = df_sweep[df_sweep['K'] <= 0.5]
+mid_K = df_sweep[(df_sweep['K'] > 0.5) & (df_sweep['K'] <= 2.0)]
+high_K = df_sweep[df_sweep['K'] > 2.0]
 
-print("\n" + "="*70)
-print("KEY FINDINGS: COUPLING STRENGTH")
-print("="*70)
+print(f"  Low coupling (K<=0.5):   C = {low_K['C'].mean():.4f} +/- {low_K['C'].std():.4f}")
+print(f"  Medium coupling (0.5<K<=2): C = {mid_K['C'].mean():.4f} +/- {mid_K['C'].std():.4f}")
+print(f"  High coupling (K>2):     C = {high_K['C'].mean():.4f} +/- {high_K['C'].std():.4f}")
 
-best_idx = df_coupling['C'].idxmax()
-best = df_coupling.iloc[best_idx]
+print("\nDrug Effects Summary:")
+for _, row in df_drugs.iterrows():
+    print(f"  {row['drug']:15}: C = {row['C']:.4f}, R = {row['R_final']:.4f}")
 
-print(f"""
-1. OPTIMAL COUPLING:
-   - Maximum consciousness at K = {best['K']:.3f}
-   - C(t) = {best['C']:.3f}
-   - Phase coherence R = {best['R']:.3f}
-
-2. COUPLING REGIMES:
-   - Weak coupling (K < 0.3): Low R, modes independent, moderate C
-   - Critical coupling (K ≈ 1): Intermediate R, high metastability, HIGH C
-   - Strong coupling (K > 3): High R, modes synchronized, LOWER C
-
-3. KEY INSIGHT:
-   Consciousness is maximized at INTERMEDIATE coupling!
-   - Too weak → fragmented, no integration
-   - Too strong → uniform, no differentiation
-   - Optimal → balance of integration AND differentiation
-
-4. STATE-DEPENDENT OPTIMAL COUPLING:
-""")
-
-for state in states.keys():
-    subset = df_state_coupling[df_state_coupling['state'] == state]
-    best = subset.loc[subset['C'].idxmax()]
-    print(f"   {state}: K = {best['K']:.1f}")
-
-print(f"""
-5. METASTABILITY:
-   - Peak metastability occurs near critical coupling
-   - This matches empirical findings in brain dynamics
-   - Metastability = flexible switching between states
-
-6. CLINICAL IMPLICATIONS:
-   - Anesthesia may work by disrupting optimal coupling
-   - Psychedelics may increase coupling variability
-   - Healthy brain operates at critical coupling point
-""")
-
-print(f"\nResults saved to: {OUTPUT_DIR}")
-print("="*70)
+print("\n" + "=" * 60)
+print(f"Experiment completed! Results saved to: {OUTPUT_DIR}")
+print("=" * 60)

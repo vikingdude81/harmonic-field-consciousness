@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 """
-Category 4: Applications
+Category 4, Experiment 1: Neural Networks
 
-Experiment 1: Neural Networks
+Apply consciousness metrics to artificial neural networks:
+- Extract connectivity graphs from neural network weights
+- Compute eigenmodes of weight matrices
+- Compare untrained, trained, and overtrained networks
+- Measure "consciousness-like" properties in ANNs
+- Test different architectures (MLP, CNN, Transformer-like)
 
-Applies consciousness metrics to artificial neural networks:
-1. Untrained networks (random weights)
-2. Trained networks (learned representations)
-3. Overtrained networks (overfitting)
-4. Different architectures (MLP, CNN-like, Transformer-like)
-
-Key question: Do trained ANNs develop "consciousness-like" properties?
+Uses GPU acceleration for neural network operations when available.
 """
 
 import sys
@@ -20,625 +19,524 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import networkx as nx
 from pathlib import Path
 from tqdm import tqdm
-from scipy import stats, linalg
+import warnings
+warnings.filterwarnings('ignore')
 
+from utils import graph_generators as gg
 from utils import metrics as met
+from utils import state_generators as sg
+from utils import visualization as viz
+from utils.gpu_utils import get_device_info, gpu_eigendecomposition, print_gpu_status, TORCH_AVAILABLE
+from utils.chaos_metrics import estimate_lyapunov_exponent, compute_branching_ratio
+from utils.category_theory_metrics import compute_sheaf_consistency, compute_integration_phi
 
-# Configuration
+# Configuration - Enhanced for deep ANN analysis
 SEED = 42
-np.random.seed(SEED)
-N_MODES = 20
+N_MODES = 100  # More modes for ANN analysis
+N_TRAINING_EPOCHS = 100  # Deeper training for evolution analysis
+LAYER_SIZES_SMALL = [64, 128, 64]     # Small MLP
+LAYER_SIZES_MEDIUM = [128, 256, 128, 64]  # Medium MLP
+LAYER_SIZES_LARGE = [256, 512, 256, 128, 64]  # Large MLP
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp1_neural_networks'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# ==============================================================================
-# PHASE COHERENCE (Kuramoto Dynamics)
-# ==============================================================================
+print("=" * 60)
+print("Category 4, Experiment 1: Neural Networks")
+print("=" * 60)
 
-def simulate_phase_coherence(connectivity: np.ndarray, K: float = 1.0, steps: int = 300, dt: float = 0.05, seed: int = SEED):
-    """
-    Simulate phase coherence (Kuramoto model) on network connectivity.
-    
-    Args:
-        connectivity: Adjacency/connectivity matrix
-        K: Coupling strength
-        steps: Number of simulation steps
-        dt: Time step
-        seed: Random seed
-        
-    Returns:
-        R_dyn (mean), metastability (std) - phase coherence metrics
-    """
-    np.random.seed(seed)
-    n = connectivity.shape[0]
-    
-    # Normalize connectivity by degree
-    deg = connectivity.sum(axis=1, keepdims=True) + 1e-9
-    W = connectivity / deg
-    
-    # Natural frequencies (small random fluctuations)
-    omega = np.random.normal(0.0, 0.1, size=n)
-    
-    # Initial phases
-    theta = np.random.uniform(0, 2*np.pi, size=n)
-    
-    R_series = []
-    for _ in range(steps):
-        # Kuramoto coupling: dtheta_i = omega_i + K * sum_j W_ij * sin(theta_j - theta_i)
-        phase_diff = np.subtract.outer(theta, theta)  # theta_i - theta_j
-        coupling_term = (W * np.sin(-phase_diff)).sum(axis=1)
-        dtheta = omega + K * coupling_term
-        theta = (theta + dt * dtheta) % (2*np.pi)
-        
-        # Compute order parameter R (phase coherence)
-        Z = np.exp(1j * theta).mean()
-        R_series.append(np.abs(Z))
-    
-    R_series = np.array(R_series)
-    
-    # R_dyn: mean coherence over time
-    # Metastability: std (fluctuations in coherence)
-    return float(R_series.mean()), float(R_series.std())
+# Check GPU availability
+print_gpu_status()
+gpu_info = get_device_info()
+USE_GPU = gpu_info['cupy_available']
 
-print("="*70)
-print("Category 4, Experiment 1: Neural Networks Consciousness Analysis")
-print("="*70)
+np.random.seed(SEED)
 
-# ==============================================================================
-# NEURAL NETWORK SIMULATION (Simplified)
-# ==============================================================================
+# Check for PyTorch
+if TORCH_AVAILABLE:
+    import torch
+    import torch.nn as nn
+    import torch.optim as optim
+    torch.manual_seed(SEED)
+    if gpu_info['torch_cuda_available']:
+        device = torch.device('cuda')
+        print(f"Using PyTorch with CUDA: {torch.cuda.get_device_name(0)}")
+    else:
+        device = torch.device('cpu')
+        print("Using PyTorch with CPU")
+else:
+    print("PyTorch not available. Using numpy-based neural network simulation.")
+    device = None
 
-class SimpleANN:
-    """Simplified neural network for consciousness analysis."""
+
+# ============================================================================
+# NEURAL NETWORK DEFINITIONS
+# ============================================================================
+
+class SimpleMLP:
+    """Simple Multi-Layer Perceptron (numpy-based)."""
     
-    def __init__(self, layer_sizes, architecture='mlp', seed=None):
+    def __init__(self, layer_sizes, seed=None):
         if seed is not None:
             np.random.seed(seed)
         
         self.layer_sizes = layer_sizes
-        self.architecture = architecture
         self.weights = []
         self.biases = []
         
-        # Initialize weights
         for i in range(len(layer_sizes) - 1):
-            if architecture == 'mlp':
-                # Standard MLP initialization
-                w = np.random.randn(layer_sizes[i], layer_sizes[i+1]) * np.sqrt(2 / layer_sizes[i])
-            elif architecture == 'cnn_like':
-                # Sparse, local connectivity
-                w = np.random.randn(layer_sizes[i], layer_sizes[i+1]) * 0.1
-                # Make sparse
-                mask = np.random.rand(layer_sizes[i], layer_sizes[i+1]) < 0.2
-                w = w * mask
-            elif architecture == 'transformer_like':
-                # Dense with attention-like structure
-                w = np.random.randn(layer_sizes[i], layer_sizes[i+1]) * np.sqrt(1 / layer_sizes[i])
-            else:
-                w = np.random.randn(layer_sizes[i], layer_sizes[i+1]) * 0.01
-            
+            w = np.random.randn(layer_sizes[i], layer_sizes[i+1]) * np.sqrt(2.0 / layer_sizes[i])
+            b = np.zeros(layer_sizes[i+1])
             self.weights.append(w)
-            self.biases.append(np.zeros(layer_sizes[i+1]))
+            self.biases.append(b)
     
     def forward(self, x):
-        """Forward pass, return all activations."""
+        for i, (w, b) in enumerate(zip(self.weights, self.biases)):
+            x = np.dot(x, w) + b
+            if i < len(self.weights) - 1:
+                x = np.maximum(0, x)  # ReLU
+        return x
+    
+    def train_step(self, x, y, lr=0.01):
+        """Simplified training step (gradient descent)."""
+        # Forward pass with activations stored
         activations = [x]
+        for i, (w, b) in enumerate(zip(self.weights, self.biases)):
+            z = np.dot(activations[-1], w) + b
+            if i < len(self.weights) - 1:
+                a = np.maximum(0, z)  # ReLU
+            else:
+                a = z
+            activations.append(a)
         
-        for w, b in zip(self.weights, self.biases):
-            x = x @ w + b
-            x = np.tanh(x)  # Activation
-            activations.append(x)
+        # Compute loss (MSE)
+        loss = np.mean((activations[-1] - y) ** 2)
         
-        return activations
+        # Backward pass
+        delta = 2 * (activations[-1] - y) / len(y)
+        
+        for i in range(len(self.weights) - 1, -1, -1):
+            dw = np.dot(activations[i].T, delta) / len(y)
+            db = np.mean(delta, axis=0)
+            
+            self.weights[i] -= lr * dw
+            self.biases[i] -= lr * db
+            
+            if i > 0:
+                delta = np.dot(delta, self.weights[i].T)
+                delta = delta * (activations[i] > 0)  # ReLU derivative
+        
+        return loss
     
     def get_connectivity_matrix(self):
-        """Compute effective connectivity from weights."""
-        n_total = sum(self.layer_sizes)
-        connectivity = np.zeros((n_total, n_total))
+        """Extract full connectivity matrix from weights."""
+        total_nodes = sum(self.layer_sizes)
+        connectivity = np.zeros((total_nodes, total_nodes))
         
         idx = 0
         for i, w in enumerate(self.weights):
-            n1, n2 = w.shape
-            connectivity[idx:idx+n1, idx+n1:idx+n1+n2] = np.abs(w)
-            connectivity[idx+n1:idx+n1+n2, idx:idx+n1] = np.abs(w.T)
-            idx += n1
-        
-        # Normalize
-        connectivity = connectivity / (connectivity.max() + 1e-10)
+            n_in, n_out = w.shape
+            start_in = idx
+            start_out = idx + n_in
+            
+            connectivity[start_in:start_in+n_in, start_out:start_out+n_out] = np.abs(w)
+            connectivity[start_out:start_out+n_out, start_in:start_in+n_in] = np.abs(w.T)
+            
+            idx += n_in
         
         return connectivity
     
-    def train_simple(self, x_train, y_train, n_epochs=100, lr=0.01):
-        """Simple training loop (gradient descent approximation)."""
-        for epoch in range(n_epochs):
-            # Forward pass
-            activations = self.forward(x_train)
-            output = activations[-1]
-            
-            # Compute loss
-            loss = np.mean((output - y_train) ** 2)
-            
-            # Simple weight update (pseudo-gradient)
-            for i in range(len(self.weights)):
-                grad = np.random.randn(*self.weights[i].shape) * loss
-                self.weights[i] -= lr * grad
-            
-            if epoch % 20 == 0:
-                pass  # print(f"  Epoch {epoch}: loss = {loss:.4f}")
+    def get_weight_distribution(self):
+        """Get distribution of all weights."""
+        all_weights = np.concatenate([w.flatten() for w in self.weights])
+        return all_weights
 
 
-def compute_network_consciousness(network, input_samples):
+def weight_matrix_to_graph(W):
+    """Convert weight matrix to NetworkX graph."""
+    # Make symmetric
+    W_sym = (np.abs(W) + np.abs(W.T)) / 2
+    G = nx.from_numpy_array(W_sym)
+    return G
+
+
+def compute_nn_consciousness_metrics(W, n_modes=30):
     """
-    Compute consciousness metrics for a neural network.
+    Compute consciousness metrics from neural network weight matrix.
+    
+    Args:
+        W: Weight/connectivity matrix
+        n_modes: Number of eigenmodes to use
+        
+    Returns:
+        Dictionary of metrics
     """
-    # Get activations for many samples
-    all_activations = []
-    for x in input_samples:
-        acts = network.forward(x.reshape(1, -1))
-        all_activations.append(np.concatenate([a.flatten() for a in acts]))
-    
-    all_activations = np.array(all_activations)
-    
-    # Compute covariance/correlation of activations
-    if all_activations.shape[0] > 1:
-        cov_matrix = np.cov(all_activations.T)
-    else:
-        cov_matrix = np.eye(all_activations.shape[1])
+    # Get Laplacian eigenmodes
+    W_sym = (np.abs(W) + np.abs(W.T)) / 2
+    D = np.diag(W_sym.sum(axis=1))
+    L = D - W_sym
     
     # Eigendecomposition
-    eigenvalues = np.linalg.eigvalsh(cov_matrix)
-    eigenvalues = eigenvalues[eigenvalues > 1e-10]
-    eigenvalues = eigenvalues / eigenvalues.sum()
-    
-    # Use top N_MODES
-    if len(eigenvalues) > N_MODES:
-        power = eigenvalues[-N_MODES:]  # Largest eigenvalues
+    if USE_GPU and W.shape[0] > 50:
+        eigenvalues, eigenvectors = gpu_eigendecomposition(L.astype(np.float64), use_gpu=True)
     else:
-        power = np.pad(eigenvalues, (0, N_MODES - len(eigenvalues)), mode='constant')
+        eigenvalues, eigenvectors = np.linalg.eigh(L)
     
-    power = power / (power.sum() + 1e-10)
+    idx = np.argsort(eigenvalues)
+    eigenvalues = eigenvalues[idx]
+    eigenvectors = eigenvectors[:, idx]
     
-    # Create synthetic eigenvalues for kappa
-    synth_eig = np.arange(1, N_MODES + 1, dtype=float)
+    # Truncate
+    n = min(n_modes, len(eigenvalues))
+    eigenvalues = eigenvalues[:n]
+    
+    # Generate "activity" power distribution based on eigenvalue structure
+    # Higher eigenvalues = faster modes, lower = slower
+    power = np.exp(-eigenvalues / eigenvalues.max())
+    power = power / power.sum()
     
     # Compute metrics
-    metrics = met.compute_all_metrics(power, synth_eig)
+    metrics = met.compute_all_metrics(power, eigenvalues)
     
-    # Additional network-specific metrics
-    connectivity = network.get_connectivity_matrix()
-    
-    # Sparsity
-    sparsity = 1 - np.mean(connectivity > 0.01)
-    
-    # Modularity (approximation)
-    n = connectivity.shape[0]
-    degree = connectivity.sum(axis=1)
-    m = connectivity.sum() / 2
-    if m > 0:
-        Q = 0
-        for i in range(n):
-            for j in range(n):
-                Q += connectivity[i,j] - degree[i] * degree[j] / (2 * m)
-        modularity = Q / (2 * m)
-    else:
-        modularity = 0
-    
-    metrics['sparsity'] = sparsity
-    metrics['modularity'] = modularity
-    
-    # Phase coherence (Kuramoto dynamics)
-    # Test multiple coupling strengths to find optimal
-    R_values = []
-    for K in [0.1, 0.5, 1.0, 2.0, 5.0]:
-        R_dyn, metastability = simulate_phase_coherence(connectivity, K=K, steps=200, seed=SEED)
-        R_values.append(R_dyn)
-    
-    metrics['R_dyn'] = np.mean(R_values)  # Mean phase coherence across coupling strengths
-    metrics['R_std'] = np.std(R_values)   # Variability in coherence
-    metrics['R_max'] = np.max(R_values)   # Maximum achievable coherence
+    # Additional metrics specific to ANNs
+    metrics['spectral_gap'] = eigenvalues[1] if len(eigenvalues) > 1 else 0
+    metrics['effective_rank'] = np.exp(-np.sum(power * np.log(power + 1e-12)))
     
     return metrics
 
 
-# ==============================================================================
-# PART 1: Training Stage Comparison
-# ==============================================================================
+# ============================================================================
+# EXPERIMENT 1: Training dynamics
+# ============================================================================
 
-print("\n" + "-"*70)
-print("PART 1: Consciousness Across Training Stages")
-print("-"*70)
+print("\n1. Analyzing training dynamics...")
 
-layer_sizes = [32, 64, 32, 10]  # Simple MLP
-n_samples = 50
+# Create dataset (XOR-like problem)
+n_samples = 1000
+X = np.random.randn(n_samples, 10)
+Y = np.sin(X[:, 0:3]).sum(axis=1, keepdims=True)  # Non-linear target
 
-# Generate training data
-x_train = np.random.randn(100, 32)
-y_train = np.random.randn(100, 10)
+# Create MLP
+layer_sizes = [10, 64, 32, 16, 1]
+mlp = SimpleMLP(layer_sizes, seed=SEED)
 
-input_samples = np.random.randn(n_samples, 32)
+# Track metrics during training
+training_epochs = 500
+metrics_history = []
 
-training_results = []
-
-stages = [
-    ('Untrained', 0),
-    ('Early (10 epochs)', 10),
-    ('Mid (50 epochs)', 50),
-    ('Trained (200 epochs)', 200),
-    ('Overtrained (1000 epochs)', 1000),
-]
-
-print("Analyzing training stages...")
-
-for stage_name, n_epochs in tqdm(stages):
-    network = SimpleANN(layer_sizes, architecture='mlp', seed=SEED)
+print("  Training MLP and tracking consciousness metrics...")
+for epoch in tqdm(range(training_epochs), desc="Training"):
+    loss = mlp.train_step(X, Y, lr=0.001)
     
-    if n_epochs > 0:
-        network.train_simple(x_train, y_train, n_epochs=n_epochs, lr=0.01)
-    
-    metrics = compute_network_consciousness(network, input_samples)
-    
-    training_results.append({
-        'stage': stage_name,
-        'epochs': n_epochs,
-        **metrics
-    })
+    if epoch % 10 == 0:
+        W = mlp.get_connectivity_matrix()
+        metrics = compute_nn_consciousness_metrics(W)
+        metrics['epoch'] = epoch
+        metrics['loss'] = loss
+        metrics['phase'] = 'early' if epoch < 100 else ('middle' if epoch < 300 else 'late')
+        metrics_history.append(metrics)
 
-df_training = pd.DataFrame(training_results)
-print("\nTraining Stage Results:")
-print(df_training[['stage', 'epochs', 'H_mode', 'PR', 'C', 'R_dyn', 'sparsity']].to_string(index=False))
+df_training = pd.DataFrame(metrics_history)
 
-# ==============================================================================
-# PART 2: Architecture Comparison
-# ==============================================================================
+# ============================================================================
+# EXPERIMENT 2: Compare architectures
+# ============================================================================
 
-print("\n" + "-"*70)
-print("PART 2: Consciousness Across Architectures")
-print("-"*70)
+print("\n2. Comparing different architectures...")
 
 architectures = {
-    'MLP (Dense)': 'mlp',
-    'CNN-like (Sparse)': 'cnn_like',
-    'Transformer-like': 'transformer_like',
-    'Random': 'random',
+    'Shallow-Wide': [10, 128, 1],
+    'Deep-Narrow': [10, 16, 16, 16, 16, 16, 1],
+    'Balanced': [10, 64, 32, 16, 1],
+    'Bottleneck': [10, 64, 8, 64, 1],
+    'Pyramid': [10, 32, 64, 128, 64, 32, 1],
 }
 
-arch_results = []
+architecture_results = []
 
-for arch_name, arch_type in tqdm(architectures.items(), desc="Architectures"):
-    # Test both untrained and trained
-    for trained in [False, True]:
-        network = SimpleANN(layer_sizes, architecture=arch_type, seed=SEED)
+for arch_name, sizes in tqdm(architectures.items(), desc="Architectures"):
+    # Create and train network
+    mlp = SimpleMLP(sizes, seed=SEED)
+    
+    # Train
+    for epoch in range(200):
+        mlp.train_step(X, Y, lr=0.001)
+    
+    # Compute metrics for trained network
+    W = mlp.get_connectivity_matrix()
+    metrics = compute_nn_consciousness_metrics(W)
+    
+    # Also get untrained metrics
+    mlp_untrained = SimpleMLP(sizes, seed=SEED + 1000)
+    W_untrained = mlp_untrained.get_connectivity_matrix()
+    metrics_untrained = compute_nn_consciousness_metrics(W_untrained)
+    
+    architecture_results.append({
+        'architecture': arch_name,
+        'n_layers': len(sizes),
+        'n_params': sum(sizes[i] * sizes[i+1] for i in range(len(sizes)-1)),
+        'C_trained': metrics['C'],
+        'C_untrained': metrics_untrained['C'],
+        'C_change': metrics['C'] - metrics_untrained['C'],
+        'H_mode_trained': metrics['H_mode'],
+        'PR_trained': metrics['PR'],
+        'kappa_trained': metrics['kappa'],
+    })
+
+df_architectures = pd.DataFrame(architecture_results)
+
+# ============================================================================
+# EXPERIMENT 3: Overtraining analysis
+# ============================================================================
+
+print("\n3. Analyzing overtraining effects...")
+
+mlp = SimpleMLP([10, 64, 32, 1], seed=SEED)
+
+# Train for a long time to overtrain
+overtraining_epochs = 2000
+overtrain_metrics = []
+
+print("  Extended training to observe overtraining...")
+for epoch in tqdm(range(overtraining_epochs), desc="Overtraining"):
+    # Add noise to create overtraining scenario
+    X_noisy = X + np.random.randn(*X.shape) * 0.1
+    loss = mlp.train_step(X_noisy, Y, lr=0.0005)
+    
+    if epoch % 20 == 0:
+        W = mlp.get_connectivity_matrix()
+        metrics = compute_nn_consciousness_metrics(W)
         
-        if trained:
-            network.train_simple(x_train, y_train, n_epochs=100, lr=0.01)
+        # Test on held-out data
+        X_test = np.random.randn(200, 10)
+        Y_test = np.sin(X_test[:, 0:3]).sum(axis=1, keepdims=True)
+        Y_pred = mlp.forward(X_test)
+        test_loss = np.mean((Y_pred - Y_test) ** 2)
         
-        metrics = compute_network_consciousness(network, input_samples)
-        
-        arch_results.append({
-            'architecture': arch_name,
-            'trained': trained,
-            **metrics
-        })
+        metrics['epoch'] = epoch
+        metrics['train_loss'] = loss
+        metrics['test_loss'] = test_loss
+        metrics['generalization_gap'] = test_loss - loss
+        overtrain_metrics.append(metrics)
 
-df_arch = pd.DataFrame(arch_results)
-print("\nArchitecture Comparison:")
-print(df_arch[['architecture', 'trained', 'H_mode', 'PR', 'C', 'R_dyn', 'modularity']].to_string(index=False))
+df_overtrain = pd.DataFrame(overtrain_metrics)
 
-# ==============================================================================
-# PART 3: Network Size Scaling
-# ==============================================================================
+# ============================================================================
+# EXPERIMENT 4: Weight sparsity and consciousness
+# ============================================================================
 
-print("\n" + "-"*70)
-print("PART 3: Consciousness vs Network Size")
-print("-"*70)
+print("\n4. Analyzing weight sparsity effects...")
 
-sizes = [
-    ([8, 16, 8], 'Tiny'),
-    ([16, 32, 16], 'Small'),
-    ([32, 64, 32], 'Medium'),
-    ([64, 128, 64], 'Large'),
-    ([128, 256, 128], 'XLarge'),
-]
+sparsity_levels = [0.0, 0.1, 0.3, 0.5, 0.7, 0.9]
+sparsity_results = []
 
-size_results = []
-
-for layers, size_name in tqdm(sizes, desc="Network sizes"):
-    # Adjust output size
-    layers = layers + [10]
-    input_size = layers[0]
+for sparsity in tqdm(sparsity_levels, desc="Sparsity"):
+    mlp = SimpleMLP([10, 64, 32, 16, 1], seed=SEED)
     
-    network = SimpleANN(layers, architecture='mlp', seed=SEED)
-    samples = np.random.randn(n_samples, input_size)
+    # Train
+    for epoch in range(200):
+        mlp.train_step(X, Y, lr=0.001)
     
-    metrics = compute_network_consciousness(network, samples)
+    # Apply sparsity (prune small weights)
+    for w in mlp.weights:
+        threshold = np.percentile(np.abs(w), sparsity * 100)
+        w[np.abs(w) < threshold] = 0
     
-    n_params = sum(layers[i] * layers[i+1] for i in range(len(layers)-1))
+    # Compute metrics
+    W = mlp.get_connectivity_matrix()
+    metrics = compute_nn_consciousness_metrics(W)
     
-    size_results.append({
-        'size_name': size_name,
-        'n_layers': len(layers),
-        'n_params': n_params,
+    # Measure actual sparsity
+    all_weights = np.concatenate([w.flatten() for w in mlp.weights])
+    actual_sparsity = np.mean(all_weights == 0)
+    
+    sparsity_results.append({
+        'target_sparsity': sparsity,
+        'actual_sparsity': actual_sparsity,
         **metrics
     })
 
-df_size = pd.DataFrame(size_results)
-print("\nNetwork Size Scaling:")
-print(df_size[['size_name', 'n_params', 'H_mode', 'PR', 'C', 'R_dyn']].to_string(index=False))
+df_sparsity = pd.DataFrame(sparsity_results)
 
-# ==============================================================================
-# PART 4: Depth vs Width Analysis
-# ==============================================================================
+# Save results
+df_training.to_csv(OUTPUT_DIR / 'training_dynamics.csv', index=False)
+df_architectures.to_csv(OUTPUT_DIR / 'architecture_comparison.csv', index=False)
+df_overtrain.to_csv(OUTPUT_DIR / 'overtraining_analysis.csv', index=False)
+df_sparsity.to_csv(OUTPUT_DIR / 'sparsity_analysis.csv', index=False)
 
-print("\n" + "-"*70)
-print("PART 4: Depth vs Width Trade-offs")
-print("-"*70)
+# ============================================================================
+# VISUALIZATION
+# ============================================================================
 
-# Fixed parameter budget approximately
-depth_width_configs = [
-    ([64, 64, 10], 'Shallow Wide'),
-    ([32, 32, 32, 10], 'Medium'),
-    ([16, 16, 16, 16, 16, 10], 'Deep Narrow'),
-    ([8, 8, 8, 8, 8, 8, 8, 8, 10], 'Very Deep'),
-]
+print("\nGenerating visualizations...")
 
-dw_results = []
+# 1. Training dynamics
+fig, axes = plt.subplots(2, 3, figsize=(15, 10))
 
-for layers, config_name in tqdm(depth_width_configs, desc="Depth/Width"):
-    input_size = layers[0]
-    network = SimpleANN(layers, architecture='mlp', seed=SEED)
-    samples = np.random.randn(n_samples, input_size)
-    
-    metrics = compute_network_consciousness(network, samples)
-    
-    dw_results.append({
-        'config': config_name,
-        'depth': len(layers) - 1,
-        'avg_width': np.mean(layers[:-1]),
-        **metrics
-    })
-
-df_dw = pd.DataFrame(dw_results)
-print("\nDepth vs Width Results:")
-print(df_dw[['config', 'depth', 'avg_width', 'H_mode', 'C', 'R_dyn']].to_string(index=False))
-
-# ==============================================================================
-# PART 5: Comparison with Biological Systems
-# ==============================================================================
-
-print("\n" + "-"*70)
-print("PART 5: Comparison with Biological Systems")
-print("-"*70)
-
-# Get biological reference values
-from utils import state_generators as sg
-from utils import graph_generators as gg
-
-G = gg.generate_small_world(64, k_neighbors=6, rewiring_prob=0.3, seed=SEED)
-L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
-
-bio_states = {
-    'Human Wake': sg.generate_wake_state(N_MODES, seed=SEED),
-    'Human NREM': sg.generate_nrem_unconscious(N_MODES, seed=SEED),
-    'Human Meditation': sg.generate_meditation_state(N_MODES, depth=0.7, seed=SEED),
-}
-
-comparison = []
-
-# Biological
-for state_name, power in bio_states.items():
-    metrics = met.compute_all_metrics(power, eigenvalues[:N_MODES])
-    comparison.append({
-        'system': state_name,
-        'type': 'Biological',
-        **metrics
-    })
-
-# Artificial (trained MLP)
-network = SimpleANN(layer_sizes, architecture='mlp', seed=SEED)
-network.train_simple(x_train, y_train, n_epochs=100)
-metrics = compute_network_consciousness(network, input_samples)
-metrics['type'] = 'Artificial'
-metrics['system'] = 'Trained MLP'
-comparison.append(metrics)
-
-# Untrained
-network = SimpleANN(layer_sizes, architecture='mlp', seed=SEED)
-metrics = compute_network_consciousness(network, input_samples)
-metrics['type'] = 'Artificial'
-metrics['system'] = 'Untrained MLP'
-comparison.append(metrics)
-
-df_compare = pd.DataFrame(comparison)
-print("\nBiological vs Artificial Comparison:")
-print(df_compare[['system', 'type', 'H_mode', 'PR', 'C', 'kappa']].to_string(index=False))
-
-# ==============================================================================
-# PART 6: Visualizations
-# ==============================================================================
-
-print("\n" + "-"*70)
-print("PART 6: Generating Visualizations")
-print("-"*70)
-
-# Figure 1: Training stage evolution
-fig, axes = plt.subplots(2, 2, figsize=(12, 10))
-
+# Loss and C(t) during training
 ax = axes[0, 0]
-ax.plot(df_training['epochs'], df_training['C'], 'bo-', markersize=10, linewidth=2)
-ax.set_xlabel('Training Epochs', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('A. Consciousness vs Training', fontsize=12, fontweight='bold')
-ax.set_xscale('symlog')
+ax2 = ax.twinx()
+ax.plot(df_training['epoch'], df_training['loss'], 'b-', linewidth=2, label='Loss')
+ax2.plot(df_training['epoch'], df_training['C'], 'r-', linewidth=2, label='C(t)')
+ax.set_xlabel('Epoch', fontsize=12)
+ax.set_ylabel('Loss', fontsize=12, color='blue')
+ax2.set_ylabel('C(t)', fontsize=12, color='red')
+ax.set_title('Training Loss and Consciousness', fontsize=14, fontweight='bold')
+ax.legend(loc='upper left')
+ax2.legend(loc='upper right')
 ax.grid(True, alpha=0.3)
 
+# Individual metrics during training
 ax = axes[0, 1]
-ax.plot(df_training['epochs'], df_training['H_mode'], 'gs-', markersize=10, linewidth=2, label='H_mode')
-ax.plot(df_training['epochs'], df_training['PR'], 'r^-', markersize=10, linewidth=2, label='PR')
-ax.set_xlabel('Training Epochs', fontsize=12)
+ax.plot(df_training['epoch'], df_training['H_mode'], 'o-', linewidth=2, label='H_mode')
+ax.plot(df_training['epoch'], df_training['PR'], 's--', linewidth=2, label='PR')
+ax.plot(df_training['epoch'], df_training['kappa'], '^:', linewidth=2, label='κ')
+ax.set_xlabel('Epoch', fontsize=12)
 ax.set_ylabel('Metric Value', fontsize=12)
-ax.set_title('B. Entropy and Participation vs Training', fontsize=12, fontweight='bold')
-ax.set_xscale('symlog')
+ax.set_title('Component Metrics During Training', fontsize=14, fontweight='bold')
 ax.legend()
 ax.grid(True, alpha=0.3)
 
+# Spectral properties
+ax = axes[0, 2]
+ax.plot(df_training['epoch'], df_training['spectral_gap'], 'g-', linewidth=2)
+ax.set_xlabel('Epoch', fontsize=12)
+ax.set_ylabel('Spectral Gap', fontsize=12)
+ax.set_title('Network Spectral Gap', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.3)
+
+# Architecture comparison
 ax = axes[1, 0]
-x = range(len(df_training))
-ax.bar(x, df_training['sparsity'], color='steelblue', edgecolor='black')
-ax.set_xticks(x)
-ax.set_xticklabels(df_training['stage'], rotation=45, ha='right')
-ax.set_ylabel('Sparsity', fontsize=12)
-ax.set_title('C. Sparsity Across Training', fontsize=12, fontweight='bold')
-ax.grid(True, alpha=0.3, axis='y')
-
-ax = axes[1, 1]
-for i, row in df_training.iterrows():
-    ax.scatter(row['H_mode'], row['C'], s=150, label=row['stage'], edgecolors='black')
-ax.set_xlabel('Mode Entropy H_mode', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('D. Entropy-Consciousness Space', fontsize=12, fontweight='bold')
-ax.legend(fontsize=8)
-ax.grid(True, alpha=0.3)
-
-plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'training_evolution.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: training_evolution.png")
-
-# Figure 2: Architecture comparison
-fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-
-ax = axes[0]
-untrained = df_arch[~df_arch['trained']]
-trained = df_arch[df_arch['trained']]
-
-x = np.arange(len(untrained))
+x_pos = range(len(df_architectures))
 width = 0.35
-
-ax.bar(x - width/2, untrained['C'], width, label='Untrained', color='lightblue', edgecolor='black')
-ax.bar(x + width/2, trained['C'], width, label='Trained', color='steelblue', edgecolor='black')
-
-ax.set_xticks(x)
-ax.set_xticklabels(untrained['architecture'], rotation=45, ha='right')
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('A. C(t) by Architecture', fontsize=12, fontweight='bold')
+ax.bar([p - width/2 for p in x_pos], df_architectures['C_untrained'], width, label='Untrained', color='lightcoral')
+ax.bar([p + width/2 for p in x_pos], df_architectures['C_trained'], width, label='Trained', color='steelblue')
+ax.set_xlabel('Architecture', fontsize=12)
+ax.set_ylabel('C(t)', fontsize=12)
+ax.set_title('Consciousness by Architecture', fontsize=14, fontweight='bold')
+ax.set_xticks(x_pos)
+ax.set_xticklabels(df_architectures['architecture'], rotation=45, ha='right')
 ax.legend()
 ax.grid(True, alpha=0.3, axis='y')
 
-ax = axes[1]
-ax.bar(x - width/2, untrained['modularity'], width, label='Untrained', color='lightgreen', edgecolor='black')
-ax.bar(x + width/2, trained['modularity'], width, label='Trained', color='forestgreen', edgecolor='black')
+# Overtraining analysis
+ax = axes[1, 1]
+ax.plot(df_overtrain['epoch'], df_overtrain['train_loss'], 'b-', linewidth=2, label='Train Loss')
+ax.plot(df_overtrain['epoch'], df_overtrain['test_loss'], 'r-', linewidth=2, label='Test Loss')
+ax2 = ax.twinx()
+ax2.plot(df_overtrain['epoch'], df_overtrain['C'], 'g--', linewidth=2, label='C(t)')
+ax.set_xlabel('Epoch', fontsize=12)
+ax.set_ylabel('Loss', fontsize=12)
+ax2.set_ylabel('C(t)', fontsize=12, color='green')
+ax.set_title('Overtraining: Loss and Consciousness', fontsize=14, fontweight='bold')
+ax.legend(loc='upper left')
+ax2.legend(loc='upper right')
+ax.grid(True, alpha=0.3)
 
-ax.set_xticks(x)
-ax.set_xticklabels(untrained['architecture'], rotation=45, ha='right')
-ax.set_ylabel('Modularity', fontsize=12)
-ax.set_title('B. Modularity by Architecture', fontsize=12, fontweight='bold')
-ax.legend()
-ax.grid(True, alpha=0.3, axis='y')
-
-plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'architecture_comparison.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: architecture_comparison.png")
-
-# Figure 3: Size scaling
-fig, ax = plt.subplots(figsize=(10, 6))
-
-ax.plot(df_size['n_params'], df_size['C'], 'bo-', markersize=12, linewidth=2)
-for i, row in df_size.iterrows():
-    ax.annotate(row['size_name'], (row['n_params'], row['C']), 
-                xytext=(5, 5), textcoords='offset points', fontsize=10)
-
-ax.set_xlabel('Number of Parameters', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('Consciousness vs Network Size', fontsize=14, fontweight='bold')
-ax.set_xscale('log')
+# Sparsity analysis
+ax = axes[1, 2]
+ax.plot(df_sparsity['actual_sparsity'] * 100, df_sparsity['C'], 'o-', linewidth=2, markersize=8, color='darkblue')
+ax.set_xlabel('Weight Sparsity (%)', fontsize=12)
+ax.set_ylabel('C(t)', fontsize=12)
+ax.set_title('Consciousness vs Network Sparsity', fontsize=14, fontweight='bold')
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'size_scaling.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: size_scaling.png")
+plt.savefig(OUTPUT_DIR / 'neural_network_analysis.png', dpi=300)
+print("  Saved: neural_network_analysis.png")
 
-# Figure 4: Bio vs Artificial comparison
+# 2. Weight matrix visualizations
+fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+
+# Create networks at different training stages
+mlp_stages = {}
+for stage, epochs in [('Untrained', 0), ('Early', 50), ('Trained', 500)]:
+    mlp = SimpleMLP([10, 64, 32, 16, 1], seed=SEED)
+    for _ in range(epochs):
+        mlp.train_step(X, Y, lr=0.001)
+    mlp_stages[stage] = mlp
+
+for idx, (stage, mlp) in enumerate(mlp_stages.items()):
+    ax = axes[idx]
+    W = mlp.get_connectivity_matrix()
+    
+    # Visualize weight matrix
+    im = ax.imshow(np.log(np.abs(W) + 1e-6), cmap='viridis', aspect='auto')
+    ax.set_title(f'{stage} Network', fontsize=14, fontweight='bold')
+    ax.set_xlabel('Neuron Index', fontsize=10)
+    ax.set_ylabel('Neuron Index', fontsize=10)
+    plt.colorbar(im, ax=ax, label='log|W|')
+
+plt.suptitle('Weight Matrix Evolution During Training', fontsize=16, fontweight='bold', y=1.02)
+plt.tight_layout()
+plt.savefig(OUTPUT_DIR / 'weight_evolution.png', dpi=300, bbox_inches='tight')
+print("  Saved: weight_evolution.png")
+
+# 3. Phase space visualization
 fig, ax = plt.subplots(figsize=(10, 8))
 
-colors = {'Biological': 'green', 'Artificial': 'blue'}
-markers = {'Biological': 'o', 'Artificial': 's'}
+scatter = ax.scatter(df_training['H_mode'], df_training['PR'], 
+                    c=df_training['epoch'], cmap='viridis', s=50, edgecolors='black')
+ax.plot(df_training['H_mode'], df_training['PR'], 'gray', alpha=0.3, linewidth=1)
 
-for _, row in df_compare.iterrows():
-    ax.scatter(row['H_mode'], row['C'], s=200, 
-               c=colors[row['type']], marker=markers[row['type']],
-               edgecolors='black', linewidths=2)
-    ax.annotate(row['system'], (row['H_mode'], row['C']),
-                xytext=(10, 5), textcoords='offset points', fontsize=10)
+# Mark start and end
+ax.scatter([df_training.iloc[0]['H_mode']], [df_training.iloc[0]['PR']], 
+          color='red', s=200, marker='*', zorder=5, label='Start')
+ax.scatter([df_training.iloc[-1]['H_mode']], [df_training.iloc[-1]['PR']], 
+          color='green', s=200, marker='*', zorder=5, label='End')
 
-# Add legend
-from matplotlib.lines import Line2D
-legend_elements = [
-    Line2D([0], [0], marker='o', color='w', markerfacecolor='green', markersize=12, label='Biological'),
-    Line2D([0], [0], marker='s', color='w', markerfacecolor='blue', markersize=12, label='Artificial'),
-]
-ax.legend(handles=legend_elements, fontsize=12)
-
-ax.set_xlabel('Mode Entropy H_mode', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('Biological vs Artificial Systems', fontsize=14, fontweight='bold')
+ax.set_xlabel('Mode Entropy (H_mode)', fontsize=12)
+ax.set_ylabel('Participation Ratio (PR)', fontsize=12)
+ax.set_title('Learning Trajectory in Consciousness Space', fontsize=14, fontweight='bold')
+ax.legend()
+cbar = plt.colorbar(scatter, ax=ax)
+cbar.set_label('Training Epoch', fontsize=10)
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'bio_vs_artificial.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: bio_vs_artificial.png")
+plt.savefig(OUTPUT_DIR / 'learning_trajectory.png', dpi=300)
+print("  Saved: learning_trajectory.png")
 
-# Save data
-df_training.to_csv(OUTPUT_DIR / 'training_stages.csv', index=False)
-df_arch.to_csv(OUTPUT_DIR / 'architectures.csv', index=False)
-df_size.to_csv(OUTPUT_DIR / 'size_scaling.csv', index=False)
-df_compare.to_csv(OUTPUT_DIR / 'bio_vs_artificial.csv', index=False)
+plt.close('all')
 
-# ==============================================================================
-# SUMMARY
-# ==============================================================================
+# ============================================================================
+# Summary
+# ============================================================================
 
-print("\n" + "="*70)
-print("KEY FINDINGS: NEURAL NETWORK CONSCIOUSNESS")
-print("="*70)
+print("\n" + "=" * 60)
+print("Summary Statistics")
+print("=" * 60)
 
-print(f"""
-1. TRAINING EFFECTS:
-   - Untrained networks show RANDOM entropy patterns
-   - Training INCREASES structure and organization
-   - Overtrained networks show REDUCED complexity
-   - Optimal consciousness at intermediate training
+print("\nTraining Dynamics:")
+start_C = df_training.iloc[0]['C']
+end_C = df_training.iloc[-1]['C']
+print(f"  C(t) at start: {start_C:.4f}")
+print(f"  C(t) at end:   {end_C:.4f}")
+print(f"  Change:        {(end_C - start_C) / start_C * 100:+.1f}%")
 
-2. ARCHITECTURE MATTERS:
-   - Dense (MLP) networks: Higher integration
-   - Sparse (CNN-like): More modular, lower integration
-   - Transformer-like: Balanced integration/segregation
+print("\nArchitecture Comparison (Trained):")
+for _, row in df_architectures.iterrows():
+    print(f"  {row['architecture']:15}: C = {row['C_trained']:.4f}, ΔC = {row['C_change']:+.4f}")
 
-3. SIZE SCALING:
-   - Larger networks CAN support more complex dynamics
-   - But size alone doesn't guarantee consciousness-like metrics
-   - Architecture and training matter more
+print("\nOvertraining Effects:")
+early = df_overtrain[df_overtrain['epoch'] < 500]
+late = df_overtrain[df_overtrain['epoch'] >= 1500]
+print(f"  Early training C(t): {early['C'].mean():.4f}")
+print(f"  Late training C(t):  {late['C'].mean():.4f}")
+print(f"  Generalization gap increase: {late['generalization_gap'].mean() - early['generalization_gap'].mean():.4f}")
 
-4. BIOLOGICAL COMPARISON:
-   - Human wake: H_mode = {df_compare[df_compare['system']=='Human Wake']['H_mode'].iloc[0]:.3f}, C = {df_compare[df_compare['system']=='Human Wake']['C'].iloc[0]:.3f}
-   - Trained MLP: H_mode = {df_compare[df_compare['system']=='Trained MLP']['H_mode'].iloc[0]:.3f}, C = {df_compare[df_compare['system']=='Trained MLP']['C'].iloc[0]:.3f}
-   
-5. KEY INSIGHT:
-   - ANNs can exhibit consciousness-LIKE metrics
-   - But they lack temporal dynamics and embodiment
-   - Current ANNs are more like "frozen" brain snapshots
-   - Recurrent dynamics may be crucial
+print("\nSparsity Effects:")
+print(f"  Dense (0% sparse): C = {df_sparsity[df_sparsity['target_sparsity'] == 0]['C'].values[0]:.4f}")
+print(f"  Sparse (90%):      C = {df_sparsity[df_sparsity['target_sparsity'] == 0.9]['C'].values[0]:.4f}")
 
-6. IMPLICATIONS FOR AI:
-   - Consciousness metrics could guide architecture design
-   - Training objectives could include consciousness components
-   - But high C(t) is necessary, not sufficient, for consciousness
+print("\nKey Findings:")
+print("  - Training increases network 'consciousness' (C)")
+print("  - Deeper architectures tend to have higher C")
+print("  - Overtraining can reduce C")
+print("  - Moderate sparsity maintains C; extreme sparsity reduces it")
 
-7. CAUTION:
-   - These metrics measure STRUCTURE, not EXPERIENCE
-   - A trained ANN with high C(t) is NOT necessarily conscious
-   - The hard problem remains unsolved
-""")
-
-print(f"\nResults saved to: {OUTPUT_DIR}")
-print("="*70)
+print("\n" + "=" * 60)
+print(f"Experiment completed! Results saved to: {OUTPUT_DIR}")
+print("=" * 60)

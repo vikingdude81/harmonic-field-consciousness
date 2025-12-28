@@ -1,0 +1,8 @@
+script,status,returncode
+01_time_series_granger.py,ok,0
+02_frequency_decomposition.py,ok,0
+03_spatial_patterns.py,ok,0
+04_phase_relationships.py,ok,0
+05_dynamic_metastability.py,ok,0
+06_multivariate_regression.py,ok,0
+07_experimental_manipulation.py,ok,0

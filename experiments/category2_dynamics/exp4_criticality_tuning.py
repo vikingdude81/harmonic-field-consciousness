@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """
-Category 2: Dynamics Experiments
+Category 2, Experiment 4: Criticality Tuning
 
-Experiment 4: Criticality Tuning
+Find the edge-of-chaos optimal point for consciousness:
+- Vary system parameters to control criticality index kappa
+- Test C(t) as function of kappa
+- Identify critical regime (kappa ~ 1)
+- Compare subcritical, critical, supercritical regimes
+- Generate phase transition plots
+- Relate to empirical brain data (power-law distributions)
 
-Tests how proximity to criticality affects consciousness:
-1. Subcritical → ordered, low entropy, predictable
-2. Critical → power-laws, long-range correlations, maximal complexity
-3. Supercritical → chaotic, high entropy, unpredictable
-
-Key question: Is consciousness maximized at criticality?
+RTX 5090 Enhanced: Uses PyTorch for GPU-accelerated eigendecomposition.
 """
 
 import sys
@@ -22,455 +23,516 @@ import pandas as pd
 from pathlib import Path
 from tqdm import tqdm
 from scipy import stats
+from scipy.optimize import curve_fit
+import warnings
+warnings.filterwarnings('ignore')
 
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
-from utils.chaos_metrics import (
-    estimate_lyapunov_exponent,
-    detect_avalanches,
-    fit_power_law,
-    compute_branching_ratio,
-    compute_all_chaos_metrics
-)
+from utils import visualization as viz
+from utils.gpu_utils import get_device_info, get_array_module, batch_compute_metrics_gpu, print_gpu_status
+from utils.chaos_metrics import estimate_lyapunov_exponent, detect_avalanches, fit_power_law
+from utils.category_theory_metrics import compute_sheaf_consistency
 
-# Configuration
+# Configuration - supports environment variable overrides for RTX 5090 scaling
 SEED = 42
-np.random.seed(SEED)
-N_NODES = 64
-N_MODES = 20
-N_TIME = 1000
+N_NODES = int(os.environ.get('EXP_N_NODES', 300))
+N_MODES = int(os.environ.get('EXP_N_MODES', 80))
+N_ALPHA_STEPS = int(os.environ.get('EXP_N_ALPHA_STEPS', 60))
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp4_criticality_tuning'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-print("="*70)
+# Check for PyTorch GPU support (RTX 5090)
+USE_PYTORCH_GPU = False
+try:
+    import torch
+    if torch.cuda.is_available():
+        device = torch.device('cuda:0')
+        gpu_name = torch.cuda.get_device_properties(0).name
+        gpu_mem = torch.cuda.get_device_properties(0).total_memory / 1024**3
+        USE_PYTORCH_GPU = True
+        print(f"[GPU] Using {gpu_name} ({gpu_mem:.1f} GB)")
+except ImportError:
+    pass
+
+print("=" * 60)
 print("Category 2, Experiment 4: Criticality Tuning")
-print("="*70)
+print(f"Configuration: {N_NODES} nodes, {N_MODES} modes, {N_ALPHA_STEPS} alpha steps")
+if USE_PYTORCH_GPU:
+    print(f"Acceleration: PyTorch CUDA (RTX 5090)")
+print("=" * 60)
 
-# ==============================================================================
-# PART 1: Branching Process Model
-# ==============================================================================
+# Check GPU availability
+print_gpu_status()
+gpu_info = get_device_info()
+USE_GPU = gpu_info['cupy_available'] or USE_PYTORCH_GPU
+xp = get_array_module(USE_GPU)
 
-print("\n" + "-"*70)
-print("PART 1: Branching Process Criticality Model")
-print("-"*70)
+np.random.seed(SEED)
 
-def simulate_branching_process(sigma, n_steps=1000, n_nodes=64, seed=None):
+# Generate network
+print("\nGenerating network...")
+G = gg.generate_small_world(N_NODES, k_neighbors=6, rewiring_prob=0.3, seed=SEED)
+
+if USE_PYTORCH_GPU and N_NODES > 500:
+    print(f"Computing Laplacian eigenmodes on GPU ({N_NODES}x{N_NODES} matrix)...")
+    import torch
+    import networkx as nx
+    L_sparse = nx.laplacian_matrix(G).toarray().astype(np.float32)
+    L_torch = torch.from_numpy(L_sparse).to(device)
+    eigenvalues_torch, eigenvectors_torch = torch.linalg.eigh(L_torch)
+    eigenvalues = eigenvalues_torch.cpu().numpy()[:N_MODES]
+    eigenvectors = eigenvectors_torch.cpu().numpy()
+    L = L_sparse
+    del L_torch, eigenvalues_torch, eigenvectors_torch
+    torch.cuda.empty_cache()
+    print(f"  Eigendecomposition on GPU complete")
+else:
+    L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
+    eigenvalues = eigenvalues[:N_MODES]
+
+
+def generate_critical_power(n_modes: int, alpha: float, seed: int = None) -> np.ndarray:
     """
-    Simulate a branching process with branching ratio sigma.
+    Generate power distribution with tunable criticality.
+    
+    Uses power-law distribution P(k) ~ k^(-alpha)
+    - alpha < 2: subcritical (dominated by few modes)
+    - alpha ≈ 2: critical (scale-free)
+    - alpha > 3: supercritical (uniform-like)
+    
+    Args:
+        n_modes: Number of modes
+        alpha: Power-law exponent
+        seed: Random seed
+        
+    Returns:
+        Normalized power distribution
+    """
+    if seed is not None:
+        np.random.seed(seed)
+    
+    k = np.arange(1, n_modes + 1)
+    
+    # Power-law base
+    power = k ** (-alpha)
+    
+    # Add small noise for variation
+    power += 0.01 * np.random.rand(n_modes)
+    
+    # Normalize
+    power = np.maximum(power, 0)
+    power = power / power.sum()
+    
+    return power
+
+
+def compute_power_law_exponent(power: np.ndarray) -> float:
+    """
+    Estimate power-law exponent from distribution.
+    
+    Args:
+        power: Power distribution
+        
+    Returns:
+        Estimated exponent alpha
+    """
+    k = np.arange(1, len(power) + 1)
+    
+    # Fit log-log linear regression
+    log_k = np.log(k)
+    log_p = np.log(power + 1e-12)
+    
+    slope, intercept, r_value, p_value, std_err = stats.linregress(log_k, log_p)
+    
+    return -slope, r_value ** 2
+
+
+def compute_branching_ratio(power: np.ndarray, eigenvalues: np.ndarray) -> float:
+    """
+    Compute branching ratio sigma as proxy for criticality.
     
     sigma < 1: subcritical (activity dies out)
-    sigma = 1: critical (sustained activity)
+    sigma = 1: critical (balanced)
     sigma > 1: supercritical (activity explodes)
+    
+    This is a simplified model based on spectral properties.
+    """
+    # Weighted sum of eigenvalues by power
+    weighted_lambda = np.sum(power * eigenvalues)
+    
+    # Normalize to get branching ratio
+    sigma = 1.0 / (1.0 + weighted_lambda)
+    
+    return sigma
+
+
+def avalanche_size_distribution(n_samples: int = 1000, branching_ratio: float = 1.0, seed: int = None):
+    """
+    Simulate avalanche sizes for a given branching ratio.
+    
+    At criticality (sigma=1), should follow power law with exponent -3/2.
+    
+    Args:
+        n_samples: Number of avalanches to simulate
+        branching_ratio: Mean offspring per event
+        seed: Random seed
+        
+    Returns:
+        Array of avalanche sizes
     """
     if seed is not None:
         np.random.seed(seed)
     
-    # Initialize with some active nodes
-    activity = np.zeros((n_nodes, n_steps))
-    activity[:, 0] = np.random.poisson(1, n_nodes)
-    
-    # Connectivity matrix
-    connectivity = np.random.rand(n_nodes, n_nodes) < 0.1
-    np.fill_diagonal(connectivity, 0)
-    
-    for t in range(1, n_steps):
-        # Each active unit spawns sigma offspring on average
-        for i in range(n_nodes):
-            if activity[i, t-1] > 0:
-                # Distribute activity to connected nodes
-                targets = np.where(connectivity[i, :])[0]
-                if len(targets) > 0:
-                    n_offspring = np.random.poisson(sigma * activity[i, t-1] / len(targets), len(targets))
-                    for j, target in enumerate(targets):
-                        activity[target, t] += n_offspring[j]
+    sizes = []
+    for _ in range(n_samples):
+        size = 0
+        active = 1  # Start with one event
         
-        # Add small spontaneous activity to prevent complete extinction
-        activity[:, t] += np.random.poisson(0.01, n_nodes)
+        while active > 0 and size < 10000:  # Prevent infinite loops
+            size += active
+            # Each active event spawns Poisson(branching_ratio) offspring
+            active = np.random.poisson(branching_ratio * active)
         
-        # Cap activity to prevent explosion
-        activity[:, t] = np.minimum(activity[:, t], 100)
+        sizes.append(size)
     
-    return activity
+    return np.array(sizes)
 
 
-branching_ratios = np.linspace(0.5, 1.5, 21)
-branching_results = []
+# ============================================================================
+# EXPERIMENT 1: Vary power-law exponent
+# ============================================================================
 
-print("Simulating branching processes across criticality...")
+print("\n1. Tuning power-law exponent...")
 
-for sigma in tqdm(branching_ratios):
-    activity = simulate_branching_process(sigma, n_steps=N_TIME, n_nodes=N_NODES, seed=SEED)
+alphas = np.linspace(0.5, 4.0, 30)
+exponent_results = []
+
+for alpha in tqdm(alphas, desc="Alpha values"):
+    power = generate_critical_power(N_MODES, alpha, seed=SEED)
     
-    # Aggregate activity
-    total_activity = activity.sum(axis=0)
+    # Compute metrics
+    metrics = met.compute_all_metrics(power, eigenvalues)
     
-    # Compute power spectrum of activity
-    power = np.zeros(N_MODES)
-    fft = np.fft.fft(activity.mean(axis=1))
-    power[:min(N_MODES, len(fft)//2)] = np.abs(fft[:min(N_MODES, len(fft)//2)]) ** 2
-    power = power / (power.sum() + 1e-10)
+    # Compute additional criticality measures
+    estimated_alpha, r_squared = compute_power_law_exponent(power)
+    branching = compute_branching_ratio(power, eigenvalues)
     
-    # Chaos metrics
-    chaos = compute_all_chaos_metrics(total_activity, activity)
-    
-    # Consciousness metrics
-    H_mode = met.compute_mode_entropy(power)
-    PR = met.compute_participation_ratio(power)
-    
-    # Avalanche analysis
-    avalanches = detect_avalanches(total_activity)
-    if len(avalanches) >= 10:
-        alpha, _, ks = fit_power_law(avalanches)
-    else:
-        alpha, ks = 0, 1
-    
-    # Estimate effective branching ratio
-    sigma_measured, _ = compute_branching_ratio(total_activity)
-    
-    branching_results.append({
-        'sigma_set': sigma,
-        'sigma_measured': sigma_measured,
-        'mean_activity': total_activity.mean(),
-        'var_activity': total_activity.var(),
-        'H_mode': H_mode,
-        'PR': PR,
-        'lyapunov': chaos['lyapunov'],
-        'avalanche_alpha': alpha,
-        'avalanche_ks': ks,
-        'n_avalanches': len(avalanches),
-        'criticality_score': chaos['criticality_score'],
+    exponent_results.append({
+        'alpha': alpha,
+        'estimated_alpha': estimated_alpha,
+        'r_squared': r_squared,
+        'branching_ratio': branching,
+        **metrics
     })
 
-df_branching = pd.DataFrame(branching_results)
+df_exponent = pd.DataFrame(exponent_results)
 
-# Estimate C(t) - need eigenvalues for kappa
-G = gg.generate_small_world(N_NODES, k_neighbors=6, rewiring_prob=0.3, seed=SEED)
-L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
+# ============================================================================
+# EXPERIMENT 2: Detailed criticality analysis
+# ============================================================================
 
-for idx, row in df_branching.iterrows():
-    power = np.ones(N_MODES) / N_MODES * (1 + 0.1 * (row['H_mode'] - 0.5))
-    power = power / power.sum()
-    kappa = met.compute_criticality_index(eigenvalues[:N_MODES], power)
-    C = met.compute_consciousness_functional(row['H_mode'], row['PR'], 0.5, 0.01, kappa)
-    df_branching.loc[idx, 'kappa'] = kappa
-    df_branching.loc[idx, 'C'] = C
+print("\n2. Analyzing critical regime...")
 
-print("\nBranching Ratio Sweep Results (selected):")
-print(df_branching[['sigma_set', 'sigma_measured', 'criticality_score', 'C', 'lyapunov']].iloc[::4].to_string(index=False))
+# Focus on alpha range around criticality (1.5 to 3.0)
+critical_alphas = np.linspace(1.5, 3.0, 50)
+critical_results = []
 
-# ==============================================================================
-# PART 2: Temperature-like Parameter
-# ==============================================================================
-
-print("\n" + "-"*70)
-print("PART 2: Temperature-like Criticality Parameter")
-print("-"*70)
-
-def simulate_ising_like_dynamics(temperature, n_steps=500, n_modes=20, seed=None):
-    """
-    Simulate Ising-like spin dynamics with temperature control.
+for alpha in tqdm(critical_alphas, desc="Critical range"):
+    # Generate multiple samples for statistics
+    c_values = []
+    kappa_values = []
     
-    Low T: ordered (ferromagnetic)
-    Critical T: phase transition
-    High T: disordered (paramagnetic)
-    """
-    if seed is not None:
-        np.random.seed(seed)
+    for sample in range(20):
+        power = generate_critical_power(N_MODES, alpha, seed=SEED + sample)
+        metrics = met.compute_all_metrics(power, eigenvalues)
+        c_values.append(metrics['C'])
+        kappa_values.append(metrics['kappa'])
     
-    # Initial random spins
-    spins = 2 * (np.random.rand(n_modes) > 0.5).astype(float) - 1
-    
-    # Coupling matrix (ferromagnetic)
-    J = np.random.rand(n_modes, n_modes) * 0.5
-    J = (J + J.T) / 2
-    np.fill_diagonal(J, 0)
-    
-    spin_history = np.zeros((n_modes, n_steps))
-    
-    for t in range(n_steps):
-        spin_history[:, t] = spins.copy()
-        
-        # Metropolis update
-        for i in range(n_modes):
-            # Energy change if we flip spin i
-            h_i = np.sum(J[i, :] * spins)
-            delta_E = 2 * spins[i] * h_i
-            
-            # Accept with Boltzmann probability
-            if delta_E < 0 or np.random.rand() < np.exp(-delta_E / (temperature + 0.01)):
-                spins[i] *= -1
-    
-    return spin_history
-
-
-temperatures = np.logspace(-1, 1, 20)  # 0.1 to 10
-temp_results = []
-
-for T in tqdm(temperatures, desc="Temperature sweep"):
-    spin_history = simulate_ising_like_dynamics(T, n_steps=500, n_modes=N_MODES, seed=SEED)
-    
-    # Magnetization (order parameter)
-    magnetization = np.abs(spin_history.mean(axis=0))
-    M_mean = magnetization.mean()
-    M_var = magnetization.var()  # Susceptibility
-    
-    # Power from spin variance
-    power = np.var(spin_history, axis=1)
-    power = power / (power.sum() + 1e-10)
-    
-    H_mode = met.compute_mode_entropy(power)
-    PR = met.compute_participation_ratio(power)
-    
-    # Correlation length (from spin correlations)
-    spin_corr = np.corrcoef(spin_history)
-    off_diag = spin_corr[np.triu_indices(N_MODES, k=1)]
-    corr_length = np.mean(np.abs(off_diag))
-    
-    # Lyapunov from magnetization time series
-    lyap, _ = estimate_lyapunov_exponent(magnetization)
-    
-    temp_results.append({
-        'T': T,
-        'log_T': np.log10(T),
-        'M_mean': M_mean,
-        'M_var': M_var,
-        'H_mode': H_mode,
-        'PR': PR,
-        'corr_length': corr_length,
-        'lyapunov': lyap,
+    critical_results.append({
+        'alpha': alpha,
+        'C_mean': np.mean(c_values),
+        'C_std': np.std(c_values),
+        'kappa_mean': np.mean(kappa_values),
+        'kappa_std': np.std(kappa_values),
     })
 
-df_temp = pd.DataFrame(temp_results)
+df_critical = pd.DataFrame(critical_results)
 
-# Estimate C(t)
-for idx, row in df_temp.iterrows():
-    power = np.ones(N_MODES) / N_MODES
-    kappa = 1 / (1 + np.abs(np.log10(row['T'])))  # Peak at T=1
-    C = met.compute_consciousness_functional(row['H_mode'], row['PR'], row['M_mean'], 0.01, kappa)
-    df_temp.loc[idx, 'kappa'] = kappa
-    df_temp.loc[idx, 'C'] = C
+# ============================================================================
+# EXPERIMENT 3: Avalanche analysis
+# ============================================================================
 
-print("\nTemperature Sweep Results (selected):")
-print(df_temp[['T', 'M_mean', 'M_var', 'H_mode', 'C']].iloc[::4].to_string(index=False))
+print("\n3. Avalanche size distributions...")
 
-# ==============================================================================
-# PART 3: Comparison with Conscious States
-# ==============================================================================
+branching_ratios = [0.8, 0.9, 1.0, 1.1, 1.2]
+avalanche_results = {}
 
-print("\n" + "-"*70)
-print("PART 3: Mapping Conscious States to Criticality")
-print("-"*70)
+for sigma in tqdm(branching_ratios, desc="Branching ratios"):
+    sizes = avalanche_size_distribution(n_samples=5000, branching_ratio=sigma, seed=SEED)
+    avalanche_results[sigma] = sizes
 
-states = {
-    'Wake': {'sigma': 1.0, 'T': 1.0},
-    'NREM': {'sigma': 0.7, 'T': 0.5},
-    'Psychedelic': {'sigma': 1.1, 'T': 2.0},
-    'Anesthesia': {'sigma': 0.5, 'T': 0.2},
-    'Seizure': {'sigma': 1.3, 'T': 3.0},
+# ============================================================================
+# EXPERIMENT 4: Brain state criticality comparison
+# ============================================================================
+
+print("\n4. Comparing brain state criticality...")
+
+brain_states = {
+    'Wake': sg.generate_wake_state(N_MODES, seed=SEED),
+    'NREM': sg.generate_nrem_unconscious(N_MODES, seed=SEED),
+    'Dream': sg.generate_nrem_dreaming(N_MODES, seed=SEED),
+    'Anesthesia': sg.generate_anesthesia_state(N_MODES, seed=SEED),
+    'Psychedelic': sg.generate_psychedelic_state(N_MODES, intensity=0.7, seed=SEED),
 }
 
 state_criticality = []
-
-for state_name, params in states.items():
-    # Generate activity with state-specific criticality
-    activity = simulate_branching_process(params['sigma'], n_steps=500, n_nodes=N_NODES, seed=SEED)
-    total_activity = activity.sum(axis=0)
-    
-    chaos = compute_all_chaos_metrics(total_activity, activity)
-    
-    # Get state power
-    if state_name == 'Wake':
-        power = sg.generate_wake_state(N_MODES, seed=SEED)
-    elif state_name == 'NREM':
-        power = sg.generate_nrem_unconscious(N_MODES, seed=SEED)
-    elif state_name == 'Psychedelic':
-        power = sg.generate_psychedelic_state(N_MODES, intensity=1.0, seed=SEED)
-    elif state_name == 'Anesthesia':
-        power = sg.generate_anesthesia_state(N_MODES, depth=1.0, seed=SEED)
-    else:  # Seizure
-        power = np.zeros(N_MODES)
-        power[0] = 0.9  # Hypersynchrony in one mode
-        power[1:] = 0.1 / (N_MODES - 1)
-    
-    metrics = met.compute_all_metrics(power, eigenvalues[:N_MODES])
+for state_name, power in brain_states.items():
+    metrics = met.compute_all_metrics(power, eigenvalues)
+    alpha_est, r2 = compute_power_law_exponent(power)
+    branching = compute_branching_ratio(power, eigenvalues)
     
     state_criticality.append({
         'state': state_name,
-        'sigma': params['sigma'],
-        'T': params['T'],
-        'distance_from_criticality': abs(params['sigma'] - 1.0),
-        'lyapunov': chaos['lyapunov'],
-        'criticality_score': chaos['criticality_score'],
+        'alpha': alpha_est,
+        'r_squared': r2,
+        'branching_ratio': branching,
         **metrics
     })
 
 df_states = pd.DataFrame(state_criticality)
-print("\nState Criticality Mapping:")
-print(df_states[['state', 'sigma', 'distance_from_criticality', 'criticality_score', 'C']].to_string(index=False))
 
-# ==============================================================================
-# PART 4: Visualizations
-# ==============================================================================
+# Save results
+df_exponent.to_csv(OUTPUT_DIR / 'exponent_sweep_results.csv', index=False)
+df_critical.to_csv(OUTPUT_DIR / 'critical_range_results.csv', index=False)
+df_states.to_csv(OUTPUT_DIR / 'state_criticality_results.csv', index=False)
 
-print("\n" + "-"*70)
-print("PART 4: Generating Visualizations")
-print("-"*70)
+# ============================================================================
+# VISUALIZATION
+# ============================================================================
 
-# Figure 1: Branching ratio analysis
-fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+print("\nGenerating visualizations...")
 
+# 1. Main criticality tuning results
+fig, axes = plt.subplots(2, 3, figsize=(15, 10))
+
+# C(t) vs alpha
 ax = axes[0, 0]
-ax.plot(df_branching['sigma_set'], df_branching['criticality_score'], 'bo-', markersize=6, linewidth=2)
-ax.axvline(x=1.0, color='red', linestyle='--', linewidth=2, label='Critical point (σ=1)')
-ax.set_xlabel('Branching Ratio σ', fontsize=12)
-ax.set_ylabel('Criticality Score', fontsize=12)
-ax.set_title('A. Criticality vs Branching Ratio', fontsize=12, fontweight='bold')
+ax.plot(df_exponent['alpha'], df_exponent['C'], 'o-', linewidth=2, markersize=6, color='darkblue')
+ax.axvline(x=2.0, color='red', linestyle='--', alpha=0.7, label='α=2 (critical)')
+ax.set_xlabel('Power-law exponent α', fontsize=12)
+ax.set_ylabel('Consciousness Functional C(t)', fontsize=12)
+ax.set_title('C(t) vs Criticality Parameter', fontsize=14, fontweight='bold')
 ax.legend()
 ax.grid(True, alpha=0.3)
 
+# Criticality index κ vs alpha
 ax = axes[0, 1]
-ax.plot(df_branching['sigma_set'], df_branching['C'], 'rs-', markersize=6, linewidth=2)
-ax.axvline(x=1.0, color='red', linestyle='--', linewidth=2)
-best_sigma = df_branching.loc[df_branching['C'].idxmax(), 'sigma_set']
-ax.axvline(x=best_sigma, color='green', linestyle='--', linewidth=2, label=f'Optimal σ={best_sigma:.2f}')
-ax.set_xlabel('Branching Ratio σ', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('B. Consciousness vs Branching Ratio', fontsize=12, fontweight='bold')
+ax.plot(df_exponent['alpha'], df_exponent['kappa'], 'o-', linewidth=2, markersize=6, color='darkgreen')
+ax.axvline(x=2.0, color='red', linestyle='--', alpha=0.7)
+ax.set_xlabel('Power-law exponent α', fontsize=12)
+ax.set_ylabel('Criticality Index κ', fontsize=12)
+ax.set_title('Criticality Index vs α', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.3)
+
+# Branching ratio vs alpha
+ax = axes[0, 2]
+ax.plot(df_exponent['alpha'], df_exponent['branching_ratio'], 'o-', linewidth=2, markersize=6, color='darkred')
+ax.axhline(y=1.0, color='red', linestyle='--', alpha=0.7, label='σ=1 (critical)')
+ax.set_xlabel('Power-law exponent α', fontsize=12)
+ax.set_ylabel('Branching Ratio σ', fontsize=12)
+ax.set_title('Branching Ratio vs α', fontsize=14, fontweight='bold')
 ax.legend()
 ax.grid(True, alpha=0.3)
 
+# H_mode and PR vs alpha
 ax = axes[1, 0]
-ax.plot(df_branching['sigma_set'], df_branching['lyapunov'], 'g^-', markersize=6, linewidth=2)
-ax.axhline(y=0, color='black', linestyle='-', linewidth=1)
-ax.axvline(x=1.0, color='red', linestyle='--', linewidth=2)
-ax.set_xlabel('Branching Ratio σ', fontsize=12)
-ax.set_ylabel('Lyapunov Exponent', fontsize=12)
-ax.set_title('C. Dynamics Stability', fontsize=12, fontweight='bold')
+ax.plot(df_exponent['alpha'], df_exponent['H_mode'], 'o-', linewidth=2, label='H_mode')
+ax.plot(df_exponent['alpha'], df_exponent['PR'], 's--', linewidth=2, label='PR')
+ax.axvline(x=2.0, color='red', linestyle='--', alpha=0.5)
+ax.set_xlabel('Power-law exponent α', fontsize=12)
+ax.set_ylabel('Metric Value', fontsize=12)
+ax.set_title('Entropy and Participation Ratio', fontsize=14, fontweight='bold')
+ax.legend()
 ax.grid(True, alpha=0.3)
 
+# Phase diagram: C vs κ
 ax = axes[1, 1]
-ax.scatter(df_branching['criticality_score'], df_branching['C'], 
-           c=df_branching['sigma_set'], cmap='coolwarm', s=80, edgecolors='black')
-ax.set_xlabel('Criticality Score', fontsize=12)
+scatter = ax.scatter(df_exponent['kappa'], df_exponent['C'], c=df_exponent['alpha'],
+                    cmap='RdYlBu_r', s=80, edgecolors='black')
+ax.set_xlabel('Criticality Index κ', fontsize=12)
 ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('D. Criticality-Consciousness Relationship', fontsize=12, fontweight='bold')
-cbar = plt.colorbar(ax.collections[0], ax=ax)
-cbar.set_label('Branching Ratio σ')
+ax.set_title('Phase Space: C vs κ', fontsize=14, fontweight='bold')
+cbar = plt.colorbar(scatter, ax=ax)
+cbar.set_label('α', fontsize=10)
+ax.grid(True, alpha=0.3)
+
+# Critical regime zoom
+ax = axes[1, 2]
+ax.fill_between(df_critical['alpha'], 
+                df_critical['C_mean'] - df_critical['C_std'],
+                df_critical['C_mean'] + df_critical['C_std'],
+                alpha=0.3, color='blue')
+ax.plot(df_critical['alpha'], df_critical['C_mean'], 'b-', linewidth=2)
+ax.axvline(x=2.0, color='red', linestyle='--', alpha=0.7, label='Critical point')
+
+# Find and mark maximum
+max_idx = df_critical['C_mean'].idxmax()
+ax.scatter([df_critical.loc[max_idx, 'alpha']], [df_critical.loc[max_idx, 'C_mean']], 
+          color='red', s=150, marker='*', zorder=5, label=f'Max at α={df_critical.loc[max_idx, "alpha"]:.2f}')
+
+ax.set_xlabel('Power-law exponent α', fontsize=12)
+ax.set_ylabel('C(t) mean ± std', fontsize=12)
+ax.set_title('Critical Regime Detail', fontsize=14, fontweight='bold')
+ax.legend()
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'branching_analysis.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: branching_analysis.png")
+plt.savefig(OUTPUT_DIR / 'criticality_tuning.png', dpi=300)
+print("  Saved: criticality_tuning.png")
 
-# Figure 2: Temperature analysis (phase transition)
-fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+# 2. Avalanche size distributions
+fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
-ax = axes[0, 0]
-ax.semilogx(df_temp['T'], df_temp['M_mean'], 'bo-', markersize=6, linewidth=2)
-ax.set_xlabel('Temperature T', fontsize=12)
-ax.set_ylabel('Magnetization |M|', fontsize=12)
-ax.set_title('A. Order Parameter (Magnetization)', fontsize=12, fontweight='bold')
-ax.grid(True, alpha=0.3)
+# Histograms
+ax = axes[0]
+for sigma in branching_ratios:
+    sizes = avalanche_results[sigma]
+    sizes = sizes[sizes < 1000]  # Truncate for visualization
+    ax.hist(sizes, bins=50, alpha=0.5, label=f'σ={sigma}', density=True)
+ax.set_xlabel('Avalanche Size', fontsize=12)
+ax.set_ylabel('Probability Density', fontsize=12)
+ax.set_title('Avalanche Size Distributions', fontsize=14, fontweight='bold')
+ax.legend()
+ax.set_xlim(0, 500)
 
-ax = axes[0, 1]
-ax.semilogx(df_temp['T'], df_temp['M_var'], 'gs-', markersize=6, linewidth=2)
-ax.set_xlabel('Temperature T', fontsize=12)
-ax.set_ylabel('Susceptibility χ (var of M)', fontsize=12)
-ax.set_title('B. Susceptibility (Phase Transition)', fontsize=12, fontweight='bold')
-ax.grid(True, alpha=0.3)
+# Log-log plot (power-law check)
+ax = axes[1]
+for sigma in branching_ratios:
+    sizes = avalanche_results[sigma]
+    sizes = sizes[sizes > 0]
+    
+    # Compute histogram
+    bins = np.logspace(0, 4, 30)
+    hist, bin_edges = np.histogram(sizes, bins=bins, density=True)
+    bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2
+    
+    # Filter zeros
+    mask = hist > 0
+    ax.loglog(bin_centers[mask], hist[mask], 'o-', alpha=0.7, label=f'σ={sigma}')
 
-ax = axes[1, 0]
-ax.semilogx(df_temp['T'], df_temp['H_mode'], 'r^-', markersize=6, linewidth=2)
-ax.set_xlabel('Temperature T', fontsize=12)
-ax.set_ylabel('Mode Entropy H_mode', fontsize=12)
-ax.set_title('C. Entropy vs Temperature', fontsize=12, fontweight='bold')
-ax.grid(True, alpha=0.3)
+# Add reference power-law (slope -3/2 for critical)
+x_ref = np.logspace(0, 3, 100)
+y_ref = 0.5 * x_ref ** (-1.5)
+ax.loglog(x_ref, y_ref, 'k--', linewidth=2, label='Power-law (α=-3/2)')
 
-ax = axes[1, 1]
-ax.semilogx(df_temp['T'], df_temp['C'], 'mo-', markersize=6, linewidth=2)
-ax.set_xlabel('Temperature T', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('D. Consciousness vs Temperature', fontsize=12, fontweight='bold')
-ax.grid(True, alpha=0.3)
-
-plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'temperature_analysis.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: temperature_analysis.png")
-
-# Figure 3: State mapping
-fig, ax = plt.subplots(figsize=(10, 8))
-
-colors = {'Wake': 'green', 'NREM': 'blue', 'Psychedelic': 'red', 
-          'Anesthesia': 'purple', 'Seizure': 'orange'}
-
-for _, row in df_states.iterrows():
-    ax.scatter(row['distance_from_criticality'], row['C'], 
-               s=200, c=colors[row['state']], label=row['state'],
-               edgecolors='black', linewidths=2)
-    ax.annotate(row['state'], (row['distance_from_criticality'], row['C']),
-                xytext=(10, 5), textcoords='offset points', fontsize=10)
-
-ax.set_xlabel('Distance from Criticality |σ - 1|', fontsize=12)
-ax.set_ylabel('Consciousness C(t)', fontsize=12)
-ax.set_title('Conscious States in Criticality Space', fontsize=14, fontweight='bold')
-ax.grid(True, alpha=0.3)
+ax.set_xlabel('Avalanche Size (log)', fontsize=12)
+ax.set_ylabel('Probability (log)', fontsize=12)
+ax.set_title('Power-law Analysis', fontsize=14, fontweight='bold')
+ax.legend()
+ax.grid(True, alpha=0.3, which='both')
 
 plt.tight_layout()
-plt.savefig(OUTPUT_DIR / 'state_criticality_map.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: state_criticality_map.png")
+plt.savefig(OUTPUT_DIR / 'avalanche_analysis.png', dpi=300)
+print("  Saved: avalanche_analysis.png")
 
-# Save data
-df_branching.to_csv(OUTPUT_DIR / 'branching_analysis.csv', index=False)
-df_temp.to_csv(OUTPUT_DIR / 'temperature_analysis.csv', index=False)
-df_states.to_csv(OUTPUT_DIR / 'state_criticality.csv', index=False)
+# 3. Brain state criticality comparison
+fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
-# ==============================================================================
-# SUMMARY
-# ==============================================================================
+# Bar chart of criticality index
+ax = axes[0]
+colors = plt.cm.RdYlBu_r(np.linspace(0.2, 0.8, len(df_states)))
+bars = ax.bar(df_states['state'], df_states['kappa'], color=colors, edgecolor='black')
+ax.axhline(y=0.5, color='red', linestyle='--', alpha=0.7, label='Optimal κ')
+ax.set_ylabel('Criticality Index κ', fontsize=12)
+ax.set_title('Criticality by Brain State', fontsize=14, fontweight='bold')
+ax.set_xticklabels(df_states['state'], rotation=45, ha='right')
+ax.legend()
+ax.grid(True, alpha=0.3, axis='y')
 
-print("\n" + "="*70)
-print("KEY FINDINGS: CRITICALITY TUNING")
-print("="*70)
+# Scatter: C vs κ for brain states
+ax = axes[1]
+for idx, row in df_states.iterrows():
+    ax.scatter(row['kappa'], row['C'], s=200, label=row['state'], edgecolors='black')
+ax.set_xlabel('Criticality Index κ', fontsize=12)
+ax.set_ylabel('Consciousness C(t)', fontsize=12)
+ax.set_title('Brain States in C-κ Space', fontsize=14, fontweight='bold')
+ax.legend()
+ax.grid(True, alpha=0.3)
 
-best_idx = df_branching['C'].idxmax()
-best = df_branching.iloc[best_idx]
+# Power-law fit quality
+ax = axes[2]
+bars = ax.bar(df_states['state'], df_states['r_squared'], color='steelblue', edgecolor='black')
+ax.axhline(y=0.9, color='red', linestyle='--', alpha=0.7, label='Good fit (R²=0.9)')
+ax.set_ylabel('Power-law Fit R²', fontsize=12)
+ax.set_title('Power-law Quality by State', fontsize=14, fontweight='bold')
+ax.set_xticklabels(df_states['state'], rotation=45, ha='right')
+ax.set_ylim(0, 1)
+ax.legend()
+ax.grid(True, alpha=0.3, axis='y')
 
-print(f"""
-1. CRITICAL BRANCHING RATIO:
-   - Maximum consciousness near σ = {best['sigma_set']:.2f}
-   - Theoretical critical point: σ = 1.0
-   - C(t) = {best['C']:.3f} at optimum
+plt.tight_layout()
+plt.savefig(OUTPUT_DIR / 'brain_state_criticality.png', dpi=300)
+print("  Saved: brain_state_criticality.png")
 
-2. PHASE TRANSITION BEHAVIOR:
-   - Low T (subcritical): Ordered, low entropy, low consciousness
-   - Critical T: Phase transition, high susceptibility, HIGH consciousness
-   - High T (supercritical): Disordered, high entropy, moderate consciousness
+# 4. Power distributions at different alpha values
+fig, axes = plt.subplots(1, 4, figsize=(16, 4))
+alpha_examples = [1.0, 2.0, 3.0, 4.0]
+titles = ['Subcritical (α=1)', 'Critical (α=2)', 'Near-uniform (α=3)', 'Uniform (α=4)']
 
-3. STATE MAPPING:
-""")
-for _, row in df_states.sort_values('C', ascending=False).iterrows():
-    regime = "Critical" if row['distance_from_criticality'] < 0.2 else \
-             ("Subcritical" if row['sigma'] < 1 else "Supercritical")
-    print(f"   {row['state']}: σ={row['sigma']:.1f} ({regime}), C={row['C']:.3f}")
+for idx, (alpha, title) in enumerate(zip(alpha_examples, titles)):
+    ax = axes[idx]
+    power = generate_critical_power(N_MODES, alpha, seed=SEED)
+    
+    ax.bar(range(N_MODES), power, color='steelblue', edgecolor='black', alpha=0.7)
+    ax.set_xlabel('Mode k', fontsize=10)
+    ax.set_ylabel('Power P(k)', fontsize=10)
+    ax.set_title(title, fontsize=12, fontweight='bold')
+    ax.set_yscale('log')
+    ax.set_ylim(1e-4, 1)
+    ax.grid(True, alpha=0.3)
 
-print(f"""
-4. CRITICALITY HYPOTHESIS CONFIRMED:
-   - Wake state operates NEAR criticality
-   - Anesthesia/NREM are SUBCRITICAL
-   - Psychedelics push toward SUPERCRITICAL
-   - Seizure is strongly SUPERCRITICAL (pathological)
+plt.suptitle('Mode Power Distributions at Different Criticality Levels', fontsize=14, fontweight='bold', y=1.02)
+plt.tight_layout()
+plt.savefig(OUTPUT_DIR / 'power_distributions.png', dpi=300, bbox_inches='tight')
+print("  Saved: power_distributions.png")
 
-5. IMPLICATIONS:
-   - Brain dynamically tunes itself to criticality
-   - Deviations from criticality reduce consciousness
-   - This may be a universal principle of conscious systems
+plt.close('all')
 
-6. LYAPUNOV EXPONENT:
-   - Negative λ (subcritical): Stable, ordered
-   - λ ≈ 0 (critical): Edge of chaos
-   - Positive λ (supercritical): Chaotic, sensitive to initial conditions
-""")
+# ============================================================================
+# Summary
+# ============================================================================
 
-print(f"\nResults saved to: {OUTPUT_DIR}")
-print("="*70)
+print("\n" + "=" * 60)
+print("Summary Statistics")
+print("=" * 60)
+
+# Find optimal criticality
+optimal_idx = df_exponent['C'].idxmax()
+optimal_alpha = df_exponent.loc[optimal_idx, 'alpha']
+optimal_C = df_exponent.loc[optimal_idx, 'C']
+optimal_kappa = df_exponent.loc[optimal_idx, 'kappa']
+
+print(f"\nOptimal Criticality:")
+print(f"  alpha* = {optimal_alpha:.3f}")
+print(f"  C* = {optimal_C:.4f}")
+print(f"  kappa* = {optimal_kappa:.4f}")
+
+print("\nRegime Classification:")
+subcrit = df_exponent[df_exponent['alpha'] < 1.5]['C'].mean()
+crit = df_exponent[(df_exponent['alpha'] >= 1.5) & (df_exponent['alpha'] <= 2.5)]['C'].mean()
+supercrit = df_exponent[df_exponent['alpha'] > 2.5]['C'].mean()
+
+print(f"  Subcritical (alpha<1.5):     C = {subcrit:.4f}")
+print(f"  Critical (1.5<=alpha<=2.5):  C = {crit:.4f}")
+print(f"  Supercritical (alpha>2.5):   C = {supercrit:.4f}")
+
+print("\nBrain State Criticality Rankings:")
+df_sorted = df_states.sort_values('kappa', ascending=False)
+for _, row in df_sorted.iterrows():
+    print(f"  {row['state']:12}: kappa = {row['kappa']:.4f}, C = {row['C']:.4f}")
+
+print("\n" + "=" * 60)
+print(f"Experiment completed! Results saved to: {OUTPUT_DIR}")
+print("=" * 60)
