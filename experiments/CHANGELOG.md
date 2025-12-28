@@ -1,5 +1,57 @@
 # Experiments Changelog
 
+## [2025-12-27] - RTX 5090 GPU Optimization & Scaling Analysis
+
+### Added
+- **RTX 5090 Setup Guide** (`category2_dynamics/RTX5090_SETUP_GUIDE.md`)
+  - Complete installation instructions for PyTorch nightly with CUDA 12.8 (sm_120 support)
+  - GPU selection code for multi-GPU systems
+  - Eigendecomposition limits documentation
+  - Troubleshooting guide for common issues
+  - Memory usage estimates by configuration
+  - Performance benchmarks vs previous generation
+
+- **GPU Scaling Analysis** (`category2_dynamics/GPU_SCALING_ANALYSIS.md`)
+  - Comprehensive benchmarks from small (961 nodes) to ultra (25,921 nodes)
+  - Scaling laws for eigendecomposition and trajectory simulation
+  - Scientific insights from large-scale experiments
+  - Recommended protocols for different research goals
+  - Future directions for beyond-cuSOLVER scales
+
+### Fixed
+- **GPU Selection**: Explicitly use GPU 0 (RTX 5090) instead of auto-detection
+- **Python Environment**: Use system Python 3.11 with PyTorch nightly (not venv)
+- **Unicode Encoding**: Replaced Unicode characters (✓, ✗, 🎉) with ASCII for Windows compatibility
+
+### Optimized
+- **Experiment Configurations** (`exp_gpu_massive_batched.py`)
+  - Updated mega/giga/ultra configs with verified working parameters
+  - Added 'max' config for maximum scale (25,921 nodes, 2,500 modes, 20,000 timesteps)
+  - Documented cuSOLVER eigendecomp limit (~26,000 nodes)
+  - Added configuration comments with timing and memory estimates
+
+### Benchmarks (RTX 5090, 34 GB VRAM)
+
+| Config | Nodes | Modes | Timesteps | Trials | Eigendecomp | Total Time |
+|--------|-------|-------|-----------|--------|-------------|------------|
+| small | 961 | 100 | 1,000 | 100 | 0.1s | 7s |
+| medium | 2,401 | 300 | 2,000 | 500 | 0.3s | 10s |
+| large | 4,900 | 800 | 5,000 | 200 | 0.8s | 20s |
+| xlarge | 10,000 | 1,500 | 10,000 | 100 | 2.0s | 40s |
+| mega | 24,964 | 2,000 | 10,000 | 50 | 13.6s | 55s |
+| giga | 24,964 | 2,000 | 15,000 | 50 | 13.6s | 58s |
+| ultra | 25,921 | 2,200 | 15,000 | 40 | 14.9s | 50s |
+| **max** | **25,921** | **2,500** | **20,000** | **100** | **15.0s** | **227s** |
+
+### Key Findings
+- **cuSOLVER Limit**: Dense eigendecomposition fails at ~27,000 nodes
+- **Maximum Scale**: 25,921 nodes (161×161 lattice) is the absolute maximum
+- **Rotation Dynamics**: Mean rotation ~52,000° at 20,000 timesteps (max config)
+- **Wave Detection**: Stabilizes at ~25% for large networks
+- **Throughput**: Peak efficiency ~40M mode-timesteps/second at medium scale
+
+---
+
 ## [2025-12-25] - Rotational Dynamics Refinements (v2)
 
 ### Refined

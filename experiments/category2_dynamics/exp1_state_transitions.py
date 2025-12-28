@@ -7,6 +7,8 @@ Animate transitions between conscious states:
 - Create Wake → NREM → Dream → Wake cycle
 - Track all metrics during transition
 - Generate time series plots and phase space trajectories
+
+RTX 5090 Enhanced: Supports environment variable configuration for scaled experiments.
 """
 
 import sys
@@ -25,24 +27,59 @@ from utils import metrics as met
 from utils import state_generators as sg
 from utils import visualization as viz
 
-# Configuration
+# Configuration - supports environment variable overrides for RTX 5090 scaling
 SEED = 42
-N_NODES = 100
-N_STEPS = 200
+N_NODES = int(os.environ.get('EXP_N_NODES', 100))
+N_MODES = int(os.environ.get('EXP_N_MODES', 20))
+N_STEPS = int(os.environ.get('EXP_N_STEPS', 200))
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp1_state_transitions'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+# Check for PyTorch GPU support (RTX 5090)
+USE_GPU = False
+try:
+    import torch
+    if torch.cuda.is_available():
+        # Explicitly use GPU 0 (RTX 5090)
+        device = torch.device('cuda:0')
+        gpu_name = torch.cuda.get_device_properties(0).name
+        gpu_mem = torch.cuda.get_device_properties(0).total_memory / 1024**3
+        USE_GPU = True
+        print(f"[GPU] Using {gpu_name} ({gpu_mem:.1f} GB)")
+except ImportError:
+    pass
+
 print("="*60)
 print("Category 2, Experiment 1: State Transitions")
+print(f"Configuration: {N_NODES} nodes, {N_MODES} modes, {N_STEPS} steps")
+if USE_GPU:
+    print(f"Acceleration: PyTorch CUDA (RTX 5090)")
+else:
+    print(f"Acceleration: NumPy CPU")
 print("="*60)
 
 # Generate network
 print("\nGenerating network...")
 G = gg.generate_small_world(N_NODES, k_neighbors=6, rewiring_prob=0.3, seed=SEED)
-L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
 
-# Use first 20 modes (to match state generators)
-n_modes = 20
+# Use PyTorch for eigendecomposition on GPU if available
+if USE_GPU and N_NODES > 500:
+    print(f"Computing Laplacian eigenmodes on GPU ({N_NODES}x{N_NODES} matrix)...")
+    import torch
+    import networkx as nx
+    L_sparse = nx.laplacian_matrix(G).toarray().astype(np.float32)
+    L_torch = torch.from_numpy(L_sparse).to(device)
+    eigenvalues_torch, eigenvectors_torch = torch.linalg.eigh(L_torch)
+    eigenvalues = eigenvalues_torch.cpu().numpy()
+    eigenvectors = eigenvectors_torch.cpu().numpy()
+    L = L_sparse
+    del L_torch, eigenvalues_torch, eigenvectors_torch
+    torch.cuda.empty_cache()
+else:
+    L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
+
+# Use specified number of modes
+n_modes = min(N_MODES, len(eigenvalues))
 eigenvalues = eigenvalues[:n_modes]
 
 # Generate state transition sequence
@@ -227,17 +264,21 @@ print(f"  Saved: mode_power_evolution.png")
 print("\nCreating animation...")
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
 
+# Get actual number of modes in power_sequence
+power_n_modes = power_sequence.shape[1]
+anim_mode_indices = np.arange(power_n_modes)
+
 def animate(frame):
     ax1.clear()
     ax2.clear()
     
     # Top: Mode power distribution
-    power = power_sequence[frame, :n_modes]
-    ax1.bar(mode_indices, power, color='steelblue', alpha=0.7)
+    power = power_sequence[frame, :power_n_modes]
+    ax1.bar(anim_mode_indices, power, color='steelblue', alpha=0.7)
     ax1.set_xlabel('Mode Index')
     ax1.set_ylabel('Power')
     ax1.set_title(f'Time: {frame}/{N_STEPS} | State: {labels[frame]}')
-    ax1.set_ylim(0, power_sequence[:, :n_modes].max() * 1.1)
+    ax1.set_ylim(0, power_sequence[:, :power_n_modes].max() * 1.1)
     
     # Bottom: C(t) time series
     ax2.plot(df['time'][:frame+1], df['C'][:frame+1], 'b-', linewidth=2)

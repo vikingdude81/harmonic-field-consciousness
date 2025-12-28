@@ -25,14 +25,39 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from typing import Tuple
 
-# Check GPU availability
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print(f"Using device: {device}")
-if torch.cuda.is_available():
-    print(f"GPU: {torch.cuda.get_device_name(0)}")
-    print(f"GPU Count: {torch.cuda.device_count()}")
-    print(f"CUDA Version: {torch.version.cuda}")
-    print(f"Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.2f} GB")
+# Check GPU availability and select best available
+try:
+    if torch.cuda.is_available():
+        # Test each GPU to find one that works
+        working_gpu = None
+        for gpu_id in range(torch.cuda.device_count()):
+            try:
+                test_device = torch.device(f'cuda:{gpu_id}')
+                test_tensor = torch.ones(10, device=test_device)
+                _ = test_tensor * 2
+                working_gpu = gpu_id
+                print(f"[OK] GPU {gpu_id} ({torch.cuda.get_device_name(gpu_id)}) - WORKING")
+                break
+            except Exception as e:
+                print(f"[SKIP] GPU {gpu_id} ({torch.cuda.get_device_name(gpu_id)}) - Not compatible: {str(e)[:50]}")
+        
+        if working_gpu is not None:
+            device = torch.device(f'cuda:{working_gpu}')
+            print(f"\nUsing device: {device}")
+            print(f"GPU: {torch.cuda.get_device_name(working_gpu)}")
+            print(f"Memory: {torch.cuda.get_device_properties(working_gpu).total_memory / 1e9:.2f} GB")
+            print(f"CUDA Version: {torch.version.cuda}")
+        else:
+            print("\n⚠️  No compatible GPU found (RTX 5090 requires newer PyTorch)")
+            print("⚠️  Falling back to CPU")
+            device = torch.device('cpu')
+    else:
+        device = torch.device('cpu')
+        print(f"Using device: {device} (CUDA not available)")
+except Exception as e:
+    print(f"⚠️  GPU error: {e}")
+    device = torch.device('cpu')
+    print(f"Using device: {device}")
 
 # Configuration for massive scale
 CONFIGS = {
@@ -250,7 +275,7 @@ def run_massive_experiment(config_name: str = 'medium',
     )
     
     setup_time = time.time() - start
-    print(f"✓ Setup complete in {setup_time:.2f}s")
+    print(f"[OK] Setup complete in {setup_time:.2f}s")
     print()
     
     # Run trials
@@ -316,7 +341,7 @@ def run_massive_experiment(config_name: str = 'medium',
         })
     
     runtime = time.time() - start
-    print(f"\n✓ {N_TRIALS} trials completed in {runtime:.2f}s")
+    print(f"\n[OK] {N_TRIALS} trials completed in {runtime:.2f}s")
     print(f"  Average: {runtime/N_TRIALS:.3f}s per trial")
     print(f"  Throughput: {N_TRIALS/runtime:.1f} trials/sec")
     
@@ -346,7 +371,7 @@ def run_massive_experiment(config_name: str = 'medium',
     
     # Wave detection by type
     wave_by_type = df.groupby('wave_type')['has_wave'].mean()
-    axes[1].bar(range(len(wave_by_type)), wave_by_type.values * 100)
+    axes[1].bar(range(len(wave_by_type)), np.array(wave_by_type.values) * 100)
     axes[1].set_xticks(range(4))
     axes[1].set_xticklabels(['Gaussian', 'Plane', 'Spiral', 'Random'])
     axes[1].set_ylabel('Wave Detection Rate (%)')
@@ -364,7 +389,7 @@ def run_massive_experiment(config_name: str = 'medium',
     
     plt.tight_layout()
     plt.savefig(output_path / 'visualization.png', dpi=150, bbox_inches='tight')
-    print(f"✓ Visualization saved to: {output_path / 'visualization.png'}")
+    print(f"[OK] Visualization saved to: {output_path / 'visualization.png'}")
     
     # Performance metrics
     perf = {

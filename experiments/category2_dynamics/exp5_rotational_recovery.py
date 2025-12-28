@@ -16,11 +16,7 @@ Tests key hypotheses:
 3. Does rotation completeness correlate with consciousness metrics?
 4. Is there correspondence between wave speed and rotation velocity?
 
-Experimental design:
-- Various network topologies
-- Different perturbation types (hub removal, noise, targeted disruption)
-- Measure recovery trajectories in eigenmode space
-- Compare conscious vs unconscious states
+RTX 5090 Enhanced: Uses PyTorch for GPU-accelerated eigendecomposition.
 """
 
 import sys
@@ -52,27 +48,41 @@ from utils.dynamic_stability import (
     comprehensive_stability_analysis, measure_perturbation_recovery
 )
 
-# Configuration
+# Configuration - supports environment variable overrides for RTX 5090 scaling
 SEED = 42
-N_NODES = 300
-N_MODES = 80
-N_TRIALS = 50  # Multiple trials for statistics
+N_NODES = int(os.environ.get('EXP_N_NODES', 300))
+N_MODES = int(os.environ.get('EXP_N_MODES', 80))
+N_TRIALS = int(os.environ.get('EXP_N_TRIALS', 50))
+POST_PERTURBATION_TIME = int(os.environ.get('EXP_POST_PERTURBATION_TIME', 100))
 PERTURBATION_STRENGTH = 0.3
-POST_PERTURBATION_TIME = 100  # Time steps after perturbation
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp_rotational_recovery'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+# Check for PyTorch GPU support (RTX 5090)
+USE_PYTORCH_GPU = False
+try:
+    import torch
+    if torch.cuda.is_available():
+        device = torch.device('cuda:0')
+        gpu_name = torch.cuda.get_device_properties(0).name
+        gpu_mem = torch.cuda.get_device_properties(0).total_memory / 1024**3
+        USE_PYTORCH_GPU = True
+except ImportError:
+    pass
 
 print("=" * 70)
 print("NEW EXPERIMENT: Rotational Dynamics and Recovery from Perturbation")
 print("Based on Batabyal et al. (2025) JOCN")
 print("=" * 70)
-print(f"\n⏱️  Experiment started at: {time.strftime('%H:%M:%S')}")
-print(f"📊 Configuration:")
-print(f"   • Network: {N_NODES} nodes, {N_MODES} modes")
-print(f"   • Experiment 1: 3 states × {N_TRIALS} trials = {3 * N_TRIALS} total")
-print(f"   • Experiment 2: 10 strengths × 20 trials = 200 total")
-print(f"   • Experiment 3: 30 trials")
-print(f"   • Est. runtime: ~3-5 minutes\n")
+print(f"\n[TIME] Experiment started at: {time.strftime('%H:%M:%S')}")
+print(f"[CONFIG]")
+print(f"   Network: {N_NODES} nodes, {N_MODES} modes")
+print(f"   Experiment 1: 3 states x {N_TRIALS} trials = {3 * N_TRIALS} total")
+print(f"   Experiment 2: 10 strengths x 20 trials = 200 total")
+print(f"   Experiment 3: 30 trials")
+if USE_PYTORCH_GPU:
+    print(f"   Acceleration: PyTorch CUDA ({gpu_name})")
+print(f"   Est. runtime: ~3-5 minutes\n")
 
 start_time = time.time()
 np.random.seed(SEED)
@@ -88,8 +98,23 @@ print("=" * 70)
 # Generate network
 print("\nGenerating small-world network...")
 G = gg.generate_small_world(N_NODES, k_neighbors=6, rewiring_prob=0.3, seed=SEED)
-L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
-eigenvalues = eigenvalues[:N_MODES]
+
+if USE_PYTORCH_GPU and N_NODES > 500:
+    print(f"Computing Laplacian eigenmodes on GPU ({N_NODES}x{N_NODES} matrix)...")
+    import torch
+    import networkx as nx
+    L_sparse = nx.laplacian_matrix(G).toarray().astype(np.float32)
+    L_torch = torch.from_numpy(L_sparse).to(device)
+    eigenvalues_torch, eigenvectors_torch = torch.linalg.eigh(L_torch)
+    eigenvalues = eigenvalues_torch.cpu().numpy()[:N_MODES]
+    eigenvectors = eigenvectors_torch.cpu().numpy()
+    L = L_sparse
+    del L_torch, eigenvalues_torch, eigenvectors_torch
+    torch.cuda.empty_cache()
+    print(f"  Eigendecomposition on GPU complete")
+else:
+    L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
+    eigenvalues = eigenvalues[:N_MODES]
 
 # Get node positions for traveling wave analysis
 pos = gg.get_node_positions(G, layout='spring', seed=SEED)
@@ -122,7 +147,7 @@ for state_name, state_power in states.items():
         # Simple damped oscillation in mode space
         trajectory_baseline[t] = trajectory_baseline[t-1] * 0.98 + \
                                 np.sqrt(state_power) * np.random.randn(N_MODES) * 0.1
-    print("✓")
+    print("[OK]")
     
     # Generate perturbed trajectories
     trial_rotations = []
@@ -193,7 +218,7 @@ for state_name, state_power in states.items():
         state_power, eigenvalues
     )
     C_t = metrics['C']
-    print("✓")
+    print("[OK]")
     
     exp1_results.append({
         'state': state_name,
@@ -222,7 +247,7 @@ for state_name, state_power in states.items():
 # Save results
 df_exp1 = pd.DataFrame(exp1_results)
 df_exp1.to_csv(OUTPUT_DIR / 'exp1_state_comparison.csv', index=False)
-print(f"✓ Experiment 1 results saved to: {OUTPUT_DIR / 'exp1_state_comparison.csv'}")
+print(f"[OK] Experiment 1 results saved to: {OUTPUT_DIR / 'exp1_state_comparison.csv'}")
 
 # ============================================================================
 # EXPERIMENT 2: Rotation-Recovery Correlation
@@ -296,7 +321,7 @@ for pert_strength in tqdm(perturbation_strengths, desc="Perturbation strengths")
 
 df_exp2 = pd.DataFrame(exp2_results)
 df_exp2.to_csv(OUTPUT_DIR / 'exp2_rotation_recovery_correlation.csv', index=False)
-print(f"✓ Experiment 2 results saved to: {OUTPUT_DIR / 'exp2_rotation_recovery_correlation.csv'}")
+print(f"[OK] Experiment 2 results saved to: {OUTPUT_DIR / 'exp2_rotation_recovery_correlation.csv'}")
 
 # Compute correlations
 print("\n" + "─" * 70)
@@ -304,11 +329,11 @@ print("CORRELATIONS:")
 print("─" * 70)
 corr_angle_recovery = stats.pearsonr(df_exp2['rotation_angle'], 
                                      df_exp2['recovery_pct'])
-print(f"  Rotation angle ↔ Recovery : r={corr_angle_recovery[0]:+.3f}, p={corr_angle_recovery[1]:.4f}")
+print(f"  Rotation angle <-> Recovery : r={corr_angle_recovery[0]:+.3f}, p={corr_angle_recovery[1]:.4f}")
 
 corr_quality_recovery = stats.pearsonr(df_exp2['rotation_quality'], 
                                        df_exp2['recovery_pct'])
-print(f"  Rotation quality ↔ Recovery: r={corr_quality_recovery[0]:+.3f}, p={corr_quality_recovery[1]:.4f}")
+print(f"  Rotation quality <-> Recovery: r={corr_quality_recovery[0]:+.3f}, p={corr_quality_recovery[1]:.4f}")
 print("─" * 70 + "\n")
 
 # ============================================================================
@@ -382,7 +407,7 @@ for trial in tqdm(range(30), desc="Analyzing trials"):
 
 df_exp3 = pd.DataFrame(exp3_results)
 df_exp3.to_csv(OUTPUT_DIR / 'exp3_wave_rotation_correspondence.csv', index=False)
-print(f"✓ Experiment 3 results saved to: {OUTPUT_DIR / 'exp3_wave_rotation_correspondence.csv'}")
+print(f"[OK] Experiment 3 results saved to: {OUTPUT_DIR / 'exp3_wave_rotation_correspondence.csv'}")
 
 # Statistics
 trials_with_waves = df_exp3[df_exp3['has_wave']]
@@ -505,8 +530,8 @@ Experiment 1: State Comparison
     Mean recovery: {df_exp1[df_exp1['consciousness']=='Unconscious']['mean_recovery_pct'].mean():.1f}%
 
 Experiment 2: Correlations
-  Rotation ↔ Recovery: r={corr_angle_recovery[0]:.3f}, p={corr_angle_recovery[1]:.4f}
-  Quality ↔ Recovery: r={corr_quality_recovery[0]:.3f}, p={corr_quality_recovery[1]:.4f}
+  Rotation <-> Recovery: r={corr_angle_recovery[0]:.3f}, p={corr_angle_recovery[1]:.4f}
+  Quality <-> Recovery: r={corr_quality_recovery[0]:.3f}, p={corr_quality_recovery[1]:.4f}
 
 Experiment 3: Wave-Rotation
   Trials with waves: {len(trials_with_waves)}/{len(df_exp3)}
@@ -517,17 +542,17 @@ ax9.text(0.1, 0.5, summary_text, fontsize=10, family='monospace',
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'rotational_dynamics_analysis.png', dpi=300, bbox_inches='tight')
-print("✓")
-print(f"✓ Figure saved to: {OUTPUT_DIR / 'rotational_dynamics_analysis.png'}")
+print("[OK]")
+print(f"[OK] Figure saved to: {OUTPUT_DIR / 'rotational_dynamics_analysis.png'}")
 
 print("\n" + "=" * 70)
-print("🎉 EXPERIMENT COMPLETE! 🎉")
+print("EXPERIMENT COMPLETE!")
 print("=" * 70)
 
 elapsed_time = time.time() - start_time
-print(f"\n⏱️  Total runtime: {elapsed_time/60:.1f} minutes ({elapsed_time:.1f} seconds)")
-print(f"📁 All results saved to: {OUTPUT_DIR}")
-print("\n📊 Key Findings:")
+print(f"\nTotal runtime: {elapsed_time/60:.1f} minutes ({elapsed_time:.1f} seconds)")
+print(f"All results saved to: {OUTPUT_DIR}")
+print("\nKey Findings:")
 print("  1. Rotational dynamics differ between conscious and unconscious states")
 print(f"  2. Fuller rotations correlate with better recovery (r={corr_angle_recovery[0]:+.3f}, p={corr_angle_recovery[1]:.4f})")
 print(f"  3. Traveling waves show correspondence with rotational dynamics")

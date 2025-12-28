@@ -66,6 +66,9 @@ P = 0.3  # Rewiring probability
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp_rotational_recovery_v2'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+# Track total runtime
+start_time = time.time()
+
 print("=" * 80)
 print("ROTATIONAL DYNAMICS & RECOVERY - REFINED VERSION")
 print("=" * 80)
@@ -125,7 +128,7 @@ for state_name, (state_type, state_params) in states_config.items():
     trial_waves = []
     
     print(f"  Running {n_trials} trials...", end=' ', flush=True)
-    start_time = time.time()
+    exp_start_time = time.time()
     
     for trial in range(n_trials):
         np.random.seed(SEED + trial * 100 + hash(state_name) % 1000)
@@ -192,8 +195,8 @@ for state_name, (state_type, state_params) in states_config.items():
             'wave_speed': 0.0
         })
     
-    elapsed = time.time() - start_time
-    print(f"✓ ({elapsed:.1f}s)")
+    elapsed = time.time() - exp_start_time
+    print(f"[OK] ({elapsed:.1f}s)")
     
     # Aggregate results
     mean_rotation_angle = np.mean([r['total_rotation_degrees'] for r in trial_rotations])
@@ -211,7 +214,7 @@ for state_name, (state_type, state_params) in states_config.items():
         state_power, eigenvalues[:N_MODES]  # Use only first N_MODES eigenvalues
     )
     C_t = metrics['C']
-    print(f"✓ C(t) = {C_t:.3f}")
+    print(f"[OK] C(t) = {C_t:.3f}")
     
     exp1_results.append({
         'state': state_name,
@@ -232,7 +235,7 @@ for state_name, (state_type, state_params) in states_config.items():
 
 df_exp1 = pd.DataFrame(exp1_results)
 df_exp1.to_csv(OUTPUT_DIR / 'exp1_state_comparison.csv', index=False)
-print(f"\n✓ Experiment 1 results saved to: {OUTPUT_DIR / 'exp1_state_comparison.csv'}")
+print(f"\n[OK] Experiment 1 results saved to: {OUTPUT_DIR / 'exp1_state_comparison.csv'}")
 
 # ==============================================================================
 # EXPERIMENT 2: Rotation-Recovery Correlation (Refined)
@@ -326,7 +329,7 @@ for pert_strength in tqdm(perturbation_strengths, desc="Perturbation strengths")
 
 df_exp2 = pd.DataFrame(exp2_results)
 df_exp2.to_csv(OUTPUT_DIR / 'exp2_rotation_recovery_correlation.csv', index=False)
-print(f"\n✓ Experiment 2 results saved to: {OUTPUT_DIR / 'exp2_rotation_recovery_correlation.csv'}")
+print(f"\n[OK] Experiment 2 results saved to: {OUTPUT_DIR / 'exp2_rotation_recovery_correlation.csv'}")
 
 # Analyze correlation
 if len(df_exp2) > 0:
@@ -360,7 +363,7 @@ for trial in range(5):
 
 df_exp3 = pd.DataFrame(exp3_results)
 df_exp3.to_csv(OUTPUT_DIR / 'exp3_wave_rotation_correspondence.csv', index=False)
-print(f"\n✓ Placeholder results saved for Experiment 3 (deferred)")
+print(f"\n[OK] Placeholder results saved for Experiment 3 (deferred)")
 n_waves = 0
 n_trials = 5
 
@@ -467,7 +470,7 @@ for trial in tqdm(range(n_trials), desc="Trials"):
 
 df_exp3 = pd.DataFrame(exp3_results)
 df_exp3.to_csv(OUTPUT_DIR / 'exp3_wave_rotation_correspondence.csv', index=False)
-print(f"\n✓ Placeholder results saved for Experiment 3 (deferred)")
+print(f"\n[OK] Placeholder results saved for Experiment 3 (deferred)")
 
 # Summary statistics
 n_waves = 0
@@ -561,7 +564,7 @@ ax.set_title('Exp 3: Wave Detection Rate')
 plt.tight_layout()
 fig_path = OUTPUT_DIR / 'rotational_dynamics_analysis.png'
 plt.savefig(fig_path, dpi=300, bbox_inches='tight')
-print(f"✓ Visualization saved to: {fig_path}")
+print(f"[OK] Visualization saved to: {fig_path}")
 
 print("\n" + "=" * 80)
 print("REFINEMENT ANALYSIS COMPLETE")
@@ -573,8 +576,8 @@ print("  - exp2_rotation_recovery_correlation.csv")
 print("  - exp3_wave_rotation_correspondence.csv")
 print("  - rotational_dynamics_analysis.png")
 print("\nKey improvements:")
-print("  ✓ 10x weaker perturbations for observable recovery")
-print("  ✓ 2x longer observation period")
-print("  ✓ Better attractor dynamics with recovery forces")
-print("  ✓ Larger network with 2D lattice for wave detection")
-print("  ✓ Enhanced jPCA parameter tuning")
+print("  [+] 10x weaker perturbations for observable recovery")
+print("  [+] 2x longer observation period")
+print("  [+] Better attractor dynamics with recovery forces")
+print("  [+] Larger network with 2D lattice for wave detection")
+print("  [+] Enhanced jPCA parameter tuning")

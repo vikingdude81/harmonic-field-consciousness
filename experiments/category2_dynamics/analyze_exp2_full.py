@@ -1,6 +1,7 @@
 """
 Statistical analysis of full 180-trial Experiment 2 dataset
 """
+from typing import cast
 import pandas as pd
 import numpy as np
 from scipy import stats
@@ -38,7 +39,10 @@ print(corr_matrix.round(3))
 # Test for significance
 print('\n--- SIGNIFICANCE TESTS ---')
 for col in ['rotation_angle', 'recovery_pct', 'normalized_recovery', 'rotation_quality']:
-    r, p = stats.pearsonr(df['perturbation_strength'], df[col])
+    result = stats.pearsonr(df['perturbation_strength'], df[col])
+    # Handle both old tuple and new named tuple return types
+    r = cast(float, result[0])
+    p = cast(float, result[1])
     sig = '***' if p < 0.001 else '**' if p < 0.01 else '*' if p < 0.05 else 'ns'
     print(f'Perturbation vs {col}: r={r:.3f}, p={p:.4f} {sig}')
 

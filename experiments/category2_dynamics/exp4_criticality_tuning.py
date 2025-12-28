@@ -3,14 +3,14 @@
 Category 2, Experiment 4: Criticality Tuning
 
 Find the edge-of-chaos optimal point for consciousness:
-- Vary system parameters to control criticality index κ
-- Test C(t) as function of κ
-- Identify critical regime (κ ≈ 1)
+- Vary system parameters to control criticality index kappa
+- Test C(t) as function of kappa
+- Identify critical regime (kappa ~ 1)
 - Compare subcritical, critical, supercritical regimes
 - Generate phase transition plots
 - Relate to empirical brain data (power-law distributions)
 
-Uses GPU acceleration for batch simulations.
+RTX 5090 Enhanced: Uses PyTorch for GPU-accelerated eigendecomposition.
 """
 
 import sys
@@ -35,22 +35,38 @@ from utils.gpu_utils import get_device_info, get_array_module, batch_compute_met
 from utils.chaos_metrics import estimate_lyapunov_exponent, detect_avalanches, fit_power_law
 from utils.category_theory_metrics import compute_sheaf_consistency
 
-# Configuration - Enhanced for criticality analysis
+# Configuration - supports environment variable overrides for RTX 5090 scaling
 SEED = 42
-N_NODES = 300  # Larger network for better statistics
-N_MODES = 80   # More modes for phase transition detection
-N_ALPHA_STEPS = 60  # Denser alpha sweep for critical point detection
+N_NODES = int(os.environ.get('EXP_N_NODES', 300))
+N_MODES = int(os.environ.get('EXP_N_MODES', 80))
+N_ALPHA_STEPS = int(os.environ.get('EXP_N_ALPHA_STEPS', 60))
 OUTPUT_DIR = Path(__file__).parent / 'results' / 'exp4_criticality_tuning'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+# Check for PyTorch GPU support (RTX 5090)
+USE_PYTORCH_GPU = False
+try:
+    import torch
+    if torch.cuda.is_available():
+        device = torch.device('cuda:0')
+        gpu_name = torch.cuda.get_device_properties(0).name
+        gpu_mem = torch.cuda.get_device_properties(0).total_memory / 1024**3
+        USE_PYTORCH_GPU = True
+        print(f"[GPU] Using {gpu_name} ({gpu_mem:.1f} GB)")
+except ImportError:
+    pass
+
 print("=" * 60)
 print("Category 2, Experiment 4: Criticality Tuning")
+print(f"Configuration: {N_NODES} nodes, {N_MODES} modes, {N_ALPHA_STEPS} alpha steps")
+if USE_PYTORCH_GPU:
+    print(f"Acceleration: PyTorch CUDA (RTX 5090)")
 print("=" * 60)
 
 # Check GPU availability
 print_gpu_status()
 gpu_info = get_device_info()
-USE_GPU = gpu_info['cupy_available']
+USE_GPU = gpu_info['cupy_available'] or USE_PYTORCH_GPU
 xp = get_array_module(USE_GPU)
 
 np.random.seed(SEED)
@@ -58,8 +74,23 @@ np.random.seed(SEED)
 # Generate network
 print("\nGenerating network...")
 G = gg.generate_small_world(N_NODES, k_neighbors=6, rewiring_prob=0.3, seed=SEED)
-L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
-eigenvalues = eigenvalues[:N_MODES]
+
+if USE_PYTORCH_GPU and N_NODES > 500:
+    print(f"Computing Laplacian eigenmodes on GPU ({N_NODES}x{N_NODES} matrix)...")
+    import torch
+    import networkx as nx
+    L_sparse = nx.laplacian_matrix(G).toarray().astype(np.float32)
+    L_torch = torch.from_numpy(L_sparse).to(device)
+    eigenvalues_torch, eigenvectors_torch = torch.linalg.eigh(L_torch)
+    eigenvalues = eigenvalues_torch.cpu().numpy()[:N_MODES]
+    eigenvectors = eigenvectors_torch.cpu().numpy()
+    L = L_sparse
+    del L_torch, eigenvalues_torch, eigenvectors_torch
+    torch.cuda.empty_cache()
+    print(f"  Eigendecomposition on GPU complete")
+else:
+    L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
+    eigenvalues = eigenvalues[:N_MODES]
 
 
 def generate_critical_power(n_modes: int, alpha: float, seed: int = None) -> np.ndarray:
@@ -484,23 +515,23 @@ optimal_C = df_exponent.loc[optimal_idx, 'C']
 optimal_kappa = df_exponent.loc[optimal_idx, 'kappa']
 
 print(f"\nOptimal Criticality:")
-print(f"  α* = {optimal_alpha:.3f}")
+print(f"  alpha* = {optimal_alpha:.3f}")
 print(f"  C* = {optimal_C:.4f}")
-print(f"  κ* = {optimal_kappa:.4f}")
+print(f"  kappa* = {optimal_kappa:.4f}")
 
 print("\nRegime Classification:")
 subcrit = df_exponent[df_exponent['alpha'] < 1.5]['C'].mean()
 crit = df_exponent[(df_exponent['alpha'] >= 1.5) & (df_exponent['alpha'] <= 2.5)]['C'].mean()
 supercrit = df_exponent[df_exponent['alpha'] > 2.5]['C'].mean()
 
-print(f"  Subcritical (α<1.5):     C = {subcrit:.4f}")
-print(f"  Critical (1.5≤α≤2.5):   C = {crit:.4f}")
-print(f"  Supercritical (α>2.5):  C = {supercrit:.4f}")
+print(f"  Subcritical (alpha<1.5):     C = {subcrit:.4f}")
+print(f"  Critical (1.5<=alpha<=2.5):  C = {crit:.4f}")
+print(f"  Supercritical (alpha>2.5):   C = {supercrit:.4f}")
 
 print("\nBrain State Criticality Rankings:")
 df_sorted = df_states.sort_values('kappa', ascending=False)
 for _, row in df_sorted.iterrows():
-    print(f"  {row['state']:12}: κ = {row['kappa']:.4f}, C = {row['C']:.4f}")
+    print(f"  {row['state']:12}: kappa = {row['kappa']:.4f}, C = {row['C']:.4f}")
 
 print("\n" + "=" * 60)
 print(f"Experiment completed! Results saved to: {OUTPUT_DIR}")

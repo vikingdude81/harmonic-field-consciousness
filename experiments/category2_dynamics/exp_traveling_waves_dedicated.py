@@ -274,7 +274,7 @@ fig.suptitle('Dedicated Traveling Waves Experiment - Extended Parameters', fonts
 # 1. Wave detection by network size
 ax = axes[0, 0]
 detection_by_size = df_results.groupby('network_size')['has_wave_simple'].mean()
-ax.bar(range(len(detection_by_size)), detection_by_size.values * 100)
+ax.bar(range(len(detection_by_size)), np.array(detection_by_size.values) * 100)
 ax.set_xticks(range(len(detection_by_size)))
 ax.set_xticklabels([f'N={s}' for s in detection_by_size.index])
 ax.set_ylabel('Wave Detection Rate (%)', fontsize=12)
@@ -284,7 +284,7 @@ ax.grid(True, alpha=0.3, axis='y')
 # 2. Wave detection by connectivity
 ax = axes[0, 1]
 detection_by_conn = df_results.groupby('connectivity')['has_wave_simple'].mean()
-ax.bar(range(len(detection_by_conn)), detection_by_conn.values * 100, color='orange')
+ax.bar(range(len(detection_by_conn)), np.array(detection_by_conn.values) * 100, color='orange')
 ax.set_xticks(range(len(detection_by_conn)))
 ax.set_xticklabels([f'{c}-conn' for c in detection_by_conn.index])
 ax.set_ylabel('Wave Detection Rate (%)', fontsize=12)
@@ -294,7 +294,7 @@ ax.grid(True, alpha=0.3, axis='y')
 # 3. Wave detection by initial condition
 ax = axes[0, 2]
 detection_by_type = df_results.groupby('wave_type')['has_wave_simple'].mean()
-ax.bar(range(len(detection_by_type)), detection_by_type.values * 100, color='green')
+ax.bar(range(len(detection_by_type)), np.array(detection_by_type.values) * 100, color='green')
 ax.set_xticks(range(len(detection_by_type)))
 ax.set_xticklabels(wave_types, rotation=45, ha='right')
 ax.set_ylabel('Wave Detection Rate (%)', fontsize=12)
