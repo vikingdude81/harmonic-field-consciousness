@@ -162,14 +162,14 @@ def compute_rotation_angle_batch_gpu(trajectory_modes_batch: torch.Tensor) -> to
     return rotation_degrees
 
 
-def detect_waves_batch_gpu(activity_spatial_batch: torch.Tensor, positions: torch.Tensor, fast_mode: bool = True) -> dict:
+def detect_waves_batch_gpu(activity_spatial_batch: torch.Tensor, positions: torch.Tensor, detection_mode: str = 'correlation') -> dict:
     """
     Detect traveling waves in batch of spatial activity patterns.
     
     Args:
         activity_spatial_batch: (BATCH_SIZE, timesteps, N_NODES)
         positions: (N_NODES, 2)
-        fast_mode: If True, use faster approximation suitable for large-scale experiments
+        detection_mode: 'correlation' (proper, accurate) or 'variance' (fast, BUGGY - for comparison only)
     
     Returns:
         dict with has_wave (BATCH_SIZE,) and wave_speed (BATCH_SIZE,)
@@ -184,23 +184,24 @@ def detect_waves_batch_gpu(activity_spatial_batch: torch.Tensor, positions: torc
     has_wave = torch.zeros(batch_size, dtype=torch.bool, device=device)
     wave_speed = torch.zeros(batch_size, device=device)
     
-    if fast_mode:
-        # Fast wave detection using variance decay pattern
-        # Waves show smooth variance propagation, random noise doesn't
-        early_var = activity_spatial_batch[:, :timesteps//4, :].var(dim=(1,2))  # Early variance
-        late_var = activity_spatial_batch[:, -timesteps//4:, :].var(dim=(1,2))  # Late variance
+    if detection_mode == 'variance':
+        # OLD BUGGY METHOD - Kept for comparison only!
+        # WARNING: This detects "variance persistence" NOT traveling waves!
+        # Type 3 (random) gets false positives, structured patterns get false negatives
+        print("[WARNING] Using BUGGY variance-based detector - for comparison only!")
         
-        # Wave = smooth decay pattern (ratio near 0.5-1.0)
-        # Random = rapid decay (ratio << 0.5) or explosion (ratio >> 1)
+        early_var = activity_spatial_batch[:, :timesteps//4, :].var(dim=(1,2))
+        late_var = activity_spatial_batch[:, -timesteps//4:, :].var(dim=(1,2))
         var_ratio = late_var / (early_var + 1e-10)
         has_wave = (var_ratio > 0.1) & (var_ratio < 2.0)
         
-        # Estimate wave speed from spatial correlation at lag=1
         for b in range(batch_size):
             if has_wave[b]:
                 wave_speed[b] = mean_dist / 10.0  # Approximate
-    else:
-        # Original detailed detection (slower but more accurate)
+                
+    elif detection_mode == 'correlation':
+        # CORRECTED METHOD - Proper correlation-based wave detection
+        # Detects spatial correlation propagation (real traveling waves)
         max_lag = min(20, timesteps // 10)
         
         for b in range(batch_size):
@@ -215,19 +216,34 @@ def detect_waves_batch_gpu(activity_spatial_batch: torch.Tensor, positions: torc
                 act_late = activity_spatial_batch[b, lag:].flatten()
                 
                 # Compute correlation
-                corr = torch.corrcoef(torch.stack([act_early, act_late]))[0, 1]
-                if not torch.isnan(corr):
-                    correlations.append(corr.item())
+                if len(act_early) > 1:
+                    corr = torch.corrcoef(torch.stack([act_early, act_late]))[0, 1]
+                    if not torch.isnan(corr):
+                        correlations.append(corr.item())
             
-            # Wave detected if correlation decays smoothly
+            # Wave detected if correlation starts high and decays smoothly
+            # (not instantly like random noise, but gradually like propagating wave)
             if len(correlations) > 5:
                 mean_early = sum(correlations[:5]) / 5
-                has_wave[b] = mean_early > 0.3
+                mean_late = sum(correlations[-5:]) / 5
                 
-                # Estimate wave speed
+                # IMPROVED: Higher threshold (0.5) and stronger decay requirement
+                # Real wave: high initial correlation (> 0.5), smooth strong decay
+                # Random noise: low correlation throughout
+                # Static pattern: very high correlation that persists
+                variance_corr = torch.var(torch.tensor(correlations)).item() if len(correlations) > 1 else 1.0
+                has_wave[b] = (
+                    (mean_early > 0.5) and              # Higher threshold (was 0.3)
+                    (mean_early > 1.5 * mean_late) and  # Stronger decay requirement
+                    (variance_corr < 0.15)              # Smooth decay (not erratic)
+                )
+                
+                # Estimate wave speed from correlation decay
                 if has_wave[b]:
-                    half_idx = next((i for i, c in enumerate(correlations) if c < 0.5), len(correlations))
-                    wave_speed[b] = mean_dist / (half_idx + 1)
+                    half_idx = next((i for i, c in enumerate(correlations) if c < mean_early * 0.5), len(correlations))
+                    wave_speed[b] = mean_dist / (half_idx + 1) if half_idx > 0 else mean_dist / 10.0
+    else:
+        raise ValueError(f"Unknown detection_mode: {detection_mode}. Use 'correlation' or 'variance'")
     
     return {
         'has_wave': has_wave,
@@ -361,8 +377,8 @@ def run_batched_experiment(config: dict):
         # Result: (BATCH_SIZE, timesteps, N_NODES)
         activity_spatial_batch = torch.matmul(trajectory_modes_batch, eigenvectors.t())
         
-        # Detect waves in batch
-        wave_results = detect_waves_batch_gpu(activity_spatial_batch, positions)
+        # Detect waves in batch using CORRECTED correlation-based detection
+        wave_results = detect_waves_batch_gpu(activity_spatial_batch, positions, detection_mode='correlation')
         
         # Store results
         for trial_offset in range(current_batch_size):

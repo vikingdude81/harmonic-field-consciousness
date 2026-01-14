@@ -1,0 +1,4 @@
+state,consciousness,C_t,mean_rotation_angle,std_rotation_angle,mean_recovery_pct,std_recovery_pct,mean_circularity,mean_rotation_quality,mean_wave_correlation,prop_has_wave
+Wake (Conscious),Conscious,0.7171465776970298,97.2,89.7115377195152,1.5832830241827696,2.470829364975091,0.0,0.7489399053968845,0.0,0.0
+NREM (Unconscious),Unconscious,0.5158046853850519,72.0,88.18163074019441,8.100684909941023,9.815476135278743,0.0,0.54074240320614,0.0,0.0
+Anesthesia (Unconscious),Unconscious,0.4541952428019297,61.2,85.26757883275448,6.519480019302619,8.617803020973437,0.0,0.5422148414393747,0.0,0.0

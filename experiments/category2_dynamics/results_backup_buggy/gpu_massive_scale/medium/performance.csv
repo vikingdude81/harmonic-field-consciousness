@@ -1,0 +1,2 @@
+config,nodes,modes,timesteps,trials,total_computations,setup_time_sec,runtime_sec,trials_per_sec,speedup_vs_cpu
+medium,2500,500,2000,500,1250000000000,0.2609994411468506,297.8366105556488,1.678772797834329,estimate 10-50x

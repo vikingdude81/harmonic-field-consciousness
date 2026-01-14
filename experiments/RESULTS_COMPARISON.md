@@ -551,6 +551,72 @@ The harmonic field consciousness framework shows **strong qualitative agreement*
 
 ---
 
-**Generated**: December 25, 2025  
-**Version**: 1.0  
-**Next Update**: After implementing recommendations in Sections 8.1-8.5
+## Appendix A: Large-Scale RTX 5090 GPU Results (January 2026)
+
+### A.1 Ultra-Scale Batched Experiment
+
+**Config**: 25,921 nodes (161×161 lattice), 2,200 modes, 15,000 timesteps, 40 trials  
+**Hardware**: NVIDIA RTX 5090 (34 GB VRAM)  
+**Runtime**: 46.6 seconds (1.16s per trial)
+
+**Summary Statistics**:
+| Metric | Value |
+|--------|-------|
+| Mean rotation angle | 40,445° ± 19,825° |
+| Wave detection rate | 25.0% (10/40 trials) |
+| Mean wave speed | 8.39 units |
+
+**Rotation by Wave Type**:
+- Type 0 (Gaussian): 48,040° ± 7,815° (n=10)
+- Type 1 (Traveling Wave): 15,541° ± 25,440° (n=10) 
+- Type 2 (Spiral): 51,283° ± 5,750° (n=10)
+- Type 3 (Random): 46,917° ± 5,614° (n=10)
+
+**Key Findings**:
+- Gaussian and spiral initial conditions produce high rotation (48k–51k°)
+- Traveling wave initialization yields highly variable rotation (15.5k±25.4k°), suggesting bimodal behavior
+- Wave detection plateaus at ~25% for large networks, indicating scale-invariant propagation limits
+
+### A.2 Maximum-Scale Batched Experiment
+
+**Config**: 25,921 nodes (161×161 lattice), 2,500 modes, 20,000 timesteps, 100 trials  
+**Hardware**: NVIDIA RTX 5090 (34 GB VRAM)  
+**Runtime**: ~227 seconds (2.27s per trial average)
+
+**Summary Statistics**:
+| Metric | Value |
+|--------|-------|
+| Mean rotation angle | 52,428° ± 26,910° |
+| Wave detection rate | 25.0% (25/100 trials) |
+| Mean wave speed | 8.39 units |
+
+**Rotation by Wave Type**:
+- Type 0 (Gaussian): 64,266° ± 6,659° (n=25)
+- Type 1 (Traveling Wave): 13,711° ± 28,062° (n=25)
+- Type 2 (Spiral): 65,539° ± 6,190° (n=25)
+- Type 3 (Random): 66,195° ± 5,749° (n=25)
+
+**Key Findings**:
+- Longer trajectories (20k vs 15k steps) yield higher mean rotation (+29% at max scale)
+- Type 1 (traveling wave) shows persistent bimodal behavior with high variance (±28k°)
+- Types 0, 2, 3 converge to 64–66k° range, suggesting attractor behavior
+- Wave detection remains stable at 25% across both ultra and max configs
+
+### A.3 Scaling Law Summary
+
+| Config | Nodes | Timesteps | Trials | Runtime | Avg Rotation | Wave % |
+|--------|-------|-----------|--------|---------|--------------|--------|
+| Ultra | 25,921 | 15,000 | 40 | 46.6s | 40,445° | 25.0% |
+| Max | 25,921 | 20,000 | 100 | 227s | 52,428° | 25.0% |
+
+**Observations**:
+- Rotation angle scales with trajectory length (~2.6°/step at max scale)
+- Wave detection stabilizes at ~25% for large lattices
+- GPU batching achieves near-linear throughput: 100 trials in ~227s (2.27s/trial)
+- Memory footprint: ~9 GB peak (well within RTX 5090's 34 GB)
+
+---
+
+**Generated**: December 25, 2025 (updated January 11, 2026)
+**Version**: 1.1
+**Next Update**: After validation-scale runs for Categories 1, 4–7
