@@ -10,7 +10,7 @@ long_description = readme_path.read_text(encoding="utf-8") if readme_path.exists
 
 setup(
     name="consciousness-circuit",
-    version="3.0.0",
+    version="3.1.0",
     author="VFD-Org",
     author_email="research@vfd.org",
     description="Measure and analyze consciousness-like patterns in transformer LLMs",
