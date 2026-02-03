@@ -228,22 +228,36 @@ class PushPullOscillator:
     def compute_oscillation_frequency(self) -> float:
         """
         Compute dominant oscillation frequency from recent activity.
-        
+
         Returns:
             Dominant frequency in Hz (assuming dt in ms)
         """
         if len(self.history['e_activity']) == 0:
             return 0.0
-        
-        # Use FFT to find dominant frequency
+
         signal = self.history['e_activity']
+
+        # Need at least 4 points for meaningful FFT analysis
+        if len(signal) < 4:
+            return 0.0
+
+        # Use FFT to find dominant frequency
         fft = np.fft.rfft(signal)
         freqs = np.fft.rfftfreq(len(signal), d=self.dt / 1000.0)  # Convert to seconds
-        
+
         # Find peak frequency (excluding DC component)
+        # Ensure we have AC components to analyze
+        if len(fft) < 2:
+            return 0.0
+
         power = np.abs(fft[1:]) ** 2
+
+        # Handle case where all AC power is zero (constant signal)
+        if np.max(power) == 0.0:
+            return 0.0
+
         peak_idx = np.argmax(power)
-        
+
         return freqs[peak_idx + 1]
     
     def get_state(self) -> Tuple[float, float]:

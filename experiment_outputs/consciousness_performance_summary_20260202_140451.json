@@ -1,0 +1,9 @@
+{
+  "accuracy": 0.76,
+  "n_total": 100,
+  "n_correct": 76,
+  "mean_score_correct": 0.2940545580607285,
+  "mean_score_incorrect": 0.3062178356355644,
+  "point_biserial_r": -0.12950027324142116,
+  "point_biserial_p": 0.19909430864618427
+}

@@ -1,0 +1,7 @@
+{
+  "model": "Oracle-Engine-32B-LoRA",
+  "accuracy": 0.84,
+  "n_total": 50,
+  "mean_score_correct": 0.6842380952380953,
+  "mean_score_incorrect": 0.6839999999999999
+}

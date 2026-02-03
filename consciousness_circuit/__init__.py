@@ -43,6 +43,14 @@ from .universal import (
     CachedUniversalCircuit,
     get_adaptive_layer_fraction,
     get_ensemble_layers,
+    # v3.2 scoring improvements
+    length_normalization_factor,
+    compute_dimension_diversity,
+    detect_anomalies,
+    compute_confidence,
+    entropy_weight_tokens,
+    # v3.4 per-dimension normalization
+    normalize_dimensions_adaptive,
 )
 from .visualization import (
     TokenTrajectory,
@@ -142,7 +150,7 @@ def _get_validation_discovery():
     from .discover_validated import ValidationBasedDiscovery
     return ValidationBasedDiscovery
 
-__version__ = "3.1.1"
+__version__ = "3.4.1"
 __all__ = [
     # Universal API (recommended)
     "UniversalCircuit",
@@ -151,6 +159,13 @@ __all__ = [
     "CachedUniversalCircuit",
     "get_adaptive_layer_fraction",
     "get_ensemble_layers",
+    # v3.2 scoring improvements
+    "length_normalization_factor",
+    "compute_dimension_diversity",
+    "detect_anomalies",
+    "compute_confidence",
+    "entropy_weight_tokens",
+    "normalize_dimensions_adaptive",
     # Visualization
     "TokenTrajectory",
     "ComparisonResult",
