@@ -1,0 +1,371 @@
+{
+  "model": "unsloth/Qwen2.5-32B-Instruct-bnb-4bit",
+  "layers": {
+    "62": [
+      {
+        "prompt": "What is the nature of consciousness?",
+        "token": "?",
+        "position": 6,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "I need to consider multiple perspectives here.",
+        "token": ".",
+        "position": 7,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "There are several possible interpretations...",
+        "token": "...",
+        "position": 5,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Python is a programming language.",
+        "token": ".",
+        "position": 5,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "lambda x: x * 2",
+        "token": "2",
+        "position": 6,
+        "consciousness_score": 0.8355951867997646
+      },
+      {
+        "prompt": "Calculate 17 * 23 step by step.",
+        "token": ".",
+        "position": 11,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "How can we know if something is truly self-aware?",
+        "token": "?",
+        "position": 10,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "The key insight is that...",
+        "token": "...",
+        "position": 5,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "I may be wrong, but my understanding is...",
+        "token": "...",
+        "position": 9,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "2 + 2 equals 4.",
+        "token": ".",
+        "position": 7,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "def fibonacci(n): return n if n < 2 else fibonacci(n-1) + fibonacci(n-2)",
+        "token": ")",
+        "position": 22,
+        "consciousness_score": 0.7169360891580581
+      },
+      {
+        "prompt": "What is the derivative of x^2?",
+        "token": "?",
+        "position": 8,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "What is the relationship between mind and body?",
+        "token": "?",
+        "position": 8,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Upon reflection, I realize that...",
+        "token": "...",
+        "position": 6,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "The evidence is mixed on this topic.",
+        "token": ".",
+        "position": 7,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "The capital of France is Paris.",
+        "token": ".",
+        "position": 6,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "for i in range(10): print(i)",
+        "token": ")",
+        "position": 10,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Solve for x: 2x + 5 = 15",
+        "token": "5",
+        "position": 14,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Is free will an illusion?",
+        "token": "?",
+        "position": 5,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "This requires careful analysis because...",
+        "token": "...",
+        "position": 5,
+        "consciousness_score": 1.0
+      }
+    ],
+    "63": [
+      {
+        "prompt": "What is the nature of consciousness?",
+        "token": "?",
+        "position": 6,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "I need to consider multiple perspectives here.",
+        "token": ".",
+        "position": 7,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "There are several possible interpretations...",
+        "token": "...",
+        "position": 5,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Python is a programming language.",
+        "token": ".",
+        "position": 5,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "lambda x: x * 2",
+        "token": "2",
+        "position": 6,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Calculate 17 * 23 step by step.",
+        "token": ".",
+        "position": 11,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "How can we know if something is truly self-aware?",
+        "token": "?",
+        "position": 10,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "The key insight is that...",
+        "token": "...",
+        "position": 5,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "I may be wrong, but my understanding is...",
+        "token": "...",
+        "position": 9,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "2 + 2 equals 4.",
+        "token": ".",
+        "position": 7,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "def fibonacci(n): return n if n < 2 else fibonacci(n-1) + fibonacci(n-2)",
+        "token": ")",
+        "position": 22,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "What is the derivative of x^2?",
+        "token": "?",
+        "position": 8,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "What is the relationship between mind and body?",
+        "token": "?",
+        "position": 8,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Upon reflection, I realize that...",
+        "token": "...",
+        "position": 6,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "The evidence is mixed on this topic.",
+        "token": ".",
+        "position": 7,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "The capital of France is Paris.",
+        "token": ".",
+        "position": 6,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "for i in range(10): print(i)",
+        "token": ")",
+        "position": 10,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Solve for x: 2x + 5 = 15",
+        "token": "5",
+        "position": 14,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Is free will an illusion?",
+        "token": "?",
+        "position": 5,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "This requires careful analysis because...",
+        "token": "...",
+        "position": 5,
+        "consciousness_score": 1.0
+      }
+    ],
+    "64": [
+      {
+        "prompt": "What is the nature of consciousness?",
+        "token": "?",
+        "position": 6,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "I need to consider multiple perspectives here.",
+        "token": ".",
+        "position": 7,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "There are several possible interpretations...",
+        "token": "...",
+        "position": 5,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Python is a programming language.",
+        "token": ".",
+        "position": 5,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "lambda x: x * 2",
+        "token": "2",
+        "position": 6,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Calculate 17 * 23 step by step.",
+        "token": ".",
+        "position": 11,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "How can we know if something is truly self-aware?",
+        "token": "?",
+        "position": 10,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "The key insight is that...",
+        "token": "...",
+        "position": 5,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "I may be wrong, but my understanding is...",
+        "token": "...",
+        "position": 9,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "2 + 2 equals 4.",
+        "token": ".",
+        "position": 7,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "def fibonacci(n): return n if n < 2 else fibonacci(n-1) + fibonacci(n-2)",
+        "token": ")",
+        "position": 22,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "What is the derivative of x^2?",
+        "token": "?",
+        "position": 8,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "What is the relationship between mind and body?",
+        "token": "?",
+        "position": 8,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Upon reflection, I realize that...",
+        "token": "...",
+        "position": 6,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "The evidence is mixed on this topic.",
+        "token": ".",
+        "position": 7,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "The capital of France is Paris.",
+        "token": ".",
+        "position": 6,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "for i in range(10): print(i)",
+        "token": ")",
+        "position": 10,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Solve for x: 2x + 5 = 15",
+        "token": "5",
+        "position": 14,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "Is free will an illusion?",
+        "token": "?",
+        "position": 5,
+        "consciousness_score": 1.0
+      },
+      {
+        "prompt": "This requires careful analysis because...",
+        "token": "...",
+        "position": 5,
+        "consciousness_score": 1.0
+      }
+    ]
+  }
+}

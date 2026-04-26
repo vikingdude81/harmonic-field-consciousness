@@ -120,6 +120,8 @@ from .plugins import (
     AttractorLockPlugin,
     CoherenceBoostPlugin,
     GoalDirectorPlugin,
+    # Analysis plugins (standalone)
+    CompressibilityPlugin,
 )
 
 # Training utilities
@@ -150,7 +152,7 @@ def _get_validation_discovery():
     from .discover_validated import ValidationBasedDiscovery
     return ValidationBasedDiscovery
 
-__version__ = "3.4.1"
+__version__ = "3.5.0"
 __all__ = [
     # Universal API (recommended)
     "UniversalCircuit",
@@ -236,6 +238,7 @@ __all__ = [
     "AttractorLockPlugin",
     "CoherenceBoostPlugin",
     "GoalDirectorPlugin",
+    "CompressibilityPlugin",
     # Training utilities
     "RewardConfig",
     "RewardResult",

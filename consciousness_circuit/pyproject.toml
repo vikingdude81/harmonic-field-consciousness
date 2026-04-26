@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "consciousness-circuit"
-version = "3.0.0"
+version = "3.5.0"
 description = "Measure meta-cognitive signatures in transformer LLMs"
 readme = "README.md"
 license = {text = "MIT"}

@@ -1,0 +1,74 @@
+================================================================================
+SPARSE EIGENSOLVER BENCHMARK
+================================================================================
+
+Configuration:
+  - Number of eigenvalues (k): 50
+  - Network density: 0.01
+  - Method: ARPACK (via scipy.sparse.linalg.eigsh)
+
+--------------------------------------------------------------------------------
+
+[1,000 nodes]
+  Generating sparse network... done (0.02s)
+  - Non-zeros: 19,870 (98.01% sparse)
+  - Memory: ~0.2 MB
+  Computing top 50 eigenvalues... done (0.03s)
+  [OK] Top eigenvalue: 5.349758
+  [OK] Bottom eigenvalue: -2.673813
+  [OK] Speed: 31252.3 nodes/sec
+
+[5,000 nodes]
+  Generating sparse network... done (1.20s)
+  - Non-zeros: 497,379 (98.01% sparse)
+  - Memory: ~3.8 MB
+  Computing top 50 eigenvalues... done (0.42s)
+  [OK] Top eigenvalue: 25.334444
+  [OK] Bottom eigenvalue: -5.788036
+  [OK] Speed: 11764.8 nodes/sec
+
+[10,000 nodes]
+  Generating sparse network... done (6.28s)
+  - Non-zeros: 1,989,924 (98.01% sparse)
+  - Memory: ~15.2 MB
+  Computing top 50 eigenvalues... done (2.14s)
+  [OK] Top eigenvalue: 50.346122
+  [OK] Bottom eigenvalue: -8.152507
+  [OK] Speed: 4668.5 nodes/sec
+
+[15,000 nodes]
+  Generating sparse network... done (16.67s)
+  - Non-zeros: 4,476,897 (98.01% sparse)
+  - Memory: ~34.2 MB
+  Computing top 50 eigenvalues... done (4.78s)
+  [OK] Top eigenvalue: 75.372457
+  [OK] Bottom eigenvalue: -9.986479
+  [OK] Speed: 3138.6 nodes/sec
+
+[20,000 nodes]
+  Generating sparse network... done (27.23s)
+  - Non-zeros: 7,959,684 (98.01% sparse)
+  - Memory: ~60.7 MB
+  Computing top 50 eigenvalues... done (9.00s)
+  [OK] Top eigenvalue: 100.293882
+  [OK] Bottom eigenvalue: -11.521952
+  [OK] Speed: 2222.0 nodes/sec
+
+================================================================================
+SUMMARY
+================================================================================
+
+     Nodes    Non-zeros   Gen Time   Comp Time           Speed
+                             (sec)       (sec)     (nodes/sec)
+--------------------------------------------------------------------------------
+     1,000       19,870       0.02        0.03         31252.3
+     5,000      497,379       1.20        0.42         11764.8
+    10,000    1,989,924       6.28        2.14          4668.5
+    15,000    4,476,897      16.67        4.78          3138.6
+    20,000    7,959,684      27.23        9.00          2222.0
+
+================================================================================
+[OK] All 5 benchmarks completed successfully!
+================================================================================
+
+[OK] Testing complete! Ready for integration with HarmonicBridge.

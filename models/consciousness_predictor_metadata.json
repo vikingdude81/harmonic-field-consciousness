@@ -1,0 +1,12 @@
+{
+  "fitted": true,
+  "n_samples": 16,
+  "r2_score": 0.8497287632035433,
+  "rmse": 0.06748210190862723,
+  "coefficients": {
+    "rotation_angle": 0.15272833893746277,
+    "wave_detection_pct": 0.019213580991358892,
+    "hierarchy_ratio": 0.040104827077394184
+  },
+  "intercept": 0.6240710005953276
+}

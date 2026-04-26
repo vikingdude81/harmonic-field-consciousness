@@ -1,0 +1,28 @@
+{
+  "Layerwise Analysis": {
+    "status": "success",
+    "elapsed": 2.7013652324676514,
+    "result": "{'n_layers': 17, 'peak_layer': 16}"
+  },
+  "Consciousness Patching": {
+    "status": "success",
+    "elapsed": 0.42043614387512207,
+    "result": "{'n_layers_tested': 17, 'most_impactful_layer': 0, 'max_delta': 0.0}"
+  },
+  "Thought Trajectory": {
+    "status": "failed",
+    "elapsed": 0.23028182983398438,
+    "error": "'NoneType' object has no attribute 'device'",
+    "result": "{}"
+  },
+  "SAE Collection": {
+    "status": "success",
+    "elapsed": 4.222753286361694,
+    "result": "{'n_samples': 60, 'layers': [62, 63, 64], 'file': 'experiment_outputs\\\\20260114_235400\\\\sae_activations.npz'}"
+  },
+  "Steering Vectors": {
+    "status": "success",
+    "elapsed": 2.7730438709259033,
+    "result": "{'n_vectors': 3, 'layers': [60, 62, 64], 'norms': {60: 421.1398620605469, 62: 515.0472412109375, 64: 110.50928497314453}, 'file': 'experiment_outputs\\\\20260114_235400\\\\steering_vectors.npz'}"
+  }
+}

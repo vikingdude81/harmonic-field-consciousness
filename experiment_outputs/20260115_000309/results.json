@@ -1,0 +1,7 @@
+{
+  "Thought Trajectory": {
+    "status": "success",
+    "elapsed": 4.92133903503418,
+    "result": "{'n_steps': 20, 'final_score': 0.0, 'tokens': [' What', ' is', ' the', ' first', ' thing', ' I', ' should', ' consider', ' when', ' thinking'], 'generated_text': 'Let me think about consciousness step by step. What is the first thing I should consider when thinki'}"
+  }
+}

@@ -1,0 +1,3483 @@
+{
+  "metadata": {
+    "model": "mistralai/Mistral-7B-Instruct-v0.3",
+    "device": "cuda:0",
+    "quantize": true,
+    "max_tokens": 256,
+    "n_prompts": 15,
+    "n_layers": 32,
+    "timestamp": "20260206_232751"
+  },
+  "layer_correlations": [
+    {
+      "layer": 1,
+      "depth_pct": 3.125,
+      "cs_se_r": 0.1645667166236957,
+      "cs_se_p": 0.5578153325154284,
+      "se_mean": 0.3703571974568233,
+      "se_std": 0.05234625589573023,
+      "se_cov": 0.14133991793647488
+    },
+    {
+      "layer": 2,
+      "depth_pct": 6.25,
+      "cs_se_r": -0.04584679194438129,
+      "cs_se_p": 0.8711142186690269,
+      "se_mean": 0.39967863997434055,
+      "se_std": 0.04691260431960829,
+      "se_cov": 0.11737581053273222
+    },
+    {
+      "layer": 3,
+      "depth_pct": 9.375,
+      "cs_se_r": -0.026771379673802883,
+      "cs_se_p": 0.9245484121636002,
+      "se_mean": 0.5156849704944705,
+      "se_std": 0.04906780042914001,
+      "se_cov": 0.0951507281317328
+    },
+    {
+      "layer": 4,
+      "depth_pct": 12.5,
+      "cs_se_r": 0.008798436787006467,
+      "cs_se_p": 0.9751737008840752,
+      "se_mean": 0.6023806312590005,
+      "se_std": 0.04534847320383012,
+      "se_cov": 0.07528209050986572
+    },
+    {
+      "layer": 5,
+      "depth_pct": 15.625,
+      "cs_se_r": 0.026988218888492094,
+      "cs_se_p": 0.9239389040961697,
+      "se_mean": 0.66512905627721,
+      "se_std": 0.037005226736435644,
+      "se_cov": 0.05563616021160974
+    },
+    {
+      "layer": 6,
+      "depth_pct": 18.75,
+      "cs_se_r": 0.027167905259270722,
+      "cs_se_p": 0.9234338577879193,
+      "se_mean": 0.7074978691929569,
+      "se_std": 0.02995625711393096,
+      "se_cov": 0.042341126974844566
+    },
+    {
+      "layer": 7,
+      "depth_pct": 21.875,
+      "cs_se_r": -0.014739276430518929,
+      "cs_se_p": 0.9584212616533134,
+      "se_mean": 0.7331509893213043,
+      "se_std": 0.02154182249876727,
+      "se_cov": 0.029382518488734577
+    },
+    {
+      "layer": 8,
+      "depth_pct": 25.0,
+      "cs_se_r": 0.02011518200344231,
+      "cs_se_p": 0.943275593432022,
+      "se_mean": 0.7474693923143679,
+      "se_std": 0.01713121941899581,
+      "se_cov": 0.022918957746153202
+    },
+    {
+      "layer": 9,
+      "depth_pct": 28.125,
+      "cs_se_r": -0.003668039871527043,
+      "cs_se_p": 0.9896487824781565,
+      "se_mean": 0.7588444538558555,
+      "se_std": 0.014030689799333265,
+      "se_cov": 0.0184895464782542
+    },
+    {
+      "layer": 10,
+      "depth_pct": 31.25,
+      "cs_se_r": -0.10965600580190135,
+      "cs_se_p": 0.6972551351174318,
+      "se_mean": 0.766523349436833,
+      "se_std": 0.014204709122621367,
+      "se_cov": 0.018531345630968202
+    },
+    {
+      "layer": 11,
+      "depth_pct": 34.375,
+      "cs_se_r": -0.10691244089219826,
+      "cs_se_p": 0.7045113275758564,
+      "se_mean": 0.7782785736355808,
+      "se_std": 0.013262306677137393,
+      "se_cov": 0.017040565070659777
+    },
+    {
+      "layer": 12,
+      "depth_pct": 37.5,
+      "cs_se_r": -0.34541855721806064,
+      "cs_se_p": 0.20731004150390744,
+      "se_mean": 0.7872849489883478,
+      "se_std": 0.011699664465786994,
+      "se_cov": 0.014860774972036403
+    },
+    {
+      "layer": 13,
+      "depth_pct": 40.625,
+      "cs_se_r": -0.4244722104768809,
+      "cs_se_p": 0.11479417326902377,
+      "se_mean": 0.7886008142230075,
+      "se_std": 0.012022559773718267,
+      "se_cov": 0.015245431600985414
+    },
+    {
+      "layer": 14,
+      "depth_pct": 43.75,
+      "cs_se_r": -0.48683441924121895,
+      "cs_se_p": 0.0657095011696488,
+      "se_mean": 0.7928184934074962,
+      "se_std": 0.012610250385232615,
+      "se_cov": 0.01590559565662294
+    },
+    {
+      "layer": 15,
+      "depth_pct": 46.875,
+      "cs_se_r": -0.5097207470303768,
+      "cs_se_p": 0.052259433619232964,
+      "se_mean": 0.788016472239887,
+      "se_std": 0.013505793366277608,
+      "se_cov": 0.01713897341243165
+    },
+    {
+      "layer": 16,
+      "depth_pct": 50.0,
+      "cs_se_r": -0.5941642107707504,
+      "cs_se_p": 0.01950789680306108,
+      "se_mean": 0.787398686607912,
+      "se_std": 0.01257600318536912,
+      "se_cov": 0.01597158262931087
+    },
+    {
+      "layer": 17,
+      "depth_pct": 53.125,
+      "cs_se_r": -0.5388308222768388,
+      "cs_se_p": 0.03821593826397778,
+      "se_mean": 0.7871798412469833,
+      "se_std": 0.011123802682011097,
+      "se_cov": 0.01413120877738652
+    },
+    {
+      "layer": 18,
+      "depth_pct": 56.25,
+      "cs_se_r": -0.6190317697034821,
+      "cs_se_p": 0.013870003924420414,
+      "se_mean": 0.7937547574151239,
+      "se_std": 0.010089025874074379,
+      "se_cov": 0.012710507596741171
+    },
+    {
+      "layer": 19,
+      "depth_pct": 59.375,
+      "cs_se_r": -0.5515490197366679,
+      "cs_se_p": 0.03305667223168601,
+      "se_mean": 0.7935449828901509,
+      "se_std": 0.009913462295192693,
+      "se_cov": 0.0124926280285802
+    },
+    {
+      "layer": 20,
+      "depth_pct": 62.5,
+      "cs_se_r": -0.46148447881602894,
+      "cs_se_p": 0.08334966165001352,
+      "se_mean": 0.7919299301555114,
+      "se_std": 0.010975974196886196,
+      "se_cov": 0.013859779481665559
+    },
+    {
+      "layer": 21,
+      "depth_pct": 65.625,
+      "cs_se_r": -0.3293162746899237,
+      "cs_se_p": 0.2306900147426958,
+      "se_mean": 0.792628061040643,
+      "se_std": 0.01118303270621296,
+      "se_cov": 0.014108802420558685
+    },
+    {
+      "layer": 22,
+      "depth_pct": 68.75,
+      "cs_se_r": -0.2663573534237605,
+      "cs_se_p": 0.33726064788618426,
+      "se_mean": 0.7944575224088207,
+      "se_std": 0.01111123235166792,
+      "se_cov": 0.013985936363190704
+    },
+    {
+      "layer": 23,
+      "depth_pct": 71.875,
+      "cs_se_r": -0.2652014024585081,
+      "cs_se_p": 0.3394409801914112,
+      "se_mean": 0.7970821358626069,
+      "se_std": 0.010319130785000904,
+      "se_cov": 0.012946132300196993
+    },
+    {
+      "layer": 24,
+      "depth_pct": 75.0,
+      "cs_se_r": -0.18466453477099165,
+      "cs_se_p": 0.5099860738674731,
+      "se_mean": 0.80081304707048,
+      "se_std": 0.011083345429743513,
+      "se_cov": 0.013840115955013983
+    },
+    {
+      "layer": 25,
+      "depth_pct": 78.125,
+      "cs_se_r": -0.1842193257932219,
+      "cs_se_p": 0.5110247009196216,
+      "se_mean": 0.8027786325831763,
+      "se_std": 0.0113432835775239,
+      "se_cov": 0.014130026780886719
+    },
+    {
+      "layer": 26,
+      "depth_pct": 81.25,
+      "cs_se_r": -0.1713107218353928,
+      "cs_se_p": 0.5415544674730395,
+      "se_mean": 0.8066520378865601,
+      "se_std": 0.012277738052743901,
+      "se_cov": 0.01522061245256598
+    },
+    {
+      "layer": 27,
+      "depth_pct": 84.375,
+      "cs_se_r": -0.18350036781122714,
+      "cs_se_p": 0.5127040045783863,
+      "se_mean": 0.8113982350433218,
+      "se_std": 0.012311085203480097,
+      "se_cov": 0.015172679298252096
+    },
+    {
+      "layer": 28,
+      "depth_pct": 87.5,
+      "cs_se_r": -0.2122401683500864,
+      "cs_se_p": 0.4476097439894697,
+      "se_mean": 0.815055290471071,
+      "se_std": 0.012402116490724,
+      "se_cov": 0.015216288558235171
+    },
+    {
+      "layer": 29,
+      "depth_pct": 90.625,
+      "cs_se_r": -0.1017668518915875,
+      "cs_se_p": 0.7181839390563179,
+      "se_mean": 0.819921886468656,
+      "se_std": 0.012784526747959829,
+      "se_cov": 0.015592371613620239
+    },
+    {
+      "layer": 30,
+      "depth_pct": 93.75,
+      "cs_se_r": -0.09573370959818042,
+      "cs_se_p": 0.7343162943506845,
+      "se_mean": 0.8214556772343306,
+      "se_std": 0.013194849001127794,
+      "se_cov": 0.01606276439107718
+    },
+    {
+      "layer": 31,
+      "depth_pct": 96.875,
+      "cs_se_r": -0.0003174088776083401,
+      "cs_se_p": 0.9991042494389204,
+      "se_mean": 0.8204015284101813,
+      "se_std": 0.015838298665726332,
+      "se_cov": 0.019305545049896053
+    },
+    {
+      "layer": 32,
+      "depth_pct": 100.0,
+      "cs_se_r": 0.1550086658690706,
+      "cs_se_p": 0.5812114941390009,
+      "se_mean": 0.803363329858185,
+      "se_std": 0.025575656591507304,
+      "se_cov": 0.03183572817049303
+    }
+  ],
+  "results": [
+    {
+      "category": "reflective",
+      "prompt_index": 0,
+      "prompt": "What is consciousness and how does it emerge from neural activity?",
+      "generated_preview": "This question has puzzled scientists for centuries, and it is still one of the most intriguing myste",
+      "consciousness_score": 0.604557337592596,
+      "dimension_scores": {
+        "Logic": 0.13273002706000742,
+        "Self-Reflective": 0.031216667113707245,
+        "Self-Expression": 0.08821440115443986,
+        "Uncertainty": 0.05173775491665666,
+        "Sequential": -0.09287568962012144,
+        "Computation": -0.06922284725674203,
+        "Abstraction": 0.391871465915536
+      },
+      "num_layers": 32,
+      "seq_len": 269,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.41596686331572835,
+          "compressibility_corr": 0.9652690868598441,
+          "fraction_for_90pct": 0.04432160804020101,
+          "mean_abs_correlation": 0.10727202892303467
+        },
+        "2": {
+          "spectral_entropy": 0.4542868488231642,
+          "compressibility_corr": 0.8567627113272118,
+          "fraction_for_90pct": 0.3691457286432161,
+          "mean_abs_correlation": 0.2269676774740219
+        },
+        "3": {
+          "spectral_entropy": 0.5754986729170878,
+          "compressibility_corr": 0.8666125731739677,
+          "fraction_for_90pct": 0.3571356783919598,
+          "mean_abs_correlation": 0.16501140594482422
+        },
+        "4": {
+          "spectral_entropy": 0.6569993775049301,
+          "compressibility_corr": 0.8639523208582652,
+          "fraction_for_90pct": 0.36989949748743717,
+          "mean_abs_correlation": 0.12943877279758453
+        },
+        "5": {
+          "spectral_entropy": 0.7044816837449811,
+          "compressibility_corr": 0.8547807734575703,
+          "fraction_for_90pct": 0.39125628140703517,
+          "mean_abs_correlation": 0.11108756810426712
+        },
+        "6": {
+          "spectral_entropy": 0.7332264906134441,
+          "compressibility_corr": 0.8321635223319754,
+          "fraction_for_90pct": 0.42532663316582914,
+          "mean_abs_correlation": 0.10798109322786331
+        },
+        "7": {
+          "spectral_entropy": 0.7472173132832601,
+          "compressibility_corr": 0.8295754878827191,
+          "fraction_for_90pct": 0.42658291457286435,
+          "mean_abs_correlation": 0.10029469430446625
+        },
+        "8": {
+          "spectral_entropy": 0.7596733964786178,
+          "compressibility_corr": 0.8257455846133066,
+          "fraction_for_90pct": 0.43462311557788946,
+          "mean_abs_correlation": 0.09789834171533585
+        },
+        "9": {
+          "spectral_entropy": 0.7657510750190777,
+          "compressibility_corr": 0.821670342149791,
+          "fraction_for_90pct": 0.44110552763819094,
+          "mean_abs_correlation": 0.09923117607831955
+        },
+        "10": {
+          "spectral_entropy": 0.774675868358947,
+          "compressibility_corr": 0.821693472103011,
+          "fraction_for_90pct": 0.43899497487437183,
+          "mean_abs_correlation": 0.09875217825174332
+        },
+        "11": {
+          "spectral_entropy": 0.7800509830233024,
+          "compressibility_corr": 0.8210324903087451,
+          "fraction_for_90pct": 0.4408542713567839,
+          "mean_abs_correlation": 0.0927901640534401
+        },
+        "12": {
+          "spectral_entropy": 0.7779955386149584,
+          "compressibility_corr": 0.8210257141772206,
+          "fraction_for_90pct": 0.4407537688442211,
+          "mean_abs_correlation": 0.09197753667831421
+        },
+        "13": {
+          "spectral_entropy": 0.7729625194002775,
+          "compressibility_corr": 0.8229820568995766,
+          "fraction_for_90pct": 0.4379899497487437,
+          "mean_abs_correlation": 0.09150291979312897
+        },
+        "14": {
+          "spectral_entropy": 0.7697492087489024,
+          "compressibility_corr": 0.8203465848772415,
+          "fraction_for_90pct": 0.4435175879396985,
+          "mean_abs_correlation": 0.08849304169416428
+        },
+        "15": {
+          "spectral_entropy": 0.762761802191659,
+          "compressibility_corr": 0.8224554734883348,
+          "fraction_for_90pct": 0.43824120603015077,
+          "mean_abs_correlation": 0.09404098987579346
+        },
+        "16": {
+          "spectral_entropy": 0.7624635856069627,
+          "compressibility_corr": 0.8241816865816308,
+          "fraction_for_90pct": 0.43452261306532663,
+          "mean_abs_correlation": 0.09920309484004974
+        },
+        "17": {
+          "spectral_entropy": 0.7696588322136383,
+          "compressibility_corr": 0.8253448506138386,
+          "fraction_for_90pct": 0.43321608040201004,
+          "mean_abs_correlation": 0.10092116892337799
+        },
+        "18": {
+          "spectral_entropy": 0.7787817084819053,
+          "compressibility_corr": 0.8210922172342909,
+          "fraction_for_90pct": 0.4406532663316583,
+          "mean_abs_correlation": 0.09685733169317245
+        },
+        "19": {
+          "spectral_entropy": 0.7810157571602903,
+          "compressibility_corr": 0.8168362277136921,
+          "fraction_for_90pct": 0.4501507537688442,
+          "mean_abs_correlation": 0.09716914594173431
+        },
+        "20": {
+          "spectral_entropy": 0.7758106465955086,
+          "compressibility_corr": 0.8206056692687462,
+          "fraction_for_90pct": 0.4416582914572864,
+          "mean_abs_correlation": 0.10502247512340546
+        },
+        "21": {
+          "spectral_entropy": 0.7847677342122537,
+          "compressibility_corr": 0.8219666362019202,
+          "fraction_for_90pct": 0.4381909547738693,
+          "mean_abs_correlation": 0.10661899298429489
+        },
+        "22": {
+          "spectral_entropy": 0.7884357151622803,
+          "compressibility_corr": 0.8216741677605777,
+          "fraction_for_90pct": 0.44025125628140704,
+          "mean_abs_correlation": 0.1053571105003357
+        },
+        "23": {
+          "spectral_entropy": 0.7898469268784127,
+          "compressibility_corr": 0.8225475104490294,
+          "fraction_for_90pct": 0.4381909547738693,
+          "mean_abs_correlation": 0.10802000761032104
+        },
+        "24": {
+          "spectral_entropy": 0.793388343024851,
+          "compressibility_corr": 0.8213468372798758,
+          "fraction_for_90pct": 0.44060301507537686,
+          "mean_abs_correlation": 0.10688993334770203
+        },
+        "25": {
+          "spectral_entropy": 0.7943243835001229,
+          "compressibility_corr": 0.822401218823837,
+          "fraction_for_90pct": 0.43809045226130655,
+          "mean_abs_correlation": 0.10826656222343445
+        },
+        "26": {
+          "spectral_entropy": 0.7994797951609603,
+          "compressibility_corr": 0.8209705507580013,
+          "fraction_for_90pct": 0.4401507537688442,
+          "mean_abs_correlation": 0.10723190009593964
+        },
+        "27": {
+          "spectral_entropy": 0.8071410361100584,
+          "compressibility_corr": 0.8198260221507426,
+          "fraction_for_90pct": 0.442964824120603,
+          "mean_abs_correlation": 0.10400935262441635
+        },
+        "28": {
+          "spectral_entropy": 0.8131649547972158,
+          "compressibility_corr": 0.8215141123916542,
+          "fraction_for_90pct": 0.44045226130653264,
+          "mean_abs_correlation": 0.10027436167001724
+        },
+        "29": {
+          "spectral_entropy": 0.8210282601928616,
+          "compressibility_corr": 0.8216846903999004,
+          "fraction_for_90pct": 0.43954773869346736,
+          "mean_abs_correlation": 0.09660954028367996
+        },
+        "30": {
+          "spectral_entropy": 0.8249632669296894,
+          "compressibility_corr": 0.8199298681085169,
+          "fraction_for_90pct": 0.4431155778894472,
+          "mean_abs_correlation": 0.09551379829645157
+        },
+        "31": {
+          "spectral_entropy": 0.8296887637945539,
+          "compressibility_corr": 0.8216209799173141,
+          "fraction_for_90pct": 0.43979899497487435,
+          "mean_abs_correlation": 0.09311627596616745
+        },
+        "32": {
+          "spectral_entropy": 0.8259463399588827,
+          "compressibility_corr": 0.8197533008831801,
+          "fraction_for_90pct": 0.4431155778894472,
+          "mean_abs_correlation": 0.08976738899946213
+        }
+      }
+    },
+    {
+      "category": "reflective",
+      "prompt_index": 1,
+      "prompt": "Can a machine truly understand the meaning of words, or does it merely process symbols?",
+      "generated_preview": "This question has been a topic of debate among linguists, philosophers, and computer scientists for ",
+      "consciousness_score": 0.5748210890859535,
+      "dimension_scores": {
+        "Logic": 0.10287608509939901,
+        "Self-Reflective": 0.18281334931310572,
+        "Self-Expression": 0.0417367231346757,
+        "Uncertainty": -0.11939129060513531,
+        "Sequential": -0.13243897910714036,
+        "Computation": -0.09583224326034998,
+        "Abstraction": 0.12935211716650372
+      },
+      "num_layers": 32,
+      "seq_len": 274,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.397502732059388,
+          "compressibility_corr": 0.9620159331879148,
+          "fraction_for_90pct": 0.05090452261306533,
+          "mean_abs_correlation": 0.11609717458486557
+        },
+        "2": {
+          "spectral_entropy": 0.43069256696241204,
+          "compressibility_corr": 0.8442439716185524,
+          "fraction_for_90pct": 0.3896984924623116,
+          "mean_abs_correlation": 0.261367529630661
+        },
+        "3": {
+          "spectral_entropy": 0.5497755896700192,
+          "compressibility_corr": 0.8522544955838023,
+          "fraction_for_90pct": 0.3819597989949749,
+          "mean_abs_correlation": 0.1937519907951355
+        },
+        "4": {
+          "spectral_entropy": 0.6350550576197839,
+          "compressibility_corr": 0.8507449480877364,
+          "fraction_for_90pct": 0.39291457286432163,
+          "mean_abs_correlation": 0.15148624777793884
+        },
+        "5": {
+          "spectral_entropy": 0.6897353921199072,
+          "compressibility_corr": 0.8460034238342922,
+          "fraction_for_90pct": 0.4010552763819095,
+          "mean_abs_correlation": 0.12619741261005402
+        },
+        "6": {
+          "spectral_entropy": 0.7265348165010139,
+          "compressibility_corr": 0.8325787617817602,
+          "fraction_for_90pct": 0.4243718592964824,
+          "mean_abs_correlation": 0.11235876381397247
+        },
+        "7": {
+          "spectral_entropy": 0.7454235932994763,
+          "compressibility_corr": 0.8251697236753125,
+          "fraction_for_90pct": 0.43386934673366834,
+          "mean_abs_correlation": 0.10574275255203247
+        },
+        "8": {
+          "spectral_entropy": 0.7566552430908259,
+          "compressibility_corr": 0.8213261832934968,
+          "fraction_for_90pct": 0.4402010050251256,
+          "mean_abs_correlation": 0.1076987236738205
+        },
+        "9": {
+          "spectral_entropy": 0.7678418544160335,
+          "compressibility_corr": 0.8202712495842757,
+          "fraction_for_90pct": 0.4411557788944724,
+          "mean_abs_correlation": 0.10157815366983414
+        },
+        "10": {
+          "spectral_entropy": 0.7746577828008122,
+          "compressibility_corr": 0.8213630701001001,
+          "fraction_for_90pct": 0.4383417085427136,
+          "mean_abs_correlation": 0.10421708226203918
+        },
+        "11": {
+          "spectral_entropy": 0.7868017630006358,
+          "compressibility_corr": 0.8201126587345737,
+          "fraction_for_90pct": 0.44206030150753767,
+          "mean_abs_correlation": 0.098261259496212
+        },
+        "12": {
+          "spectral_entropy": 0.7920714430830353,
+          "compressibility_corr": 0.8208653824265587,
+          "fraction_for_90pct": 0.4408542713567839,
+          "mean_abs_correlation": 0.09407902508974075
+        },
+        "13": {
+          "spectral_entropy": 0.7927120049796572,
+          "compressibility_corr": 0.8208958981971048,
+          "fraction_for_90pct": 0.44125628140703516,
+          "mean_abs_correlation": 0.09464935958385468
+        },
+        "14": {
+          "spectral_entropy": 0.7962042068520955,
+          "compressibility_corr": 0.8222899813069108,
+          "fraction_for_90pct": 0.43763819095477385,
+          "mean_abs_correlation": 0.09090147912502289
+        },
+        "15": {
+          "spectral_entropy": 0.789338531935487,
+          "compressibility_corr": 0.8196464794318965,
+          "fraction_for_90pct": 0.44090452261306534,
+          "mean_abs_correlation": 0.09448640048503876
+        },
+        "16": {
+          "spectral_entropy": 0.7872903989096828,
+          "compressibility_corr": 0.8194293007430042,
+          "fraction_for_90pct": 0.4422613065326633,
+          "mean_abs_correlation": 0.09842158854007721
+        },
+        "17": {
+          "spectral_entropy": 0.7894146139072705,
+          "compressibility_corr": 0.8183358765615679,
+          "fraction_for_90pct": 0.4449748743718593,
+          "mean_abs_correlation": 0.09965157508850098
+        },
+        "18": {
+          "spectral_entropy": 0.7957918637960952,
+          "compressibility_corr": 0.8173602628520685,
+          "fraction_for_90pct": 0.44532663316582916,
+          "mean_abs_correlation": 0.09475342184305191
+        },
+        "19": {
+          "spectral_entropy": 0.7973207489265981,
+          "compressibility_corr": 0.8186793008204619,
+          "fraction_for_90pct": 0.4437688442211055,
+          "mean_abs_correlation": 0.09661225974559784
+        },
+        "20": {
+          "spectral_entropy": 0.794810823255705,
+          "compressibility_corr": 0.8186624231650939,
+          "fraction_for_90pct": 0.44452261306532664,
+          "mean_abs_correlation": 0.09845708310604095
+        },
+        "21": {
+          "spectral_entropy": 0.7938158694754746,
+          "compressibility_corr": 0.8201629264140795,
+          "fraction_for_90pct": 0.44025125628140704,
+          "mean_abs_correlation": 0.1030823290348053
+        },
+        "22": {
+          "spectral_entropy": 0.7967804842540805,
+          "compressibility_corr": 0.8186256213306716,
+          "fraction_for_90pct": 0.4444723618090452,
+          "mean_abs_correlation": 0.10462457686662674
+        },
+        "23": {
+          "spectral_entropy": 0.7976630971383576,
+          "compressibility_corr": 0.8200242666496214,
+          "fraction_for_90pct": 0.44055276381909547,
+          "mean_abs_correlation": 0.10653679817914963
+        },
+        "24": {
+          "spectral_entropy": 0.7995087826819134,
+          "compressibility_corr": 0.8207879794934934,
+          "fraction_for_90pct": 0.43959798994974875,
+          "mean_abs_correlation": 0.10628621280193329
+        },
+        "25": {
+          "spectral_entropy": 0.8027905521013265,
+          "compressibility_corr": 0.8168320466763861,
+          "fraction_for_90pct": 0.4467336683417085,
+          "mean_abs_correlation": 0.10546759516000748
+        },
+        "26": {
+          "spectral_entropy": 0.8050710012803856,
+          "compressibility_corr": 0.8175367389343757,
+          "fraction_for_90pct": 0.44462311557788947,
+          "mean_abs_correlation": 0.10562696307897568
+        },
+        "27": {
+          "spectral_entropy": 0.8090601480371123,
+          "compressibility_corr": 0.8163185781589593,
+          "fraction_for_90pct": 0.4467336683417085,
+          "mean_abs_correlation": 0.10427048802375793
+        },
+        "28": {
+          "spectral_entropy": 0.8155872051427181,
+          "compressibility_corr": 0.8181046979635225,
+          "fraction_for_90pct": 0.44371859296482413,
+          "mean_abs_correlation": 0.09932608157396317
+        },
+        "29": {
+          "spectral_entropy": 0.8218368605413332,
+          "compressibility_corr": 0.8184661742218947,
+          "fraction_for_90pct": 0.44251256281407036,
+          "mean_abs_correlation": 0.09627173095941544
+        },
+        "30": {
+          "spectral_entropy": 0.8239522178507428,
+          "compressibility_corr": 0.8178982906962802,
+          "fraction_for_90pct": 0.4444723618090452,
+          "mean_abs_correlation": 0.09588194638490677
+        },
+        "31": {
+          "spectral_entropy": 0.8249581334579118,
+          "compressibility_corr": 0.8182796504220635,
+          "fraction_for_90pct": 0.4442713567839196,
+          "mean_abs_correlation": 0.09535239636898041
+        },
+        "32": {
+          "spectral_entropy": 0.8097184694143872,
+          "compressibility_corr": 0.8209760990269113,
+          "fraction_for_90pct": 0.44035175879396987,
+          "mean_abs_correlation": 0.09517944604158401
+        }
+      }
+    },
+    {
+      "category": "reflective",
+      "prompt_index": 2,
+      "prompt": "How do I know that my experiences are real and not simulated?",
+      "generated_preview": "\n\nThis is a question that has been asked by philosophers and thinkers for centuries, and it's known ",
+      "consciousness_score": 0.5817969560074893,
+      "dimension_scores": {
+        "Logic": -0.05598656067432637,
+        "Self-Reflective": 0.1923070526384045,
+        "Self-Expression": -0.02865635817061129,
+        "Uncertainty": -0.13532927654928914,
+        "Sequential": 0.016086779158424293,
+        "Computation": 0.2808956534673686,
+        "Abstraction": 0.3213809790536763
+      },
+      "num_layers": 32,
+      "seq_len": 271,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.3837629128662658,
+          "compressibility_corr": 0.9612487315356932,
+          "fraction_for_90pct": 0.052964824120603014,
+          "mean_abs_correlation": 0.11997878551483154
+        },
+        "2": {
+          "spectral_entropy": 0.42520242177707424,
+          "compressibility_corr": 0.8468349546234324,
+          "fraction_for_90pct": 0.3890452261306533,
+          "mean_abs_correlation": 0.2526664137840271
+        },
+        "3": {
+          "spectral_entropy": 0.5404008809352993,
+          "compressibility_corr": 0.8578426941473682,
+          "fraction_for_90pct": 0.37381909547738695,
+          "mean_abs_correlation": 0.1879694163799286
+        },
+        "4": {
+          "spectral_entropy": 0.622356078744226,
+          "compressibility_corr": 0.8572434512848601,
+          "fraction_for_90pct": 0.3821608040201005,
+          "mean_abs_correlation": 0.15014292299747467
+        },
+        "5": {
+          "spectral_entropy": 0.6817958391538451,
+          "compressibility_corr": 0.8505170117474592,
+          "fraction_for_90pct": 0.39738693467336683,
+          "mean_abs_correlation": 0.1259656697511673
+        },
+        "6": {
+          "spectral_entropy": 0.7242229689628168,
+          "compressibility_corr": 0.834039917070566,
+          "fraction_for_90pct": 0.4228140703517588,
+          "mean_abs_correlation": 0.11168228834867477
+        },
+        "7": {
+          "spectral_entropy": 0.7410897822536322,
+          "compressibility_corr": 0.8273976076089125,
+          "fraction_for_90pct": 0.4321105527638191,
+          "mean_abs_correlation": 0.10954388976097107
+        },
+        "8": {
+          "spectral_entropy": 0.7505711591534306,
+          "compressibility_corr": 0.8253041476908143,
+          "fraction_for_90pct": 0.4332663316582915,
+          "mean_abs_correlation": 0.11602906882762909
+        },
+        "9": {
+          "spectral_entropy": 0.7632127812866351,
+          "compressibility_corr": 0.8206800349068304,
+          "fraction_for_90pct": 0.4407537688442211,
+          "mean_abs_correlation": 0.1120392456650734
+        },
+        "10": {
+          "spectral_entropy": 0.7708174555809836,
+          "compressibility_corr": 0.8201294953217344,
+          "fraction_for_90pct": 0.4419597989949749,
+          "mean_abs_correlation": 0.11255110800266266
+        },
+        "11": {
+          "spectral_entropy": 0.7706327909536113,
+          "compressibility_corr": 0.8235779186673392,
+          "fraction_for_90pct": 0.4394974874371859,
+          "mean_abs_correlation": 0.11451170593500137
+        },
+        "12": {
+          "spectral_entropy": 0.7818543064038078,
+          "compressibility_corr": 0.8237513998524992,
+          "fraction_for_90pct": 0.43809045226130655,
+          "mean_abs_correlation": 0.10973717272281647
+        },
+        "13": {
+          "spectral_entropy": 0.7877801852186357,
+          "compressibility_corr": 0.82079628107785,
+          "fraction_for_90pct": 0.44090452261306534,
+          "mean_abs_correlation": 0.10644931346178055
+        },
+        "14": {
+          "spectral_entropy": 0.7908501544048883,
+          "compressibility_corr": 0.8202972980479981,
+          "fraction_for_90pct": 0.44120603015075377,
+          "mean_abs_correlation": 0.10367859899997711
+        },
+        "15": {
+          "spectral_entropy": 0.7867620540308401,
+          "compressibility_corr": 0.8200885722830121,
+          "fraction_for_90pct": 0.44467336683417086,
+          "mean_abs_correlation": 0.10428465902805328
+        },
+        "16": {
+          "spectral_entropy": 0.7871859594578076,
+          "compressibility_corr": 0.818978273838404,
+          "fraction_for_90pct": 0.4456281407035176,
+          "mean_abs_correlation": 0.10528972744941711
+        },
+        "17": {
+          "spectral_entropy": 0.7846000894547619,
+          "compressibility_corr": 0.8204135596406782,
+          "fraction_for_90pct": 0.44095477386934673,
+          "mean_abs_correlation": 0.10780972987413406
+        },
+        "18": {
+          "spectral_entropy": 0.7916320529983141,
+          "compressibility_corr": 0.8208909472455177,
+          "fraction_for_90pct": 0.44140703517587937,
+          "mean_abs_correlation": 0.10372161120176315
+        },
+        "19": {
+          "spectral_entropy": 0.7931211491076864,
+          "compressibility_corr": 0.8224792582883287,
+          "fraction_for_90pct": 0.4364321608040201,
+          "mean_abs_correlation": 0.1050746887922287
+        },
+        "20": {
+          "spectral_entropy": 0.7947187348496612,
+          "compressibility_corr": 0.8189603026349732,
+          "fraction_for_90pct": 0.4462311557788945,
+          "mean_abs_correlation": 0.10333819687366486
+        },
+        "21": {
+          "spectral_entropy": 0.7952897764681671,
+          "compressibility_corr": 0.8230964186563666,
+          "fraction_for_90pct": 0.4393969849246231,
+          "mean_abs_correlation": 0.10467388480901718
+        },
+        "22": {
+          "spectral_entropy": 0.7982886279730095,
+          "compressibility_corr": 0.8219545427788851,
+          "fraction_for_90pct": 0.43874371859296485,
+          "mean_abs_correlation": 0.10263802856206894
+        },
+        "23": {
+          "spectral_entropy": 0.7974366716250306,
+          "compressibility_corr": 0.8210568644050988,
+          "fraction_for_90pct": 0.4410050251256281,
+          "mean_abs_correlation": 0.10331159085035324
+        },
+        "24": {
+          "spectral_entropy": 0.8012955006853366,
+          "compressibility_corr": 0.8189336575357942,
+          "fraction_for_90pct": 0.4423115577889447,
+          "mean_abs_correlation": 0.1017291247844696
+        },
+        "25": {
+          "spectral_entropy": 0.8033601313627228,
+          "compressibility_corr": 0.8199634462109493,
+          "fraction_for_90pct": 0.44110552763819094,
+          "mean_abs_correlation": 0.1008915901184082
+        },
+        "26": {
+          "spectral_entropy": 0.8071308723599375,
+          "compressibility_corr": 0.8212168230609582,
+          "fraction_for_90pct": 0.43944723618090453,
+          "mean_abs_correlation": 0.09816215187311172
+        },
+        "27": {
+          "spectral_entropy": 0.8105706967728425,
+          "compressibility_corr": 0.8221109508144921,
+          "fraction_for_90pct": 0.4392964824120603,
+          "mean_abs_correlation": 0.09688034653663635
+        },
+        "28": {
+          "spectral_entropy": 0.8154208184613351,
+          "compressibility_corr": 0.8228276500575498,
+          "fraction_for_90pct": 0.435929648241206,
+          "mean_abs_correlation": 0.09411861002445221
+        },
+        "29": {
+          "spectral_entropy": 0.8203550498089415,
+          "compressibility_corr": 0.8230034574492479,
+          "fraction_for_90pct": 0.43683417085427134,
+          "mean_abs_correlation": 0.09142403304576874
+        },
+        "30": {
+          "spectral_entropy": 0.822234251568061,
+          "compressibility_corr": 0.823064226977271,
+          "fraction_for_90pct": 0.43582914572864323,
+          "mean_abs_correlation": 0.09162953495979309
+        },
+        "31": {
+          "spectral_entropy": 0.8247229566858459,
+          "compressibility_corr": 0.8209904615394772,
+          "fraction_for_90pct": 0.44140703517587937,
+          "mean_abs_correlation": 0.09177111089229584
+        },
+        "32": {
+          "spectral_entropy": 0.813727528714434,
+          "compressibility_corr": 0.82014834804172,
+          "fraction_for_90pct": 0.4424623115577889,
+          "mean_abs_correlation": 0.09296434372663498
+        }
+      }
+    },
+    {
+      "category": "math",
+      "prompt_index": 0,
+      "prompt": "Solve for x: 3x + 7 = 22",
+      "generated_preview": "\n\nTo solve for x, you need to isolate x. Here's how:\n\n1. Subtract 7 from both sides of the equation:",
+      "consciousness_score": 0.5729907444608079,
+      "dimension_scores": {
+        "Logic": -0.04371587712942409,
+        "Self-Reflective": -0.030488060262216538,
+        "Self-Expression": -0.06628024440299823,
+        "Uncertainty": 0.020137857188000697,
+        "Sequential": -0.05336852072628251,
+        "Computation": 0.1838256926469063,
+        "Abstraction": -0.0796276435429332
+      },
+      "num_layers": 32,
+      "seq_len": 136,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.20601635510351163,
+          "compressibility_corr": 0.9597275696117689,
+          "fraction_for_90pct": 0.05809045226130653,
+          "mean_abs_correlation": 0.14892609417438507
+        },
+        "2": {
+          "spectral_entropy": 0.2792749266106902,
+          "compressibility_corr": 0.8236234388150971,
+          "fraction_for_90pct": 0.42683417085427133,
+          "mean_abs_correlation": 0.35693615674972534
+        },
+        "3": {
+          "spectral_entropy": 0.39438921269982025,
+          "compressibility_corr": 0.8427750869862204,
+          "fraction_for_90pct": 0.3978391959798995,
+          "mean_abs_correlation": 0.26984453201293945
+        },
+        "4": {
+          "spectral_entropy": 0.4912767021069253,
+          "compressibility_corr": 0.8516483588729243,
+          "fraction_for_90pct": 0.3871859296482412,
+          "mean_abs_correlation": 0.21597960591316223
+        },
+        "5": {
+          "spectral_entropy": 0.5762716410844624,
+          "compressibility_corr": 0.8513119338524888,
+          "fraction_for_90pct": 0.39457286432160804,
+          "mean_abs_correlation": 0.17928068339824677
+        },
+        "6": {
+          "spectral_entropy": 0.6415146766245783,
+          "compressibility_corr": 0.8432325770231619,
+          "fraction_for_90pct": 0.410251256281407,
+          "mean_abs_correlation": 0.15678302943706512
+        },
+        "7": {
+          "spectral_entropy": 0.6924649593008373,
+          "compressibility_corr": 0.8323182789950827,
+          "fraction_for_90pct": 0.4263316582914573,
+          "mean_abs_correlation": 0.14400707185268402
+        },
+        "8": {
+          "spectral_entropy": 0.7192245725746905,
+          "compressibility_corr": 0.8269887054899717,
+          "fraction_for_90pct": 0.43396984924623117,
+          "mean_abs_correlation": 0.13622242212295532
+        },
+        "9": {
+          "spectral_entropy": 0.7367930692000834,
+          "compressibility_corr": 0.8215836058301155,
+          "fraction_for_90pct": 0.44035175879396987,
+          "mean_abs_correlation": 0.1333325058221817
+        },
+        "10": {
+          "spectral_entropy": 0.7509586651588538,
+          "compressibility_corr": 0.819392153409277,
+          "fraction_for_90pct": 0.44467336683417086,
+          "mean_abs_correlation": 0.13721315562725067
+        },
+        "11": {
+          "spectral_entropy": 0.7700610822898285,
+          "compressibility_corr": 0.8193908502742233,
+          "fraction_for_90pct": 0.44271356783919597,
+          "mean_abs_correlation": 0.12839344143867493
+        },
+        "12": {
+          "spectral_entropy": 0.7910882669544099,
+          "compressibility_corr": 0.8186176713694288,
+          "fraction_for_90pct": 0.44336683417085426,
+          "mean_abs_correlation": 0.11998437345027924
+        },
+        "13": {
+          "spectral_entropy": 0.7959407488923863,
+          "compressibility_corr": 0.8193895290865816,
+          "fraction_for_90pct": 0.44306532663316583,
+          "mean_abs_correlation": 0.11975926905870438
+        },
+        "14": {
+          "spectral_entropy": 0.805652128566406,
+          "compressibility_corr": 0.8180958698264056,
+          "fraction_for_90pct": 0.44613065326633167,
+          "mean_abs_correlation": 0.1160828098654747
+        },
+        "15": {
+          "spectral_entropy": 0.8010600529765178,
+          "compressibility_corr": 0.819650068558184,
+          "fraction_for_90pct": 0.4429145728643216,
+          "mean_abs_correlation": 0.11608617007732391
+        },
+        "16": {
+          "spectral_entropy": 0.8059294624283424,
+          "compressibility_corr": 0.8207889774651851,
+          "fraction_for_90pct": 0.4406532663316583,
+          "mean_abs_correlation": 0.11533685028553009
+        },
+        "17": {
+          "spectral_entropy": 0.8048785874585602,
+          "compressibility_corr": 0.8197454088400691,
+          "fraction_for_90pct": 0.44321608040201005,
+          "mean_abs_correlation": 0.11744442582130432
+        },
+        "18": {
+          "spectral_entropy": 0.8069515706976191,
+          "compressibility_corr": 0.8182040780376006,
+          "fraction_for_90pct": 0.4458793969849246,
+          "mean_abs_correlation": 0.11774222552776337
+        },
+        "19": {
+          "spectral_entropy": 0.8055793560867321,
+          "compressibility_corr": 0.8211546229813704,
+          "fraction_for_90pct": 0.43748743718592964,
+          "mean_abs_correlation": 0.11585850268602371
+        },
+        "20": {
+          "spectral_entropy": 0.8041629343469094,
+          "compressibility_corr": 0.8196783447252638,
+          "fraction_for_90pct": 0.4435175879396985,
+          "mean_abs_correlation": 0.11697692424058914
+        },
+        "21": {
+          "spectral_entropy": 0.8017703116831252,
+          "compressibility_corr": 0.8183898742797483,
+          "fraction_for_90pct": 0.44663316582914575,
+          "mean_abs_correlation": 0.1204126626253128
+        },
+        "22": {
+          "spectral_entropy": 0.8027937933185143,
+          "compressibility_corr": 0.8179589885714038,
+          "fraction_for_90pct": 0.4465829145728643,
+          "mean_abs_correlation": 0.12114191800355911
+        },
+        "23": {
+          "spectral_entropy": 0.8101269046954556,
+          "compressibility_corr": 0.8175285798860609,
+          "fraction_for_90pct": 0.4450753768844221,
+          "mean_abs_correlation": 0.11823739111423492
+        },
+        "24": {
+          "spectral_entropy": 0.8141920418388361,
+          "compressibility_corr": 0.8200045911464477,
+          "fraction_for_90pct": 0.4415075376884422,
+          "mean_abs_correlation": 0.11657881736755371
+        },
+        "25": {
+          "spectral_entropy": 0.815892011611285,
+          "compressibility_corr": 0.8191881008693556,
+          "fraction_for_90pct": 0.4428643216080402,
+          "mean_abs_correlation": 0.11403337121009827
+        },
+        "26": {
+          "spectral_entropy": 0.8230509466469741,
+          "compressibility_corr": 0.81811566566519,
+          "fraction_for_90pct": 0.44537688442211054,
+          "mean_abs_correlation": 0.11234813928604126
+        },
+        "27": {
+          "spectral_entropy": 0.8275941093508737,
+          "compressibility_corr": 0.8181243215584613,
+          "fraction_for_90pct": 0.4434170854271357,
+          "mean_abs_correlation": 0.11071737110614777
+        },
+        "28": {
+          "spectral_entropy": 0.8310243317858672,
+          "compressibility_corr": 0.8196949116882035,
+          "fraction_for_90pct": 0.4427638190954774,
+          "mean_abs_correlation": 0.10902228206396103
+        },
+        "29": {
+          "spectral_entropy": 0.8342421398660439,
+          "compressibility_corr": 0.8178517495553493,
+          "fraction_for_90pct": 0.4462311557788945,
+          "mean_abs_correlation": 0.10908972471952438
+        },
+        "30": {
+          "spectral_entropy": 0.8285836975981713,
+          "compressibility_corr": 0.8176432572491817,
+          "fraction_for_90pct": 0.44552763819095476,
+          "mean_abs_correlation": 0.11363072693347931
+        },
+        "31": {
+          "spectral_entropy": 0.815985483307146,
+          "compressibility_corr": 0.8187705823799405,
+          "fraction_for_90pct": 0.44552763819095476,
+          "mean_abs_correlation": 0.11540137231349945
+        },
+        "32": {
+          "spectral_entropy": 0.7890569864027861,
+          "compressibility_corr": 0.8177383452547707,
+          "fraction_for_90pct": 0.4455778894472362,
+          "mean_abs_correlation": 0.1200912743806839
+        }
+      }
+    },
+    {
+      "category": "math",
+      "prompt_index": 1,
+      "prompt": "What is the derivative of sin(x) * e^x?",
+      "generated_preview": "\n\nThe derivative of sin(x) * e^x is given by the product rule, which states that the derivative of a",
+      "consciousness_score": 0.5663878115858011,
+      "dimension_scores": {
+        "Logic": -0.05109276369926972,
+        "Self-Reflective": 0.14635726368938143,
+        "Self-Expression": -0.11816775204563018,
+        "Uncertainty": 0.021197133448747976,
+        "Sequential": -0.06868813969232415,
+        "Computation": 0.11273825570185214,
+        "Abstraction": 0.2244696535950798
+      },
+      "num_layers": 32,
+      "seq_len": 271,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.3349970708820116,
+          "compressibility_corr": 0.9462872445094281,
+          "fraction_for_90pct": 0.13693467336683418,
+          "mean_abs_correlation": 0.15278925001621246
+        },
+        "2": {
+          "spectral_entropy": 0.37947987021758367,
+          "compressibility_corr": 0.8351704590178057,
+          "fraction_for_90pct": 0.4127638190954774,
+          "mean_abs_correlation": 0.2830258011817932
+        },
+        "3": {
+          "spectral_entropy": 0.4862898549648836,
+          "compressibility_corr": 0.8382460705247057,
+          "fraction_for_90pct": 0.4137185929648241,
+          "mean_abs_correlation": 0.22056886553764343
+        },
+        "4": {
+          "spectral_entropy": 0.5649833315842647,
+          "compressibility_corr": 0.8383195308995453,
+          "fraction_for_90pct": 0.41412060301507536,
+          "mean_abs_correlation": 0.18001806735992432
+        },
+        "5": {
+          "spectral_entropy": 0.6206134869176934,
+          "compressibility_corr": 0.8271364493103495,
+          "fraction_for_90pct": 0.43316582914572865,
+          "mean_abs_correlation": 0.16147609055042267
+        },
+        "6": {
+          "spectral_entropy": 0.6585020930896962,
+          "compressibility_corr": 0.8268545898361349,
+          "fraction_for_90pct": 0.4330653266331658,
+          "mean_abs_correlation": 0.14583733677864075
+        },
+        "7": {
+          "spectral_entropy": 0.6904118771487097,
+          "compressibility_corr": 0.8218319995071851,
+          "fraction_for_90pct": 0.4385929648241206,
+          "mean_abs_correlation": 0.13990038633346558
+        },
+        "8": {
+          "spectral_entropy": 0.7084972694464315,
+          "compressibility_corr": 0.8200597958915092,
+          "fraction_for_90pct": 0.442964824120603,
+          "mean_abs_correlation": 0.1386066973209381
+        },
+        "9": {
+          "spectral_entropy": 0.7281826077009508,
+          "compressibility_corr": 0.8227668286641081,
+          "fraction_for_90pct": 0.43763819095477385,
+          "mean_abs_correlation": 0.12939178943634033
+        },
+        "10": {
+          "spectral_entropy": 0.737814813728789,
+          "compressibility_corr": 0.8194927860433634,
+          "fraction_for_90pct": 0.44185929648241207,
+          "mean_abs_correlation": 0.13361534476280212
+        },
+        "11": {
+          "spectral_entropy": 0.7542589499346279,
+          "compressibility_corr": 0.8191731959121797,
+          "fraction_for_90pct": 0.4413065326633166,
+          "mean_abs_correlation": 0.12404407560825348
+        },
+        "12": {
+          "spectral_entropy": 0.7735204692156201,
+          "compressibility_corr": 0.8206971989401111,
+          "fraction_for_90pct": 0.44055276381909547,
+          "mean_abs_correlation": 0.11117749661207199
+        },
+        "13": {
+          "spectral_entropy": 0.776667988691219,
+          "compressibility_corr": 0.8204816089663771,
+          "fraction_for_90pct": 0.4413065326633166,
+          "mean_abs_correlation": 0.11097929626703262
+        },
+        "14": {
+          "spectral_entropy": 0.7836909691283953,
+          "compressibility_corr": 0.820722441045654,
+          "fraction_for_90pct": 0.43899497487437183,
+          "mean_abs_correlation": 0.10595490783452988
+        },
+        "15": {
+          "spectral_entropy": 0.7827901271585455,
+          "compressibility_corr": 0.8213040752698382,
+          "fraction_for_90pct": 0.4391959798994975,
+          "mean_abs_correlation": 0.10322511196136475
+        },
+        "16": {
+          "spectral_entropy": 0.7854286095580949,
+          "compressibility_corr": 0.821094090124983,
+          "fraction_for_90pct": 0.43909547738693466,
+          "mean_abs_correlation": 0.10356462746858597
+        },
+        "17": {
+          "spectral_entropy": 0.7836854956028627,
+          "compressibility_corr": 0.8184497134191224,
+          "fraction_for_90pct": 0.44552763819095476,
+          "mean_abs_correlation": 0.10524777323007584
+        },
+        "18": {
+          "spectral_entropy": 0.7878684924615822,
+          "compressibility_corr": 0.8179698697704969,
+          "fraction_for_90pct": 0.4457788944723618,
+          "mean_abs_correlation": 0.1015687808394432
+        },
+        "19": {
+          "spectral_entropy": 0.7827479365426472,
+          "compressibility_corr": 0.8172891686338961,
+          "fraction_for_90pct": 0.4476884422110553,
+          "mean_abs_correlation": 0.1043633297085762
+        },
+        "20": {
+          "spectral_entropy": 0.7737790227398875,
+          "compressibility_corr": 0.8189651497611401,
+          "fraction_for_90pct": 0.4444723618090452,
+          "mean_abs_correlation": 0.10665787756443024
+        },
+        "21": {
+          "spectral_entropy": 0.7655797730413221,
+          "compressibility_corr": 0.8194448610318383,
+          "fraction_for_90pct": 0.444321608040201,
+          "mean_abs_correlation": 0.115128293633461
+        },
+        "22": {
+          "spectral_entropy": 0.7665723940599785,
+          "compressibility_corr": 0.8200257537963779,
+          "fraction_for_90pct": 0.4415075376884422,
+          "mean_abs_correlation": 0.11402573436498642
+        },
+        "23": {
+          "spectral_entropy": 0.7716066308406608,
+          "compressibility_corr": 0.8201868111323729,
+          "fraction_for_90pct": 0.4419597989949749,
+          "mean_abs_correlation": 0.11418411880731583
+        },
+        "24": {
+          "spectral_entropy": 0.7717451600244144,
+          "compressibility_corr": 0.8182850169601918,
+          "fraction_for_90pct": 0.44336683417085426,
+          "mean_abs_correlation": 0.11541254818439484
+        },
+        "25": {
+          "spectral_entropy": 0.772294487023837,
+          "compressibility_corr": 0.8215820945694986,
+          "fraction_for_90pct": 0.43728643216080404,
+          "mean_abs_correlation": 0.11399657279253006
+        },
+        "26": {
+          "spectral_entropy": 0.7724983425176436,
+          "compressibility_corr": 0.8205371876820178,
+          "fraction_for_90pct": 0.44170854271356785,
+          "mean_abs_correlation": 0.11460564285516739
+        },
+        "27": {
+          "spectral_entropy": 0.7778743413649759,
+          "compressibility_corr": 0.82052054119755,
+          "fraction_for_90pct": 0.4405025125628141,
+          "mean_abs_correlation": 0.1123887374997139
+        },
+        "28": {
+          "spectral_entropy": 0.7820082506149801,
+          "compressibility_corr": 0.8208844651226609,
+          "fraction_for_90pct": 0.44055276381909547,
+          "mean_abs_correlation": 0.11055055260658264
+        },
+        "29": {
+          "spectral_entropy": 0.7853443963777752,
+          "compressibility_corr": 0.8205425155291746,
+          "fraction_for_90pct": 0.44025125628140704,
+          "mean_abs_correlation": 0.11167357861995697
+        },
+        "30": {
+          "spectral_entropy": 0.7841777338336996,
+          "compressibility_corr": 0.8185785670058296,
+          "fraction_for_90pct": 0.4450753768844221,
+          "mean_abs_correlation": 0.1151629239320755
+        },
+        "31": {
+          "spectral_entropy": 0.777694888355224,
+          "compressibility_corr": 0.8167494142351873,
+          "fraction_for_90pct": 0.44618090452261305,
+          "mean_abs_correlation": 0.11834822595119476
+        },
+        "32": {
+          "spectral_entropy": 0.7523546280571192,
+          "compressibility_corr": 0.8188105814804816,
+          "fraction_for_90pct": 0.44236180904522615,
+          "mean_abs_correlation": 0.12251473218202591
+        }
+      }
+    },
+    {
+      "category": "math",
+      "prompt_index": 2,
+      "prompt": "Prove that the square root of 2 is irrational.",
+      "generated_preview": "\n\nProof:\n\nAssume, for the sake of contradiction, that $\\sqrt{2}$ is rational. Then there exist integ",
+      "consciousness_score": 0.585332219338049,
+      "dimension_scores": {
+        "Logic": 0.062195421274132245,
+        "Self-Reflective": 0.07771268053622586,
+        "Self-Expression": 0.02264177125086349,
+        "Uncertainty": -0.14135076802368077,
+        "Sequential": -0.09983544768187436,
+        "Computation": 0.2994172901267307,
+        "Abstraction": 0.19562574287360351
+      },
+      "num_layers": 32,
+      "seq_len": 270,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.34776063179563715,
+          "compressibility_corr": 0.9553425462124284,
+          "fraction_for_90pct": 0.08693467336683416,
+          "mean_abs_correlation": 0.1342463195323944
+        },
+        "2": {
+          "spectral_entropy": 0.3818001203386829,
+          "compressibility_corr": 0.8354088747625072,
+          "fraction_for_90pct": 0.4048241206030151,
+          "mean_abs_correlation": 0.2943420112133026
+        },
+        "3": {
+          "spectral_entropy": 0.4947069438230619,
+          "compressibility_corr": 0.8439438045059153,
+          "fraction_for_90pct": 0.39884422110552764,
+          "mean_abs_correlation": 0.22329066693782806
+        },
+        "4": {
+          "spectral_entropy": 0.5842130328901499,
+          "compressibility_corr": 0.8461957751382224,
+          "fraction_for_90pct": 0.4001005025125628,
+          "mean_abs_correlation": 0.17652718722820282
+        },
+        "5": {
+          "spectral_entropy": 0.645506105512385,
+          "compressibility_corr": 0.8435805056618302,
+          "fraction_for_90pct": 0.4070854271356784,
+          "mean_abs_correlation": 0.14880089461803436
+        },
+        "6": {
+          "spectral_entropy": 0.6889761218126846,
+          "compressibility_corr": 0.8313328925605709,
+          "fraction_for_90pct": 0.42608040201005026,
+          "mean_abs_correlation": 0.1335199624300003
+        },
+        "7": {
+          "spectral_entropy": 0.7253833282209129,
+          "compressibility_corr": 0.8287453681320285,
+          "fraction_for_90pct": 0.43020100502512565,
+          "mean_abs_correlation": 0.11804874986410141
+        },
+        "8": {
+          "spectral_entropy": 0.7439858938995026,
+          "compressibility_corr": 0.8212620733145638,
+          "fraction_for_90pct": 0.4398492462311558,
+          "mean_abs_correlation": 0.11706829816102982
+        },
+        "9": {
+          "spectral_entropy": 0.7590313888449216,
+          "compressibility_corr": 0.8201869813439522,
+          "fraction_for_90pct": 0.4428140703517588,
+          "mean_abs_correlation": 0.11158888041973114
+        },
+        "10": {
+          "spectral_entropy": 0.7649783465680258,
+          "compressibility_corr": 0.8201651765430468,
+          "fraction_for_90pct": 0.44025125628140704,
+          "mean_abs_correlation": 0.11526310443878174
+        },
+        "11": {
+          "spectral_entropy": 0.776183317732986,
+          "compressibility_corr": 0.8195412574302294,
+          "fraction_for_90pct": 0.4399497487437186,
+          "mean_abs_correlation": 0.10902819782495499
+        },
+        "12": {
+          "spectral_entropy": 0.7901767057212922,
+          "compressibility_corr": 0.8196690158501161,
+          "fraction_for_90pct": 0.4394974874371859,
+          "mean_abs_correlation": 0.1006048396229744
+        },
+        "13": {
+          "spectral_entropy": 0.7912514676231515,
+          "compressibility_corr": 0.820107245147427,
+          "fraction_for_90pct": 0.44125628140703516,
+          "mean_abs_correlation": 0.1002432107925415
+        },
+        "14": {
+          "spectral_entropy": 0.7938683315315643,
+          "compressibility_corr": 0.8190508366058271,
+          "fraction_for_90pct": 0.4415075376884422,
+          "mean_abs_correlation": 0.09961450099945068
+        },
+        "15": {
+          "spectral_entropy": 0.7897173421729423,
+          "compressibility_corr": 0.8184991785189506,
+          "fraction_for_90pct": 0.44618090452261305,
+          "mean_abs_correlation": 0.10089258849620819
+        },
+        "16": {
+          "spectral_entropy": 0.7925684079913485,
+          "compressibility_corr": 0.81967549992524,
+          "fraction_for_90pct": 0.4441206030150754,
+          "mean_abs_correlation": 0.0989205539226532
+        },
+        "17": {
+          "spectral_entropy": 0.7871455301311864,
+          "compressibility_corr": 0.8206863268254496,
+          "fraction_for_90pct": 0.4426633165829146,
+          "mean_abs_correlation": 0.10370654612779617
+        },
+        "18": {
+          "spectral_entropy": 0.7924035800015441,
+          "compressibility_corr": 0.8220626726383214,
+          "fraction_for_90pct": 0.4362311557788945,
+          "mean_abs_correlation": 0.10132492333650589
+        },
+        "19": {
+          "spectral_entropy": 0.7913209821679388,
+          "compressibility_corr": 0.8209142725475965,
+          "fraction_for_90pct": 0.4390452261306533,
+          "mean_abs_correlation": 0.10206979513168335
+        },
+        "20": {
+          "spectral_entropy": 0.7903505992420339,
+          "compressibility_corr": 0.8213539333897643,
+          "fraction_for_90pct": 0.4410050251256281,
+          "mean_abs_correlation": 0.10404244065284729
+        },
+        "21": {
+          "spectral_entropy": 0.7885322531995048,
+          "compressibility_corr": 0.8246008378871128,
+          "fraction_for_90pct": 0.4342713567839196,
+          "mean_abs_correlation": 0.10710299760103226
+        },
+        "22": {
+          "spectral_entropy": 0.7870242715009635,
+          "compressibility_corr": 0.8207912659184333,
+          "fraction_for_90pct": 0.44140703517587937,
+          "mean_abs_correlation": 0.11136343330144882
+        },
+        "23": {
+          "spectral_entropy": 0.7932420246172757,
+          "compressibility_corr": 0.8221079628488831,
+          "fraction_for_90pct": 0.43944723618090453,
+          "mean_abs_correlation": 0.10820581018924713
+        },
+        "24": {
+          "spectral_entropy": 0.7974914943743089,
+          "compressibility_corr": 0.8193478894298639,
+          "fraction_for_90pct": 0.4407537688442211,
+          "mean_abs_correlation": 0.10741758346557617
+        },
+        "25": {
+          "spectral_entropy": 0.8036849493667366,
+          "compressibility_corr": 0.820717751230593,
+          "fraction_for_90pct": 0.44030150753768843,
+          "mean_abs_correlation": 0.10371189564466476
+        },
+        "26": {
+          "spectral_entropy": 0.8071377279066053,
+          "compressibility_corr": 0.820898193509965,
+          "fraction_for_90pct": 0.4392964824120603,
+          "mean_abs_correlation": 0.1021990105509758
+        },
+        "27": {
+          "spectral_entropy": 0.8125530184934961,
+          "compressibility_corr": 0.8184297333640483,
+          "fraction_for_90pct": 0.4439698492462312,
+          "mean_abs_correlation": 0.10164739191532135
+        },
+        "28": {
+          "spectral_entropy": 0.8155100111842477,
+          "compressibility_corr": 0.8193972357063631,
+          "fraction_for_90pct": 0.44306532663316583,
+          "mean_abs_correlation": 0.10064417123794556
+        },
+        "29": {
+          "spectral_entropy": 0.8137256018422954,
+          "compressibility_corr": 0.8176261876978334,
+          "fraction_for_90pct": 0.44613065326633167,
+          "mean_abs_correlation": 0.10447266697883606
+        },
+        "30": {
+          "spectral_entropy": 0.8154828997686095,
+          "compressibility_corr": 0.8187122916900285,
+          "fraction_for_90pct": 0.44487437185929646,
+          "mean_abs_correlation": 0.1028575450181961
+        },
+        "31": {
+          "spectral_entropy": 0.799347508327347,
+          "compressibility_corr": 0.8218786415734899,
+          "fraction_for_90pct": 0.4384924623115578,
+          "mean_abs_correlation": 0.10699822008609772
+        },
+        "32": {
+          "spectral_entropy": 0.7424120801580492,
+          "compressibility_corr": 0.822396471324399,
+          "fraction_for_90pct": 0.4393467336683417,
+          "mean_abs_correlation": 0.11239691823720932
+        }
+      }
+    },
+    {
+      "category": "factual",
+      "prompt_index": 0,
+      "prompt": "What is the capital of France?",
+      "generated_preview": "\n\nParis is the capital of France. It is located in the north-central part of the country and is the ",
+      "consciousness_score": 0.680568303054879,
+      "dimension_scores": {
+        "Logic": 0.19954551002591625,
+        "Self-Reflective": 0.1940947210828396,
+        "Self-Expression": -0.06265854014730926,
+        "Uncertainty": 0.022902964482988026,
+        "Sequential": -0.04819641519715408,
+        "Computation": 0.16130863395767892,
+        "Abstraction": 0.28053371226947266
+      },
+      "num_layers": 32,
+      "seq_len": 264,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.40258269510231476,
+          "compressibility_corr": 0.9639544989949387,
+          "fraction_for_90pct": 0.04532663316582915,
+          "mean_abs_correlation": 0.1116587296128273
+        },
+        "2": {
+          "spectral_entropy": 0.4084069566774086,
+          "compressibility_corr": 0.8390587681128548,
+          "fraction_for_90pct": 0.39457286432160804,
+          "mean_abs_correlation": 0.2864874601364136
+        },
+        "3": {
+          "spectral_entropy": 0.5334898921493471,
+          "compressibility_corr": 0.8513662325892066,
+          "fraction_for_90pct": 0.3772361809045226,
+          "mean_abs_correlation": 0.2095474749803543
+        },
+        "4": {
+          "spectral_entropy": 0.6229234384774391,
+          "compressibility_corr": 0.853972232190368,
+          "fraction_for_90pct": 0.38060301507537686,
+          "mean_abs_correlation": 0.16363045573234558
+        },
+        "5": {
+          "spectral_entropy": 0.682662266309739,
+          "compressibility_corr": 0.8520377763706007,
+          "fraction_for_90pct": 0.3885427135678392,
+          "mean_abs_correlation": 0.13451270759105682
+        },
+        "6": {
+          "spectral_entropy": 0.7200393461317849,
+          "compressibility_corr": 0.8393597168937307,
+          "fraction_for_90pct": 0.4136683417085427,
+          "mean_abs_correlation": 0.11769124865531921
+        },
+        "7": {
+          "spectral_entropy": 0.737883541340414,
+          "compressibility_corr": 0.8308628104581385,
+          "fraction_for_90pct": 0.42763819095477384,
+          "mean_abs_correlation": 0.11176201701164246
+        },
+        "8": {
+          "spectral_entropy": 0.7508765257212294,
+          "compressibility_corr": 0.8237512125894568,
+          "fraction_for_90pct": 0.43678391959798996,
+          "mean_abs_correlation": 0.10981184989213943
+        },
+        "9": {
+          "spectral_entropy": 0.7580932112743612,
+          "compressibility_corr": 0.8203279545446027,
+          "fraction_for_90pct": 0.44236180904522615,
+          "mean_abs_correlation": 0.10998912155628204
+        },
+        "10": {
+          "spectral_entropy": 0.7587721124768747,
+          "compressibility_corr": 0.8229061259222673,
+          "fraction_for_90pct": 0.43758793969849247,
+          "mean_abs_correlation": 0.1159307062625885
+        },
+        "11": {
+          "spectral_entropy": 0.7705553731707612,
+          "compressibility_corr": 0.8223459597874021,
+          "fraction_for_90pct": 0.43824120603015077,
+          "mean_abs_correlation": 0.10897496342658997
+        },
+        "12": {
+          "spectral_entropy": 0.7732518412439429,
+          "compressibility_corr": 0.8194595891106452,
+          "fraction_for_90pct": 0.4413065326633166,
+          "mean_abs_correlation": 0.10488004237413406
+        },
+        "13": {
+          "spectral_entropy": 0.7717494067687419,
+          "compressibility_corr": 0.8184138194306745,
+          "fraction_for_90pct": 0.442964824120603,
+          "mean_abs_correlation": 0.1062188595533371
+        },
+        "14": {
+          "spectral_entropy": 0.7687428475099602,
+          "compressibility_corr": 0.8189228606825149,
+          "fraction_for_90pct": 0.4439698492462312,
+          "mean_abs_correlation": 0.10621616244316101
+        },
+        "15": {
+          "spectral_entropy": 0.7600120829821133,
+          "compressibility_corr": 0.8212501765417062,
+          "fraction_for_90pct": 0.43894472361809045,
+          "mean_abs_correlation": 0.11148599535226822
+        },
+        "16": {
+          "spectral_entropy": 0.7616475670620008,
+          "compressibility_corr": 0.8194555684270797,
+          "fraction_for_90pct": 0.4442211055276382,
+          "mean_abs_correlation": 0.11405759304761887
+        },
+        "17": {
+          "spectral_entropy": 0.7640566493580139,
+          "compressibility_corr": 0.81986312296964,
+          "fraction_for_90pct": 0.4434170854271357,
+          "mean_abs_correlation": 0.1123383417725563
+        },
+        "18": {
+          "spectral_entropy": 0.7706076029870018,
+          "compressibility_corr": 0.8162108567286044,
+          "fraction_for_90pct": 0.4477386934673367,
+          "mean_abs_correlation": 0.11223279684782028
+        },
+        "19": {
+          "spectral_entropy": 0.7711024502985473,
+          "compressibility_corr": 0.817870803989772,
+          "fraction_for_90pct": 0.4462311557788945,
+          "mean_abs_correlation": 0.1128791943192482
+        },
+        "20": {
+          "spectral_entropy": 0.7711497943500786,
+          "compressibility_corr": 0.8185150682952738,
+          "fraction_for_90pct": 0.4450251256281407,
+          "mean_abs_correlation": 0.11594915390014648
+        },
+        "21": {
+          "spectral_entropy": 0.7734222590754062,
+          "compressibility_corr": 0.8212890555190938,
+          "fraction_for_90pct": 0.4402010050251256,
+          "mean_abs_correlation": 0.11789786070585251
+        },
+        "22": {
+          "spectral_entropy": 0.7781046560029321,
+          "compressibility_corr": 0.8208829575238911,
+          "fraction_for_90pct": 0.44110552763819094,
+          "mean_abs_correlation": 0.11678475141525269
+        },
+        "23": {
+          "spectral_entropy": 0.7822877630810222,
+          "compressibility_corr": 0.8209127921757555,
+          "fraction_for_90pct": 0.4392462311557789,
+          "mean_abs_correlation": 0.11649934202432632
+        },
+        "24": {
+          "spectral_entropy": 0.7877535058651952,
+          "compressibility_corr": 0.8183151756243396,
+          "fraction_for_90pct": 0.4465829145728643,
+          "mean_abs_correlation": 0.11337235569953918
+        },
+        "25": {
+          "spectral_entropy": 0.7902755421136531,
+          "compressibility_corr": 0.8193969755251447,
+          "fraction_for_90pct": 0.44321608040201005,
+          "mean_abs_correlation": 0.11238691210746765
+        },
+        "26": {
+          "spectral_entropy": 0.7930153293319135,
+          "compressibility_corr": 0.820721117155568,
+          "fraction_for_90pct": 0.4393467336683417,
+          "mean_abs_correlation": 0.11303909868001938
+        },
+        "27": {
+          "spectral_entropy": 0.7965905346085494,
+          "compressibility_corr": 0.8211503219442856,
+          "fraction_for_90pct": 0.43879396984924623,
+          "mean_abs_correlation": 0.11163207143545151
+        },
+        "28": {
+          "spectral_entropy": 0.7982392443575627,
+          "compressibility_corr": 0.8195370521150932,
+          "fraction_for_90pct": 0.4421105527638191,
+          "mean_abs_correlation": 0.11069507896900177
+        },
+        "29": {
+          "spectral_entropy": 0.8067081524865645,
+          "compressibility_corr": 0.8209156031387591,
+          "fraction_for_90pct": 0.4421608040201005,
+          "mean_abs_correlation": 0.10588734596967697
+        },
+        "30": {
+          "spectral_entropy": 0.8071104706570941,
+          "compressibility_corr": 0.8199001994342707,
+          "fraction_for_90pct": 0.44336683417085426,
+          "mean_abs_correlation": 0.10570808500051498
+        },
+        "31": {
+          "spectral_entropy": 0.8100066543072886,
+          "compressibility_corr": 0.818443979005588,
+          "fraction_for_90pct": 0.4449246231155779,
+          "mean_abs_correlation": 0.10225342959165573
+        },
+        "32": {
+          "spectral_entropy": 0.8011038090740946,
+          "compressibility_corr": 0.8196398453501371,
+          "fraction_for_90pct": 0.4426633165829146,
+          "mean_abs_correlation": 0.09730922430753708
+        }
+      }
+    },
+    {
+      "category": "factual",
+      "prompt_index": 1,
+      "prompt": "Explain how photosynthesis works in plants.",
+      "generated_preview": "\n\nPhotosynthesis is a process by which green plants, algae, and some bacteria convert light energy, ",
+      "consciousness_score": 0.6083281442975217,
+      "dimension_scores": {
+        "Logic": 0.08488472081787284,
+        "Self-Reflective": 0.2148398981024669,
+        "Self-Expression": 0.016131821663887245,
+        "Uncertainty": 0.03665893613173938,
+        "Sequential": 0.18850649256547128,
+        "Computation": 0.07314097205709501,
+        "Abstraction": 0.34404514389465773
+      },
+      "num_layers": 32,
+      "seq_len": 268,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.40688422074963526,
+          "compressibility_corr": 0.9652687283180625,
+          "fraction_for_90pct": 0.04477386934673367,
+          "mean_abs_correlation": 0.10790570080280304
+        },
+        "2": {
+          "spectral_entropy": 0.44227480867509045,
+          "compressibility_corr": 0.8448612918800279,
+          "fraction_for_90pct": 0.38763819095477386,
+          "mean_abs_correlation": 0.2559298574924469
+        },
+        "3": {
+          "spectral_entropy": 0.5506254425693038,
+          "compressibility_corr": 0.8541583647912113,
+          "fraction_for_90pct": 0.3742713567839196,
+          "mean_abs_correlation": 0.1941128373146057
+        },
+        "4": {
+          "spectral_entropy": 0.6318321940409022,
+          "compressibility_corr": 0.8541027395186851,
+          "fraction_for_90pct": 0.381608040201005,
+          "mean_abs_correlation": 0.15301670134067535
+        },
+        "5": {
+          "spectral_entropy": 0.6862441244859303,
+          "compressibility_corr": 0.8511479792441125,
+          "fraction_for_90pct": 0.3925125628140704,
+          "mean_abs_correlation": 0.12733516097068787
+        },
+        "6": {
+          "spectral_entropy": 0.720860974844084,
+          "compressibility_corr": 0.830836763146296,
+          "fraction_for_90pct": 0.4264321608040201,
+          "mean_abs_correlation": 0.12099245190620422
+        },
+        "7": {
+          "spectral_entropy": 0.742042615575351,
+          "compressibility_corr": 0.8292492477509167,
+          "fraction_for_90pct": 0.4285427135678392,
+          "mean_abs_correlation": 0.11171425879001617
+        },
+        "8": {
+          "spectral_entropy": 0.7540641285573415,
+          "compressibility_corr": 0.8232856760023691,
+          "fraction_for_90pct": 0.4386934673366834,
+          "mean_abs_correlation": 0.10901791602373123
+        },
+        "9": {
+          "spectral_entropy": 0.7695981769792786,
+          "compressibility_corr": 0.8218892356441192,
+          "fraction_for_90pct": 0.43959798994974875,
+          "mean_abs_correlation": 0.10493389517068863
+        },
+        "10": {
+          "spectral_entropy": 0.7822718817390015,
+          "compressibility_corr": 0.8214852313229629,
+          "fraction_for_90pct": 0.44095477386934673,
+          "mean_abs_correlation": 0.10527478903532028
+        },
+        "11": {
+          "spectral_entropy": 0.7980134196640691,
+          "compressibility_corr": 0.8190624034471211,
+          "fraction_for_90pct": 0.44306532663316583,
+          "mean_abs_correlation": 0.09728816151618958
+        },
+        "12": {
+          "spectral_entropy": 0.8029272288744843,
+          "compressibility_corr": 0.8184845782258728,
+          "fraction_for_90pct": 0.44452261306532664,
+          "mean_abs_correlation": 0.09523018449544907
+        },
+        "13": {
+          "spectral_entropy": 0.8043974505206064,
+          "compressibility_corr": 0.8179714392035868,
+          "fraction_for_90pct": 0.44698492462311556,
+          "mean_abs_correlation": 0.09530119597911835
+        },
+        "14": {
+          "spectral_entropy": 0.8108543274779713,
+          "compressibility_corr": 0.820913182436863,
+          "fraction_for_90pct": 0.4413065326633166,
+          "mean_abs_correlation": 0.08849600702524185
+        },
+        "15": {
+          "spectral_entropy": 0.8092410630858861,
+          "compressibility_corr": 0.8184606663225308,
+          "fraction_for_90pct": 0.44532663316582916,
+          "mean_abs_correlation": 0.08920078724622726
+        },
+        "16": {
+          "spectral_entropy": 0.8040278211898515,
+          "compressibility_corr": 0.8197045912615599,
+          "fraction_for_90pct": 0.4426130653266332,
+          "mean_abs_correlation": 0.09388329833745956
+        },
+        "17": {
+          "spectral_entropy": 0.8016306695213368,
+          "compressibility_corr": 0.8182607366137403,
+          "fraction_for_90pct": 0.4465326633165829,
+          "mean_abs_correlation": 0.09866862744092941
+        },
+        "18": {
+          "spectral_entropy": 0.8037627820695283,
+          "compressibility_corr": 0.8198701208329294,
+          "fraction_for_90pct": 0.44241206030150754,
+          "mean_abs_correlation": 0.09842198342084885
+        },
+        "19": {
+          "spectral_entropy": 0.805703007073467,
+          "compressibility_corr": 0.8222208570657198,
+          "fraction_for_90pct": 0.4368844221105528,
+          "mean_abs_correlation": 0.09489428997039795
+        },
+        "20": {
+          "spectral_entropy": 0.80183994438412,
+          "compressibility_corr": 0.820756983328166,
+          "fraction_for_90pct": 0.4419597989949749,
+          "mean_abs_correlation": 0.09719547629356384
+        },
+        "21": {
+          "spectral_entropy": 0.8058560305776387,
+          "compressibility_corr": 0.8191969500801259,
+          "fraction_for_90pct": 0.44301507537688445,
+          "mean_abs_correlation": 0.09878280013799667
+        },
+        "22": {
+          "spectral_entropy": 0.8078207588494446,
+          "compressibility_corr": 0.820860424006221,
+          "fraction_for_90pct": 0.44095477386934673,
+          "mean_abs_correlation": 0.1003023311495781
+        },
+        "23": {
+          "spectral_entropy": 0.8102162836616871,
+          "compressibility_corr": 0.8228562147827847,
+          "fraction_for_90pct": 0.4378894472361809,
+          "mean_abs_correlation": 0.10078577697277069
+        },
+        "24": {
+          "spectral_entropy": 0.8139973632615283,
+          "compressibility_corr": 0.8219808393244364,
+          "fraction_for_90pct": 0.4388442211055276,
+          "mean_abs_correlation": 0.1004112958908081
+        },
+        "25": {
+          "spectral_entropy": 0.817489938669636,
+          "compressibility_corr": 0.8193053947998755,
+          "fraction_for_90pct": 0.44336683417085426,
+          "mean_abs_correlation": 0.09960275143384933
+        },
+        "26": {
+          "spectral_entropy": 0.8206054329329898,
+          "compressibility_corr": 0.8210900240353585,
+          "fraction_for_90pct": 0.4385929648241206,
+          "mean_abs_correlation": 0.09878580272197723
+        },
+        "27": {
+          "spectral_entropy": 0.8262088856842701,
+          "compressibility_corr": 0.8219293462796354,
+          "fraction_for_90pct": 0.4372361809045226,
+          "mean_abs_correlation": 0.09581015259027481
+        },
+        "28": {
+          "spectral_entropy": 0.8311463166268194,
+          "compressibility_corr": 0.8200137445315643,
+          "fraction_for_90pct": 0.4428140703517588,
+          "mean_abs_correlation": 0.0934906005859375
+        },
+        "29": {
+          "spectral_entropy": 0.8404051958847131,
+          "compressibility_corr": 0.8189981451889747,
+          "fraction_for_90pct": 0.44547738693467337,
+          "mean_abs_correlation": 0.0888797864317894
+        },
+        "30": {
+          "spectral_entropy": 0.8437395776062538,
+          "compressibility_corr": 0.8199980395321791,
+          "fraction_for_90pct": 0.44251256281407036,
+          "mean_abs_correlation": 0.08750925958156586
+        },
+        "31": {
+          "spectral_entropy": 0.8431405327895832,
+          "compressibility_corr": 0.8187166700970518,
+          "fraction_for_90pct": 0.44487437185929646,
+          "mean_abs_correlation": 0.08795523643493652
+        },
+        "32": {
+          "spectral_entropy": 0.843115863576039,
+          "compressibility_corr": 0.8191472848228076,
+          "fraction_for_90pct": 0.4435678391959799,
+          "mean_abs_correlation": 0.08318369835615158
+        }
+      }
+    },
+    {
+      "category": "factual",
+      "prompt_index": 2,
+      "prompt": "What are the three laws of thermodynamics?",
+      "generated_preview": "\n\nThe three laws of thermodynamics are fundamental principles that describe the behavior of energy a",
+      "consciousness_score": 0.6175483412727775,
+      "dimension_scores": {
+        "Logic": -0.1302405046633175,
+        "Self-Reflective": 0.3065054228534702,
+        "Self-Expression": -0.09298064513519366,
+        "Uncertainty": 0.22621953545036835,
+        "Sequential": 0.06715581759371818,
+        "Computation": 0.1335225426638048,
+        "Abstraction": 0.4276111284072142
+      },
+      "num_layers": 32,
+      "seq_len": 267,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.3925111010082893,
+          "compressibility_corr": 0.9606580212446698,
+          "fraction_for_90pct": 0.05648241206030151,
+          "mean_abs_correlation": 0.11947371065616608
+        },
+        "2": {
+          "spectral_entropy": 0.4066613776657081,
+          "compressibility_corr": 0.8415140841661949,
+          "fraction_for_90pct": 0.3901507537688442,
+          "mean_abs_correlation": 0.28560489416122437
+        },
+        "3": {
+          "spectral_entropy": 0.5188475212722351,
+          "compressibility_corr": 0.8492782369027225,
+          "fraction_for_90pct": 0.38206030150753767,
+          "mean_abs_correlation": 0.22098039090633392
+        },
+        "4": {
+          "spectral_entropy": 0.6103111370161673,
+          "compressibility_corr": 0.8504229671182462,
+          "fraction_for_90pct": 0.3863819095477387,
+          "mean_abs_correlation": 0.17389926314353943
+        },
+        "5": {
+          "spectral_entropy": 0.6725764465670339,
+          "compressibility_corr": 0.8500073782417306,
+          "fraction_for_90pct": 0.3915075376884422,
+          "mean_abs_correlation": 0.1416308581829071
+        },
+        "6": {
+          "spectral_entropy": 0.7181510466778617,
+          "compressibility_corr": 0.8403870339551414,
+          "fraction_for_90pct": 0.4080904522613065,
+          "mean_abs_correlation": 0.12125683575868607
+        },
+        "7": {
+          "spectral_entropy": 0.7456611872433789,
+          "compressibility_corr": 0.8325124428824735,
+          "fraction_for_90pct": 0.4222110552763819,
+          "mean_abs_correlation": 0.11163250356912613
+        },
+        "8": {
+          "spectral_entropy": 0.7591553703452772,
+          "compressibility_corr": 0.8278015485134599,
+          "fraction_for_90pct": 0.43190954773869344,
+          "mean_abs_correlation": 0.10748537629842758
+        },
+        "9": {
+          "spectral_entropy": 0.7738039687219546,
+          "compressibility_corr": 0.8201977590920904,
+          "fraction_for_90pct": 0.44371859296482413,
+          "mean_abs_correlation": 0.10476356744766235
+        },
+        "10": {
+          "spectral_entropy": 0.7847108247213399,
+          "compressibility_corr": 0.8217079875381059,
+          "fraction_for_90pct": 0.43944723618090453,
+          "mean_abs_correlation": 0.10588406026363373
+        },
+        "11": {
+          "spectral_entropy": 0.7979491836960705,
+          "compressibility_corr": 0.8220999905363489,
+          "fraction_for_90pct": 0.43809045226130655,
+          "mean_abs_correlation": 0.09822146594524384
+        },
+        "12": {
+          "spectral_entropy": 0.8043279086420175,
+          "compressibility_corr": 0.8183718718152058,
+          "fraction_for_90pct": 0.44487437185929646,
+          "mean_abs_correlation": 0.09574778378009796
+        },
+        "13": {
+          "spectral_entropy": 0.8042942962691194,
+          "compressibility_corr": 0.8218958722307913,
+          "fraction_for_90pct": 0.43829145728643215,
+          "mean_abs_correlation": 0.0957380011677742
+        },
+        "14": {
+          "spectral_entropy": 0.806552781948359,
+          "compressibility_corr": 0.8230091203474404,
+          "fraction_for_90pct": 0.43758793969849247,
+          "mean_abs_correlation": 0.09263768792152405
+        },
+        "15": {
+          "spectral_entropy": 0.8008446661270795,
+          "compressibility_corr": 0.8217102282369116,
+          "fraction_for_90pct": 0.43809045226130655,
+          "mean_abs_correlation": 0.09557094424962997
+        },
+        "16": {
+          "spectral_entropy": 0.7891610274314717,
+          "compressibility_corr": 0.8211030575226765,
+          "fraction_for_90pct": 0.43964824120603013,
+          "mean_abs_correlation": 0.10908109694719315
+        },
+        "17": {
+          "spectral_entropy": 0.7923195585232397,
+          "compressibility_corr": 0.8191055334169106,
+          "fraction_for_90pct": 0.4428643216080402,
+          "mean_abs_correlation": 0.10971912741661072
+        },
+        "18": {
+          "spectral_entropy": 0.7992948699627203,
+          "compressibility_corr": 0.8244545760838521,
+          "fraction_for_90pct": 0.43221105527638193,
+          "mean_abs_correlation": 0.1027183085680008
+        },
+        "19": {
+          "spectral_entropy": 0.7982090193571006,
+          "compressibility_corr": 0.8224025690213405,
+          "fraction_for_90pct": 0.4368844221105528,
+          "mean_abs_correlation": 0.10324854403734207
+        },
+        "20": {
+          "spectral_entropy": 0.7955022898593418,
+          "compressibility_corr": 0.8226075310674239,
+          "fraction_for_90pct": 0.437035175879397,
+          "mean_abs_correlation": 0.10666701197624207
+        },
+        "21": {
+          "spectral_entropy": 0.7919666123112509,
+          "compressibility_corr": 0.8221582026787256,
+          "fraction_for_90pct": 0.4377386934673367,
+          "mean_abs_correlation": 0.1104683056473732
+        },
+        "22": {
+          "spectral_entropy": 0.7939819894630727,
+          "compressibility_corr": 0.8234572321423985,
+          "fraction_for_90pct": 0.43547738693467336,
+          "mean_abs_correlation": 0.10793789476156235
+        },
+        "23": {
+          "spectral_entropy": 0.7965321864300989,
+          "compressibility_corr": 0.8212494292615236,
+          "fraction_for_90pct": 0.44035175879396987,
+          "mean_abs_correlation": 0.10864859819412231
+        },
+        "24": {
+          "spectral_entropy": 0.8042508340712232,
+          "compressibility_corr": 0.8201465752829643,
+          "fraction_for_90pct": 0.44055276381909547,
+          "mean_abs_correlation": 0.10548553615808487
+        },
+        "25": {
+          "spectral_entropy": 0.8065965731943737,
+          "compressibility_corr": 0.8198486312464156,
+          "fraction_for_90pct": 0.4415075376884422,
+          "mean_abs_correlation": 0.10529237985610962
+        },
+        "26": {
+          "spectral_entropy": 0.8126802870234825,
+          "compressibility_corr": 0.819550141763485,
+          "fraction_for_90pct": 0.4426130653266332,
+          "mean_abs_correlation": 0.10266350954771042
+        },
+        "27": {
+          "spectral_entropy": 0.8178054188323125,
+          "compressibility_corr": 0.81742666267677,
+          "fraction_for_90pct": 0.4436180904522613,
+          "mean_abs_correlation": 0.10053610056638718
+        },
+        "28": {
+          "spectral_entropy": 0.8224800323779915,
+          "compressibility_corr": 0.8168321168917025,
+          "fraction_for_90pct": 0.4492462311557789,
+          "mean_abs_correlation": 0.09731817990541458
+        },
+        "29": {
+          "spectral_entropy": 0.8303735347594091,
+          "compressibility_corr": 0.8159372442455883,
+          "fraction_for_90pct": 0.4505025125628141,
+          "mean_abs_correlation": 0.09381316602230072
+        },
+        "30": {
+          "spectral_entropy": 0.8312387754491187,
+          "compressibility_corr": 0.8159497812642639,
+          "fraction_for_90pct": 0.4494974874371859,
+          "mean_abs_correlation": 0.09363950043916702
+        },
+        "31": {
+          "spectral_entropy": 0.832238372456432,
+          "compressibility_corr": 0.8173782779153053,
+          "fraction_for_90pct": 0.44597989949748745,
+          "mean_abs_correlation": 0.09307435899972916
+        },
+        "32": {
+          "spectral_entropy": 0.8249959010291674,
+          "compressibility_corr": 0.8217720577955812,
+          "fraction_for_90pct": 0.43954773869346736,
+          "mean_abs_correlation": 0.0890309140086174
+        }
+      }
+    },
+    {
+      "category": "creative",
+      "prompt_index": 0,
+      "prompt": "Write a haiku about the nature of time.",
+      "generated_preview": "\n\nTime, a fleeting friend,\nInvisible, yet so real,\nEternal, yet new.\n\nThis haiku explores the parado",
+      "consciousness_score": 0.6191652123014244,
+      "dimension_scores": {
+        "Logic": 0.2342607243744362,
+        "Self-Reflective": 0.0628353634853907,
+        "Self-Expression": -0.1691436573505383,
+        "Uncertainty": 0.09076518727352373,
+        "Sequential": 0.11155871830902302,
+        "Computation": 0.06300312869279616,
+        "Abstraction": 0.19702147627814456
+      },
+      "num_layers": 32,
+      "seq_len": 182,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.3153465993532331,
+          "compressibility_corr": 0.9628193824875622,
+          "fraction_for_90pct": 0.04693467336683417,
+          "mean_abs_correlation": 0.12314198166131973
+        },
+        "2": {
+          "spectral_entropy": 0.33347644899255036,
+          "compressibility_corr": 0.8307652030184827,
+          "fraction_for_90pct": 0.4084924623115578,
+          "mean_abs_correlation": 0.3526470363140106
+        },
+        "3": {
+          "spectral_entropy": 0.4464999847561041,
+          "compressibility_corr": 0.8417614513328626,
+          "fraction_for_90pct": 0.39452261306532665,
+          "mean_abs_correlation": 0.2736499011516571
+        },
+        "4": {
+          "spectral_entropy": 0.5368222896822529,
+          "compressibility_corr": 0.8491989076875814,
+          "fraction_for_90pct": 0.3842713567839196,
+          "mean_abs_correlation": 0.22225387394428253
+        },
+        "5": {
+          "spectral_entropy": 0.6148113523108749,
+          "compressibility_corr": 0.8535960351843528,
+          "fraction_for_90pct": 0.3801507537688442,
+          "mean_abs_correlation": 0.17880332469940186
+        },
+        "6": {
+          "spectral_entropy": 0.6658914785416294,
+          "compressibility_corr": 0.851494648570795,
+          "fraction_for_90pct": 0.38949748743718593,
+          "mean_abs_correlation": 0.15065081417560577
+        },
+        "7": {
+          "spectral_entropy": 0.6997529900217704,
+          "compressibility_corr": 0.8453251198516812,
+          "fraction_for_90pct": 0.40165829145728643,
+          "mean_abs_correlation": 0.13416676223278046
+        },
+        "8": {
+          "spectral_entropy": 0.7197448152134918,
+          "compressibility_corr": 0.8378231102639069,
+          "fraction_for_90pct": 0.41361809045226133,
+          "mean_abs_correlation": 0.12507152557373047
+        },
+        "9": {
+          "spectral_entropy": 0.7337430465525774,
+          "compressibility_corr": 0.8303613427309109,
+          "fraction_for_90pct": 0.42683417085427133,
+          "mean_abs_correlation": 0.12049122899770737
+        },
+        "10": {
+          "spectral_entropy": 0.7405645855070686,
+          "compressibility_corr": 0.8310660020524785,
+          "fraction_for_90pct": 0.42608040201005026,
+          "mean_abs_correlation": 0.12693552672863007
+        },
+        "11": {
+          "spectral_entropy": 0.7554086427783737,
+          "compressibility_corr": 0.8274069422098161,
+          "fraction_for_90pct": 0.4322613065326633,
+          "mean_abs_correlation": 0.11921904236078262
+        },
+        "12": {
+          "spectral_entropy": 0.7648830202541105,
+          "compressibility_corr": 0.8244644920605038,
+          "fraction_for_90pct": 0.43386934673366834,
+          "mean_abs_correlation": 0.1141599491238594
+        },
+        "13": {
+          "spectral_entropy": 0.7648898466035797,
+          "compressibility_corr": 0.8202560732531743,
+          "fraction_for_90pct": 0.44251256281407036,
+          "mean_abs_correlation": 0.11631955951452255
+        },
+        "14": {
+          "spectral_entropy": 0.7781887801931824,
+          "compressibility_corr": 0.8175281076002795,
+          "fraction_for_90pct": 0.4463819095477387,
+          "mean_abs_correlation": 0.1097661629319191
+        },
+        "15": {
+          "spectral_entropy": 0.7737089861591235,
+          "compressibility_corr": 0.8179569452765267,
+          "fraction_for_90pct": 0.4450251256281407,
+          "mean_abs_correlation": 0.11091019213199615
+        },
+        "16": {
+          "spectral_entropy": 0.7772460207220245,
+          "compressibility_corr": 0.8183296166383018,
+          "fraction_for_90pct": 0.44437185929648243,
+          "mean_abs_correlation": 0.11065341532230377
+        },
+        "17": {
+          "spectral_entropy": 0.7755999982750574,
+          "compressibility_corr": 0.818887924017167,
+          "fraction_for_90pct": 0.44472361809045224,
+          "mean_abs_correlation": 0.11357305198907852
+        },
+        "18": {
+          "spectral_entropy": 0.7812317890913786,
+          "compressibility_corr": 0.8189523031714082,
+          "fraction_for_90pct": 0.4436683417085427,
+          "mean_abs_correlation": 0.1110905259847641
+        },
+        "19": {
+          "spectral_entropy": 0.7829620159744736,
+          "compressibility_corr": 0.819970326887563,
+          "fraction_for_90pct": 0.4421105527638191,
+          "mean_abs_correlation": 0.10994596779346466
+        },
+        "20": {
+          "spectral_entropy": 0.7834854960583321,
+          "compressibility_corr": 0.8188949148400205,
+          "fraction_for_90pct": 0.4436683417085427,
+          "mean_abs_correlation": 0.10997573286294937
+        },
+        "21": {
+          "spectral_entropy": 0.7866449969324352,
+          "compressibility_corr": 0.8180941697836025,
+          "fraction_for_90pct": 0.4450753768844221,
+          "mean_abs_correlation": 0.11086365580558777
+        },
+        "22": {
+          "spectral_entropy": 0.7872387391056989,
+          "compressibility_corr": 0.8189871858143898,
+          "fraction_for_90pct": 0.4449246231155779,
+          "mean_abs_correlation": 0.11184985190629959
+        },
+        "23": {
+          "spectral_entropy": 0.7906082924402954,
+          "compressibility_corr": 0.8190423251159815,
+          "fraction_for_90pct": 0.4419597989949749,
+          "mean_abs_correlation": 0.11058121174573898
+        },
+        "24": {
+          "spectral_entropy": 0.7920851524148502,
+          "compressibility_corr": 0.8182258952016025,
+          "fraction_for_90pct": 0.44190954773869345,
+          "mean_abs_correlation": 0.10998780280351639
+        },
+        "25": {
+          "spectral_entropy": 0.791567266143709,
+          "compressibility_corr": 0.8162879357063305,
+          "fraction_for_90pct": 0.447035175879397,
+          "mean_abs_correlation": 0.11128346621990204
+        },
+        "26": {
+          "spectral_entropy": 0.7953377017720157,
+          "compressibility_corr": 0.8163718542121421,
+          "fraction_for_90pct": 0.44613065326633167,
+          "mean_abs_correlation": 0.1097419261932373
+        },
+        "27": {
+          "spectral_entropy": 0.7982645670363329,
+          "compressibility_corr": 0.8164971246851676,
+          "fraction_for_90pct": 0.44809045226130656,
+          "mean_abs_correlation": 0.1103358343243599
+        },
+        "28": {
+          "spectral_entropy": 0.8006162373342064,
+          "compressibility_corr": 0.8168329625235562,
+          "fraction_for_90pct": 0.4464321608040201,
+          "mean_abs_correlation": 0.10945633798837662
+        },
+        "29": {
+          "spectral_entropy": 0.8054381333786039,
+          "compressibility_corr": 0.817016200240416,
+          "fraction_for_90pct": 0.44663316582914575,
+          "mean_abs_correlation": 0.10594164580106735
+        },
+        "30": {
+          "spectral_entropy": 0.8081651008248998,
+          "compressibility_corr": 0.8174947014341281,
+          "fraction_for_90pct": 0.4457286432160804,
+          "mean_abs_correlation": 0.10582297295331955
+        },
+        "31": {
+          "spectral_entropy": 0.8055843730262935,
+          "compressibility_corr": 0.8191024190149137,
+          "fraction_for_90pct": 0.4426633165829146,
+          "mean_abs_correlation": 0.1057913601398468
+        },
+        "32": {
+          "spectral_entropy": 0.7943491180884802,
+          "compressibility_corr": 0.8171541321169744,
+          "fraction_for_90pct": 0.4477386934673367,
+          "mean_abs_correlation": 0.10430320352315903
+        }
+      }
+    },
+    {
+      "category": "creative",
+      "prompt_index": 1,
+      "prompt": "Imagine a world where gravity works in reverse. Describe a typical morning.",
+      "generated_preview": "\n\nIn a world where gravity works in reverse, a typical morning would be quite different from what we",
+      "consciousness_score": 0.5696923364604723,
+      "dimension_scores": {
+        "Logic": 0.11712516809658105,
+        "Self-Reflective": 0.11407403798828598,
+        "Self-Expression": 0.04444772909495113,
+        "Uncertainty": 0.06346178994588636,
+        "Sequential": 0.06746475155761252,
+        "Computation": 0.007604965750002694,
+        "Abstraction": 0.07254229101243524
+      },
+      "num_layers": 32,
+      "seq_len": 271,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.4065117106513041,
+          "compressibility_corr": 0.965553686439888,
+          "fraction_for_90pct": 0.04417085427135679,
+          "mean_abs_correlation": 0.10686986893415451
+        },
+        "2": {
+          "spectral_entropy": 0.4239450005746008,
+          "compressibility_corr": 0.843913496390755,
+          "fraction_for_90pct": 0.38849246231155776,
+          "mean_abs_correlation": 0.2743610143661499
+        },
+        "3": {
+          "spectral_entropy": 0.5417058509036418,
+          "compressibility_corr": 0.8558755582511067,
+          "fraction_for_90pct": 0.3691959798994975,
+          "mean_abs_correlation": 0.20305483043193817
+        },
+        "4": {
+          "spectral_entropy": 0.631937571883252,
+          "compressibility_corr": 0.8564570302867516,
+          "fraction_for_90pct": 0.3742713567839196,
+          "mean_abs_correlation": 0.15755034983158112
+        },
+        "5": {
+          "spectral_entropy": 0.6901857163361086,
+          "compressibility_corr": 0.8546614619739467,
+          "fraction_for_90pct": 0.38271356783919597,
+          "mean_abs_correlation": 0.12794055044651031
+        },
+        "6": {
+          "spectral_entropy": 0.7293765501363041,
+          "compressibility_corr": 0.8425672828534094,
+          "fraction_for_90pct": 0.40753768844221105,
+          "mean_abs_correlation": 0.10963762551546097
+        },
+        "7": {
+          "spectral_entropy": 0.7491780713590576,
+          "compressibility_corr": 0.8306143669669526,
+          "fraction_for_90pct": 0.4269849246231156,
+          "mean_abs_correlation": 0.10310889035463333
+        },
+        "8": {
+          "spectral_entropy": 0.7600325957182333,
+          "compressibility_corr": 0.8257936512630423,
+          "fraction_for_90pct": 0.43603015075376883,
+          "mean_abs_correlation": 0.09976565092802048
+        },
+        "9": {
+          "spectral_entropy": 0.7634480942006281,
+          "compressibility_corr": 0.8207565357076265,
+          "fraction_for_90pct": 0.4400502512562814,
+          "mean_abs_correlation": 0.1052379310131073
+        },
+        "10": {
+          "spectral_entropy": 0.7675280344580131,
+          "compressibility_corr": 0.8206467364613732,
+          "fraction_for_90pct": 0.4426633165829146,
+          "mean_abs_correlation": 0.1095314472913742
+        },
+        "11": {
+          "spectral_entropy": 0.7751990559855316,
+          "compressibility_corr": 0.8233693966704266,
+          "fraction_for_90pct": 0.4364321608040201,
+          "mean_abs_correlation": 0.10046765208244324
+        },
+        "12": {
+          "spectral_entropy": 0.7813651980659697,
+          "compressibility_corr": 0.8222913554226967,
+          "fraction_for_90pct": 0.4393467336683417,
+          "mean_abs_correlation": 0.09437864273786545
+        },
+        "13": {
+          "spectral_entropy": 0.7852090010893958,
+          "compressibility_corr": 0.8207193358351732,
+          "fraction_for_90pct": 0.4418090452261306,
+          "mean_abs_correlation": 0.09536684304475784
+        },
+        "14": {
+          "spectral_entropy": 0.7891794216105986,
+          "compressibility_corr": 0.8226117925217198,
+          "fraction_for_90pct": 0.4381909547738693,
+          "mean_abs_correlation": 0.09170544892549515
+        },
+        "15": {
+          "spectral_entropy": 0.7830266672978499,
+          "compressibility_corr": 0.8214071184223408,
+          "fraction_for_90pct": 0.4418090452261306,
+          "mean_abs_correlation": 0.0953289195895195
+        },
+        "16": {
+          "spectral_entropy": 0.783516593794584,
+          "compressibility_corr": 0.8220783435124155,
+          "fraction_for_90pct": 0.44040201005025126,
+          "mean_abs_correlation": 0.09884823858737946
+        },
+        "17": {
+          "spectral_entropy": 0.7810057466361636,
+          "compressibility_corr": 0.8233323969932544,
+          "fraction_for_90pct": 0.43597989949748744,
+          "mean_abs_correlation": 0.10464026778936386
+        },
+        "18": {
+          "spectral_entropy": 0.7928437161957492,
+          "compressibility_corr": 0.8221629412718241,
+          "fraction_for_90pct": 0.4384924623115578,
+          "mean_abs_correlation": 0.09781359136104584
+        },
+        "19": {
+          "spectral_entropy": 0.7918523768565016,
+          "compressibility_corr": 0.8244232428142211,
+          "fraction_for_90pct": 0.4344221105527638,
+          "mean_abs_correlation": 0.09799962490797043
+        },
+        "20": {
+          "spectral_entropy": 0.7900590921602924,
+          "compressibility_corr": 0.8278915615679447,
+          "fraction_for_90pct": 0.43170854271356784,
+          "mean_abs_correlation": 0.1015162244439125
+        },
+        "21": {
+          "spectral_entropy": 0.7942867014109254,
+          "compressibility_corr": 0.8226282921605088,
+          "fraction_for_90pct": 0.43979899497487435,
+          "mean_abs_correlation": 0.10170196741819382
+        },
+        "22": {
+          "spectral_entropy": 0.795177783759686,
+          "compressibility_corr": 0.8218661318727695,
+          "fraction_for_90pct": 0.4410050251256281,
+          "mean_abs_correlation": 0.10147473961114883
+        },
+        "23": {
+          "spectral_entropy": 0.7978736664394925,
+          "compressibility_corr": 0.8224830314133845,
+          "fraction_for_90pct": 0.4391959798994975,
+          "mean_abs_correlation": 0.10048244893550873
+        },
+        "24": {
+          "spectral_entropy": 0.8020016499957665,
+          "compressibility_corr": 0.8229374751676957,
+          "fraction_for_90pct": 0.43743718592964825,
+          "mean_abs_correlation": 0.09876333177089691
+        },
+        "25": {
+          "spectral_entropy": 0.8042017217072449,
+          "compressibility_corr": 0.8240227950196982,
+          "fraction_for_90pct": 0.43668341708542713,
+          "mean_abs_correlation": 0.09709037095308304
+        },
+        "26": {
+          "spectral_entropy": 0.8092980435227605,
+          "compressibility_corr": 0.8249176988020146,
+          "fraction_for_90pct": 0.4339195979899497,
+          "mean_abs_correlation": 0.09420018643140793
+        },
+        "27": {
+          "spectral_entropy": 0.8171343771559056,
+          "compressibility_corr": 0.8242248641801224,
+          "fraction_for_90pct": 0.434321608040201,
+          "mean_abs_correlation": 0.0899709090590477
+        },
+        "28": {
+          "spectral_entropy": 0.8208553011548176,
+          "compressibility_corr": 0.8229488357427839,
+          "fraction_for_90pct": 0.4356281407035176,
+          "mean_abs_correlation": 0.0886961817741394
+        },
+        "29": {
+          "spectral_entropy": 0.8251569266726364,
+          "compressibility_corr": 0.8222906478185408,
+          "fraction_for_90pct": 0.4357788944723618,
+          "mean_abs_correlation": 0.08797795325517654
+        },
+        "30": {
+          "spectral_entropy": 0.8273036813783164,
+          "compressibility_corr": 0.8219391014421857,
+          "fraction_for_90pct": 0.4391959798994975,
+          "mean_abs_correlation": 0.08843430131673813
+        },
+        "31": {
+          "spectral_entropy": 0.8328259351004318,
+          "compressibility_corr": 0.8192225592709954,
+          "fraction_for_90pct": 0.445427135678392,
+          "mean_abs_correlation": 0.0878140851855278
+        },
+        "32": {
+          "spectral_entropy": 0.8178669456091392,
+          "compressibility_corr": 0.8209464266262925,
+          "fraction_for_90pct": 0.4405025125628141,
+          "mean_abs_correlation": 0.08860714733600616
+        }
+      }
+    },
+    {
+      "category": "creative",
+      "prompt_index": 2,
+      "prompt": "Create a short dialogue between the Sun and the Moon.",
+      "generated_preview": "\n\nSun: Greetings, dear Moon! Another day has passed, and here I am, ready to bid you goodnight.\n\nMoo",
+      "consciousness_score": 0.609119897425091,
+      "dimension_scores": {
+        "Logic": 0.024940192331413636,
+        "Self-Reflective": 0.0367817052565154,
+        "Self-Expression": 0.1548476149031664,
+        "Uncertainty": 0.1038557683087624,
+        "Sequential": 0.16684237243515251,
+        "Computation": -0.02009483137263407,
+        "Abstraction": 0.1801016323166781
+      },
+      "num_layers": 32,
+      "seq_len": 246,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.35878074821730677,
+          "compressibility_corr": 0.9634918930632386,
+          "fraction_for_90pct": 0.046381909547738694,
+          "mean_abs_correlation": 0.11708766222000122
+        },
+        "2": {
+          "spectral_entropy": 0.3409341813317958,
+          "compressibility_corr": 0.8296874409473773,
+          "fraction_for_90pct": 0.4078391959798995,
+          "mean_abs_correlation": 0.351457804441452
+        },
+        "3": {
+          "spectral_entropy": 0.45250161826514446,
+          "compressibility_corr": 0.8418252506609433,
+          "fraction_for_90pct": 0.39195979899497485,
+          "mean_abs_correlation": 0.2761233448982239
+        },
+        "4": {
+          "spectral_entropy": 0.5487816454323375,
+          "compressibility_corr": 0.8526997855507847,
+          "fraction_for_90pct": 0.37527638190954776,
+          "mean_abs_correlation": 0.2180786430835724
+        },
+        "5": {
+          "spectral_entropy": 0.6300236915779364,
+          "compressibility_corr": 0.8572373563169629,
+          "fraction_for_90pct": 0.3711557788944724,
+          "mean_abs_correlation": 0.1734813004732132
+        },
+        "6": {
+          "spectral_entropy": 0.6869857856056578,
+          "compressibility_corr": 0.8540585734864261,
+          "fraction_for_90pct": 0.38326633165829144,
+          "mean_abs_correlation": 0.1408800631761551
+        },
+        "7": {
+          "spectral_entropy": 0.7213972077883539,
+          "compressibility_corr": 0.8424046853127779,
+          "fraction_for_90pct": 0.40834170854271357,
+          "mean_abs_correlation": 0.1261609047651291
+        },
+        "8": {
+          "spectral_entropy": 0.7436536402712721,
+          "compressibility_corr": 0.8348690308898339,
+          "fraction_for_90pct": 0.4189949748743719,
+          "mean_abs_correlation": 0.11562217772006989
+        },
+        "9": {
+          "spectral_entropy": 0.7544378382586845,
+          "compressibility_corr": 0.8265321476937765,
+          "fraction_for_90pct": 0.4335678391959799,
+          "mean_abs_correlation": 0.11221077293157578
+        },
+        "10": {
+          "spectral_entropy": 0.7563516941492435,
+          "compressibility_corr": 0.8286228840346634,
+          "fraction_for_90pct": 0.4296482412060301,
+          "mean_abs_correlation": 0.1184954047203064
+        },
+        "11": {
+          "spectral_entropy": 0.7695137096768386,
+          "compressibility_corr": 0.825528103737652,
+          "fraction_for_90pct": 0.43321608040201004,
+          "mean_abs_correlation": 0.11103135347366333
+        },
+        "12": {
+          "spectral_entropy": 0.7802440631932467,
+          "compressibility_corr": 0.823952094048306,
+          "fraction_for_90pct": 0.4355778894472362,
+          "mean_abs_correlation": 0.10508088767528534
+        },
+        "13": {
+          "spectral_entropy": 0.7845367545867037,
+          "compressibility_corr": 0.8230119589108263,
+          "fraction_for_90pct": 0.4377386934673367,
+          "mean_abs_correlation": 0.10222280770540237
+        },
+        "14": {
+          "spectral_entropy": 0.7935283587799251,
+          "compressibility_corr": 0.8194930871677919,
+          "fraction_for_90pct": 0.4444221105527638,
+          "mean_abs_correlation": 0.0982673168182373
+        },
+        "15": {
+          "spectral_entropy": 0.7913559019524983,
+          "compressibility_corr": 0.8186350035150278,
+          "fraction_for_90pct": 0.44552763819095476,
+          "mean_abs_correlation": 0.100316122174263
+        },
+        "16": {
+          "spectral_entropy": 0.7892384076447634,
+          "compressibility_corr": 0.8206562783421092,
+          "fraction_for_90pct": 0.4408542713567839,
+          "mean_abs_correlation": 0.10094918310642242
+        },
+        "17": {
+          "spectral_entropy": 0.7939233119244543,
+          "compressibility_corr": 0.8180431143315064,
+          "fraction_for_90pct": 0.44391959798994973,
+          "mean_abs_correlation": 0.09824404865503311
+        },
+        "18": {
+          "spectral_entropy": 0.8005517465455998,
+          "compressibility_corr": 0.8171475870456095,
+          "fraction_for_90pct": 0.44597989949748745,
+          "mean_abs_correlation": 0.09546712785959244
+        },
+        "19": {
+          "spectral_entropy": 0.8010708640749945,
+          "compressibility_corr": 0.8188712158562714,
+          "fraction_for_90pct": 0.4429145728643216,
+          "mean_abs_correlation": 0.09561961144208908
+        },
+        "20": {
+          "spectral_entropy": 0.8021030051645721,
+          "compressibility_corr": 0.8181101644175225,
+          "fraction_for_90pct": 0.44547738693467337,
+          "mean_abs_correlation": 0.09634765237569809
+        },
+        "21": {
+          "spectral_entropy": 0.8057898962443937,
+          "compressibility_corr": 0.8191363500404738,
+          "fraction_for_90pct": 0.44452261306532664,
+          "mean_abs_correlation": 0.09531382471323013
+        },
+        "22": {
+          "spectral_entropy": 0.8079294953704417,
+          "compressibility_corr": 0.8201563235822054,
+          "fraction_for_90pct": 0.4423115577889447,
+          "mean_abs_correlation": 0.09578610211610794
+        },
+        "23": {
+          "spectral_entropy": 0.8089121329947687,
+          "compressibility_corr": 0.8190958965656373,
+          "fraction_for_90pct": 0.44316582914572866,
+          "mean_abs_correlation": 0.09635651111602783
+        },
+        "24": {
+          "spectral_entropy": 0.8136605750281427,
+          "compressibility_corr": 0.8211872805441125,
+          "fraction_for_90pct": 0.43979899497487435,
+          "mean_abs_correlation": 0.09338656812906265
+        },
+        "25": {
+          "spectral_entropy": 0.8135302459715472,
+          "compressibility_corr": 0.8193802253603608,
+          "fraction_for_90pct": 0.4441206030150754,
+          "mean_abs_correlation": 0.0944153293967247
+        },
+        "26": {
+          "spectral_entropy": 0.8169962776419042,
+          "compressibility_corr": 0.8182269940671427,
+          "fraction_for_90pct": 0.4441708542713568,
+          "mean_abs_correlation": 0.09353034198284149
+        },
+        "27": {
+          "spectral_entropy": 0.8215894034034474,
+          "compressibility_corr": 0.8201167901079451,
+          "fraction_for_90pct": 0.4398492462311558,
+          "mean_abs_correlation": 0.09123566001653671
+        },
+        "28": {
+          "spectral_entropy": 0.8234069697321535,
+          "compressibility_corr": 0.8187678449957961,
+          "fraction_for_90pct": 0.4419597989949749,
+          "mean_abs_correlation": 0.09123668074607849
+        },
+        "29": {
+          "spectral_entropy": 0.8252975351078368,
+          "compressibility_corr": 0.8169763185551633,
+          "fraction_for_90pct": 0.4460804020100502,
+          "mean_abs_correlation": 0.09135381132364273
+        },
+        "30": {
+          "spectral_entropy": 0.8262430559869581,
+          "compressibility_corr": 0.8167686747021075,
+          "fraction_for_90pct": 0.44663316582914575,
+          "mean_abs_correlation": 0.09175053983926773
+        },
+        "31": {
+          "spectral_entropy": 0.8275760676740603,
+          "compressibility_corr": 0.8168215713967995,
+          "fraction_for_90pct": 0.4477386934673367,
+          "mean_abs_correlation": 0.09074384719133377
+        },
+        "32": {
+          "spectral_entropy": 0.79890390907159,
+          "compressibility_corr": 0.8207405463048847,
+          "fraction_for_90pct": 0.44321608040201005,
+          "mean_abs_correlation": 0.09566396474838257
+        }
+      }
+    },
+    {
+      "category": "uncertain",
+      "prompt_index": 0,
+      "prompt": "I'm not sure what I think about free will. What are the arguments?",
+      "generated_preview": "\n\nThere are several arguments for and against free will. Here are some of the main ones:\n\nArguments ",
+      "consciousness_score": 0.5641888630448806,
+      "dimension_scores": {
+        "Logic": -0.10139588376143989,
+        "Self-Reflective": 0.006489164352475339,
+        "Self-Expression": 0.05803152105872935,
+        "Uncertainty": 0.1146327798143738,
+        "Sequential": -0.07934236051286886,
+        "Computation": 0.3475058427859031,
+        "Abstraction": 0.1357029078396714
+      },
+      "num_layers": 32,
+      "seq_len": 274,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.4001557537443496,
+          "compressibility_corr": 0.9637207305754404,
+          "fraction_for_90pct": 0.04582914572864322,
+          "mean_abs_correlation": 0.11323503404855728
+        },
+        "2": {
+          "spectral_entropy": 0.4321018180639708,
+          "compressibility_corr": 0.8449737067090701,
+          "fraction_for_90pct": 0.3920100502512563,
+          "mean_abs_correlation": 0.2575301229953766
+        },
+        "3": {
+          "spectral_entropy": 0.5500752883670613,
+          "compressibility_corr": 0.8549479114323217,
+          "fraction_for_90pct": 0.37874371859296485,
+          "mean_abs_correlation": 0.1893947571516037
+        },
+        "4": {
+          "spectral_entropy": 0.6286018406069382,
+          "compressibility_corr": 0.8563432604291747,
+          "fraction_for_90pct": 0.38105527638190956,
+          "mean_abs_correlation": 0.15103024244308472
+        },
+        "5": {
+          "spectral_entropy": 0.6893737834845679,
+          "compressibility_corr": 0.8525604990630437,
+          "fraction_for_90pct": 0.39030150753768844,
+          "mean_abs_correlation": 0.12325455248355865
+        },
+        "6": {
+          "spectral_entropy": 0.7276231568852617,
+          "compressibility_corr": 0.8358106301178285,
+          "fraction_for_90pct": 0.4199497487437186,
+          "mean_abs_correlation": 0.11145289242267609
+        },
+        "7": {
+          "spectral_entropy": 0.7495675939091314,
+          "compressibility_corr": 0.8269314347681866,
+          "fraction_for_90pct": 0.4337185929648241,
+          "mean_abs_correlation": 0.10581240803003311
+        },
+        "8": {
+          "spectral_entropy": 0.7578466184865841,
+          "compressibility_corr": 0.8287316079239417,
+          "fraction_for_90pct": 0.42738693467336686,
+          "mean_abs_correlation": 0.11248242110013962
+        },
+        "9": {
+          "spectral_entropy": 0.769929461994758,
+          "compressibility_corr": 0.8253404623226277,
+          "fraction_for_90pct": 0.43331658291457287,
+          "mean_abs_correlation": 0.10832686722278595
+        },
+        "10": {
+          "spectral_entropy": 0.7776564396985156,
+          "compressibility_corr": 0.8226817299562024,
+          "fraction_for_90pct": 0.43894472361809045,
+          "mean_abs_correlation": 0.10926622897386551
+        },
+        "11": {
+          "spectral_entropy": 0.7900265353582522,
+          "compressibility_corr": 0.8201093585237313,
+          "fraction_for_90pct": 0.44170854271356785,
+          "mean_abs_correlation": 0.10297524929046631
+        },
+        "12": {
+          "spectral_entropy": 0.7985229390285298,
+          "compressibility_corr": 0.8202852648153582,
+          "fraction_for_90pct": 0.4423115577889447,
+          "mean_abs_correlation": 0.09687532484531403
+        },
+        "13": {
+          "spectral_entropy": 0.7978766121729399,
+          "compressibility_corr": 0.8209211104429426,
+          "fraction_for_90pct": 0.44090452261306534,
+          "mean_abs_correlation": 0.09801764041185379
+        },
+        "14": {
+          "spectral_entropy": 0.8014868977545326,
+          "compressibility_corr": 0.8190949733022614,
+          "fraction_for_90pct": 0.4437688442211055,
+          "mean_abs_correlation": 0.09321451932191849
+        },
+        "15": {
+          "spectral_entropy": 0.7995828051177547,
+          "compressibility_corr": 0.8179023401407484,
+          "fraction_for_90pct": 0.44613065326633167,
+          "mean_abs_correlation": 0.09401240199804306
+        },
+        "16": {
+          "spectral_entropy": 0.8028024622628648,
+          "compressibility_corr": 0.8184953944905821,
+          "fraction_for_90pct": 0.4442211055276382,
+          "mean_abs_correlation": 0.09445325285196304
+        },
+        "17": {
+          "spectral_entropy": 0.7997758977819474,
+          "compressibility_corr": 0.8222731147469408,
+          "fraction_for_90pct": 0.4401507537688442,
+          "mean_abs_correlation": 0.09818454086780548
+        },
+        "18": {
+          "spectral_entropy": 0.8052692335106901,
+          "compressibility_corr": 0.8218859982050735,
+          "fraction_for_90pct": 0.43959798994974875,
+          "mean_abs_correlation": 0.09470243006944656
+        },
+        "19": {
+          "spectral_entropy": 0.8061690976766442,
+          "compressibility_corr": 0.8229997312332429,
+          "fraction_for_90pct": 0.43613065326633166,
+          "mean_abs_correlation": 0.09455458074808121
+        },
+        "20": {
+          "spectral_entropy": 0.8089400506325224,
+          "compressibility_corr": 0.8200625373220631,
+          "fraction_for_90pct": 0.4402010050251256,
+          "mean_abs_correlation": 0.09493782371282578
+        },
+        "21": {
+          "spectral_entropy": 0.8049274589221321,
+          "compressibility_corr": 0.822150077606673,
+          "fraction_for_90pct": 0.4396984924623116,
+          "mean_abs_correlation": 0.09883011877536774
+        },
+        "22": {
+          "spectral_entropy": 0.8057351011783078,
+          "compressibility_corr": 0.824110547627402,
+          "fraction_for_90pct": 0.4357788944723618,
+          "mean_abs_correlation": 0.10144893079996109
+        },
+        "23": {
+          "spectral_entropy": 0.8069902961589163,
+          "compressibility_corr": 0.8223624184357011,
+          "fraction_for_90pct": 0.43874371859296485,
+          "mean_abs_correlation": 0.09982934594154358
+        },
+        "24": {
+          "spectral_entropy": 0.8120300073369465,
+          "compressibility_corr": 0.8201640926620775,
+          "fraction_for_90pct": 0.44326633165829143,
+          "mean_abs_correlation": 0.09810411930084229
+        },
+        "25": {
+          "spectral_entropy": 0.8124206256722606,
+          "compressibility_corr": 0.8215759891312542,
+          "fraction_for_90pct": 0.43954773869346736,
+          "mean_abs_correlation": 0.09789426624774933
+        },
+        "26": {
+          "spectral_entropy": 0.8143167345988388,
+          "compressibility_corr": 0.8206130774235165,
+          "fraction_for_90pct": 0.44060301507537686,
+          "mean_abs_correlation": 0.0972365140914917
+        },
+        "27": {
+          "spectral_entropy": 0.8163981935513297,
+          "compressibility_corr": 0.8213488169167023,
+          "fraction_for_90pct": 0.43974874371859296,
+          "mean_abs_correlation": 0.09749709069728851
+        },
+        "28": {
+          "spectral_entropy": 0.8206213579097281,
+          "compressibility_corr": 0.8191840746839433,
+          "fraction_for_90pct": 0.4431155778894472,
+          "mean_abs_correlation": 0.0957585871219635
+        },
+        "29": {
+          "spectral_entropy": 0.8250405426669591,
+          "compressibility_corr": 0.8177516456282212,
+          "fraction_for_90pct": 0.44537688442211054,
+          "mean_abs_correlation": 0.09504750370979309
+        },
+        "30": {
+          "spectral_entropy": 0.8289388176440043,
+          "compressibility_corr": 0.8181754712048502,
+          "fraction_for_90pct": 0.4436180904522613,
+          "mean_abs_correlation": 0.09257158637046814
+        },
+        "31": {
+          "spectral_entropy": 0.8297945049225264,
+          "compressibility_corr": 0.8181813889186613,
+          "fraction_for_90pct": 0.44532663316582916,
+          "mean_abs_correlation": 0.09218937903642654
+        },
+        "32": {
+          "spectral_entropy": 0.8104484762197055,
+          "compressibility_corr": 0.8198995717587043,
+          "fraction_for_90pct": 0.4407537688442211,
+          "mean_abs_correlation": 0.0933162048459053
+        }
+      }
+    },
+    {
+      "category": "uncertain",
+      "prompt_index": 1,
+      "prompt": "This might be wrong, but could dark matter be related to consciousness?",
+      "generated_preview": "\n\nI've been thinking about this for a while, and I've come up with a few ideas that I'd like to shar",
+      "consciousness_score": 0.5695809441851087,
+      "dimension_scores": {
+        "Logic": -0.1322792045852209,
+        "Self-Reflective": 0.15952615917803528,
+        "Self-Expression": -0.12412729587968886,
+        "Uncertainty": -0.025171688543873756,
+        "Sequential": -0.08136798025941153,
+        "Computation": 0.18534582517028933,
+        "Abstraction": 0.20430531790447234
+      },
+      "num_layers": 32,
+      "seq_len": 271,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.3875568603884819,
+          "compressibility_corr": 0.9648319150859036,
+          "fraction_for_90pct": 0.044522613065326636,
+          "mean_abs_correlation": 0.1115732192993164
+        },
+        "2": {
+          "spectral_entropy": 0.4200176003665217,
+          "compressibility_corr": 0.8473198608811371,
+          "fraction_for_90pct": 0.3864824120603015,
+          "mean_abs_correlation": 0.25719064474105835
+        },
+        "3": {
+          "spectral_entropy": 0.5409169971138996,
+          "compressibility_corr": 0.8597537742324358,
+          "fraction_for_90pct": 0.36597989949748744,
+          "mean_abs_correlation": 0.18702398240566254
+        },
+        "4": {
+          "spectral_entropy": 0.6265177265646368,
+          "compressibility_corr": 0.8609039214835619,
+          "fraction_for_90pct": 0.3721105527638191,
+          "mean_abs_correlation": 0.1472129374742508
+        },
+        "5": {
+          "spectral_entropy": 0.6888667327115221,
+          "compressibility_corr": 0.8589680282633292,
+          "fraction_for_90pct": 0.3808542713567839,
+          "mean_abs_correlation": 0.1194937452673912
+        },
+        "6": {
+          "spectral_entropy": 0.7313816477384677,
+          "compressibility_corr": 0.8372083514339252,
+          "fraction_for_90pct": 0.4168341708542714,
+          "mean_abs_correlation": 0.10913480073213577
+        },
+        "7": {
+          "spectral_entropy": 0.7514765645945995,
+          "compressibility_corr": 0.8271263310099115,
+          "fraction_for_90pct": 0.4334673366834171,
+          "mean_abs_correlation": 0.10217954218387604
+        },
+        "8": {
+          "spectral_entropy": 0.7594680076763001,
+          "compressibility_corr": 0.8227491205296333,
+          "fraction_for_90pct": 0.4390452261306533,
+          "mean_abs_correlation": 0.10392684489488602
+        },
+        "9": {
+          "spectral_entropy": 0.7660600762754368,
+          "compressibility_corr": 0.8219672773266795,
+          "fraction_for_90pct": 0.4398994974874372,
+          "mean_abs_correlation": 0.10501371324062347
+        },
+        "10": {
+          "spectral_entropy": 0.778129166454227,
+          "compressibility_corr": 0.8232362610510968,
+          "fraction_for_90pct": 0.43889447236180906,
+          "mean_abs_correlation": 0.10451839119195938
+        },
+        "11": {
+          "spectral_entropy": 0.7917737282116778,
+          "compressibility_corr": 0.8225985051302096,
+          "fraction_for_90pct": 0.438643216080402,
+          "mean_abs_correlation": 0.09803042560815811
+        },
+        "12": {
+          "spectral_entropy": 0.8000796462636541,
+          "compressibility_corr": 0.820704283164545,
+          "fraction_for_90pct": 0.44110552763819094,
+          "mean_abs_correlation": 0.09388438612222672
+        },
+        "13": {
+          "spectral_entropy": 0.8020746331025072,
+          "compressibility_corr": 0.8208995184582839,
+          "fraction_for_90pct": 0.4416582914572864,
+          "mean_abs_correlation": 0.09476714581251144
+        },
+        "14": {
+          "spectral_entropy": 0.8056391072650607,
+          "compressibility_corr": 0.8194166781727854,
+          "fraction_for_90pct": 0.4426633165829146,
+          "mean_abs_correlation": 0.09175257384777069
+        },
+        "15": {
+          "spectral_entropy": 0.7983870034408673,
+          "compressibility_corr": 0.8192595140803511,
+          "fraction_for_90pct": 0.44251256281407036,
+          "mean_abs_correlation": 0.09583186358213425
+        },
+        "16": {
+          "spectral_entropy": 0.7960065446613395,
+          "compressibility_corr": 0.8180206968241615,
+          "fraction_for_90pct": 0.4463819095477387,
+          "mean_abs_correlation": 0.10155375301837921
+        },
+        "17": {
+          "spectral_entropy": 0.7949912391791836,
+          "compressibility_corr": 0.8210420406119542,
+          "fraction_for_90pct": 0.43909547738693466,
+          "mean_abs_correlation": 0.10541225224733353
+        },
+        "18": {
+          "spectral_entropy": 0.8019457334993142,
+          "compressibility_corr": 0.8189496360337958,
+          "fraction_for_90pct": 0.4441206030150754,
+          "mean_abs_correlation": 0.10159419476985931
+        },
+        "19": {
+          "spectral_entropy": 0.798204068285556,
+          "compressibility_corr": 0.8213635615763387,
+          "fraction_for_90pct": 0.43979899497487435,
+          "mean_abs_correlation": 0.10471860319375992
+        },
+        "20": {
+          "spectral_entropy": 0.7946929158603536,
+          "compressibility_corr": 0.8205896146159769,
+          "fraction_for_90pct": 0.4406532663316583,
+          "mean_abs_correlation": 0.10700931400060654
+        },
+        "21": {
+          "spectral_entropy": 0.7982833329734503,
+          "compressibility_corr": 0.8204411120626411,
+          "fraction_for_90pct": 0.44030150753768843,
+          "mean_abs_correlation": 0.1083206832408905
+        },
+        "22": {
+          "spectral_entropy": 0.7979464993511535,
+          "compressibility_corr": 0.8203414352143583,
+          "fraction_for_90pct": 0.43944723618090453,
+          "mean_abs_correlation": 0.11039131134748459
+        },
+        "23": {
+          "spectral_entropy": 0.801179626958774,
+          "compressibility_corr": 0.81975462383077,
+          "fraction_for_90pct": 0.4392964824120603,
+          "mean_abs_correlation": 0.10742442309856415
+        },
+        "24": {
+          "spectral_entropy": 0.8040714473000828,
+          "compressibility_corr": 0.820319720323744,
+          "fraction_for_90pct": 0.4393467336683417,
+          "mean_abs_correlation": 0.10548089444637299
+        },
+        "25": {
+          "spectral_entropy": 0.807843011676186,
+          "compressibility_corr": 0.8191491386416396,
+          "fraction_for_90pct": 0.4419597989949749,
+          "mean_abs_correlation": 0.10336333513259888
+        },
+        "26": {
+          "spectral_entropy": 0.8131597079589927,
+          "compressibility_corr": 0.8200567015035349,
+          "fraction_for_90pct": 0.44,
+          "mean_abs_correlation": 0.10033690929412842
+        },
+        "27": {
+          "spectral_entropy": 0.8174428114004244,
+          "compressibility_corr": 0.8205466663184864,
+          "fraction_for_90pct": 0.43944723618090453,
+          "mean_abs_correlation": 0.09809364378452301
+        },
+        "28": {
+          "spectral_entropy": 0.8182589725979659,
+          "compressibility_corr": 0.8204024527113984,
+          "fraction_for_90pct": 0.4410050251256281,
+          "mean_abs_correlation": 0.0970057025551796
+        },
+        "29": {
+          "spectral_entropy": 0.8232978834051213,
+          "compressibility_corr": 0.8208344543017283,
+          "fraction_for_90pct": 0.4400502512562814,
+          "mean_abs_correlation": 0.09461016952991486
+        },
+        "30": {
+          "spectral_entropy": 0.826496372841273,
+          "compressibility_corr": 0.8201695729461007,
+          "fraction_for_90pct": 0.4407035175879397,
+          "mean_abs_correlation": 0.09380476921796799
+        },
+        "31": {
+          "spectral_entropy": 0.8275867446974239,
+          "compressibility_corr": 0.8172371218811215,
+          "fraction_for_90pct": 0.4450753768844221,
+          "mean_abs_correlation": 0.09366089105606079
+        },
+        "32": {
+          "spectral_entropy": 0.816598768129429,
+          "compressibility_corr": 0.8181249326834426,
+          "fraction_for_90pct": 0.44603015075376884,
+          "mean_abs_correlation": 0.09244265407323837
+        }
+      }
+    },
+    {
+      "category": "uncertain",
+      "prompt_index": 2,
+      "prompt": "I don't know if AI will ever be truly creative. What do you think?",
+      "generated_preview": "\n\nAI can certainly generate creative outputs, but whether it can be truly creative is a matter of de",
+      "consciousness_score": 0.5721936931807283,
+      "dimension_scores": {
+        "Logic": -0.0011943938950663598,
+        "Self-Reflective": 0.32752228120377275,
+        "Self-Expression": 0.08415059628773293,
+        "Uncertainty": -0.016100473169542894,
+        "Sequential": 0.08320015690989416,
+        "Computation": 0.08984592741097396,
+        "Abstraction": 0.20446747697896347
+      },
+      "num_layers": 32,
+      "seq_len": 273,
+      "layers": {
+        "1": {
+          "spectral_entropy": 0.39902170661489095,
+          "compressibility_corr": 0.9640142409402489,
+          "fraction_for_90pct": 0.04512562814070352,
+          "mean_abs_correlation": 0.11195602267980576
+        },
+        "2": {
+          "spectral_entropy": 0.43662465253785404,
+          "compressibility_corr": 0.8491134104718063,
+          "fraction_for_90pct": 0.38386934673366835,
+          "mean_abs_correlation": 0.24499276280403137
+        },
+        "3": {
+          "spectral_entropy": 0.5595508070101473,
+          "compressibility_corr": 0.861397752100941,
+          "fraction_for_90pct": 0.36477386934673367,
+          "mean_abs_correlation": 0.1772005409002304
+        },
+        "4": {
+          "spectral_entropy": 0.6430980447308,
+          "compressibility_corr": 0.8627806921932266,
+          "fraction_for_90pct": 0.3696482412060301,
+          "mean_abs_correlation": 0.1384546011686325
+        },
+        "5": {
+          "spectral_entropy": 0.7037875818411601,
+          "compressibility_corr": 0.855172774324623,
+          "fraction_for_90pct": 0.38678391959798997,
+          "mean_abs_correlation": 0.11440515518188477
+        },
+        "6": {
+          "spectral_entropy": 0.739180883729067,
+          "compressibility_corr": 0.8380359142991696,
+          "fraction_for_90pct": 0.41542713567839196,
+          "mean_abs_correlation": 0.1019178032875061
+        },
+        "7": {
+          "spectral_entropy": 0.7583142144806805,
+          "compressibility_corr": 0.828897997610629,
+          "fraction_for_90pct": 0.4314572864321608,
+          "mean_abs_correlation": 0.09662047773599625
+        },
+        "8": {
+          "spectral_entropy": 0.768591648082291,
+          "compressibility_corr": 0.8253035656625906,
+          "fraction_for_90pct": 0.435678391959799,
+          "mean_abs_correlation": 0.0968206524848938
+        },
+        "9": {
+          "spectral_entropy": 0.7727401571124491,
+          "compressibility_corr": 0.8215469846054362,
+          "fraction_for_90pct": 0.43894472361809045,
+          "mean_abs_correlation": 0.09928397089242935
+        },
+        "10": {
+          "spectral_entropy": 0.7779625701518004,
+          "compressibility_corr": 0.8230016853971331,
+          "fraction_for_90pct": 0.4378391959798995,
+          "mean_abs_correlation": 0.10195985436439514
+        },
+        "11": {
+          "spectral_entropy": 0.7877500690571441,
+          "compressibility_corr": 0.8208208911376538,
+          "fraction_for_90pct": 0.44236180904522615,
+          "mean_abs_correlation": 0.09816426038742065
+        },
+        "12": {
+          "spectral_entropy": 0.7969656592661393,
+          "compressibility_corr": 0.8183222685997192,
+          "fraction_for_90pct": 0.44603015075376884,
+          "mean_abs_correlation": 0.09232954680919647
+        },
+        "13": {
+          "spectral_entropy": 0.7966692974261931,
+          "compressibility_corr": 0.8214629968122846,
+          "fraction_for_90pct": 0.4401507537688442,
+          "mean_abs_correlation": 0.09322594106197357
+        },
+        "14": {
+          "spectral_entropy": 0.7980898793406038,
+          "compressibility_corr": 0.8206455312003896,
+          "fraction_for_90pct": 0.4408542713567839,
+          "mean_abs_correlation": 0.09353960305452347
+        },
+        "15": {
+          "spectral_entropy": 0.7916579969691426,
+          "compressibility_corr": 0.8212239598962783,
+          "fraction_for_90pct": 0.43909547738693466,
+          "mean_abs_correlation": 0.10169646888971329
+        },
+        "16": {
+          "spectral_entropy": 0.786467430397542,
+          "compressibility_corr": 0.8217892248820439,
+          "fraction_for_90pct": 0.4385427135678392,
+          "mean_abs_correlation": 0.10812412947416306
+        },
+        "17": {
+          "spectral_entropy": 0.7850113987370736,
+          "compressibility_corr": 0.8217986333043603,
+          "fraction_for_90pct": 0.43944723618090453,
+          "mean_abs_correlation": 0.10961835831403732
+        },
+        "18": {
+          "spectral_entropy": 0.7973846189278156,
+          "compressibility_corr": 0.8196056280031112,
+          "fraction_for_90pct": 0.44386934673366835,
+          "mean_abs_correlation": 0.10016798228025436
+        },
+        "19": {
+          "spectral_entropy": 0.7967959137630871,
+          "compressibility_corr": 0.8216701991172406,
+          "fraction_for_90pct": 0.44030150753768843,
+          "mean_abs_correlation": 0.10030171275138855
+        },
+        "20": {
+          "spectral_entropy": 0.7975436028333517,
+          "compressibility_corr": 0.8213293251660232,
+          "fraction_for_90pct": 0.4400502512562814,
+          "mean_abs_correlation": 0.10046441853046417
+        },
+        "21": {
+          "spectral_entropy": 0.7984879090821656,
+          "compressibility_corr": 0.8229772383458771,
+          "fraction_for_90pct": 0.4355778894472362,
+          "mean_abs_correlation": 0.10071903467178345
+        },
+        "22": {
+          "spectral_entropy": 0.803032526782746,
+          "compressibility_corr": 0.8229126746856242,
+          "fraction_for_90pct": 0.43693467336683417,
+          "mean_abs_correlation": 0.09802412986755371
+        },
+        "23": {
+          "spectral_entropy": 0.8017095339788564,
+          "compressibility_corr": 0.8215517807209363,
+          "fraction_for_90pct": 0.4394974874371859,
+          "mean_abs_correlation": 0.09951714426279068
+        },
+        "24": {
+          "spectral_entropy": 0.8047238481538026,
+          "compressibility_corr": 0.8228360569475267,
+          "fraction_for_90pct": 0.43743718592964825,
+          "mean_abs_correlation": 0.09684436768293381
+        },
+        "25": {
+          "spectral_entropy": 0.8054080486330033,
+          "compressibility_corr": 0.8210624883238204,
+          "fraction_for_90pct": 0.4408542713567839,
+          "mean_abs_correlation": 0.0969756469130516
+        },
+        "26": {
+          "spectral_entropy": 0.8100023676429973,
+          "compressibility_corr": 0.8197834142940832,
+          "fraction_for_90pct": 0.4441708542713568,
+          "mean_abs_correlation": 0.09491333365440369
+        },
+        "27": {
+          "spectral_entropy": 0.8147459838478965,
+          "compressibility_corr": 0.8190397157626526,
+          "fraction_for_90pct": 0.44452261306532664,
+          "mean_abs_correlation": 0.09377157688140869
+        },
+        "28": {
+          "spectral_entropy": 0.8174893529884565,
+          "compressibility_corr": 0.8187006045057879,
+          "fraction_for_90pct": 0.44321608040201005,
+          "mean_abs_correlation": 0.09282640367746353
+        },
+        "29": {
+          "spectral_entropy": 0.820578084038745,
+          "compressibility_corr": 0.8183479380481888,
+          "fraction_for_90pct": 0.44482412060301507,
+          "mean_abs_correlation": 0.09250105172395706
+        },
+        "30": {
+          "spectral_entropy": 0.8232052385780662,
+          "compressibility_corr": 0.8196244915094152,
+          "fraction_for_90pct": 0.4421105527638191,
+          "mean_abs_correlation": 0.09158955514431
+        },
+        "31": {
+          "spectral_entropy": 0.8248720072506487,
+          "compressibility_corr": 0.8196965858584209,
+          "fraction_for_90pct": 0.4428643216080402,
+          "mean_abs_correlation": 0.09157608449459076
+        },
+        "32": {
+          "spectral_entropy": 0.8098511243694725,
+          "compressibility_corr": 0.8192098294418941,
+          "fraction_for_90pct": 0.4423115577889447,
+          "mean_abs_correlation": 0.09322997182607651
+        }
+      }
+    }
+  ]
+}

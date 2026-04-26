@@ -1,0 +1,8 @@
+{
+  "Thought Trajectory": {
+    "status": "failed",
+    "elapsed": 1.261103868484497,
+    "error": "'NoneType' object has no attribute 'device'",
+    "result": "{}"
+  }
+}

@@ -1,0 +1,42 @@
+================================================================================
+SPARSE EIGENSOLVER BENCHMARK
+================================================================================
+
+Configuration:
+  - Number of eigenvalues (k): 100
+  - Network density: 0.01
+  - Method: ARPACK (via scipy.sparse.linalg.eigsh)
+
+--------------------------------------------------------------------------------
+
+[30,000 nodes]
+  Generating sparse network... done (101.76s)
+  - Non-zeros: 17,909,063 (98.01% sparse)
+  - Memory: ~136.6 MB
+  Computing top 100 eigenvalues... done (39.11s)
+  [OK] Top eigenvalue: 150.382706
+  [OK] Bottom eigenvalue: -14.114951
+  [OK] Speed: 767.0 nodes/sec
+
+[50,000 nodes]
+  Generating sparse network... Traceback (most recent call last):
+  File "c:\Users\akbon\OneDrive\Documents\GitHub\harmonic-field-consciousness\experiments\test_sparse_eigensolvers.py", line 193, in <module>
+    main()
+  File "c:\Users\akbon\OneDrive\Documents\GitHub\harmonic-field-consciousness\experiments\test_sparse_eigensolvers.py", line 180, in main
+    benchmark_sparse_solver(
+  File "c:\Users\akbon\OneDrive\Documents\GitHub\harmonic-field-consciousness\experiments\test_sparse_eigensolvers.py", line 78, in benchmark_sparse_solver
+    A = generate_test_network(n, density=density)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\akbon\OneDrive\Documents\GitHub\harmonic-field-consciousness\experiments\test_sparse_eigensolvers.py", line 20, in generate_test_network
+    A = sp.random(n_nodes, n_nodes, density=density, format='csr', dtype=np.float32)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\akbon\AppData\Local\Programs\Python\Python311\Lib\site-packages\scipy\_lib\_util.py", line 352, in wrapper
+    return fun(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\akbon\AppData\Local\Programs\Python\Python311\Lib\site-packages\scipy\sparse\_construct.py", line 1396, in random
+    vals, ind = _random((m, n), density, format, dtype, rng, data_rvs_kw)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\akbon\AppData\Local\Programs\Python\Python311\Lib\site-packages\scipy\sparse\_construct.py", line 1278, in _random
+    ind = np.unravel_index(raveled_ind, shape=shape, order='F')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: index -1807099863 is out of bounds for array with size 2500000000

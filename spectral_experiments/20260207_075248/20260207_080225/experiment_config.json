@@ -1,0 +1,19 @@
+{
+  "phase": "4",
+  "device": "cuda",
+  "save_dir": "spectral_experiments/20260207_075248",
+  "n_embd": 256,
+  "n_head": 4,
+  "n_layer": 4,
+  "max_value": 99,
+  "seq_len": 16,
+  "num_train": 50000,
+  "num_val": 5000,
+  "batch_size": 128,
+  "lr": 0.0003,
+  "max_epochs": 30,
+  "patience": 8,
+  "max_forbidden_rank": 16,
+  "spectral_lambda": 0.1,
+  "reward_lambda": 0.01
+}

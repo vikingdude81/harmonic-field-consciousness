@@ -59,31 +59,70 @@ class UniversalResult:
         return self.dimension_scores
 
 
-def get_adaptive_layer_fraction(num_layers: int) -> float:
+def get_adaptive_layer_fraction(num_layers: int, model_name: str = "") -> float:
     """
-    Get optimal layer fraction based on model depth.
+    Get optimal layer fraction based on model depth and architecture.
 
-    Deeper models tend to have consciousness emerge earlier proportionally.
-    These values are heuristics based on analysis of various model sizes.
+    Layer sweep analysis (Feb 2026) across Mistral-7B and Qwen-7B revealed that
+    the CS-SE correlation peaks at architecture-specific depths:
+      - Mistral: peak at ~56% depth (L18/32), significant window 50-59%
+      - Qwen: representations are maximally compressed at 14-93% depth (SE≈0.005),
+              with the CS-SE link spread weakly across the compressed zone
+      - General: the old 75% heuristic misses the peak in most architectures
 
     Args:
         num_layers: Number of transformer layers in the model
+        model_name: Model name/path for architecture-specific selection
 
     Returns:
         Optimal layer fraction (0.0 to 1.0)
     """
+    model_lower = model_name.lower()
+
+    # Architecture-specific fractions based on layer sweep data
+    if "mistral" in model_lower:
+        # Peak CS-SE at 56% depth (L18/32), significant zone L16-L19
+        if num_layers <= 32:
+            return 0.56
+        elif num_layers <= 48:
+            return 0.54
+        else:
+            return 0.52
+    elif "qwen" in model_lower:
+        # Qwen compresses representations to SE≈0.005 at L4-L26 (28 layers)
+        # The CS-SE link is weak but steadily grows through the compressed zone
+        # Use late-compressed zone where SE starts to recover (~85% depth)
+        if num_layers <= 28:
+            return 0.85
+        elif num_layers <= 48:
+            return 0.80
+        else:
+            return 0.75
+    elif "yi" in model_lower:
+        # Yi architecture is similar to Llama; use mid-depth
+        if num_layers <= 32:
+            return 0.65
+        else:
+            return 0.60
+    elif "llama" in model_lower:
+        if num_layers <= 32:
+            return 0.65
+        else:
+            return 0.60
+
+    # General fallback heuristic
     if num_layers <= 12:
         return 0.75  # Small models (GPT-2, etc.)
     elif num_layers <= 24:
-        return 0.72  # Medium models (7B range)
+        return 0.65  # Medium models
     elif num_layers <= 32:
-        return 0.70  # Large models (13B-14B range)
+        return 0.60  # Large models (7B-14B range)
     elif num_layers <= 48:
-        return 0.68  # Very large models (32B range - Qwen2.5-32B has 64 layers)
+        return 0.58  # Very large models
     elif num_layers <= 64:
-        return 0.65  # 32B models with 64 layers
+        return 0.55  # 32B+ models
     else:
-        return 0.60  # 70B+ models
+        return 0.52  # 70B+ models
 
 
 def get_ensemble_layers(num_layers: int, n_layers: int = 3) -> list:
@@ -630,7 +669,7 @@ class UniversalCircuit:
             target_layer = layer_override
         elif use_adaptive_layer:
             # Use adaptive layer selection for deep models
-            layer_frac = get_adaptive_layer_fraction(num_layers)
+            layer_frac = get_adaptive_layer_fraction(num_layers, model_name)
             target_layer = int(num_layers * layer_frac)
         else:
             # Use circuit's default layer fraction
@@ -935,7 +974,7 @@ class UniversalCircuit:
 
         # Determine target layer
         if use_adaptive_layer:
-            layer_frac = get_adaptive_layer_fraction(num_layers)
+            layer_frac = get_adaptive_layer_fraction(num_layers, model_name)
             target_layer = int(num_layers * layer_frac)
         else:
             layer_frac = circuit.get("layer_fraction", 0.75)
@@ -1277,7 +1316,7 @@ class CachedUniversalCircuit(UniversalCircuit):
         if layer_override is not None:
             target_layer = layer_override
         elif use_adaptive:
-            layer_frac = get_adaptive_layer_fraction(num_layers)
+            layer_frac = get_adaptive_layer_fraction(num_layers, model_name)
             target_layer = int(num_layers * layer_frac)
         else:
             layer_frac = circuit.get("layer_fraction", 0.75)

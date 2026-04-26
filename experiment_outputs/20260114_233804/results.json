@@ -1,0 +1,27 @@
+{
+  "Layerwise Analysis": {
+    "status": "success",
+    "elapsed": 1.562084674835205,
+    "result": "{'n_layers': 7, 'peak_layer': 4}"
+  },
+  "Consciousness Patching": {
+    "status": "success",
+    "elapsed": 0.6065413951873779,
+    "result": "{'n_layers_tested': 7, 'most_impactful_layer': 24, 'max_delta': 0.13555664062500017}"
+  },
+  "Thought Trajectory": {
+    "status": "success",
+    "elapsed": 1.746595859527588,
+    "result": "{'n_steps': 20, 'final_score': 0.504748046875, 'tokens': [' First', ',', ' I', ' need', ' to', ' understand', ' what', ' consciousness', ' is', '.'], 'generated_text': 'Let me think about consciousness step by step. First, I need to understand what consciousness is. Co'}"
+  },
+  "SAE Collection": {
+    "status": "success",
+    "elapsed": 1.3815932273864746,
+    "result": "{'n_samples': 60, 'layers': [22, 23, 24], 'file': 'experiment_outputs\\\\20260114_233804\\\\sae_activations.npz'}"
+  },
+  "Steering Vectors": {
+    "status": "success",
+    "elapsed": 0.6805448532104492,
+    "result": "{'n_vectors': 3, 'layers': [20, 22, 24], 'norms': {20: 16.863527297973633, 22: 23.080663681030273, 24: 126.87596893310547}, 'file': 'experiment_outputs\\\\20260114_233804\\\\steering_vectors.npz'}"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "phase": "all",
+  "device": "cpu",
+  "save_dir": "../../spectral_experiments",
+  "n_embd": 64,
+  "n_head": 2,
+  "n_layer": 2,
+  "max_value": 99,
+  "seq_len": 16,
+  "num_train": 500,
+  "num_val": 100,
+  "batch_size": 32,
+  "lr": 0.0003,
+  "max_epochs": 3,
+  "patience": 3,
+  "max_forbidden_rank": 4,
+  "spectral_lambda": 0.1,
+  "reward_lambda": 0.0
+}

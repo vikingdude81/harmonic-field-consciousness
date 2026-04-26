@@ -1,0 +1,9 @@
+gradio==4.11.0
+transformers==4.36.0
+torch>=2.0.0
+acceleragte==0.25.0
+bitsandbytes>=0.41.0
+peft>=0.7.0
+numpy<2.0.0
+matplotlib>=3.5.0
+pillow>=9.0.0
