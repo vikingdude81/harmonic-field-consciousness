@@ -37,3 +37,4 @@ models/*.pt
 
 # Logs
 logs/
+*.log

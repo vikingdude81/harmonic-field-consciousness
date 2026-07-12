@@ -1,0 +1,3 @@
+[submodule "NanoGPT"]
+	path = NanoGPT
+	url = https://github.com/vikingdude81/NanoGPT

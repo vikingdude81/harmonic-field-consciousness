@@ -57,6 +57,18 @@ def compute_consciousness(
     
     # Remap dimensions if needed
     if hidden_dim != REFERENCE_HIDDEN_DIM:
+        # WARNING: linear index scaling is NOT a validated remapping. Dimension
+        # semantics do not survive index arithmetic across models/hidden sizes
+        # (see consciousness_circuit/correlation_remapper.py for the validated
+        # correlation-based approach). Scores produced through this branch are
+        # UNCALIBRATED and should not be reported as circuit v2.1 measurements.
+        import warnings
+        warnings.warn(
+            f"Hidden dim {hidden_dim} != calibrated {REFERENCE_HIDDEN_DIM}: "
+            "falling back to naive index scaling - scores are UNCALIBRATED. "
+            "Use consciousness_circuit.correlation_remapper for a validated remap.",
+            stacklevel=2,
+        )
         scale = hidden_dim / REFERENCE_HIDDEN_DIM
         dims = {int(round(k * scale)): v for k, v in CONSCIOUS_DIMS_V2_1.items()}
     else:
