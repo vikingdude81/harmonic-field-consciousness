@@ -379,6 +379,47 @@ form/reliance split (replicated), sediment-robustness with a construction
 gradient (new). Remaining rigor ladder: scale (word-level/GPT-2), then the
 Continuant Probe B2 loop.
 
+### SCALE RUNG (2026-07-13): 512d/6L — triad survives; internalization completes; gradient amplifies
+
+Full pipeline re-run at 512-dim × 6-layer × 8-head (~25M params, 6× capacity;
+fresh P_bad extracted at the new width, rank 16; same char-level protocol).
+
+**Scaffold ablation (A1a), 512d vs 256d:**
+
+| Condition | 256d (seed-replicated) | 512d (single seed) |
+|---|---|---|
+| C2a inference retrofit | −0.0100 | −0.0020 (tax; CI excludes 0) |
+| C2b adapted (10ep) | +0.0037 | +0.0012 (crutch; CI excludes 0) |
+| C3 grown-in | +0.0003 | **−0.00004, CI (−0.00017, +0.00009) — fully independent** |
+
+Ordering preserved at both scales (tax < internalized ≈ 0 < crutch). At 512d
+the grown-in scaffold is **completely vestigial** — the small residual seen at
+256d vanished. More capacity → cleaner internalization.
+
+**Sediment measures (occupancy chance = 16/512 = 0.031):**
+
+| Model | Occupancy | A1b @α=0.5 (3 inj. seeds) |
+|---|---|---|
+| C1 vanilla | 0.0308 (at chance) | −0.005 |
+| C2b (10ep) | 0.0289 (barely below) | −0.018 (−0.020..−0.016) |
+| C3 grown-in | **0.0142 (< half of chance)** | **−0.105 (−0.107..−0.103)** |
+
+The construction gradient **amplified with scale**: at 256d C3's sediment
+robustness was ~2× the 10-epoch retrofit's; at 512d it is ~6×, with
+non-overlapping ranges, and the grown-in model's forbidden-subspace avoidance
+dug far below chance while the retrofit barely moved. Coherent single reading
+across all measures: **larger models internalize a formation-time constraint
+more completely — scaffold dependence → 0 while weight-borne sediment deepens.**
+
+**Caveats for this rung:** single seed at 512d (the 256d replicate protocol
+should be repeated here before publication); C2b measured at 10ep only (dose
+sweep not re-run at scale); the rank/dim fraction halved (16/512 vs 16/256),
+which likely explains the smaller raw ΔNLL magnitudes — a rank-32 variant at
+512d would deconfound constraint-fraction from capacity. Side observation:
+the phase-4 *cure* failed its own DKR criterion at 512d (0.417 vs target
+0.35) — post-hoc removal gets harder with scale even as grown-in
+internalization gets cleaner, which is itself on-message for the framework.
+
 Additional caveats specific to this curve: (a) single seed per dose; (b) the
 80-epoch model is well into overfitting (train 0.347 vs val 0.552 rising),
 so the 40-epoch point is the cleanest deep-dose measurement — a 160-epoch
