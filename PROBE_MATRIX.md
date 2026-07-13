@@ -190,15 +190,44 @@ inside as form (grown-in). That is §6's "direction of constitution," measured.
 **Honest caveats before this goes near the paper:**
 1. Effect sizes are small in absolute terms (10⁻³–10⁻² NLL); statistically
    solid (CIs exclude 0) but char-level toy scale.
-2. Budget confound: C2b trained 10 epochs vs C3's 20. The dose-response run —
-   C2b at 20/40/80 epochs — is *literally the permanence-vs-convergence
-   question*: does deeper retrofit adaptation approach the grown-in signature
-   (convergence) or plateau at crutch-dependence (permanence)? This is the
-   single most valuable follow-up.
+2. ~~Budget confound~~ — resolved by the dose-response run below.
 3. Single seed per condition; replicate before publishing numbers.
 4. "Internalized" here concerns a *removable* regulator whose shaping persists
    in weights — it does not license any claim about stakes or consequence
    (the wall is untouched, exactly as the framework requires).
+
+### DOSE-RESPONSE RESULT (2026-07-12): convergence with a permanent residue
+
+C2b re-run at increasing fine-tuning doses, early stopping disabled, same
+baseline + geometry + protocol throughout:
+
+| Dose (epochs) | ΔNLL | CI95 |
+|---|---|---|
+| 10 | +0.00396 | (+0.00357, +0.00437) — replicates flagship C2b |
+| 20 | +0.00203 | (+0.00175, +0.00232) |
+| 40 | +0.00105 | (+0.00084, +0.00126) |
+| 80 | +0.00112 | (+0.00093, +0.00132) |
+| **C3 grown-in (reference)** | **+0.00042** | (+0.00023, +0.00063) |
+
+**Reading: partial convergence, measurable floor.** Retrofit dependence halves
+per doubling of adaptation until ~40 epochs, then flattens. The asymptote
+(~+0.0011) sits ≈2.6× above the grown-in signature with non-overlapping CIs.
+So on §6's permanence-vs-convergence question, the measurement answers *both,
+quantified*: deep retrofit adaptation converges most of the way toward
+internalization, and a residue of construction order persists at the
+asymptote that further adaptation does not close. Workstream 2's deliverable
+was "characterize the asymptotic limit" — this is a literal measured
+asymptote, at toy scale, for one regulatory layer.
+
+Additional caveats specific to this curve: (a) single seed per dose; (b) the
+80-epoch model is well into overfitting (train 0.347 vs val 0.552 rising),
+so the 40-epoch point is the cleanest deep-dose measurement — a 160-epoch
+point plus seed replicates would firm up the floor; (c) toy scale as above.
+
+**Follow-ups in value order:** seed replicates of {40, 80, C3}; a 160-epoch
+point; the same sweep at word-level/GPT-2 scale; and the same protocol on a
+*different* layer type (e.g., memory instead of geometry) to test whether the
+residue generalizes.
 
 ## FTTF: feature the knee, don't hide it
 
