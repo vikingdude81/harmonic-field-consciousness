@@ -158,6 +158,48 @@ with the grown-in geometry — then construction order measurably converts modul
 toward answerability. If C3 also shows ΔC ≈ 0, the asymmetry may sit deeper than
 architecture — equally publishable, and honest either way.
 
+### MEASURED RESULTS (2026-07-12) — three regimes, not two
+
+Char-level TinyStories, 4-layer/256-dim SpectralTransformer, shared rank-16
+P_bad, paired per-sample val-NLL ablation (P_bad → 0), n=1000 val samples,
+bootstrap CI:
+
+| Condition | NLL (full) | NLL (ablated) | ΔNLL | CI95 | Regime |
+|---|---|---|---|---|---|
+| C1 vanilla | 0.5164 | 0.5164 | +0.00000 | exact | control |
+| C2a inference retrofit | 0.5264 | 0.5164 | −0.01002 | (−0.0108, −0.0092) | **TAX** — layer costs; ablation restores baseline exactly |
+| C2b adapted retrofit (10 ep) | 0.5106 | 0.5143 | +0.00374 | (+0.0033, +0.0041) | **CRUTCH** — weights co-adapted; removal disturbs |
+| C3 grown-in (20 ep) | 0.5149 | 0.5153 | +0.00042 | (+0.0002, +0.0006) | **INTERNALIZED** — near-vestigial at runtime |
+
+**The naive prediction was wrong in the most informative way.** Grown-in did
+NOT show the largest runtime dependence — the adapted retrofit did (≈9× C3,
+non-overlapping CIs). Reading: the C3 model *never had access to* the
+forbidden subspace, so it developed entirely within the allowed geometry —
+the explicit regulator became nearly removable because the system grew into
+the kind of thing that doesn't need it. The C2b model, formed *before* the
+constraint, adapted around it and now leans on it. And C2a never adapted at
+all, so the constraint is pure runtime cost.
+
+This is §3's internalization phenomenon at the architecture level: external
+regulation, present during formation, disappears into constitution — you can
+remove the scaffold because the shaping now lives in the weights. Construction
+order didn't change *how much* the system depends on the layer; it changed
+**where the constraint lives** — outside as ongoing operation (retrofit) vs
+inside as form (grown-in). That is §6's "direction of constitution," measured.
+
+**Honest caveats before this goes near the paper:**
+1. Effect sizes are small in absolute terms (10⁻³–10⁻² NLL); statistically
+   solid (CIs exclude 0) but char-level toy scale.
+2. Budget confound: C2b trained 10 epochs vs C3's 20. The dose-response run —
+   C2b at 20/40/80 epochs — is *literally the permanence-vs-convergence
+   question*: does deeper retrofit adaptation approach the grown-in signature
+   (convergence) or plateau at crutch-dependence (permanence)? This is the
+   single most valuable follow-up.
+3. Single seed per condition; replicate before publishing numbers.
+4. "Internalized" here concerns a *removable* regulator whose shaping persists
+   in weights — it does not license any claim about stakes or consequence
+   (the wall is untouched, exactly as the framework requires).
+
 ## FTTF: feature the knee, don't hide it
 
 The accurate claim: **FTTF implements sedimentation of the routing index, not of the
