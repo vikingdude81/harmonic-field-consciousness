@@ -333,6 +333,52 @@ regulated-vs-unregulated (all regulated models in −0.15…−0.19). Caveats: s
 injection seed, single model seed/condition, char scale; seed replicates and a
 larger model would firm the dose picture.
 
+### SEED REPLICATES (2026-07-13): all three headline claims survive; one new gradient
+
+3 model seeds × {C3 fresh-init, C2b-40ep, C2b-10ep}, each with scaffold
+ablation, occupancy, and A1b (3 injection seeds × 2 α). Fixed C1 + P_bad as
+shared environment. Ranges below are min..max across model seeds.
+
+**1. Scaffold ablation (A1a) — the triad replicates with striking stability:**
+
+| Group | ΔNLL mean | seed range | Non-overlap |
+|---|---|---|---|
+| C2b 10ep | +0.00370 | +0.00368..+0.00371 | ✓ vs both others |
+| C2b 40ep | +0.00095 | +0.00078..+0.00105 | ✓ vs both others |
+| C3 grown-in | +0.00033 | +0.00023..+0.00051 | ✓ vs both others |
+
+The dependence ordering C2b10 > C2b40 > C3 holds for every seed; the
+C2b40/C3 floor ratio is ≈2.9× on replicate means (2.6× single-seed). The
+crutch→internalized separation is not seed noise.
+
+**2. Occupancy — internal-form convergence replicates:** C2b40 (0.0267) ≈ C3
+(0.0277) < C2b10 (0.0357) << C1 (0.0603). Deep retrofit reproduces grown-in
+internal geometry-avoidance while retaining ~3× the scaffold dependence —
+the form/reliance split is robust.
+
+**3. A1b — regulated vs vanilla replicates decisively; and at moderate
+perturbation a construction gradient emerges:**
+
+| Group | a1b effect @α=0.5 (seed range) | @α=1.0 (seed range) |
+|---|---|---|
+| C1 vanilla | −0.002 (−0.003..−0.001) | −0.006 (−0.009..−0.003) |
+| C2b 10ep | −0.045 (−0.046..−0.044) | −0.189 (−0.213..−0.174) |
+| C2b 40ep | −0.066 (−0.069..−0.064) | −0.164 (−0.189..−0.119) |
+| C3 grown-in | −0.086 (−0.109..−0.070) | −0.285 (−0.398..−0.147) |
+
+At **α=0.5 the three regulated groups separate with non-overlapping seed
+ranges in a monotone order: C2b10 < C2b40 < C3** — more formation-under-
+constraint → deeper robustness sediment. This is the dose/construction
+gradient the single-seed run couldn't see. At α=1.0 the gradient is swamped
+by seed variance (C3 spread −0.15..−0.40); report the α=0.5 gradient and the
+α=1.0 regulated-vs-vanilla separation, nothing stronger.
+
+**Status after replicates:** the empirical spine at toy scale is complete —
+tax/crutch/internalized (replicated), the non-zero floor (replicated, ≈2.9×),
+form/reliance split (replicated), sediment-robustness with a construction
+gradient (new). Remaining rigor ladder: scale (word-level/GPT-2), then the
+Continuant Probe B2 loop.
+
 Additional caveats specific to this curve: (a) single seed per dose; (b) the
 80-epoch model is well into overfitting (train 0.347 vs val 0.552 rising),
 so the 40-epoch point is the cleanest deep-dose measurement — a 160-epoch
