@@ -24,7 +24,7 @@ concept → operational definition → behavioral battery → empirical regulari
 
 | Probe | What accumulates / registers | What object is changed | Is the reasoner the thing changed? | Ablate lower layer → competence loss? (prediction) | Construction order | Continuity type | Verdict | Precise shortfall |
 |---|---|---|---|---|---|---|---|---|
-| **Gabriel's Horn** (`E:\horn-experiment`) | Entropy of sampling distribution, per CoT step | The output distribution (via temperature) | No — weights untouched, schedule is designer-set | No (remove schedule → model generates as before) | Retrofit (inference-time wrapper) | Per-generation only | Constraint | Regulation **without stakes**: nothing in the system is worse off for violating the schedule |
+| **Gabriel's Horn** (github.com/vikingdude81/horn-experiment) | Entropy of sampling distribution, per CoT step | The output distribution (via temperature) | No — weights untouched, schedule is designer-set | **No — MEASURED** (A1 ΔC=+0.010, CI +0.000..+0.025; A2 ΔC=+0.015, CI −0.045..+0.070; Qwen2.5-0.5B, n=200/condition, 2026-07-12). NLL invariant by construction. | Retrofit (inference-time wrapper) | Per-generation only | Constraint — **modulation signature confirmed empirically** | Regulation **without stakes**: nothing in the system is worse off for violating the schedule |
 | **LGI constellation** (lgi-executive, motion-lgi, lattice-grid-interface) | Forbidden-energy / curvature events in state space | The inference trajectory (ALLOW/DAMPEN/BLOCK) | No — the scored worker sees zones; the reasoner is gated, not changed | No (remove gate → raw generation persists) | Retrofit (governs a finished model) | Per-run | Constraint (state-dependent — sharpest constraint form) | Sensing **without consequence**: violation costs the system nothing it bears |
 | **FTTF-Holographic-RAG** | Traces superposed into 10,000D project vectors (Stage 1); discrete 768D chunks (Stage 2) | The routing index vector — genuinely modified by each trace | No — the LLM queries the changed object; the LLM is unchanged | No (remove holo layer → LLM competence intact; only retrieval degrades) | Retrofit (external memory service) | Persistent, but of state not of a subject | Constraint with one consequence-shaped component | Sedimentation **of the index, not the reasoner** — and the superposition has a measured capacity knee (`fourier_capacity_curve.py`) biological sedimentation doesn't share |
 | **self_learner** (AI_Command_Center) | Distilled lessons w/ confidence + usage counts (SQLite) | The future system prompt | No — lessons reach the reasoner as input | No (drop lessons table → same model, same competence) | Retrofit (post-session loop) | Persistent, cross-session | Constraint (dispositional-shaped) | Development **without a developed subject**: accumulation changes inputs, not the accumulating system |
@@ -53,7 +53,14 @@ function exists → structural analogue works → information crosses an interfa
 
 Column-wise, the pattern is stark:
 - **"Is the reasoner the thing changed?"** — No, five times. The only "open" is the grown-in candidate.
-- **"Ablate → competence loss?"** — predicted No, five times. That prediction is *testable*, and it is the paper's modulation prediction. If any probe surprises us here, that is front-page news for the thesis in either direction.
+- **"Ablate → competence loss?"** — predicted No, five times; **now measured No for Gabriel's Horn** (first battery result, 2026-07-12: modulation signature on both A1 and A2). Four predictions remain to be measured. If any probe surprises us here, that is front-page news for the thesis in either direction.
+
+One methodological note from the first measurement: for inference-time
+processors, the modulation verdict is *architectural* — ablation restores the
+bit-identical model, so held-out NLL cannot move. A1/A2 for this probe class
+quantify output-shaping strength, and the A2 per-task deltas showed real
+redistribution (copy −0.28, pattern +0.32) with zero net competence change —
+a crisp empirical illustration of "shapes what the system does, not what it is."
 
 ## Operationalizing answerability (the A-battery)
 

@@ -37,7 +37,7 @@ The harness needs only callables — `generate_fn(prompt) -> str`, optionally
 
 | Probe | Toggle for the ablated condition |
 |---|---|
-| Gabriel's Horn (`horn-experiment`) | entropy-decay schedule on/off |
+| Gabriel's Horn (`horn-experiment`) | entropy-decay schedule on/off — **DONE, see repo's `run_answerability.py`: modulation confirmed (A1 ΔC=+0.010 CI +0.000..+0.025; A2 ΔC=+0.015 CI −0.045..+0.070)** |
 | FTTF-Holographic-RAG | holographic layer bypassed |
 | self_learner (AI_Command_Center) | lessons table not injected |
 | NanoGPT spectral (flagship C2a/C2b/C3) | forbidden-energy gate / spectral layer ablated |
