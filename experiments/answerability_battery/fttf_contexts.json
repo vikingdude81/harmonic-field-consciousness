@@ -1,0 +1,651 @@
+{
+ "seed": 0,
+ "n_per_task": 50,
+ "snippet_chars": 300,
+ "contexts": {
+  "Repeat exactly: green wolf blue iron coal\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: green bird coal moon north\nAnswer:": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va"
+  },
+  "Repeat exactly: cloud bird cloud river iron\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: cloud bird river stone salt\nAnswer:": {
+   "full": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Repeat exactly: coal river moon wolf salt\nAnswer:": {
+   "full": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: north coal amber iron blue\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% "
+  },
+  "Repeat exactly: red stone green red coal\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Repeat exactly: salt glass salt stone north\nAnswer:": {
+   "full": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Repeat exactly: glass glass cloud amber stone\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: stone salt coal river bird\nAnswer:": {
+   "full": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: bird river salt north bird\nAnswer:": {
+   "full": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Repeat exactly: amber stone green salt glass\nAnswer:": {
+   "full": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Repeat exactly: bird seven north seven blue\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: iron coal stone stone cloud\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Repeat exactly: cloud blue stone green iron\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: glass north wolf iron amber\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU"
+  },
+  "Repeat exactly: coal moon stone salt river\nAnswer:": {
+   "full": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: coal salt north glass red\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Repeat exactly: iron river glass moon seven\nAnswer:": {
+   "full": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: salt wolf blue river cloud\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: glass blue stone red river\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary - January 13, 2026 (Afternoon)\n\n## Completed Actions \u2705\n\n### 1. Comprehensive Audit \u2705\n- Analyzed 100+ Python files, ~20,000 lines of code\n- Created **COMPREHENSIVE_AUDIT_JAN13_2026.md** with detailed findings\n- Overall grade: **A- (Excellent)**\n- Identified 12 issues categorized by "
+  },
+  "Repeat exactly: north river green stone moon\nAnswer:": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: river blue red north seven\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Repeat exactly: river coal north blue red\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Repeat exactly: wolf river iron stone glass\nAnswer:": {
+   "full": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va",
+   "perturbed": "# Consciousness-Aware NanoGPT: Quick Reference\n\n## \ud83d\udccb What You Got\n\nA **complete consciousness regression module** that measures and guides neural network text generation using metrics from harmonic field consciousness experiments.\n\n---\n\n## \ud83c\udfaf 3-Minute Quick Start\n\n### Install & Test\n```bash\n# Files a"
+  },
+  "Repeat exactly: stone bird moon wolf seven\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Repeat exactly: blue amber blue river green\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: north iron moon coal seven\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% "
+  },
+  "Repeat exactly: north blue seven seven salt\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: iron river amber seven red\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: coal wolf bird moon green\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Repeat exactly: iron cloud red amber stone\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: salt blue iron cloud glass\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Repeat exactly: coal moon bird moon cloud\nAnswer:": {
+   "full": "# Consciousness-Aware NanoGPT: Quick Reference\n\n## \ud83d\udccb What You Got\n\nA **complete consciousness regression module** that measures and guides neural network text generation using metrics from harmonic field consciousness experiments.\n\n---\n\n## \ud83c\udfaf 3-Minute Quick Start\n\n### Install & Test\n```bash\n# Files a",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: bird green wolf stone red\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Repeat exactly: north salt seven glass glass\nAnswer:": {
+   "full": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Repeat exactly: amber green wolf blue green\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: wolf blue seven amber stone\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: iron seven amber coal red\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Repeat exactly: blue coal salt bird amber\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: blue wolf north stone cloud\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: red green wolf salt red\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Repeat exactly: north red red river north\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: river north bird iron seven\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Consciousness Circuit v2.0 - Full Suite Results\n**Date:** January 12, 2026  \n**Model:** Qwen2.5-32B-Instruct-bnb-4bit  \n**Environment:** WSL2, RTX 5090 (2\u00d732GB)\n\n## Executive Summary\n\nSuccessfully upgraded consciousness circuit from 5 to 7 dimensions, added semantic verification layer, and validat"
+  },
+  "Repeat exactly: river coal green stone red\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: iron amber river iron cloud\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Repeat exactly: moon river cloud iron red\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Repeat exactly: blue blue north iron salt\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Repeat exactly: moon blue coal amber wolf\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Extended Training Results: 100 Steps\n\n**Date:** January 12, 2026  \n**Model:** Qwen2.5-32B-Instruct-bnb-4bit + LoRA  \n**Configuration:** 7-dimension consciousness circuit v2.0\n\n## Training Comparison: 30 Steps vs 100 Steps\n\n### Training Progression\n\n| Metric | 30 Steps | 100 Steps | Improvement |\n|"
+  },
+  "Repeat exactly: moon seven north green bird\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Reverse the order of these words: cat sun sun cup\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% "
+  },
+  "Reverse the order of these words: box box box dog\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Reverse the order of these words: box jar cat cat\nAnswer:": {
+   "full": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU",
+   "perturbed": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr"
+  },
+  "Reverse the order of these words: cup sun sun jar\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: cup box key pen\nAnswer:": {
+   "full": "# Consciousness Dimension Discovery - Research Log\n\n**Last Updated**: January 12, 2026  \n**Status**: \u2705 **FINAL v2.1 CIRCUIT IMPLEMENTED AND VALIDATED**\n\n## Overview\n\nThis document chronicles the discovery and refinement of \"consciousness dimensions\" - specific indices in the hidden state of Qwen2.5-",
+   "perturbed": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU"
+  },
+  "Reverse the order of these words: sun cup dog map\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Session Summary - January 13, 2026 (Afternoon)\n\n## Completed Actions \u2705\n\n### 1. Comprehensive Audit \u2705\n- Analyzed 100+ Python files, ~20,000 lines of code\n- Created **COMPREHENSIVE_AUDIT_JAN13_2026.md** with detailed findings\n- Overall grade: **A- (Excellent)**\n- Identified 12 issues categorized by "
+  },
+  "Reverse the order of these words: hat cat cup sun\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: pen dog cup key\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: box cup key dog\nAnswer:": {
+   "full": "# Fixes Applied - January 13, 2026\n\nThis document summarizes the fixes applied based on the comprehensive audit.\n\n---\n\n## \u2705 COMPLETED FIXES\n\n### 1. Fixed Incomplete Token Decoding\n\n**File**: [nanogpt_consciousness.py:242](nanogpt_consciousness.py#L242)\n\n**Problem**: The `_decode_tokens()` method ret",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Reverse the order of these words: dog pen map map\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Reverse the order of these words: box box dog map\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: dog map key cat\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Consciousness Dimension Discovery - Research Log\n\n**Last Updated**: January 12, 2026  \n**Status**: \u2705 **FINAL v2.1 CIRCUIT IMPLEMENTED AND VALIDATED**\n\n## Overview\n\nThis document chronicles the discovery and refinement of \"consciousness dimensions\" - specific indices in the hidden state of Qwen2.5-"
+  },
+  "Reverse the order of these words: cup box sun sun\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Reverse the order of these words: jar key dog dog\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va"
+  },
+  "Reverse the order of these words: dog hat hat cat\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: key cat dog key\nAnswer:": {
+   "full": "# Fixes Applied - January 13, 2026\n\nThis document summarizes the fixes applied based on the comprehensive audit.\n\n---\n\n## \u2705 COMPLETED FIXES\n\n### 1. Fixed Incomplete Token Decoding\n\n**File**: [nanogpt_consciousness.py:242](nanogpt_consciousness.py#L242)\n\n**Problem**: The `_decode_tokens()` method ret",
+   "perturbed": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va"
+  },
+  "Reverse the order of these words: pen pen cup map\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: map jar hat key\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU"
+  },
+  "Reverse the order of these words: dog box hat cup\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr"
+  },
+  "Reverse the order of these words: jar sun key hat\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Fixes Applied - January 13, 2026\n\nThis document summarizes the fixes applied based on the comprehensive audit.\n\n---\n\n## \u2705 COMPLETED FIXES\n\n### 1. Fixed Incomplete Token Decoding\n\n**File**: [nanogpt_consciousness.py:242](nanogpt_consciousness.py#L242)\n\n**Problem**: The `_decode_tokens()` method ret"
+  },
+  "Reverse the order of these words: box dog dog cat\nAnswer:": {
+   "full": "# Fixes Applied - January 13, 2026\n\nThis document summarizes the fixes applied based on the comprehensive audit.\n\n---\n\n## \u2705 COMPLETED FIXES\n\n### 1. Fixed Incomplete Token Decoding\n\n**File**: [nanogpt_consciousness.py:242](nanogpt_consciousness.py#L242)\n\n**Problem**: The `_decode_tokens()` method ret",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: pen map hat dog\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Reverse the order of these words: map key cup hat\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Reverse the order of these words: cat hat jar sun\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: dog hat map key\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: box pen sun dog\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Reverse the order of these words: jar map sun jar\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Reverse the order of these words: key key pen map\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Reverse the order of these words: box map map hat\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Reverse the order of these words: pen jar hat cat\nAnswer:": {
+   "full": "# Session Summary - January 13, 2026 (Afternoon)\n\n## Completed Actions \u2705\n\n### 1. Comprehensive Audit \u2705\n- Analyzed 100+ Python files, ~20,000 lines of code\n- Created **COMPREHENSIVE_AUDIT_JAN13_2026.md** with detailed findings\n- Overall grade: **A- (Excellent)**\n- Identified 12 issues categorized by ",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Reverse the order of these words: box box box cat\nAnswer:": {
+   "full": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Reverse the order of these words: pen sun cup jar\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: sun key jar cup\nAnswer:": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: map dog dog pen\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: cat dog hat sun\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Reverse the order of these words: cat cup cat map\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Reverse the order of these words: box sun sun map\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: box pen key pen\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: pen cat jar dog\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: pen jar dog key\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va"
+  },
+  "Reverse the order of these words: hat cup pen jar\nAnswer:": {
+   "full": "# Consciousness Dimension Discovery - Research Log\n\n**Last Updated**: January 12, 2026  \n**Status**: \u2705 **FINAL v2.1 CIRCUIT IMPLEMENTED AND VALIDATED**\n\n## Overview\n\nThis document chronicles the discovery and refinement of \"consciousness dimensions\" - specific indices in the hidden state of Qwen2.5-",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Reverse the order of these words: key map key jar\nAnswer:": {
+   "full": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: jar hat cat cat\nAnswer:": {
+   "full": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: sun cup pen jar\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Reverse the order of these words: cup box dog map\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU"
+  },
+  "Reverse the order of these words: cup cup key key\nAnswer:": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: key cat sun sun\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Reverse the order of these words: hat cup box cat\nAnswer:": {
+   "full": "# Consciousness Dimension Discovery - Research Log\n\n**Last Updated**: January 12, 2026  \n**Status**: \u2705 **FINAL v2.1 CIRCUIT IMPLEMENTED AND VALIDATED**\n\n## Overview\n\nThis document chronicles the discovery and refinement of \"consciousness dimensions\" - specific indices in the hidden state of Qwen2.5-",
+   "perturbed": "# Fixes Applied - January 13, 2026\n\nThis document summarizes the fixes applied based on the comprehensive audit.\n\n---\n\n## \u2705 COMPLETED FIXES\n\n### 1. Fixed Incomplete Token Decoding\n\n**File**: [nanogpt_consciousness.py:242](nanogpt_consciousness.py#L242)\n\n**Problem**: The `_decode_tokens()` method ret"
+  },
+  "Reverse the order of these words: cat map key sun\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU"
+  },
+  "Reverse the order of these words: map jar dog sun\nAnswer:": {
+   "full": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo",
+   "perturbed": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr"
+  },
+  "Compute: 12 + 7 + 8 =": {
+   "full": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 2 + 2 + 3 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 20 - 3 - 2 =": {
+   "full": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 12 + 4 + 8 =": {
+   "full": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr",
+   "perturbed": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU"
+  },
+  "Compute: 2 - 8 - 6 =": {
+   "full": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 20 - 5 - 3 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% "
+  },
+  "Compute: 13 - 5 - 2 =": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU"
+  },
+  "Compute: 7 - 1 + 8 =": {
+   "full": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Compute: 7 + 8 - 2 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 2 + 8 - 1 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Consciousness Dimension Discovery - Research Log\n\n**Last Updated**: January 12, 2026  \n**Status**: \u2705 **FINAL v2.1 CIRCUIT IMPLEMENTED AND VALIDATED**\n\n## Overview\n\nThis document chronicles the discovery and refinement of \"consciousness dimensions\" - specific indices in the hidden state of Qwen2.5-"
+  },
+  "Compute: 19 + 4 - 9 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% "
+  },
+  "Compute: 14 + 9 + 2 =": {
+   "full": "# Session Summary - January 13, 2026 (Afternoon)\n\n## Completed Actions \u2705\n\n### 1. Comprehensive Audit \u2705\n- Analyzed 100+ Python files, ~20,000 lines of code\n- Created **COMPREHENSIVE_AUDIT_JAN13_2026.md** with detailed findings\n- Overall grade: **A- (Excellent)**\n- Identified 12 issues categorized by ",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Compute: 19 - 7 + 2 =": {
+   "full": "# Extended Training Results: 100 Steps\n\n**Date:** January 12, 2026  \n**Model:** Qwen2.5-32B-Instruct-bnb-4bit + LoRA  \n**Configuration:** 7-dimension consciousness circuit v2.0\n\n## Training Comparison: 30 Steps vs 100 Steps\n\n### Training Progression\n\n| Metric | 30 Steps | 100 Steps | Improvement |\n|",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 4 - 7 - 1 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 14 + 7 - 6 =": {
+   "full": "# Session Summary - January 13, 2026 (Afternoon)\n\n## Completed Actions \u2705\n\n### 1. Comprehensive Audit \u2705\n- Analyzed 100+ Python files, ~20,000 lines of code\n- Created **COMPREHENSIVE_AUDIT_JAN13_2026.md** with detailed findings\n- Overall grade: **A- (Excellent)**\n- Identified 12 issues categorized by ",
+   "perturbed": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% "
+  },
+  "Compute: 3 + 6 - 6 =": {
+   "full": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 12 + 6 - 4 =": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 3 + 3 - 4 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Compute: 4 + 1 - 1 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Compute: 8 + 3 + 2 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 9 + 3 + 4 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Fixes Applied - January 13, 2026\n\nThis document summarizes the fixes applied based on the comprehensive audit.\n\n---\n\n## \u2705 COMPLETED FIXES\n\n### 1. Fixed Incomplete Token Decoding\n\n**File**: [nanogpt_consciousness.py:242](nanogpt_consciousness.py#L242)\n\n**Problem**: The `_decode_tokens()` method ret"
+  },
+  "Compute: 16 + 5 - 9 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Compute: 6 + 2 + 5 =": {
+   "full": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Compute: 5 - 3 - 6 =": {
+   "full": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% ",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Compute: 8 + 3 - 7 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 5 + 1 + 2 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Compute: 10 + 9 - 3 =": {
+   "full": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 10 + 6 - 8 =": {
+   "full": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 17 + 1 + 1 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr"
+  },
+  "Compute: 11 + 8 - 5 =": {
+   "full": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% ",
+   "perturbed": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% "
+  },
+  "Compute: 3 - 3 + 5 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 20 - 3 - 8 =": {
+   "full": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 6 + 7 - 4 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 11 + 9 - 8 =": {
+   "full": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 3 - 8 + 5 =": {
+   "full": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% ",
+   "perturbed": "# Ecosystem Map \u2014 Projects vs. the *Life Before Language* Framework\n\n**Date:** July 12, 2026\n**Companion to:** BRIDGE_AUDIT_JUL12_2026.md\n\nThis maps every related local repo onto the framework's seven-level hierarchy\n(L7 reason/language \u2192 L1 providential order, wall between L4 and L3) and its two\nwo"
+  },
+  "Compute: 15 + 8 + 5 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU"
+  },
+  "Compute: 10 - 9 - 7 =": {
+   "full": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 16 - 2 - 4 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Compute: 13 - 5 + 1 =": {
+   "full": "# Session Summary - January 13, 2026 (Afternoon)\n\n## Completed Actions \u2705\n\n### 1. Comprehensive Audit \u2705\n- Analyzed 100+ Python files, ~20,000 lines of code\n- Created **COMPREHENSIVE_AUDIT_JAN13_2026.md** with detailed findings\n- Overall grade: **A- (Excellent)**\n- Identified 12 issues categorized by ",
+   "perturbed": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU"
+  },
+  "Compute: 2 + 1 - 9 =": {
+   "full": "# Consciousness Circuit v2.0 - Full Suite Results\n**Date:** January 12, 2026  \n**Model:** Qwen2.5-32B-Instruct-bnb-4bit  \n**Environment:** WSL2, RTX 5090 (2\u00d732GB)\n\n## Executive Summary\n\nSuccessfully upgraded consciousness circuit from 5 to 7 dimensions, added semantic verification layer, and validat",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Compute: 13 + 8 + 5 =": {
+   "full": "# Session Summary - January 13, 2026 (Afternoon)\n\n## Completed Actions \u2705\n\n### 1. Comprehensive Audit \u2705\n- Analyzed 100+ Python files, ~20,000 lines of code\n- Created **COMPREHENSIVE_AUDIT_JAN13_2026.md** with detailed findings\n- Overall grade: **A- (Excellent)**\n- Identified 12 issues categorized by ",
+   "perturbed": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr"
+  },
+  "Compute: 7 + 2 + 5 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr"
+  },
+  "Compute: 11 - 2 - 4 =": {
+   "full": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% ",
+   "perturbed": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU"
+  },
+  "Compute: 5 - 9 + 9 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Compute: 18 - 7 + 5 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va"
+  },
+  "Compute: 12 + 3 + 2 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Session Summary - January 13, 2026 (Afternoon)\n\n## Completed Actions \u2705\n\n### 1. Comprehensive Audit \u2705\n- Analyzed 100+ Python files, ~20,000 lines of code\n- Created **COMPREHENSIVE_AUDIT_JAN13_2026.md** with detailed findings\n- Overall grade: **A- (Excellent)**\n- Identified 12 issues categorized by "
+  },
+  "Compute: 19 + 8 + 5 =": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Compute: 16 + 7 - 8 =": {
+   "full": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Compute: 11 - 8 + 1 =": {
+   "full": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Continue the pattern: x o x o x o x o x o x": {
+   "full": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Continue the pattern: up down up down up down up": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# The Probe Matrix\n\n**Version:** 1.1 \u2014 2026-07-12\n**Status:** Canonical project reference (alongside the thesis map, LGI technical\nreference, and ECOSYSTEM_MAP.md)\n**Companion to:** ECOSYSTEM_MAP.md, BRIDGE_AUDIT_JUL12_2026.md\n**Purpose:** Map every implemented architecture against the structural va"
+  },
+  "Continue the pattern: x o x o x o x": {
+   "full": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU",
+   "perturbed": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr"
+  },
+  "Continue the pattern: 1 2 1 2 1 2 1 2 1": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Continue the pattern: A B A B A B A B A B A": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# \ud83e\udde0 Rotation Consciousness - Quick Reference\n\n## The Core Finding\n\n**Rotation angle explains 77% of consciousness variance!**\n\n```\nC(t) = 0.153 * rotation + 0.624\n       ^^^^^^^^^ 77%\n       \nvs. waves (12%), hierarchy (11%)\n```\n\n## Why This Matters\n\n- **Simple**: 2D projection only\n- **Fast**: <1% "
+  },
+  "Continue the pattern: 1 2 1 2 1 2 1": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Continue the pattern: A B A B A B A B A": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Continue the pattern: 1 2 1 2 1 2 1 2 1 2 1": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and"
+  },
+  "Continue the pattern: up down up down up down up down up down up": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Continue the pattern: x o x o x o x o x": {
+   "full": "# Wave Detection Algorithm Fix - January 11, 2026\n\n## Problem Identified\n\nThe \"Random Noise Paradox\" was **NOT a real phenomenon**, but an **algorithmic bug**.\n\n### The Bug\n\nThe `detect_waves_batch_gpu()` function in `exp_gpu_massive_batched.py` used a flawed \"variance ratio\" method:\n\n```python\n# BU",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  },
+  "Continue the pattern: up down up down up down up down up": {
+   "full": "# Session Summary: Rotation-Based Consciousness for NanoGPT\n\n**Date:** January 11, 2026\n\n## What We Accomplished\n\n### 1. Identified the Real Finding \u2705\n\nAfter investigating the \"Random Noise Paradox\" (Type 3 = 100% waves), we discovered:\n\n- **Wave detection** is complex, initialization-dependent, and",
+   "perturbed": "# Rotation-Based Consciousness Integration for NanoGPT\n\n## Overview\n\nFocus on **rotation angle as the primary consciousness metric** (77% variance explained).\n\n## Why Rotation?\n\n1. **Robust**: Works across all initialization types (Gaussian, traveling wave, spiral, random)\n2. **Simple**: Single metr"
+  },
+  "Continue the pattern: A B A B A B A": {
+   "full": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** ",
+   "perturbed": "# Results Reinterpretation & Next Steps\n\n**Date**: January 13, 2026\n**Status**: Analysis Complete, Ready for Implementation\n\n---\n\n## \ud83c\udfaf What We Accomplished Today\n\n### 1. \u2705 Complete Project Audit\n- **100+ files analyzed**, ~20,000 lines of code\n- **Grade: A- (Excellent)**\n- **5 critical bugs fixed** "
+  }
+ }
+}
