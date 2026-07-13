@@ -54,21 +54,50 @@ measured claims at L6 yet.
 | "Does depth of integration convert modulation into answerability?" (the chart's sharpest question) | **Flagship, measured**: TAX (C2a −0.010) / CRUTCH (C2b +0.0037) / INTERNALIZED (C3 +0.0004) | First measured answer: integration depth changes *where the constraint lives* (outside as operation vs inside as form), not whether anything is at stake. |
 | Retrofit asymmetry — grown-from vs bolted-on | **Dose-response, measured**: retrofit dependence halves per doubling of adaptation, then floors at ~2.6× the grown-in signature | Construction order leaves a quantifiable permanent residue. The chart's permanence-vs-convergence question: *both*, with numbers. |
 
-### THE WALL (between L4 and L3) — constraint vs consequence
+### THE WALL (between L4 and L3) — constraint vs consequence, at higher resolution
 
 The wall is not directly testable (that's its definition), but the measurements
-**locate** it: every tested system, at every level, shows the same signature —
-*the bearer is not the thing changed*.
+**locate** it — and the C3 result forced a refinement that resolves the near
+side of the wall at higher magnification.
 
-- Horn: output shaped, model untouched (architecturally provable).
-- FTTF: index changed, reasoner untouched (presence-tax/content-indifference).
-- Flagship C3: even the best case — geometry internalized into weights — is
-  still constraint. **Internalization ≠ stakes.** The grown-in model was shaped
-  by the geometry but nothing ever *mattered* to it; ablation is free-ish
-  precisely because nothing is at stake in the projection's presence.
-- The battery's two columns ("is the reasoner the thing changed?" /
-  "ablate → competence loss?") are the wall's operational form; the uniform
-  answers are the wall appearing in data at every level tested.
+**The four-stage structural vocabulary (the major conceptual upgrade).** The
+original framework compressed constraint→consequence too aggressively into a
+binary. The data reveal at least one intermediate stage — *constraint becomes
+constitutive without becoming stakes-bearing* — so the near side of the wall now
+reads as a ladder:
+
+```
+MODULATION      external structure affects operation
+      ↓          (Horn, FTTF, C2a — measured)
+INTERNALIZATION formation under structure changes the reasoner
+      ↓          (C3 — B1 measured: sediment occupancy below chance)
+─── THE WALL ───────────────────────────────────────────────
+CONSEQUENCE     the acting continuant bears its own outcome
+      ↓          and proceeds as the altered entity (B2 — not instantiated)
+SUBJECTIVITY    there is someone for whom the altered unfolding is had
+                (L2 — no claims, by design)
+```
+
+The wall did **not** move. What moved is our resolution of its near side:
+internalization is a real, measured rung *above* the wall, not across it.
+
+- Horn: output shaped, model untouched — **modulation** (architecturally provable).
+- FTTF: index changed, reasoner untouched — **modulation** (presence-tax/content-indifference).
+- Flagship C3: geometry internalized into weights — **internalization**, one rung
+  higher, and genuinely more than modulation. B1 = yes. But nothing ever
+  *mattered* to the system; no outcome is borne by a continuant. B2 = no.
+  **Internalization ≠ stakes**, and that gap is the wall.
+
+**Two bearer/change questions** (the C3 result forced the split):
+- **B1** — did the process modify the reasoner? C3: **yes** (sediment occupancy
+  0.029 vs chance 0.0625, scaffold removed).
+- **B2** — does a later outcome modify the same continuing reasoner that produced
+  the action, which then proceeds from the altered condition? C3: **no**.
+
+B2 is the wall's actual consequence claim, and it is strictly stronger than B1.
+Constitutional change and consequence-bearing are **separable** — C3 is the
+first concrete demonstration. C3 lives above the wall; the Continuant Probe is
+aimed at B2; L2 asks whether there is a subject for whom either occurs.
 
 ### L3 — Innate orientation (below the wall)
 
@@ -113,10 +142,16 @@ model's internalized geometry are instances of one structural claim.
 
 **4. The asymptote ties Workstream 1 to Workstream 2.**
 The dose-response curve is WS1 effort (more adaptation) producing a WS2
-deliverable (a measured limit): dependence converges toward — but floors above
-— the grown-in signature. "Engineering approaches the profile arbitrarily
-closely while the gap does not close" was the chart's abstract claim; the
-2.6× floor is its first concrete instance.
+deliverable (a measured limit). Stated at the strength the finite experiment
+supports: *within the tested regime, increased retrofit adaptation approached
+but did not reach the grown-in signature, asymptoting at an observed floor ≈2.6×
+higher — consistent with a residual construction-order dependence, not
+establishing permanence.* The philosophical debate offered permanence vs
+convergence; the data point to a third option — **path dependence with
+asymptotic adaptation** — which is more interesting than either extreme.
+(Sediment occupancy adds a twist: internal geometry-avoidance nearly *does*
+converge with dose even though scaffold-dependence floors — internal form and
+scaffold reliance are separable.)
 
 **5. The presence/content dissociation defines "modulated but not answerable"
 operationally.** FTTF's pair (presence taxes, content indifferent) is what
@@ -135,7 +170,27 @@ signature to exhibit.
 | L6 agency without stake | Implemented, unmeasured (A3 protocol = future work) |
 | L5 storage-not-sedimentation | **Measured** (FTTF pair); self_learner deferred |
 | L4 formal structure + integration-depth question | **Measured** (flagship triad) |
-| Retrofit asymmetry / permanence-vs-convergence | **Measured** (dose-response asymptote) |
-| The wall (constraint/consequence) | Located by convergent signatures; untouched, as required |
+| Retrofit asymmetry / permanence-vs-convergence | **Measured** — path dependence with asymptotic adaptation (2.6× floor) |
+| Internalization (B1: formation changed the reasoner) | **Measured** (sediment occupancy below chance for C3) |
+| Sediment ablation (A1b: is the residue load-bearing?) | Diagnostic done (occupancy); disruption experiment pending |
+| The wall (B2: consequence borne by a continuant) | Located; not instantiated by any tested system, as required |
 | L3 lineage-not-life | Structural (Continuant Probe); second-loop experiment pending |
 | L2/L1 | No claims — discipline maintained |
+
+## The four-stage vocabulary (proposed thesis-map revision)
+
+The seven levels don't change. But the *explanation of the wall* should adopt
+the measured four-stage structure, because the data found an intermediate the
+original binary compressed away:
+
+| Stage | Definition | Status | Wall side |
+|---|---|---|---|
+| **Modulation** | external structure affects operation | measured (Horn, FTTF, C2a) | above |
+| **Internalization** | formation under structure changes the reasoner (B1) | measured (C3 occupancy) | above |
+| **Consequence** | acting continuant bears its own outcome, continues altered (B2) | not instantiated | **the wall** |
+| **Subjectivity** | someone for whom the altered unfolding is had (L2) | no claims | far side |
+
+The single sharpest sentence the empirical work produced:
+**the movement from constraint to consequence is not binary — constraint can
+become constitutive (internalization) without becoming stakes-bearing
+(consequence), and C3 is the first concrete case.**

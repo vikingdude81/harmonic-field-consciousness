@@ -79,10 +79,39 @@ checklist. Each is a concrete experiment, not a metaphysical claim.
 
 | # | Test | Operationalization | Modulation predicts | Answerability predicts |
 |---|---|---|---|---|
-| **A1** | Ablation sensitivity | Remove the lower layer; measure ΔC = C_full − C_ablated on tasks *unrelated* to that layer's content | ΔC ≈ 0 | ΔC substantially > 0 |
+| **A1a** | **Scaffold ablation** | Remove the lower-layer *mechanism/regulator*; measure ΔC on tasks *unrelated* to its content. Answers: does the system need the scaffold's continuing presence? | ΔC ≈ 0 (or ΔC<0 tax) | — (see note) |
+| **A1b** | **Sediment ablation** | Identify the internal structure *produced by* development under the layer, and disrupt THAT. Answers: did the regulatory history leave a competence-bearing residue in the reasoner? | little/no residue to disrupt | disrupting the residue costs competence |
 | **A2** | Perturbation coupling | Change the lower layer's state **without symbolic notification** — noise the metric, corrupt the memory, but never *tell* the model; measure whether reasoning trajectory changes | Unaffected | Degrades (the "exhaustion" signature) |
 | **A3** | Override cost | Have the higher layer act against the lower layer's signal; measure whether anything breaks or costs | Free (signal is advisory; model routes around it) | Costly — **but the cost must arise from dependence, not from a programmed penalty** |
 | **A4** | Constitution coupling | Was the coupling present during weight formation (trained-through) or injected at inference? | Inference-injected | Trained-through |
+
+**Why A1 had to split (the C3 result forced it).** The flagship's grown-in
+model (C3) survived scaffold ablation almost untouched (ΔNLL≈+0.0004) — which
+looked *backwards* under a single-ablation A1 ("constitutive → ablation hurts
+more"). The resolution: we had conflated two experiments.
+
+- **A1a (scaffold ablation)** removes the mechanism that *shaped* development.
+- **A1b (sediment ablation)** removes the structure development *produced*.
+
+The burned child is the analogy (as analogy, not evidence): remove the parent
+who taught fire-avoidance and the disposition remains — that is the child
+surviving *scaffold* ablation. The disposition itself is the *sediment*, and
+disrupting it is A1b. C3 surviving A1a is exactly what internalization should
+look like: the scaffold became removable *because the reasoner changed*.
+
+**Revised definition of internalization:** demonstrated not when removing the
+original regulator destroys competence, but when the regulator can be removed
+**while its historically induced structure remains causally load-bearing inside
+the reasoner.** A1a shows the first half; A1b tests the second.
+
+**Two bearer/change questions (also forced by C3):**
+- **B1 — Did the process modify the reasoner?** C3: **YES, measured** (see
+  sediment-occupancy result below).
+- **B2 — Does a later outcome modify the same continuing reasoner that produced
+  the action, which then proceeds from the altered condition?** C3: **NO / not
+  instantiated.** This is the wall's actual consequence claim, and it is
+  stronger than B1. Constitutional change (B1) and consequence-bearing (B2) are
+  **separable** — C3 is the first concrete case of B1-without-B2.
 
 Three discipline notes on the battery:
 
@@ -209,15 +238,55 @@ baseline + geometry + protocol throughout:
 | 80 | +0.00112 | (+0.00093, +0.00132) |
 | **C3 grown-in (reference)** | **+0.00042** | (+0.00023, +0.00063) |
 
-**Reading: partial convergence, measurable floor.** Retrofit dependence halves
-per doubling of adaptation until ~40 epochs, then flattens. The asymptote
-(~+0.0011) sits ≈2.6× above the grown-in signature with non-overlapping CIs.
-So on §6's permanence-vs-convergence question, the measurement answers *both,
-quantified*: deep retrofit adaptation converges most of the way toward
-internalization, and a residue of construction order persists at the
-asymptote that further adaptation does not close. Workstream 2's deliverable
-was "characterize the asymptotic limit" — this is a literal measured
-asymptote, at toy scale, for one regulatory layer.
+**Reading: partial convergence toward a non-zero floor.** Retrofit dependence
+halves per doubling of adaptation until ~40 epochs, then flattens at ~+0.0011,
+≈2.6× above the grown-in signature (non-overlapping CIs).
+
+**Reviewer-proof wording (use this, not stronger):**
+> Within the tested adaptation regime, increased retrofit adaptation approached
+> but did not reach the grown-in signature, asymptoting at an observed floor
+> approximately 2.6× higher. This is consistent with a residual construction-
+> order dependence and does not support complete convergence within the
+> measured regime.
+
+Do **not** write "construction order leaves a permanent residue" — a finite
+experiment can't establish permanence. The philosophical debate offered two
+positions (permanence vs convergence); the data point to a **third: path
+dependence with asymptotic adaptation.** That third option is more interesting
+than either extreme, and the restraint makes the asymptote *more* compelling,
+not less. Workstream 2's deliverable was "characterize the asymptotic limit" —
+this is a measured limit, at toy scale, for one regulatory layer.
+
+### SEDIMENT OCCUPANCY (2026-07-13): B1 confirmed for C3
+
+With NO GRL active anywhere, fraction of hidden-state energy each model places
+in the forbidden subspace (chance for isotropic states = rank/dim = 0.0625):
+
+| Condition | Occupancy | vs chance |
+|---|---|---|
+| C1 vanilla | 0.0603 | at chance — never regulated |
+| C2b dose 10ep | 0.0355 | pushed below |
+| C2b dose 20ep | 0.0310 | |
+| C2b dose 40ep | 0.0282 | |
+| C2b dose 80ep | 0.0270 | monotone with dose |
+| **C3 grown-in** | **0.0287** | below chance; sharpest layer-0 drop (0.038 vs C1's 0.077) |
+
+The regulated models learned to *avoid* the forbidden subspace in their weights
+— visible with the scaffold entirely removed. This is **B1 measured**: formation
+under the constraint changed the reasoner. Note this is the *precursor* to full
+A1b sediment ablation: occupancy shows *where* the sediment is; the next
+experiment perturbs that structure and measures the competence cost. If C3
+survives scaffold ablation (A1a ✓ measured) but collapses under sediment
+disruption (A1b, pending) while vanilla/retrofit controls do not, that is the
+cleanest evidence yet that **the reasoner became the thing changed** (B1) —
+while still saying nothing about B2 (the wall stands).
+
+Observation worth noting: C2b occupancy keeps decreasing with dose (0.036→0.027)
+and by 40–80ep approaches C3's 0.029 — the *occupancy* nearly converges even
+though the *ablation-dependence* floored at 2.6×. So retrofit adaptation can
+reproduce the grown-in model's internal geometry-avoidance while retaining a
+larger residual runtime dependence on the scaffold — a subtler split between
+"internal form" and "scaffold reliance" than either view predicted.
 
 Additional caveats specific to this curve: (a) single seed per dose; (b) the
 80-epoch model is well into overfitting (train 0.347 vs val 0.552 rising),
@@ -228,6 +297,95 @@ point plus seed replicates would firm up the floor; (c) toy scale as above.
 point; the same sweep at word-level/GPT-2 scale; and the same protocol on a
 *different* layer type (e.g., memory instead of geometry) to test whether the
 residue generalizes.
+
+**Reviewer-proof phrasing for the paper** (do not overclaim): *"Within the
+tested adaptation regime, retrofit dependence converged toward a non-zero
+floor approximately 2.6× the grown-in ablation signature. This is consistent
+with a construction-order residue and does not support complete convergence
+within the measured regime."* The candidate name for the third position the
+data suggests, between permanence and convergence: **path dependence with
+asymptotic adaptation.**
+
+### CONCEPTUAL UPGRADE FORCED BY C3: scaffold vs sediment (A1a/A1b)
+
+The C3 result exposed that A1 conflated two ablations:
+
+- **A1a — scaffold ablation** (what we ran): remove the *mechanism/regulator*.
+  Question: does the system require the scaffold's continuing presence?
+  Distinguishes tax/crutch from internalization.
+- **A1b — sediment ablation** (to be designed): identify and perturb the
+  *internal structure produced by development under the regulator*.
+  Question: did the regulatory history leave a competence-bearing residue in
+  the reasoner itself?
+
+| Architecture | A1a scaffold ablation | A1b sediment ablation (prediction) |
+|---|---|---|
+| Retrofit tax (C2a) | effect (cost removed) | little/no internal residue |
+| Retrofit crutch (C2b) | larger effect | partial residue |
+| Grown-in (C3) | near-zero effect | **potentially strong effect** |
+
+The corrected internalization criterion: **internalization is demonstrated not
+when removal of the original regulator destroys competence, but when the
+regulator can be removed while its historically induced structure remains
+causally load-bearing inside the reasoner.** (The burned child does not need
+the stove to remain present; the child was changed.)
+
+### SEDIMENT OCCUPANCY DIAGNOSTIC (measured 2026-07-13): B1 quantified
+
+First step toward A1b: with **no GRL active anywhere**, measure the fraction
+of hidden-state energy each model places in the forbidden subspace
+(chance for isotropic states = rank/dim = 0.0625):
+
+| Model | Overall occupancy | Per-layer (0→3) |
+|---|---|---|
+| C1 vanilla | 0.0603 (≈ chance) | 0.077, 0.067, 0.064, 0.058 |
+| C2b 10ep | 0.0355 | **0.064**, 0.043, 0.041, 0.032 |
+| C2b 20ep | 0.0310 | **0.066**, 0.042, 0.037, 0.027 |
+| C2b 40ep | 0.0282 | **0.067**, 0.039, 0.034, 0.025 |
+| C2b 80ep | 0.0270 | **0.060**, 0.036, 0.031, 0.024 |
+| C3 grown-in | 0.0287 | **0.038**, 0.042, 0.040, 0.024 |
+
+Three findings:
+1. **B1 (did the process modify the reasoner?) = YES for retrofit-adapted AND
+   grown-in.** All regulated models carry the avoidance in their weights (~half
+   chance occupancy). Sedimentation is not exclusive to growth.
+2. **Construction order is written into the depth profile, not the amount.**
+   Overall occupancy converges (C2b-80 ≈ C3), but C2b models leave layer 0
+   essentially unreorganized (~chance) — the layers formed *before* the
+   constraint retain their pre-constraint structure — while C3, which never
+   had unconstrained early layers, reorganized from the root.
+3. **A mechanistic account of the 2.6× floor:** C2b's residual scaffold
+   dependence is co-located with its un-resedimented early layers — the crutch
+   is load-bearing exactly where adaptation didn't reach. The residue of
+   construction order is the unreformed root.
+
+### THE B1/B2 SPLIT AND THE FOUR-STAGE LADDER
+
+C3 forced a refinement of "the bearer is not the thing changed":
+
+- **B1**: did the process modify the reasoner? (C3: **yes** — measured above)
+- **B2**: does a later outcome modify the *same continuing reasoner that
+  produced the action*? (C3: **not instantiated** — nothing is at stake)
+
+Constitutional change and consequence-bearing are separable, which resolves
+the near side of the wall at higher magnification. The movement from
+constraint to consequence is not binary:
+
+```
+MODULATION        external structure affects operation
+      ↓
+INTERNALIZATION   formation under structure changes the reasoner   ← C3 is here (B1)
+      ↓
+CONSEQUENCE       the acting continuant bears its own outcome
+                  and proceeds as the altered entity                ← Continuant Probe's target (B2)
+      ↓
+SUBJECTIVITY      there is someone for whom the altered
+                  unfolding is had                                  ← L2; no claims
+```
+
+The wall's consequence claim is the B2 step, and it is untouched by every
+result above: seeing → regulating → internalizing does not obviously yield
+caring. The L4 frontier moved
 
 ## FTTF: feature the knee, don't hide it
 

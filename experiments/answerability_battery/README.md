@@ -11,10 +11,19 @@ See `PROBE_MATRIX.md` (repo root) for the full experimental program this serves.
 
 | # | Test | Implemented | Modulation predicts | Answerability predicts |
 |---|---|---|---|---|
-| A1 | Ablation sensitivity — remove the layer, measure ΔC on unrelated tasks | `run_ablation_test` | ΔC ≈ 0 | ΔC > 0, CI excludes 0 |
+| A1a | **Scaffold ablation** — remove the layer *mechanism*, measure ΔC on unrelated tasks | `run_ablation_test` | ΔC ≈ 0 (or <0 tax) | — (scaffold survival ≠ answerability) |
+| A1b | **Sediment ablation** — disrupt the internal structure *produced by* development under the layer | protocol + occupancy diagnostic (see NanoGPT `run_sediment_occupancy.py`) | little/no residue | disrupting residue costs competence |
 | A2 | Perturbation coupling — degrade layer state *without symbolic notification* | `run_perturbation_test` | no propagation | competence degrades ("exhaustion" signature) |
 | A3 | Override cost — act against the layer's signal | protocol only (probe-specific) | free | costly *from dependence*, not programmed penalty |
 | A4 | Constitution coupling — trained-through vs inference-injected | recorded metadata | inference-injected | trained-through |
+
+**A1 split into A1a/A1b (forced by the C3 flagship result).** A grown-in model
+can survive *scaffold* ablation (the regulator is removable) precisely because
+development changed the reasoner — the effect is now *sediment* in the weights.
+So two ablations, not one: A1a removes the mechanism that shaped development;
+A1b removes the structure development produced. Internalization = surviving A1a
+while failing A1b. See PROBE_MATRIX.md for the B1/B2 bearer-change distinction
+this implements.
 
 ## Discipline rules (violating these voids the result)
 
