@@ -171,8 +171,8 @@ signature to exhibit.
 | L5 storage-not-sedimentation | **Measured** (FTTF pair); self_learner deferred |
 | L4 formal structure + integration-depth question | **Measured** (flagship triad) |
 | Retrofit asymmetry / permanence-vs-convergence | **Measured** — path dependence with asymptotic adaptation (2.6× floor) |
-| Internalization (B1: formation changed the reasoner) | **Measured** (sediment occupancy below chance for C3) |
-| Sediment ablation (A1b: is the residue load-bearing?) | Diagnostic done (occupancy); disruption experiment pending |
+| Internalization (B1: formation changed the reasoner) | **Measured** two ways (sediment occupancy below chance; A1b differential) |
+| Sediment ablation (A1b: is the residue load-bearing?) | **Measured** — yes, as *robustness* to forbidden-subspace perturbation (sediment_effect −0.15…−0.19 for regulated vs ≈0 for vanilla) |
 | The wall (B2: consequence borne by a continuant) | Located; not instantiated by any tested system, as required |
 | L3 lineage-not-life | Structural (Continuant Probe); second-loop experiment pending |
 | L2/L1 | No claims — discipline maintained |

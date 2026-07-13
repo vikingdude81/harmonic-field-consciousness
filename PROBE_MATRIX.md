@@ -288,6 +288,51 @@ reproduce the grown-in model's internal geometry-avoidance while retaining a
 larger residual runtime dependence on the scaffold — a subtler split between
 "internal form" and "scaffold reliance" than either view predicted.
 
+### SEDIMENT ABLATION A1b (2026-07-13): sediment is real, and its sign is *robustness*
+
+Inject matched-magnitude energy (α·‖h‖) into span(P_bad) vs a matched-rank
+random subspace orthogonal to it; **sediment_effect = ΔNLL_forbidden −
+ΔNLL_random** (the damage attributable to disrupting the *avoided* structure,
+over generic perturbation sensitivity). At α=1.0:
+
+| Condition | ΔNLL forbidden | ΔNLL random | sediment_effect |
+|---|---|---|---|
+| C1 vanilla | +2.334 | +2.337 | **−0.003** (forbidden not special — control works) |
+| C2b 10ep | +2.211 | +2.400 | −0.189 |
+| C2b 40ep | +2.263 | +2.425 | −0.161 |
+| C2b 80ep | +2.204 | +2.349 | −0.146 |
+| C3 grown-in | +2.158 | +2.324 | −0.166 |
+
+**The naive A1b prediction was wrong, and the correct reading is better.** I
+predicted "forbidden ≫ random for C3" (internalized structure = fragile under
+disruption). The data show the *opposite sign*: regulated models are **more
+robust** to forbidden-subspace perturbation than to random perturbation. The
+mechanism is exactly internalization: these models relocated competence into the
+allowed complement, so energy injected along the avoided directions lands in
+dead space (cheap), while random directions hit directions they actually use
+(costly). C1 vanilla, which never organized around P_bad, is hurt equally by
+both (sediment_effect ≈ 0) — **the control confirms the effect is P_bad-specific,
+not generic noise sensitivity.**
+
+**This refines the A1b concept itself.** Sediment ablation's *sign depends on
+what kind of structure was internalized*:
+- **Avoidance sediment** (this case): internalization shows up as *robustness*
+  in the avoided directions (sediment_effect < 0).
+- **Skill/feature sediment** (a different experiment): internalization would
+  show up as *fragility* when the used structure is disrupted (sediment_effect
+  in the used directions > 0).
+Either way, the signature is a **differential** between structured and random
+perturbation that vanilla lacks — that differential is the sediment being
+causally real.
+
+**What A1b establishes and doesn't.** Establishes: B1 a second, independent way —
+regulated models carry a competence-relevant reorganization in their weights
+(clearly separated from vanilla). Does *not* establish: a clean dose gradient or
+a C3 peak — at this toy scale the signature is essentially binary
+regulated-vs-unregulated (all regulated models in −0.15…−0.19). Caveats: single
+injection seed, single model seed/condition, char scale; seed replicates and a
+larger model would firm the dose picture.
+
 Additional caveats specific to this curve: (a) single seed per dose; (b) the
 80-epoch model is well into overfitting (train 0.347 vs val 0.552 rising),
 so the 40-epoch point is the cleanest deep-dose measurement — a 160-epoch
