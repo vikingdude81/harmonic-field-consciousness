@@ -411,14 +411,41 @@ dug far below chance while the retrofit barely moved. Coherent single reading
 across all measures: **larger models internalize a formation-time constraint
 more completely — scaffold dependence → 0 while weight-borne sediment deepens.**
 
-**Caveats for this rung:** single seed at 512d (the 256d replicate protocol
-should be repeated here before publication); C2b measured at 10ep only (dose
-sweep not re-run at scale); the rank/dim fraction halved (16/512 vs 16/256),
-which likely explains the smaller raw ΔNLL magnitudes — a rank-32 variant at
-512d would deconfound constraint-fraction from capacity. Side observation:
+**Caveats for this rung:** ~~single seed at 512d~~ — replicated, see below;
+C2b measured at 10ep only in the headline run; the rank/dim fraction halved
+(16/512 vs 16/256) — rank-32 deconfound run separately. Side observation:
 the phase-4 *cure* failed its own DKR criterion at 512d (0.417 vs target
 0.35) — post-hoc removal gets harder with scale even as grown-in
 internalization gets cleaner, which is itself on-message for the framework.
+
+### 512d SEED REPLICATES (2026-07-13): the core findings replicate; the dose story does not transfer
+
+3 seeds × {C3, C2b40, C2b10} at 512d, full evaluation battery, same protocol
+as the 256d replicates.
+
+**Replicated cleanly (report these):**
+
+| Finding | Values (3 seeds) |
+|---|---|
+| **C3 complete scaffold independence** | ΔNLL −0.00005, range (−0.00015..+0.00004) — CI-includes-0 for every seed |
+| Crutch regime for both retrofit doses | C2b10 +0.00170 (±0.00006); C2b40 +0.00224 (range +0.00198..+0.00262); all CIs > 0 |
+| **C3 deep sediment** | occupancy 0.011–0.013 vs chance 0.031 (all seeds < 0.42× chance); A1b@0.5 −0.088..−0.131 — 4–18× any retrofit value, non-overlapping |
+| Vanilla null | C1 occupancy at chance; A1b ≈ −0.005 |
+
+**NOT interpretable at 512d (do not report as a dose effect):** the retrofit
+dose ordering *inverted* on scaffold dependence (C2b40 +0.0022 > C2b10
++0.0017) while C2b40's sediment collapsed to vanilla levels (A1b −0.007 ≈ C1's
+−0.005; occupancy 0.031 = chance). Diagnosis: at 512d this model overfits
+TinyStories within ~2–4 epochs, so best-checkpoint restoration caps the
+*effective* dose far below the nominal 10/40 epochs, and the cosine-LR
+schedule differs by nominal length — nominal dose no longer measures
+adaptation depth. The 256d dose-response curve remains the valid dose result;
+at 512d the dose axis needs a bigger dataset or explicit effective-dose
+accounting before any claim.
+
+**Net for the paper:** construction order (C3 vs any retrofit) is rock-solid
+at both scales and across seeds on all three measures; the *dose* axis is
+established at 256d only.
 
 Additional caveats specific to this curve: (a) single seed per dose; (b) the
 80-epoch model is well into overfitting (train 0.347 vs val 0.552 rising),
