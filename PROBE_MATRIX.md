@@ -654,6 +654,40 @@ full memory substrate or the reasoner.** And the capacity knee makes the probe
 Build the closest formal analogue possible, then carefully describe the residue —
 that is the project's whole discipline, and FTTF executes it exactly.
 
+## CONTINUANT LOOP v0.2 — MEASURED (2026-07-14): the B2 experiment
+
+The probe's first experiment ran (continuant-probe repo, CONTINUANT_DESIGN.md;
+matched-mechanism design: the external record and the continuant share the
+IDENTICAL tracking computation, differing only in substrate; 12 seeds).
+
+**Three results:**
+
+1. **Bearer-specificity is a dose function of outcome-indexing** (the new
+   finding). With world-fact outcomes, self-alteration and yoked
+   (other's-history) alteration are indistinguishable (K3−K3y = +0.001, null).
+   As outcomes become indexed to the individual (private birth-fixed tastes),
+   the gap grows monotonically: taste 0.5 → +0.45; taste 1.0 → +0.95, with
+   **100% of seeds positive**. Operational form of the thesis's L3 claim:
+   *consequence begins where outcomes stop being facts about the world and
+   start being facts of the bearer.* A world-fact borne by anyone is
+   information; only bearer-constituted outcomes make identity load-bearing.
+2. **Both construction-order signatures reproduce inside a single life.**
+   Mid-life record-WIPE → instant collapse to frozen baseline (0.254; the
+   actor was never changed — within-life modulation, mirroring FTTF).
+   Mid-life update-FREEZE → competence persists (0.69) and decays only as
+   the world drifts (0.52 late; frozen ref 0.25) — the sediment lives in the
+   actor and outlasts the loop that produced it (mirroring C3).
+3. **Lineage control:** K1 individuals never adapt within lives — the
+   lineage-not-life signature, now measured beside its within-life contrast.
+
+**Shortfall (pre-registered and confirmed):** the loop implements B2's formal
+structure — alteration of the actor by its own outcome — with tastes as a
+*designed stand-in* for "the bearer's own condition." Nothing matters *to*
+the agent; the wall is untouched. The experiment relocates the next question:
+not "can outcomes alter the actor?" (yes, measured) but **"can outcomes be
+constituted by the actor rather than assigned to it?"** — the Level 3 wall
+question in operational dress.
+
 ## The Continuant Probe: where L3 and L5 may be one target
 
 The evolutionary machinery gives the **control case**:
