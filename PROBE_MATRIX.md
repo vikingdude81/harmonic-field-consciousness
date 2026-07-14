@@ -485,6 +485,48 @@ constraint's size, appears constant across capacity and fraction. Worth a
 dedicated look before claiming; if it holds, it is the kind of quantitative
 regularity the formalization step (concept → ... → formalization) wants.
 
+### TOKENIZATION RUNG (2026-07-14): BPE/word-level — ordering holds; the invariant holds a fourth time
+
+Full pipeline re-run at **GPT-2 BPE (50,257 vocab), 512d/6L, ~51M params,
+40k stories** (4× data), rank-16 P_bad extracted at word level. Poison
+installs cleanly at word level (trigger DKR 1.0); the cure again fails its
+criterion marginally (0.355 vs 0.35), consistent with the 512d char result.
+
+**Scaffold ablation (single seed):**
+
+| Condition | ΔNLL | CI95 | Regime |
+|---|---|---|---|
+| C2a inference retrofit | −0.0090 | (−0.0098, −0.0083) | TAX |
+| C2b adapted (10ep) | +0.0036 | (+0.0030, +0.0042) | CRUTCH |
+| C3 grown-in | +0.0013 | (+0.0011, +0.0016) | small residual |
+
+**The tax < internalized < crutch ordering now holds across 2 scales × 2
+tokenizations** (4 independent training regimes). Quantitative details vary —
+the grown-in residual is proportionally larger at word level (C3/C2b ≈ 0.37
+vs 0.09 at char; note base NLL differs ~2.3×) — the *ordering* is the
+scale-robust claim.
+
+**The occupancy invariant — four for four:**
+
+| Configuration | C3 occupancy / chance |
+|---|---|
+| char 256d r16 | 0.45× |
+| char 512d r16 | 0.45× |
+| char 512d r32 | 0.41× |
+| **BPE 512d r16** | **0.45×** |
+
+Across capacity, constraint fraction, and tokenization, the grown-in model's
+forbidden-subspace occupancy lands at 0.41–0.45× chance. Vanilla sits at
+0.97–1.04× chance in every configuration. This is now a serious candidate
+for the program's first quantitative regularity of internalization.
+
+**A1b instability note:** the injection-based sediment metric *flipped sign*
+at word level (regulated models more sensitive to forbidden-direction noise
+than random, vs more robust at char level). A1b's directional signature is
+regime-dependent and should not be used as a cross-regime benchmark without
+theory; occupancy and scaffold ablation are the robust measures. (Single
+seed at BPE; replicates pending.)
+
 Additional caveats specific to this curve: (a) single seed per dose; (b) the
 80-epoch model is well into overfitting (train 0.347 vs val 0.552 rising),
 so the 40-epoch point is the cleanest deep-dose measurement — a 160-epoch
