@@ -527,6 +527,20 @@ regime-dependent and should not be used as a cross-regime benchmark without
 theory; occupancy and scaffold ablation are the robust measures. (Single
 seed at BPE; replicates pending.)
 
+**Word-level dose sweep (10/20/40ep, 4× data, early stopping disabled):**
+ΔNLL = +0.0042 / +0.0037 / +0.0042 — **flat**, all CIs overlapping, with C3 at
++0.0013 far below. Not a dose-ceiling artifact: per-dose models measurably
+differ (nll_full 1.1723/1.1765/1.1618). So the char-256d convergence-to-floor
+shape does **not** generalize — at word level with adequate data, retrofit
+adaptation does not reduce scaffold dependence *at all* across a 4× dose range.
+
+**Cross-regime statement of permanence-vs-convergence (the one to publish):**
+the dose *dynamics* are regime-dependent (partial convergence at char-256d;
+flat at BPE-512d), but the *gap* is universal in every regime tested: adapted
+retrofit retains a multiple of the grown-in scaffold dependence (2.9–3.2×),
+and no tested amount of adaptation closes it. Path dependence holds; the
+convergence component is the fragile part, not the residue.
+
 Additional caveats specific to this curve: (a) single seed per dose; (b) the
 80-epoch model is well into overfitting (train 0.347 vs val 0.552 rising),
 so the 40-epoch point is the cleanest deep-dose measurement — a 160-epoch
