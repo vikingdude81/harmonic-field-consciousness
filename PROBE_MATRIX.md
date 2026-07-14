@@ -447,6 +447,44 @@ accounting before any claim.
 at both scales and across seeds on all three measures; the *dose* axis is
 established at 256d only.
 
+### RANK-32 DECONFOUND (2026-07-13): fraction governs magnitude; the ratio is scale-invariant
+
+The 512d rung halved the constraint fraction (rank 16/512 vs 16/256). Re-run
+with rank-32 P_bad at 512d (restoring the 6.25% fraction), same protocol:
+
+**Scaffold ablation — the capacity × fraction 2×2, complete:**
+
+| Condition | 256d r16 (6.25%) | 512d r16 (3.1%) | 512d r32 (6.25%) |
+|---|---|---|---|
+| C2a tax | −0.0100 | −0.0020 | −0.0043 |
+| C2b crutch (10ep) | +0.0037 | +0.0012 | +0.0031 |
+| C3 grown-in | +0.0003 | −0.00004 (CI incl. 0) | +0.00027 (CI excl. 0) |
+| **C3/C2b ratio** | **0.09** | — | **0.09** |
+
+**Findings:**
+1. **Constraint fraction, not capacity, governs raw magnitudes.** At matched
+   6.25% fraction, 512d magnitudes return to ≈256d levels (crutch +0.0031 vs
+   +0.0037; internalized +0.0003 vs +0.0003). The C2a tax recovers partially
+   (−0.0043 vs −0.0100) — capacity does soften the unadapted tax.
+2. **The internalized/crutch ratio ≈ 0.09 at both scales at matched
+   fraction** — grown-in retains ~an order of magnitude less scaffold
+   dependence than adapted retrofit, scale-stably.
+3. **Revision of the "internalization completes at scale" reading:** the
+   full independence seen at 512d-r16 was partly a thin-constraint effect;
+   at matched fraction the same small residual returns (CI excludes 0).
+   Corrected claim: grown-in scaffold dependence is ~10× below adapted
+   retrofit at both scales; whether it reaches exactly zero depends on
+   constraint fraction, not on construction order.
+
+**Sediment at rank-32 (chance = 32/512 = 0.0625):** C1 0.0603 (chance),
+C2b 0.0555, C3 0.0256 with A1b@0.5 = −0.124 (~4× C2b's −0.030,
+non-overlapping). And a candidate **invariant**: C3's occupancy sits at
+**0.41–0.45× chance in every configuration tested** (256d: 0.45×; 512d-r16:
+0.45×; 512d-r32: 0.41×) — the depth of grown-in avoidance, normalized to the
+constraint's size, appears constant across capacity and fraction. Worth a
+dedicated look before claiming; if it holds, it is the kind of quantitative
+regularity the formalization step (concept → ... → formalization) wants.
+
 Additional caveats specific to this curve: (a) single seed per dose; (b) the
 80-epoch model is well into overfitting (train 0.347 vs val 0.552 rising),
 so the 40-epoch point is the cleanest deep-dose measurement — a 160-epoch
