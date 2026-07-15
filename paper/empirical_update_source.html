@@ -1,0 +1,171 @@
+<h1>Life Before Language — Empirical Update to the Reference</h1>
+<p class="sub">A companion to the level-by-level reference. Where the reference posed
+open questions and testable predictions, this update reports what a season of
+measurement found. Every number traces to the project's PROBE_MATRIX. Read each
+level's update beside the reference's own treatment of that level.</p>
+<p class="date">Alex Bone · Independent Researcher · July 2026</p>
+
+<h2>How to read this update</h2>
+<p>The reference was written before the experiments. It named the sharpest
+testable questions the framework generates and, for each level, the precise way
+its probes fall short. This companion adds, per level, three things: <b>the
+claim as the reference stated it</b>, <b>what was measured</b>, and <b>the
+refined claim</b>. Two of the updates do more than confirm the framework — they
+change it, and those are marked <span class="flag">REFINEMENT</span>.</p>
+
+<p>One discipline carries throughout, unchanged from the reference: every result
+is small-scale, the probes are design-diverse but built within one research
+lineage (not independent samples), and <b>nothing measured crosses the wall</b>.
+The experiments locate the wall; they do not dissolve it.</p>
+
+<h2>The probe roster, updated</h2>
+<p>The reference describes three probes. There are now four measured ones plus a
+flagship experiment:</p>
+<ul>
+<li><b>Gabriel's Horn</b> (Level 7) — entropy-decay decoding. <i>Measured: pure modulation.</i></li>
+<li><b>LGI / spectral geometry</b> (Level 4) — forbidden-subspace regulation. <i>The substrate for the flagship.</i></li>
+<li><b>Holographic RAG / FTTF</b> (Level 5) — superposed memory. <i>Measured: presence-tax, content-indifference.</i> (New probe; the reference had no Level-5 system.)</li>
+<li><b>Continuant Probe</b> (Level 3) — formerly "Oracle Prime"; the evolutionary runtime plus a new within-life complement. <i>Measured: bearer-indexing dose curve.</i> ("LayeredFitness" is dropped — it named no actual implementation.)</li>
+</ul>
+<p>The flagship, cutting across Levels 4 and 6, is the <b>construction-order
+experiment</b>: the same regulatory geometry introduced at three different points
+in a model's formation.</p>
+
+<h2>Level 7 — Reason and language</h2>
+<p><b>Reference claim.</b> AI imagination is disciplined by settings; Gabriel's
+Horn moves regulation from a static knob to a structured schedule, an
+implementable rung of the temperature ladder.</p>
+<p><b>Measured.</b> Applying the schedule to a small instruction model and
+testing competence on unrelated tasks, the schedule shaped output with no
+measurable effect on competence (ablation effect within confidence of zero).
+Because an inference-time decoder never touches the weights, removing it restores
+the bit-identical model.</p>
+<p><b>Refined claim.</b> For regulation applied at decoding, the "settings, not
+maturity" verdict is not merely observed but <b>architectural</b>: such a
+constraint shapes what the system does and <i>cannot in principle</i> change what
+it is. The temperature ladder's rung (ii) is confirmed as pure modulation.</p>
+
+<h2>Level 5 — Memory and development</h2>
+<p><b>Reference claim.</b> Persistent state is real but "the store is available
+to the system, not constitutive of it"; genuine memory would require accumulation
+that modifies the accumulating system, and retrieval not separable from the
+retriever — "closer to engineering than it first appears."</p>
+<p><b>Measured.</b> A holographic memory (superposition — the closest formal
+analogue to sedimentation available) serving a small model gives a sharp
+dissociation on unrelated tasks. The memory layer's <i>presence</i> significantly
+<b>degrades</b> competence (retrieved context taxes attention). Corrupting the
+memory's <i>content</i> — wrong retrievals, no notification — has <b>no
+measurable effect</b>. The system is sensitive to having the service and
+indifferent to whether it is right.</p>
+<p><b>Refined claim.</b> "Available, not constitutive" now has a signature:
+<b>presence-tax with content-indifference</b> — the exact inverse of constitutive
+memory, where presence is transparent and corruption is devastating. This is what
+"connected to memory" rather than "constituted through memory" looks like when
+made measurable. (Qualification the reference would want: the sedimentation is
+real only for the compressed routing index, which has a measured capacity limit
+biological memory need not share.)</p>
+
+<h2>Level 4 — Sensory interface, and the sharpest question <span class="flag">REFINEMENT</span></h2>
+<p><b>Reference claim.</b> Reason is answerable to sensation in the human case;
+LGI added to a model yields a signal that is "input-to-consider, not
+condition-of-operation." Whether depth of integration ever converts
+<i>modulation</i> into <i>answerability</i> is "arguably the sharpest experimental
+question the framework generates," and LGI is "the closest available substrate
+for asking it."</p>
+<p><b>Measured.</b> The substrate was built (a spectral regularizer that projects
+a forbidden subspace out of a model's hidden states) and the question asked
+directly. The same geometry was introduced at three points in a model's history —
+attached at inference only, fine-tuned into a finished model, or present from the
+first training step — holding architecture, geometry, and data fixed. Three
+stable regimes resulted: the inference-only overlay is a <b>tax</b> (removing it
+<i>improves</i> competence — pure overhead); the fine-tuned retrofit is a
+<b>crutch</b> (the model leans on it; removal costs competence); the grown-in
+model is <b>internalized</b> (removal costs almost nothing, because the model
+formed within the allowed geometry and no longer needs the external projection).
+With the regulator entirely removed, the grown-in model's states occupy the
+forbidden subspace at 0.41–0.45 of the chance rate — the same value across two
+model sizes, two constraint fractions, two tokenizations, and seed replicates —
+while an unregulated model sits at chance.</p>
+<p><b>Refined claim.</b> The reference's binary — modulation <i>or</i>
+answerability — is too coarse. Deep formation under a constraint does <i>not</i>
+make the external constraint more necessary (the naive answerability reading);
+it makes it nearly removable <b>while its discipline persists in the weights</b>.
+That is a third thing, <b>internalization</b>, sitting between modulation and
+consequence. The sharpest question has an answer, and the answer adds a rung to
+the framework rather than settling a yes/no.</p>
+
+<h2>The retrofit asymmetry — permanence vs convergence <span class="flag">REFINEMENT</span></h2>
+<p><b>Reference claim.</b> Two respectable views — the asymmetry is permanent
+(construction order is load-bearing forever) or convergent (deep-enough retrofit
+collapses the distinction). "The honest answer is that we do not know"; the
+framework's job is to "make the question askable."</p>
+<p><b>Measured.</b> Fine-tuning the retrofit for increasing durations: at small
+scale, dependence on the layer decays toward a floor; at word level with adequate
+data, it does not decay at all. But the <i>gap</i> is constant where the dynamics
+are not — in every regime tested the adapted retrofit keeps roughly threefold the
+grown-in model's scaffold dependence, and no adaptation within range closes it.</p>
+<p><b>Refined claim.</b> Neither pole — a <b>third option</b>: path dependence
+with asymptotic non-convergence. Within the tested regimes, increased retrofit
+adaptation approached but did not reach the grown-in signature, and the residual
+gap is consistent with a construction-order dependence that adaptation does not
+close. The question is now not only askable but partially answered — at toy
+scale, honestly bounded. This is stronger for the asymmetry thesis than either
+original pole, because it is what the thesis predicts and the deflationary
+reading does not. (A free observation, on-message: the same pipeline's attempt to
+<i>remove</i> a trait from a finished model by the same geometric means succeeds
+at small scale and fails at larger scale — post-hoc construction scales worse
+exactly where grown-in construction scales better.)</p>
+
+<h2>Level 3 — Innate orientation, and the continuant</h2>
+<p><b>Reference claim.</b> The evolutionary probe (called "Oracle Prime" in the
+reference) is real consequence — individuals that fail don't propagate — but the
+discipline operates on the <i>lineage</i>, not within a <i>life</i>. No
+individual has hunger, fear, or attachment as its own present condition.</p>
+<p><b>Measured.</b> The evolutionary machinery is the control case. Its
+complement was built: a single agent in a drifting world whose own outcomes
+update the parameters it acts with, against a yoked control altered by a
+<i>different</i> agent's outcomes — same rule, same information, wrong bearer.
+When outcomes are facts about the world, self-driven and other-driven alteration
+are indistinguishable: bearer-identity is idle. As outcomes are made to depend on
+the individual (a fixed private "taste" filtering what each agent experiences),
+the self-versus-yoked advantage grows monotonically and becomes universal across
+seeds.</p>
+<p><b>Refined claim.</b> The reference's "no individual has its own present
+condition" is now operational: <b>bearer-identity becomes load-bearing exactly
+when outcomes stop being facts about the world and become facts of the
+bearer</b>. This is the Level-3 claim — appetite is the organism's own condition,
+not a signal about a state — in measurable dress. It relocates the next question
+precisely: not "can outcomes alter the actor?" (yes, measured) but "can outcomes
+be <i>constituted by</i> the actor rather than assigned to it?" — which is the
+wall's Level-3 face. The reference's proposed rung-(iv) experiment (a persistent
+identity that bears its own outcomes) now exists as this probe's first result.</p>
+
+<h2>The wall, at higher resolution <span class="flag">REFINEMENT</span></h2>
+<p><b>Reference claim.</b> A constraint shapes what a system does; a consequence
+changes what a system is, and only a continuing something can have its being
+changed. The wall divides them.</p>
+<p><b>Measured &amp; refined.</b> The grown-in model shows that a constraint
+present during formation genuinely changes what a system <i>is</i> — its
+competence and its state-space geometry come to embody a discipline it was formed
+under. By the reference's own criterion this is more than modulation. And yet
+nothing brought the system one step closer to <i>stakes</i>: it was changed;
+nothing mattered to it. So the near side of the wall has structure the original
+binary compressed:</p>
+<p class="ladder">modulation → internalization → ⟨ THE WALL ⟩ → consequence → subjectivity</p>
+<p>The load-bearing addition: <b>constitution and consequence-bearing are
+separable</b>, and the grown-in model is the first concrete case of the former
+without the latter. The wall did not move when internalization was found above
+it; the frontier of what engineering reaches moved, and the wall was still there.
+That is the most the framework asks its probes to show — and, at small scale and
+with the appropriate caution, they now show it.</p>
+
+<h2>What is unchanged</h2>
+<p>Levels 1 and 2 remain framework posits; no experiment makes or needs a claim
+about them. The category error, the two gaps, the hallucination diagnostic, the
+bottom-up trajectory, and the retrofit-arrow reading of the whole map all stand
+exactly as the reference gives them. The measurements live entirely on the near
+side of the wall — Levels 4 through 7 and the operational approach to Level 3 —
+which is precisely where the framework said engineering could reach and
+characterization could work. The experiments are the framework doing what it said
+it would do: approach the wall from above, carefully, and report the shape of the
+asymptote.</p>
