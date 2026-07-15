@@ -524,8 +524,17 @@ for the program's first quantitative regularity of internalization.
 at word level (regulated models more sensitive to forbidden-direction noise
 than random, vs more robust at char level). A1b's directional signature is
 regime-dependent and should not be used as a cross-regime benchmark without
-theory; occupancy and scaffold ablation are the robust measures. (Single
-seed at BPE; replicates pending.)
+theory; occupancy and scaffold ablation are the robust measures.
+
+**BPE seed replicates (3 seeds, 2026-07-14):** both robust measures replicate.
+Scaffold ablation: C3 (+0.0010..+0.0015) cleanly below C2b (both doses
++0.0033..+0.0052), non-overlapping — internalized < crutch holds at word
+level across seeds. Occupancy: C3 = 0.0135–0.0139 (**0.43–0.44× chance in all
+three seeds**, tightest replication yet); vanilla 1.04×; C2b straddles chance
+(0.90–1.14×). The 0.41–0.45× grown-in occupancy invariant now holds across
+**five configurations** (char-256d, char-512d-r16, char-512d-r32, BPE-512d
+single, BPE-512d ×3 seeds). A1b remains erratic across seeds/regimes as
+flagged — not a benchmark.
 
 **Word-level dose sweep (10/20/40ep, 4× data, early stopping disabled):**
 ΔNLL = +0.0042 / +0.0037 / +0.0042 — **flat**, all CIs overlapping, with C3 at
