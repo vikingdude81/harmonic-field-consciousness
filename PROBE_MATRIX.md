@@ -697,6 +697,40 @@ not "can outcomes alter the actor?" (yes, measured) but **"can outcomes be
 constituted by the actor rather than assigned to it?"** — the Level 3 wall
 question in operational dress.
 
+> ### ⚠ QUALIFICATION (2026-07-19, from the Constitution Experiment v0.4)
+>
+> The v0.2 bearer-specificity result above was measured on the agent's **own
+> (assigned) criterion** — taste-weighted reward. Re-running the identical
+> comparison with a **bearer-neutral yardstick** (raw food collected, 40 seeds)
+> gives **+0.002, 55% of seeds — a null**, while the own-criterion version
+> reproduces at **+0.909, 100% of seeds**.
+>
+> So the advantage is real and reproducible, but it is **a fact about the
+> assigned criterion, not about the world**: an agent altered by its own
+> outcomes does better *by its own assigned lights*, and no better at foraging
+> than one altered by a donor's outcomes. This is the assigned residue
+> appearing one level earlier than the Constitution spec anticipated.
+>
+> **For the paper:** state the v0.2 effect as *criterion-internal
+> bearer-specificity*, not as a world-measurable advantage. The §8.4 prose
+> ("bearer-identity becomes load-bearing when outcomes become facts of the
+> bearer") survives — indeed it is sharpened, since the effect is precisely
+> co-extensive with the bearer-indexed criterion — but any wording implying a
+> bearer-neutral performance gain must be removed.
+
+**Constitution Experiment v0.4 (spec-faithful) — UNRESOLVED, and why.** With the
+criterion made a function of the agent's own current parameters and swept over
+levels of self-reference (depth 0–3, 40 seeds), **none of the spec's three
+predicted shapes is supported**; B−C flips sign across depth with very large
+seed ranges. The cause is not sampling (stable 12→40 seeds) but a measurement
+problem: **when the outcome-criterion is self-generated there is no
+bearer-neutral way to score "doing well by its own lights"** — own-criterion
+value inflates from 1.67 (depth 0) to ~18 (depth 1) as the self-referential loop
+concentrates the criterion onto wherever the agent already is. A
+self-constituting system can trivially satisfy itself. v0.5 requires a
+budget-constrained criterion or a persistence-based measure before any shape can
+be claimed. (See continuant-probe `CONTINUANT_DESIGN.md` §RESULTS v0.4.)
+
 ## The Continuant Probe: where L3 and L5 may be one target
 
 The evolutionary machinery gives the **control case**:
