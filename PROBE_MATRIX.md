@@ -718,7 +718,45 @@ question in operational dress.
 > co-extensive with the bearer-indexed criterion — but any wording implying a
 > bearer-neutral performance gain must be removed.
 
-**Constitution Experiment v0.4 (spec-faithful) — UNRESOLVED, and why.** With the
+### CONSTITUTION EXPERIMENT v0.5 — RESOLVED (2026-07-19): a fourth outcome
+
+With every control the paper #2 outline requires (parameter-matched arm, drift
+sweep, yoking fidelity, per-seed) plus the two fixes v0.4 demanded
+(budget-constrained criterion; persistence competence, **validated** — a frozen
+agent dies at 15/400 days, so the metric discriminates):
+
+| Drift | B−C (persistence days) | B−D | self-ref unique sites vs yoked |
+|---|---|---|---|
+| 0.0 static | **0.0** | 0.0 | 1.1–1.2 vs 1.3 |
+| 0.25 | −22 to −56 | −82 to −111 | 1.5–1.6 vs 2.9–3.1 |
+| 0.5 | **−65 to −137** | −242 to −248 | 1.4–1.9 vs 2.6–3.4 |
+
+**None of the three pre-registered shapes obtained — all assumed B > C.** The
+self-referential arm is *worse* than both controls, and the harm **scales
+monotonically with the rate of world change**. Mechanism (from the
+yoking-fidelity logs): a criterion generated from the agent's own parameters
+creates a feedback loop — value where you've been → go there → value it more —
+collapsing the agent to ~1.5 unique sites of 30 visits versus ~3 for yoked.
+**Lock-in: optimal in a static world (B−C = 0 exactly), fatal in a drifting
+one.** The exogenous parameter-matched arm survives at every drift precisely
+because its criterion keeps moving independently of the agent.
+
+**Statement for paper #2:** *in this implementation, making the outcome-criterion
+self-generated does bearer-constitutive work in the wrong direction — it is
+neither constituted stakes nor "assigned with extra steps," but a
+self-reinforcing valuation that ossifies around the agent's own history.*
+No monotonic depth curve obtained; the categorical presence of self-reference is
+what matters, not its stacking depth (the assigned-residue *depth* axis produced
+no shape). Caveats: one coupling implementation (**one probe is not the class**),
+toy scale, and the persistence threshold is designer-set — an assigned residue by
+construction, reported as such.
+
+Also: the apparatus check reproduced at all three drifts (+0.52..+0.76
+own-criterion, 100% of seeds; +0.0 persistence, 0%), **independently confirming
+the criterion-internal qualification above**.
+
+**Constitution Experiment v0.4 (spec-faithful) — superseded by v0.5; retained
+because it is what forced the yardstick fix.** With the
 criterion made a function of the agent's own current parameters and swept over
 levels of self-reference (depth 0–3, 40 seeds), **none of the spec's three
 predicted shapes is supported**; B−C flips sign across depth with very large
