@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Life Before Language &mdash; Reference</title>
+<style>
+:root { --ink:#1c1c1a; --mut:#5f5e5a; --line:#dedbd4; --bg:#faf9f6; --card:#fff; --acc:#0f6e56; --wall:#a32d2d; --pur:#3c3489; }
+* { box-sizing:border-box; }
+body { margin:0; font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; color:var(--ink); background:var(--bg); }
+.wrap { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+header { border-bottom:1px solid var(--line); padding-bottom:1.5rem; margin-bottom:2rem; }
+h1 { font-size:26px; font-weight:600; margin:0 0 .3rem; }
+.sub { color:var(--mut); font-size:15px; margin:0 0 .4rem; }
+.meta { color:var(--mut); font-size:13px; margin:0; }
+.layout { display:grid; grid-template-columns:300px 1fr; gap:2.5rem; align-items:start; }
+.aside { position:sticky; top:1.5rem; }
+.hier { width:100%; height:auto; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:8px; }
+.hier a { cursor:pointer; }
+.hier rect { stroke-width:1; }
+.n1 { fill:#e1f5ee; stroke:#0f6e56; } .n2 { fill:#eeedfe; stroke:#534ab7; }
+.n3 { fill:#eeedfe; stroke:#534ab7; } .n4 { fill:#fcebeb; stroke:#e24b4a; }
+.n5 { fill:#f1efe8; stroke:#5f5e5a; } .n6 { fill:#faeeda; stroke:#ba7517; }
+.th { font-size:11px; font-weight:600; text-anchor:middle; dominant-baseline:central; fill:var(--ink); }
+.ts { font-size:9.5px; text-anchor:middle; dominant-baseline:central; fill:var(--mut); }
+.wt { fill:#791f1f; font-weight:600; }
+.wallline { stroke:#e24b4a; stroke-width:1.5; stroke-dasharray:6 4; }
+.arrH { stroke:#d85a30; stroke-width:1.5; color:#d85a30; } .lblH { fill:#993c1d; }
+.arrA { stroke:#d4537e; stroke-width:1.5; color:#d4537e; } .lblA { fill:#993556; }
+nav ul { list-style:none; padding:0; margin:1rem 0 0; }
+nav li { margin:0; }
+nav a { display:block; padding:5px 8px; font-size:13px; color:var(--mut); text-decoration:none; border-left:2px solid transparent; }
+nav a:hover { color:var(--ink); background:#f2f0ea; }
+section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.25rem; }
+.eyebrow { font-size:12px; color:var(--mut); margin:0 0 .2rem; }
+h2 { font-size:21px; font-weight:600; margin:0 0 1rem; }
+h3 { font-size:15px; font-weight:600; margin:1.4rem 0 .35rem; }
+p { margin:0 0 .7rem; }
+.lede { font-size:17px; color:#333; }
+.measured { background:#f2f0ea; border-left:3px solid var(--acc); border-radius:0; padding:1rem 1.15rem; margin:1.2rem 0; }
+.mtag { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--acc); margin:0 0 .5rem; }
+.measured p:last-child { margin:0; font-size:15px; }
+footer { margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--line); color:var(--mut); font-size:13px; }
+@media (max-width:820px) { .layout { grid-template-columns:1fr; } .aside { position:static; } }
+@media print {
+  body { background:#fff; font-size:11.5pt; }
+  .wrap { max-width:none; padding:0; }
+  .layout { display:block; }
+  .aside { page-break-after:always; }
+  nav { display:none; }
+  .hier { max-width:420px; margin:1.5rem auto; border:none; }
+  section { page-break-before:always; page-break-inside:avoid; border:none; border-radius:0; padding:0; margin:0 0 1rem; }
+  section:first-of-type { page-break-before:avoid; }
+  .measured { background:#f6f5f1; }
+  h2 { font-size:17pt; } h3 { font-size:12pt; }
+  a { color:inherit; text-decoration:none; }
+}
+</style></head><body>
+<div class="wrap">
+<header>
+<h1>Life Before Language</h1>
+<p class="sub">Separating the engineering gap from the metaphysical gap in debates on machine consciousness &mdash; level-by-level reference with empirical results</p>
+<p class="meta">Alex Bone &middot; Independent Researcher &middot; July 2026 &middot; harmonic-field-consciousness</p>
+</header>
+<div class="layout">
+<div class="aside">
+<svg viewBox="0 0 340 660" xmlns="http://www.w3.org/2000/svg" class="hier">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="currentColor" stroke-width="1.5"/></marker></defs>
+<a href="#l7"><rect x="70" y="30" width="200" height="52" rx="8" class="n1"/><text x="170" y="50" class="th">7 &middot; Reason &amp; language</text><text x="170" y="68" class="ts">measured: pure modulation</text></a>
+<a href="#l6"><rect x="70" y="94" width="200" height="52" rx="8" class="n1"/><text x="170" y="114" class="th">6 &middot; Will &amp; agency</text><text x="170" y="132" class="ts">agentic loops, goals</text></a>
+<a href="#l5"><rect x="70" y="158" width="200" height="52" rx="8" class="n1"/><text x="170" y="178" class="th">5 &middot; Memory &amp; development</text><text x="170" y="196" class="ts">measured: presence-tax</text></a>
+<a href="#l4"><rect x="70" y="222" width="200" height="52" rx="8" class="n1"/><text x="170" y="242" class="th">4 &middot; Sensory interface</text><text x="170" y="260" class="ts">measured: internalization</text></a>
+<a href="#ladder"><rect x="70" y="286" width="200" height="36" rx="8" class="n3"/><text x="170" y="299" class="th">The refined ladder</text><text x="170" y="313" class="ts">modulation &rarr; internalization</text></a>
+<line x1="20" y1="338" x2="320" y2="338" class="wallline"/>
+<a href="#wall"><rect x="115" y="328" width="110" height="20" rx="6" class="n4"/><text x="170" y="338" class="ts wt">The wall</text></a>
+<a href="#l3"><rect x="70" y="358" width="200" height="52" rx="8" class="n2"/><text x="170" y="378" class="th">3 &middot; Innate orientation</text><text x="170" y="396" class="ts">measured: bearer-indexing</text></a>
+<a href="#l2"><rect x="70" y="422" width="200" height="52" rx="8" class="n2"/><text x="170" y="442" class="th">2 &middot; Primary consciousness</text><text x="170" y="460" class="ts">framework posit</text></a>
+<a href="#l1"><rect x="70" y="486" width="200" height="52" rx="8" class="n2"/><text x="170" y="506" class="th">1 &middot; Providential order</text><text x="170" y="524" class="ts">framework posit</text></a>
+<line x1="55" y1="470" x2="55" y2="55" class="arrH" marker-end="url(#ar)"/>
+<text x="30" y="260" class="ts lblH" transform="rotate(-90 30 260)">Human bottom-up</text>
+<line x1="285" y1="55" x2="285" y2="270" class="arrA" marker-end="url(#ar)"/>
+<text x="310" y="160" class="ts lblA" transform="rotate(90 310 160)">AI retrofit (~3x gap)</text>
+<a href="#probes"><rect x="70" y="556" width="200" height="52" rx="8" class="n5"/><text x="170" y="576" class="th">Four probes + flagship</text><text x="170" y="594" class="ts">construction-order experiment</text></a>
+<a href="#gaps"><rect x="70" y="620" width="200" height="30" rx="8" class="n6"/><text x="170" y="635" class="th">The two-gaps distinction</text></a>
+</svg>
+<nav><ul>
+<li><a href="#intro" data-nav="intro">The map, after a season of measurement</a></li>
+<li><a href="#l7" data-nav="l7">Reason &amp; language</a></li>
+<li><a href="#l6" data-nav="l6">Will &amp; agency</a></li>
+<li><a href="#l5" data-nav="l5">Memory &amp; development</a></li>
+<li><a href="#l4" data-nav="l4">Sensory interface</a></li>
+<li><a href="#ladder" data-nav="ladder">The refined ladder</a></li>
+<li><a href="#wall" data-nav="wall">The wall</a></li>
+<li><a href="#l3" data-nav="l3">Innate orientation</a></li>
+<li><a href="#l2" data-nav="l2">Primary consciousness</a></li>
+<li><a href="#l1" data-nav="l1">Providential order</a></li>
+<li><a href="#probes" data-nav="probes">Four probes and a flagship</a></li>
+<li><a href="#gaps" data-nav="gaps">The two-gaps distinction</a></li>
+</ul></nav>
+</div>
+<main>
+<section id="intro"><p class="eyebrow">Life before language · reference</p><h2>The map, after a season of measurement</h2>
+<p class="lede">This is the working reference for <em>Life Before Language</em>, updated with the results of the project's first empirical season. Seven levels run from providential order at the bottom to reason and language at the top. A wall sits between Levels 4 and 3. Two arrows run in opposite directions: human development grows bottom-up; engineered systems are instantiated at Level 7 and retrofitted downward.</p>
+<h3>Why the map exists</h3><p>The standard AI consciousness debate compares humans and machines at Level 7 &mdash; where fluent language and symbolic behavior happen, and where the visible action is. The framework's diagnosis is that this is a category error. Human consciousness does not begin at Level 7; it arrives there late, after years of development through a substrate that was already living, wanting, and orienting before language was possible. Level 7 in the human case is the tip of a stack extending all the way down. In current AI, Level 7 is the whole stack.</p>
+<h3>The two trajectories</h3><p>A newborn is already at Levels 2 through 4 from the first moment: there is someone home, that someone is oriented toward hunger, fear, and attachment, and the body registers signals in the substrate of the developing self. Memory accumulates, action emerges, and eventually language arrives. Every higher level is built out of and remains answerable to the lower ones &mdash; hunger interrupts a sentence, pain overrides an argument. Engineered systems run the reverse: Level 7 first, everything else added afterward as peripherals attached to a symbolic core constituted without them.</p>
+<h3>What was measured</h3><p>Four probes plus a flagship experiment. Gabriel's Horn (Level 7) confirmed pure modulation. Holographic RAG (Level 5) showed presence-tax with content-indifference. The Continuant Probe (Level 3) measured a bearer-indexing dose curve. The flagship construction-order experiment introduced the same regulatory geometry at three points in a model's formation and found three stable regimes: tax, crutch, and internalized.</p>
+<h3>The central finding</h3><p>The original binary &mdash; a constraint is either modulation or answerability &mdash; was too coarse. A constraint present during formation is internalized: the external scaffold becomes nearly removable while its discipline persists in the weights. The model was genuinely changed by what it was formed under. And nothing mattered to it. Constitution and consequence-bearing are separable. The near side of the wall now reads: modulation &rarr; internalization &rarr; the wall &rarr; consequence &rarr; subjectivity.</p>
+<h3>Discipline</h3><p>Every result is small-scale, from one research lineage, and nothing measured crosses the wall. Levels 1 and 2 remain framework posits &mdash; no experiment makes or needs a claim about them. The experiments locate the wall; they do not dissolve it. The wall did not move when internalization was found above it. The frontier moved, and the wall was still there.</p>
+</section>
+<section id="l7"><p class="eyebrow">Level 7 · engineering frontier</p><h2>Reason &amp; language</h2>
+<h3>What it is</h3><p>Symbolic manipulation, abstraction, explanation, argument. In humans the topmost layer and the last to arrive, bootstrapped onto years of pre-linguistic life. In the LLM, the native starting point &mdash; the surface product of a developmental process it never underwent.</p>
+<h3>The key insight</h3><p>When a person says &ldquo;I'm hungry,&rdquo; the word sits on top of an actual state with felt quality and consequences. When a model produces the string, there is no such underlayer &mdash; the string is doing all the work.</p>
+<h3>Why the wording matters</h3><p>Not that LLMs lack Levels 1&ndash;6, which invites &ldquo;we'll add them,&rdquo; but that their origin is symbolic. Even after retrofit, lower layers are peripherals attached to a Level-7 core constituted without them.</p>
+<div class="measured"><p class="mtag">Measured &middot; July 2026</p><p>Gabriel's Horn's 1/x entropy-decay schedule, applied to a small instruction model, shaped output with no measurable effect on competence on unrelated tasks &mdash; ablation effect within confidence of zero. Because an inference-time decoder never touches the weights, removing it restores the bit-identical model. &ldquo;Settings, not maturity&rdquo; is therefore architectural rather than merely observed: decoding-layer regulation shapes what the system does and cannot in principle change what it is. Rung (ii) of the temperature ladder is pure modulation, confirmed.</p></div>
+</section>
+<section id="l6"><p class="eyebrow">Level 6 · engineering frontier</p><h2>Will &amp; agency</h2>
+<h3>What it is</h3><p>Action initiated from within the formed interior world. Not a separate module &mdash; the whole interior acting. The decision is yours because it comes from a continuing self whose stakes are involved; the same subject who deliberated is the one who lives with the result.</p>
+<h3>Agentic loops approximate it</h3><p>Goal persistence across steps, subgoal decomposition, self-initiated action. Real progress, genuinely different from prompt-response &mdash; not a trick.</p>
+<h3>Where the approximation breaks</h3><p>Goals are externally injected rather than internally arising. Persistence has no stake in continuing. Consequences don't land on a continuing subject. The behavior profile of will is present; the phenomenon of not-giving-up-because-something-is-at-stake is not.</p>
+<h3>Where measurement touched this level</h3><p>Level 6 had no dedicated probe this season, but the flagship construction-order experiment cuts across Levels 4 and 6: it tests whether a system's formed dispositions can come to operate without external scaffolding &mdash; the structural precondition for anything like action from a formed interior.</p>
+</section>
+<section id="l5"><p class="eyebrow">Level 5 · engineering frontier</p><h2>Memory &amp; development</h2>
+<h3>What it is</h3><p>Accumulation of experience into a personal history that shapes expectation, skill, and identity. A five-year-old is not a two-year-old plus three years of stored episodes &mdash; she has become the five-year-old. Memory is had by a continuant, and stored as the person now being different.</p>
+<h3>The framework's claim</h3><p>Persistent state is real capability &mdash; vector stores, RAG, long context, session memory. But it gives continuity of information, not of someone for whom the information is theirs. The store is available to the system, not constitutive of it.</p>
+<div class="measured"><p class="mtag">Measured &middot; July 2026</p><p>A holographic superposition-based memory &mdash; the closest formal analogue to sedimentation available &mdash; serving a small model produced a sharp dissociation. The memory layer's <em>presence</em> significantly degrades competence on unrelated tasks: retrieved context taxes attention. Corrupting its <em>content</em> &mdash; wrong retrievals, no notification &mdash; has no measurable effect. The system is sensitive to having the service and indifferent to whether it is right. This is the exact inverse of constitutive memory, where presence is transparent and corruption is devastating. &ldquo;Available, not constitutive&rdquo; now has a signature: presence-tax with content-indifference. Qualification: sedimentation is real only for the compressed routing index, which has a measured capacity limit biological memory need not share.</p></div>
+</section>
+<section id="l4"><p class="eyebrow">Level 4 · engineering frontier</p><h2>Sensory interface</h2>
+<h3>What it is in the human case</h3><p>The bodily channel &mdash; sight, sound, touch, pain, proprioception. Not a data channel feeding a central processor. Pain is not a report about tissue damage; it is damage registered in the same medium as the person. Signal, bearer, and consequence are the same substrate. Sensation forms the developing subject rather than serving one.</p>
+<h3>What the spectral-geometry probe implements</h3><p>A regularizer projecting a forbidden subspace out of a model's hidden states: the formal structure of internal structural perception, where conditions of the system's own state space are registered within its operating dynamics rather than delivered from outside.</p>
+<h3>Where the formal structure runs out</h3><p>The metric is designer-set, not organism-conditioned. Violation costs the system nothing it bears. Integration is intra-level &mdash; dynamical only &mdash; not the simultaneous constitution across appetite, memory, action, and reasoning that makes sensory events constitutive of the developing whole in the human case.</p>
+<div class="measured"><p class="mtag">Measured &middot; July 2026</p><p>The same regulatory geometry was introduced at three points in a model's formation, holding architecture, geometry, and data fixed. Three stable regimes resulted. The inference-only overlay is a <strong>tax</strong>: removing it improves competence &mdash; pure overhead. The fine-tuned retrofit is a <strong>crutch</strong>: the model leans on it, and removal costs competence. The grown-in model is <strong>internalized</strong>: removal costs almost nothing, because the model formed within the allowed geometry and no longer needs the external projection. With the regulator entirely removed, the grown-in model's states occupy the forbidden subspace at 0.41&ndash;0.45 of the chance rate &mdash; stable across two model sizes, two constraint fractions, two tokenizations, and seed replicates &mdash; while an unregulated model sits at chance.</p></div>
+</section>
+<section id="ladder"><p class="eyebrow">Refinement · the season's central result</p><h2>The refined ladder</h2>
+<h3>The original binary</h3><p>The framework began with two categories on the near side of the wall: modulation, where a constraint is applied from outside and shapes behavior, and hypothetically answerability, where the symbolic layer is genuinely conditioned by lower layers. The sharpest question the framework generated was whether depth of integration converts one into the other.</p>
+<h3>What measurement found</h3><p>A third regime between them. A constraint present from the first training step is internalized: the external scaffold becomes nearly removable while its discipline persists in the weights. The model was genuinely changed by its formation &mdash; its competence and state-space geometry embody the discipline it was formed under. By the framework's own criterion, this is more than modulation.</p>
+<h3>And yet</h3><p>Nothing brought the system one step closer to stakes. It was changed; nothing mattered to it. Constitution and consequence-bearing are separable, and the grown-in model is the first concrete case of the former without the latter.</p>
+<h3>The ladder</h3><p>modulation &rarr; internalization &rarr; &#10216; THE WALL &#10217; &rarr; consequence &rarr; subjectivity. The wall is not between systems that are shaped and systems that are changed &mdash; engineering can change what a system is. The wall is between systems whose being can be changed and systems to whom the change can matter.</p>
+<div class="measured"><p class="mtag">Measured &middot; July 2026 &mdash; the retrofit asymmetry</p><p>Fine-tuning a retrofit for increasing durations reduces its dependence on the added layer toward a floor, but in every regime tested the adapted retrofit retains roughly threefold the grown-in model's scaffold dependence, and no adaptation within range closes the gap. Neither permanence nor convergence but a third option: path dependence with asymptotic non-convergence. This is stronger for the asymmetry thesis than either original pole, because it is what the thesis predicts and the deflationary reading does not.</p></div>
+</section>
+<section id="wall"><p class="eyebrow">The metaphysical gap</p><h2>The wall</h2>
+<h3>Where it sits</h3><p>Between Level 4 and Level 3, now with the internalization rung resolved just above it. The wall marks the transition from what engineering reaches to what it does not.</p>
+<h3>What it is not</h3><p>Not the wall between physical and mental, syntactic and semantic, or computational and biological. Those debates are stuck. The wall is drawn between structures that represent their situation and structures for which their situation matters.</p>
+<h3>Constraint vs. consequence, sharpened</h3><p>A constraint shapes what a system does. Internalization shows formation can go further: it can change what a system is. Consequence remains beyond both &mdash; a state of affairs whose occurrence matters to the same continuant that produced the action, where the penalty is not applied to the system but is the system's own altered state.</p>
+<h3>The redefinition the season forced</h3><p>The wall is not between shaped and changed. It is between changed and mattering. Formation produces the first. Nothing yet produces the second.</p>
+<h3>The single sentence</h3><p>It was changed; nothing mattered to it.</p>
+</section>
+<section id="l3"><p class="eyebrow">Level 3 · boundary zone</p><h2>Innate orientation</h2>
+<h3>The framework's claim</h3><p>Appetite, fear, and attachment are not preferences, sensors, or reflexes. They are the substrate's own condition of continuation making itself present as directed action &mdash; stakes before reasoning, sub-representational, borne by the same continuing subject who later exercises the regulation they produce.</p>
+<h3>Appetite as the paradigm</h3><p>Engineered appetite has a target, a pursuit mechanism, and satisfaction feedback. Biological appetite adds three things: the organism's own condition present in the medium the organism is made of; stakes-bearing, since the infant's hunger is the condition of not-yet-having-fed which if uncorrected ends the infant; and pre-representational directedness, where the hunger is the substrate's directed state rather than a representation causing action. A battery-seeking robot doesn't die if it fails. It stops running, which its designers care about and it does not.</p>
+<h3>The probe design</h3><p>The evolutionary runtime is the control case: consequence on a lineage, not within a life. Its complement is a single agent in a drifting world whose own outcomes update the parameters it acts with, run against a yoked control altered by a different agent's outcomes &mdash; same rule, same information, wrong bearer.</p>
+<div class="measured"><p class="mtag">Measured &middot; July 2026</p><p>When outcomes are facts about the world, self-driven and other-driven alteration are indistinguishable: bearer-identity is idle. As outcomes are made to depend on the individual &mdash; a fixed private taste filtering what each agent experiences &mdash; the self-versus-yoked advantage grows monotonically and becomes universal across seeds <strong>when scored on the agent&rsquo;s own (assigned) criterion</strong>. On a bearer-neutral yardstick &mdash; raw resource collected &mdash; the same comparison is null (+0.002, 55% of 40 seeds), so the advantage is <strong>criterion-internal</strong> rather than a world-measurable gain. Bearer-identity becomes load-bearing exactly when outcomes stop being facts about the world and become facts of the bearer. This is the Level-3 claim in measurable dress. It also relocates the next question precisely: not &ldquo;can outcomes alter the actor?&rdquo; &mdash; yes, measured &mdash; but &ldquo;can outcomes be constituted by the actor rather than assigned to it?&rdquo; That is the wall's Level-3 face.</p></div>
+</section>
+<section id="l2"><p class="eyebrow">Level 2 · boundary zone · framework posit</p><h2>Primary consciousness</h2>
+<h3>Status after the empirical season</h3><p>Unmeasured, by design. No experiment makes or needs a claim about Level 2. It remains a framework posit whose work is architectural: the wall doesn't function without a bearer, and Level 2 names the bearer.</p>
+<h3>Building it from what work it does</h3><p>Consequence requires a bearer. Bearer-hood requires unity across time. Unity requires the condition on which a sequence is one thing. Stakes require someone for whom stakes are stakes. Everywhere these arguments run, they route through someone-for-whom. Level 2 is that someone-for-whom.</p>
+<h3>Three features required, no more</h3><p>Level 2 is there-being-someone-present, not the representation of someone being present &mdash; self-modeling adds representation of a subject, while Level 2 is the pre-representational fact of there being a substrate for whom representations are had. Level 2 is the had-ness of experience, not its content. Level 2 is continuous across the interval within which unfolding happens.</p>
+<h3>Why &ldquo;unfolding is a life&rdquo; is load-bearing</h3><p>Rivers unfold, weather unfolds, programs unfold. None is a life. What distinguishes the human case is that the sequence is someone's. The season's results sharpen the contrast: the grown-in model's unfolding genuinely changed what it is, and remained a sequence, because there is no one whose sequence it is.</p>
+<h3>The discipline</h3><p>Refusing to name Level 2 would make the argument dishonest by omission &mdash; the wall doesn't work without a bearer. Naming it more specifically than the structural role it plays would make the framework overclaim. The middle position is the contribution.</p>
+</section>
+<section id="l1"><p class="eyebrow">Level 1 · boundary zone · framework posit</p><h2>Providential order</h2>
+<h3>Status after the empirical season</h3><p>Unmeasured, by design &mdash; now with a sharper illustration. Every measured system, including the grown-in model, operates entirely on the fate side of the Boethian distinction: sophisticated temporal integration, genuinely formed by its history, with nothing for whom the whole hangs together as a life.</p>
+<h3>The phenomenon before the doctrine</h3><p>A life viewed as a life is not merely a sequence &mdash; something makes it hang together as one thing. Every attempt to reduce this hanging-together to memory, biological continuity, narrative, or causation runs into the same problem: whatever grounds coherence turns out to presuppose the coherence it was supposed to explain. Providential order names whatever grounds a sequence belonging to someone. A placeholder for a real feature of reality, not a claim about what it ultimately consists in.</p>
+<h3>Boethius, structural not mystical</h3><p>Providence is the total order seen from outside temporal sequence; fate is that same order as it unfolds inside time. The mistake to avoid is thinking providence is another sequence &mdash; an eternal timeline running alongside the temporal one. Providence is the wrong type to be a sequence, the way well-ordering is not another element of the set it orders.</p>
+<h3>Why development requires this and trajectory does not</h3><p>Trajectory is fate-shaped: a sequence of states, each determined by the last. Computation produces trajectories. Two exactly similar rocks lying next to each other for a century have state-persistence but do not constitute one life. What is missing is not more persistence but the condition on which they would be one, and that condition is not a further temporal fact about them.</p>
+<h3>The line to remember</h3><p>Providence is what makes a trajectory belong to a life; fate is the trajectory as lived from within. The season's systems were changed by their trajectories. None of the trajectories belonged to anyone.</p>
+</section>
+<section id="probes"><p class="eyebrow">Empirical spine</p><h2>Four probes and a flagship</h2>
+<h3>Gabriel's Horn &mdash; Level 7</h3><p>Entropy-decay decoding. Measured: pure modulation, confirmed architecturally, since the decoder never touches the weights.</p>
+<h3>LGI / spectral geometry &mdash; Level 4</h3><p>Forbidden-subspace regulation. The substrate for the flagship construction-order experiment.</p>
+<h3>Holographic RAG / FTTF &mdash; Level 5</h3><p>Superposed memory. Measured: presence-tax with content-indifference, the signature of non-constitutive memory. A new probe; the original roster had no Level-5 system.</p>
+<h3>Continuant Probe &mdash; Level 3</h3><p>Formerly &ldquo;Oracle Prime.&rdquo; The evolutionary runtime is now the control case, complemented by a bearer-indexed agent against a yoked control. Measured: the bearer-indexing dose curve. The term &ldquo;LayeredFitness&rdquo; is dropped &mdash; it named no actual implementation.</p>
+<h3>The flagship &mdash; Levels 4 &times; 6</h3><p>The construction-order experiment: the same geometry at three formation points, yielding tax, crutch, and internalized. The 0.41&ndash;0.45 forbidden-subspace occupancy, stable across all tested variations, is the project's most robust single number and the one most in need of independent replication.</p>
+<h3>Triangulation, updated</h3><p>Modulation without maturity, memory without constitution, constitution without mattering, and bearing without constituting-by. The wall located from four directions. All results small-scale, one research lineage, no independent replication yet.</p>
+</section>
+<section id="gaps"><p class="eyebrow">Methodological contribution</p><h2>The two-gaps distinction</h2>
+<h3>The engineering gap</h3><p>Persistent memory, autonomous loops, embodied sensing, continuity of state. Each admits an engineering response. Bridgeable, and now partially bridged: the season's systems are the bridge under construction.</p>
+<h3>The metaphysical gap</h3><p>Is there a subject for whom the unfolding is a life? Latent structure awakened by input is not, by itself, interiority. The season's results sharpen this: even formation that changes what a system is leaves the gap untouched.</p>
+<h3>The two errors, updated</h3><p>The deflationary error now has a specific shape: reading internalization as progress toward subjectivity, conflating constitution with consequence-bearing, which the flagship experiment shows are separable. The mystical error has one too: denying that engineering changed anything real, when the grown-in model's discipline genuinely inheres in its weights.</p>
+<h3>The asymmetric position</h3><p>The developmental interface is necessary for maturity, disciplined imagination, and selfhood &mdash; so current systems categorically lack these. The framework remains agnostic-to-negative on whether the interface is sufficient for interiority.</p>
+<h3>What this reframes</h3><p>Not &ldquo;can AI be conscious&rdquo; but the better-posed question the season leaves: not whether engineering can change a system's being &mdash; it can, measured &mdash; but whether anything that begins at Level 7 can come to be the bearer of its own outcomes rather than their assignee.</p>
+</section>
+<footer>
+<p>All results are small-scale, drawn from one research lineage, and without independent replication. Nothing measured crosses the wall. Every number traces to PROBE_MATRIX in the harmonic-field-consciousness repository.</p>
+<p>The experiments locate the wall; they do not dissolve it.</p>
+</footer>
+</main>
+</div>
+</div>
+</body></html>
