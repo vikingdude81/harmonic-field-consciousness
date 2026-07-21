@@ -2,7 +2,7 @@
 
 **Alex Bone**
 Independent Researcher, Long Beach, CA
-*Draft v0.2 — July 2026 (empirical results integrated)*
+*Preprint — July 2026*
 
 ---
 
@@ -22,7 +22,7 @@ Large language models begin at the opposite end. They are instantiated directly 
 
 > **AI begins with language without life. Human consciousness begins with life before language.**
 
-This is not, by itself, an argument that machine consciousness is impossible. It is an argument that the debate has been conducted at the wrong layer. This paper reorganizes the debate around origins rather than endpoints, separates the engineering question from the metaphysical one, and — unlike the purely philosophical treatments it descends from — reports measurements. Version 0.1 of this paper posed its sharpest questions as open; this version answers several of them at small scale, with the honest bounds that scale imposes.
+This is not, by itself, an argument that machine consciousness is impossible. It is an argument that the debate has been conducted at the wrong layer. This paper reorganizes the debate around origins rather than endpoints, separates the engineering question from the metaphysical one, and — unlike the purely philosophical treatments it descends from — reports measurements. The framework's sharpest questions were initially posed as open; this paper answers several of them at small scale, with the honest bounds that scale imposes.
 
 ## 2. The Developmental Interface Hierarchy
 
@@ -30,7 +30,7 @@ We define the *developmental interface* as the total ordered arrangement through
 
 **Level 1 — Providential order.** The total order of being, possibility, and final purpose; in Boethian terms, the whole seen from outside temporal sequence (Boethius, *Consolation of Philosophy*, Bk. IV–V).
 
-**Level 2 — Soul / primary consciousness.** The living center of experience that enters time; the subject for whom there is something it is like to unfold.
+**Level 2 — Soul / primary consciousness.** The living center of experience that enters time; the subject for whom there is something it is like (Nagel, 1974) to unfold.
 
 **Level 3 — Innate orientation.** Pre-rational directedness: hunger, fear, attachment, desire, recognition, survival. Present before any reasoning and never derived from it.
 
@@ -55,7 +55,7 @@ When a language model produces confident falsehood, the behavior is classified a
 - **Knowledge-system frame:** output is judged against factual ground truth; unreal output is error.
 - **Developmental frame:** output is judged as a moment in an ongoing formation; unreal output can be exploration.
 
-The child earns the second frame because she sits inside a regulating interface. Her imagination is progressively disciplined by social feedback, embarrassment, trust, reward, correction, and consequence, until she internalizes context-sensitivity. Human "temperature," in other words, is not a parameter. It begins as external regulation and is *internalized through development*.
+The child earns the second frame because she sits inside a regulating interface. Her imagination is progressively disciplined by social feedback, embarrassment, trust, reward, correction, and consequence, until she internalizes context-sensitivity (on the regulated development of pretend play, see Harris, 2000). Human "temperature," in other words, is not a parameter. It begins as external regulation and is *internalized through development*.
 
 The LLM's temperature is, by contrast, literally a sampling parameter. Hence the second slogan:
 
@@ -69,7 +69,7 @@ The literature conflates two distinct claims under the heading "AI lacks what hu
 
 **The engineering gap.** Current LLMs lack persistent memory across episodes, autonomous execution loops, embodied sensing, accumulated social consequence, and continuity of internal state. Each of these is an architectural absence, and each admits of an engineering response. This gap is *bridgeable*, and §5 describes the program for bridging it — now partially executed.
 
-**The metaphysical gap.** Even a system possessing all of the above would present a further question: is there a subject for whom this unfolding is experienced as a life? Latent structure awakened by input is not, by itself, interiority. This gap concerns origin and kind, not architecture.
+**The metaphysical gap.** Even a system possessing all of the above would present a further question: is there a subject for whom this unfolding is experienced as a life? Latent structure awakened by input is not, by itself, interiority. This gap concerns origin and kind, not architecture. It is related to, but not identical with, the familiar easy/hard partition (Chalmers, 1995): the hard problem asks how experience is to be explained; the metaphysical gap asks whether a developmental substrate of the right kind exists at all. A system could close every "easy" problem and still stand on the wrong side of the gap this paper measures.
 
 The paper's central methodological claim is that these gaps must be *separated before either can be investigated*. Conflating them produces the two familiar failure modes: the deflationary error (treating the metaphysical gap as more engineering) and the mystical error (treating the engineering gap as already metaphysical). Our position is deliberately asymmetric: the developmental interface is argued to be *necessary* for anything like maturity, disciplined imagination, or selfhood — hence current LLMs categorically lack these — while the paper remains agnostic-to-negative on whether the interface is *sufficient* for interiority.
 
@@ -89,7 +89,7 @@ The critical discipline of the program — refusing to let Workstream 1 results 
 
 ## 6. The Retrofit Asymmetry
 
-Human development is bottom-up: the organism originates at Levels 2–4 and grows upward, so that language is everywhere conditioned by the life beneath it. The engineering program proceeds in the opposite direction: it begins with a Level-7 system and retrofits lower levels beneath it. Version 0.1 posed the resulting question — whether the directional difference is merely historical or permanently constitutive — as open between two poles: *permanence* (construction order is load-bearing forever) and *convergence* (deep enough retrofit collapses the distinction).
+Human development is bottom-up: the organism originates at Levels 2–4 and grows upward, so that language is everywhere conditioned by the life beneath it. The engineering program proceeds in the opposite direction: it begins with a Level-7 system and retrofits lower levels beneath it. The nearest neighbor to this observation in the developmental-AI literature is Smith and Gasser's (2005) argument that intelligence should be built the way infants build it — through embodied, developmental interaction. The retrofit asymmetry is a narrower and different claim: not that development helps, but that *when* a layer enters a system's formation is an independent, measurable variable — one their prescription assumes and this paper isolates experimentally. The framework initially posed the resulting question — whether the directional difference is merely historical or permanently constitutive — as open between two poles: *permanence* (construction order is load-bearing forever) and *convergence* (deep enough retrofit collapses the distinction).
 
 The construction-order experiment (§8.5) returns a third answer: **path dependence with asymptotic non-convergence.** Fine-tuning a retrofit for increasing durations reduces its dependence on the added layer toward a floor — but in every regime tested, the adapted retrofit retains roughly threefold the grown-in model's scaffold dependence, and no adaptation within range closes the gap. Retrofit *approaches* the grown-in signature; it does not reach it. This result is stronger for the asymmetry thesis than either original pole, because it is what the thesis predicts and the deflationary reading does not: if construction order were merely historical, adaptation should erase its signature.
 
@@ -115,7 +115,7 @@ All experiments are small-scale; the probes are design-diverse but built within 
 
 **8.3 Holographic RAG / FTTF (Level 5): presence-tax with content-indifference.** A holographic (superposition-based) memory layer — the closest formal analogue to sedimentation available — serving a small model yields a sharp dissociation on unrelated tasks. The memory layer's *presence* significantly degrades competence: retrieved context taxes attention. Corrupting the memory's *content* — wrong retrievals, no notification — has no measurable effect. The system is sensitive to *having* the service and indifferent to whether it is *right*. This is the exact inverse of constitutive memory, where presence is transparent and corruption is devastating. "Available, not constitutive" now has a measurable signature: **presence-tax with content-indifference.** (Qualification: the sedimentation is real only for the compressed routing index, which has a measured capacity limit biological memory need not share.)
 
-**8.4 Continuant Probe (Level 3): the bearer-indexing dose curve.** The evolutionary runtime (formerly "Oracle Prime") serves as the control case: consequence operating on a lineage. Its complement is a single agent in a drifting world whose own outcomes update the parameters it acts with, run against a *yoked control* altered by a different agent's outcomes — same rule, same information, wrong bearer. When outcomes are facts about the world, self-driven and other-driven alteration are indistinguishable: bearer-identity is idle. As outcomes are made to depend on the individual (a fixed private "taste" filtering what each agent experiences), the self-versus-yoked advantage grows monotonically and becomes universal across seeds **when scored on the agent's own (assigned) criterion**. On a bearer-neutral yardstick — raw resource collected — the same comparison is null (+0.002, 55% of 40 seeds); the advantage is therefore **criterion-internal**: an agent altered by its own outcomes does better by its own assigned lights, and no better at the world-fact task. This sharpens rather than weakens the Level-3 claim — the effect is exactly co-extensive with the bearer-indexed criterion — but no bearer-neutral performance gain is claimed. The result operationalizes the Level-3 claim: **bearer-identity becomes load-bearing exactly when outcomes stop being facts about the world and become facts of the bearer.** It also relocates the next question precisely: not "can outcomes alter the actor?" (yes — measured) but "can outcomes be *constituted by* the actor rather than assigned to it?" — the wall's Level-3 face.
+**8.4 Continuant Probe (Level 3): the bearer-indexing dose curve.** The evolutionary runtime (formerly "Oracle Prime") serves as the control case: consequence operating on a lineage. Its complement is a single agent in a drifting world whose own outcomes update the parameters it acts with, run against a *yoked control* altered by a different agent's outcomes — same rule, same information, wrong bearer (a yoked-control design; cf. Church, 1964). When outcomes are facts about the world, self-driven and other-driven alteration are indistinguishable: bearer-identity is idle. As outcomes are made to depend on the individual (a fixed private "taste" filtering what each agent experiences), the self-versus-yoked advantage grows monotonically and becomes universal across seeds **when scored on the agent's own (assigned) criterion**. On a bearer-neutral yardstick — raw resource collected — the same comparison is null (+0.002, 55% of 40 seeds); the advantage is therefore **criterion-internal**: an agent altered by its own outcomes does better by its own assigned lights, and no better at the world-fact task. This sharpens rather than weakens the Level-3 claim — the effect is exactly co-extensive with the bearer-indexed criterion — but no bearer-neutral performance gain is claimed. The result operationalizes the Level-3 claim: **bearer-identity becomes load-bearing exactly when outcomes stop being facts about the world and become facts of the bearer.** It also relocates the next question precisely: not "can outcomes alter the actor?" (yes — measured) but "can outcomes be *constituted by* the actor rather than assigned to it?" — the wall's Level-3 face.
 
 **8.5 The flagship: the construction-order experiment (Levels 4 × 6).** The same regulatory geometry was introduced at three points in a model's formation — attached at inference only, fine-tuned into a finished model, or present from the first training step — holding architecture, geometry, and data fixed. Three stable regimes resulted:
 
@@ -123,13 +123,13 @@ All experiments are small-scale; the probes are design-diverse but built within 
 - *Fine-tuned retrofit: a crutch.* The model leans on it; removal costs competence.
 - *Grown-in: internalized.* Removal costs almost nothing, because the model formed within the allowed geometry and no longer needs the external projection. With the regulator entirely removed, the grown-in model's states occupy the forbidden subspace at 0.41–0.45 of the chance rate — the same value across two model sizes, two constraint fractions, two tokenizations, and seed replicates — while an unregulated model sits at chance.
 
-The original binary — modulation or answerability — is too coarse. Deep formation under a constraint does not make the external constraint more necessary (the naive answerability reading); it makes it nearly removable *while its discipline persists in the weights*. That is a third thing, **internalization**, sitting between modulation and consequence. The sharpest question version 0.1 posed has an answer, and the answer adds a rung to the framework rather than settling a yes/no.
+The original binary — modulation or answerability — is too coarse. Deep formation under a constraint does not make the external constraint more necessary (the naive answerability reading); it makes it nearly removable *while its discipline persists in the weights*. That is a third thing, **internalization**, sitting between modulation and consequence. The sharpest question the framework generates has an answer, and the answer adds a rung to the ladder rather than settling a yes/no.
 
-**8.6 Bounds and discipline.** Every result above is small-scale and drawn from one research lineage. The invariance of the 0.41–0.45 occupancy across the tested variations is encouraging but is not replication by independent groups at production scale. The claims are stated at the resolution the evidence supports: the experiments locate the wall; they do not dissolve it.
+**8.6 Bounds and discipline.** Every result above is small-scale and drawn from one research lineage. The invariance of the 0.41–0.45 occupancy across the tested variations is encouraging but is not replication by independent groups at production scale. The claims are stated at the resolution the evidence supports: the experiments locate the wall; they do not dissolve it. Follow-up experiments — including a demonstration that constitution and consequence-bearing vary as independent factors within a single acting, stakes-bearing substrate, and a mapping of self-referential outcome-couplings in which self-valuation proves destructive while self-prediction is benign — are reported in a companion paper in preparation.
 
 ## 9. The Wall, at Higher Resolution
 
-Version 0.1 stated the wall as a binary: a constraint shapes what a system does; a consequence changes what a system is. The grown-in model complicates the first half productively: a constraint present during formation genuinely changes what a system *is* — its competence and its state-space geometry come to embody a discipline it was formed under. By the paper's own criterion this is more than modulation.
+The framework initially stated the wall as a binary: a constraint shapes what a system does; a consequence changes what a system is. The grown-in model complicates the first half productively: a constraint present during formation genuinely changes what a system *is* — its competence and its state-space geometry come to embody a discipline it was formed under. By the paper's own criterion this is more than modulation.
 
 And yet nothing brought the system one step closer to stakes. It was changed; nothing mattered to it. The near side of the wall therefore has structure the original binary compressed:
 
@@ -143,11 +143,11 @@ A common intuition holds that an LLM between prompts is "asleep." The correction
 
 ## 11. Objections
 
-**11.1 "Innate orientation is just pretraining."** We concede the structural analogy — and §8.5 now shows exactly what it buys and where it stops. Pretraining-with-constraint produces internalization: discipline inhering in the weights, formation genuinely shaping being. What it does not produce, in any tested regime, is stake-bearing. The objection's own best case (formation as pretraining) was run as an experiment, and the result is the modulation/internalization/consequence ladder — which sharpens rather than deflates the thesis.
+**11.1 "Innate orientation is just pretraining"** (the predictive-processing reading: Friston, 2010; Clark, 2016)**.** We concede the structural analogy — and §8.5 now shows exactly what it buys and where it stops. Pretraining-with-constraint produces internalization: discipline inhering in the weights, formation genuinely shaping being. What it does not produce, in any tested regime, is stake-bearing. The objection's own best case (formation as pretraining) was run as an experiment, and the result is the modulation/internalization/consequence ladder — which sharpens rather than deflates the thesis.
 
 **11.2 "The hierarchy smuggles in dualism."** No substance dualism is asserted. Levels 1–2 are framework posits whose work is architectural, and the empirical program of §8 survives their deletion entirely: every measurement stands on functional grounds.
 
-**11.3 "Sufficiently rich embodiment closes the gap."** The burden is now sharper: §8.5 shows retrofit adaptation approaching but not reaching the grown-in signature, and §8.4 shows bearer-indexing mattering only when outcomes are facts of the bearer. The embodiment claim must now say not just what converts a sensor into a stake, but why adding embodiment post-formation should escape the measured non-convergence of every other retrofit tested.
+**11.3 "Sufficiently rich embodiment closes the gap"** (the enactivist tradition: Varela, Thompson, & Rosch, 1991)**.** The burden is now sharper: §8.5 shows retrofit adaptation approaching but not reaching the grown-in signature, and §8.4 shows bearer-indexing mattering only when outcomes are facts of the bearer. The embodiment claim must now say not just what converts a sensor into a stake, but why adding embodiment post-formation should escape the measured non-convergence of every other retrofit tested.
 
 ## 12. Conclusion
 
@@ -157,16 +157,20 @@ The machines we have begin with language without life. The experiments show that
 
 ---
 
-## References (to be completed)
+## References
 
-- Boethius, *The Consolation of Philosophy*, Books IV–V.
-- Leibniz, G.W., *Discourse on Metaphysics*, §§26–35; *Monadology*.
-- [Predictive processing: Friston; Clark, *Surfing Uncertainty*] (for §11.1).
-- [Embodied cognition: Varela, Thompson & Rosch; Smith & Gasser, "The Development of Embodied Cognition: Six Lessons from Babies"] (for §6, §11.3 — cite and distinguish).
-- [Developmental psychology of pretend play: Harris, *The Work of the Imagination*] (for §3).
-- [Yoked-control designs in learning research] (for §8.4).
-- [Author's implementations: PROBE_MATRIX and all probe code — github.com/vikingdude81, harmonic-field-consciousness repository.]
+- Boethius (1999). *The Consolation of Philosophy* (V. Watts, Trans.). Penguin Classics. (Original work c. 524; Books IV–V.)
+- Chalmers, D. J. (1995). Facing up to the problem of consciousness. *Journal of Consciousness Studies*, 2(3), 200–219.
+- Church, R. M. (1964). Systematic effect of random error in the yoked control design. *Psychological Bulletin*, 62(2), 122–131.
+- Clark, A. (2016). *Surfing Uncertainty: Prediction, Action, and the Embodied Mind*. Oxford University Press.
+- Friston, K. (2010). The free-energy principle: a unified brain theory? *Nature Reviews Neuroscience*, 11(2), 127–138.
+- Harris, P. L. (2000). *The Work of the Imagination*. Blackwell.
+- Leibniz, G. W. (1989). *Philosophical Essays* (R. Ariew & D. Garber, Eds. & Trans.). Hackett. (*Discourse on Metaphysics*, 1686, §§26–35; *Monadology*, 1714.)
+- Nagel, T. (1974). What is it like to be a bat? *The Philosophical Review*, 83(4), 435–450.
+- Smith, L., & Gasser, M. (2005). The development of embodied cognition: Six lessons from babies. *Artificial Life*, 11(1–2), 13–29.
+- Varela, F. J., Thompson, E., & Rosch, E. (1991). *The Embodied Mind: Cognitive Science and Human Experience*. MIT Press.
+- Author's implementations: all probe code and the full measurement record (PROBE_MATRIX) — github.com/vikingdude81 (harmonic-field-consciousness, horn-experiment, FTTF-Holographic-RAG, continuant-probe).
 
 ---
 
-*Correspondence: [contact].*
+*Correspondence: dixiebone13@gmail.com. Code and the full measurement record (PROBE_MATRIX) are available at github.com/vikingdude81.*
