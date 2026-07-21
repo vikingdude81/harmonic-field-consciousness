@@ -769,6 +769,47 @@ self-constituting system can trivially satisfy itself. v0.5 requires a
 budget-constrained criterion or a persistence-based measure before any shape can
 be claimed. (See continuant-probe `CONTINUANT_DESIGN.md` §RESULTS v0.4.)
 
+
+### MARKET CAPSTONE (2026-07-20): SEPARABILITY DEMONSTRATED IN ONE SUBSTRATE
+
+The foraging capstone's stopping rule specified the next attempt: a world where
+bearer-indexing is structural. The crypto-ml scan supplied the design (what/where
+split); a price-taker market delivers it — the market stream is exogenous (clean
+fixed probes exist by construction) and P&L = position · returns makes the same
+world-event good or bad depending on what *you* hold (bearer-indexing as payoff
+structure, not assigned filter).
+
+**The 2×2** ({C1 vanilla, C3 grown-in regulator} × {self-borne, yoked}), 8 seeds,
+600 days:
+
+| cell | occupancy /chance | capital |
+|---|---|---|
+| C1-self | 1.02× | ×17.5 |
+| C1-yoked | 1.09× | ×1.30 |
+| C3-self | **0.82×** | ×18.1 |
+| C3-yoked | **0.91×** | ×1.57 |
+
+- **Occupancy tracks construction** (+0.19× effect; grown-in below chance) **and
+  ignores bearing** (−0.08×).
+- **The bearer gap tracks bearing** (capital ×17.5–18.1 self vs ×1.3–1.6 yoked)
+  **and ignores construction** (+16.2 vs +16.5).
+
+**Both separability criteria pass: constitution (B1) and consequence-bearing's
+formal structure (B2) are dissociable factors inside one acting, stakes-bearing
+system.** The program's headline claim is now a single-substrate measurement.
+The gap is measured on capital — a world-fact — retiring the criterion-internal
+caveat for this design. C3's internalization magnitude (0.82–0.91×) sits in the
+acting-agent regime established by the formation sweep, not the passive
+transformer's 0.41–0.45×.
+
+**Caveat (pre-stated):** gradient yoking is bearer-specific for two structural
+reasons at once — position-indexed outcomes AND parameter-local credit
+assignment; this design does not decompose them (refinement arm specified:
+yoke the outcome stream, compute gradients locally). One substrate, one drift,
+toy scale. Full record: continuant-probe `CAPSTONE_MARKET_FINDINGS.md`; the
+coupling-family result (valuation harms, prediction ~free) in v0.6; the
+Hoffman/FEP framing in `CRYPTO_ML_SCAN.md`.
+
 ## The Continuant Probe: where L3 and L5 may be one target
 
 The evolutionary machinery gives the **control case**:
