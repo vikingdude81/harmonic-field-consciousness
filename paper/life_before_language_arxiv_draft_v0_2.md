@@ -42,7 +42,10 @@ We define the *developmental interface* as the total ordered arrangement through
 
 **Level 7 — Reason and language.** Explanation, abstraction, reflection, symbol manipulation.
 
-The human trajectory is *bottom-up*: consciousness originates at Levels 2–4 and grows into Level 7 across years of regulated development. The LLM trajectory is *top-only*: the system is instantiated at Level 7, and its interface to the world consists of prompt, context window, trained weights, tool access, and output channel. Everything below Level 7 is either absent or simulated at Level 7 itself.
+The human trajectory is *bottom-up*: consciousness originates at Levels 2–4 and grows into Level 7 across years of regulated development. The LLM trajectory is *top-only*: the system is instantiated at Level 7, and its interface to the world consists of prompt, context window, trained weights, tool access, and output channel. Everything below Level 7 is either absent or simulated at Level 7 itself. Figure 1 summarizes the hierarchy, the two trajectories, and the boundary the rest of the paper measures.
+
+![Figure 1](fig1_hierarchy.png)
+*Figure 1: The developmental interface hierarchy. Human consciousness originates at Levels 2–4 and grows upward into language; AI systems are instantiated at Level 7 and retrofit downward. Workstream 1 (Levels 7–4) is the engineering frontier; Workstream 2 (Levels 3–1) is the boundary zone. The dashed line marks the wall — the metaphysical gap, which the experiments in §8 characterize but do not cross.*
 
 Two consequences follow. First, comparisons of "intelligence" that measure Level-7 performance are silent about Levels 1–6 and therefore silent about consciousness. Second, any engineering program that adds lower levels to an LLM proceeds *downward by retrofit* — and §6 and §8.5 now show empirically that construction order leaves a measurable, non-converging signature.
 
