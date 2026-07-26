@@ -1,6 +1,6 @@
 # A Second Substrate for the Bearer-Indexing Result: What the CCA Forager Tested and What It Found
 
-*Companion note to "Life Before Language." Written July 2025. Maps the
+*Companion note to "Life Before Language." Written July 2026. Maps the
 continuant-probe/cca experiments onto the paper and proposes where they belong.*
 
 ---
