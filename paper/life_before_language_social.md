@@ -21,9 +21,8 @@ fear, attachment, and sensation before a single word. Reasoning arrives late,
 built on top of all of that.
 
 **3/**
-A large language model begins at the opposite end. It is born at the language
-layer, trained on the written residue of beings who came to language through a
-life. It has the endpoint without the origin. The slogan version:
+A language model begins at the opposite end: born at the language layer, trained
+on the written residue of beings who reached language through a life.
 
 AI begins with language without life. Human consciousness begins with life
 before language.
@@ -35,10 +34,10 @@ top. Humans grow bottom-up. AI is installed at the top and has to be retrofitted
 downward. That direction matters.
 
 **5/**
-The key move is separating two questions people constantly blur together.
-The engineering gap: memory, a body, continuity, autonomy. Missing, but
-buildable. The metaphysical gap: is there anyone home for whom any of this is
-experienced as a life. A different kind of question entirely.
+The key move: separate two questions people blur together. The engineering gap:
+memory, a body, continuity, autonomy. Missing, but buildable. The metaphysical
+gap: is there anyone home for whom any of this is experienced as a life. A
+different kind of question.
 
 **6/**
 Most bad takes collapse these two. Optimists treat the metaphysical gap as just
@@ -47,37 +46,36 @@ paper keeps them apart and, unlike most philosophy of mind, actually runs
 experiments.
 
 **7/**
-A favorite diagnostic: hallucination. When a model states a confident falsehood
-we call it failure. When a four-year-old says her teddy bear talked to her, the
-identical behavior, we call it play. The difference is not the output. It is that
-the child sits inside a life that disciplines her imagination.
+Diagnostic: hallucination. A model states a confident falsehood, we call it
+failure. A child says her teddy bear talked, same act, we call it play. She sits
+in a life that disciplines it.
 
 Human imagination is disciplined by life. AI imagination is disciplined by
 settings.
 
 **8/**
-The flagship experiment. Take the same constraint and introduce it at three
-different points in a model's formation: bolted on at the end, fine-tuned in, or
-present from the very first training step. Same constraint, three arrival times.
-The results split cleanly into three regimes.
+The flagship experiment. Take one constraint and introduce it at three points in
+a model's formation: bolted on at the end, fine-tuned in, or present from the
+first training step. Same constraint, three arrival times. The results split into
+three clean regimes.
 
 **9/**
-Bolted on at inference: a tax. Removing it makes the model better. Pure overhead.
-Fine-tuned in: a crutch. The model leans on it and removal hurts. Present from
-the start: internalized. You can remove the scaffold and the discipline stays in
-the weights, at almost no cost. When a layer arrives changes what it becomes.
+Bolted on at inference: a tax. Removing it makes the model better. Fine-tuned in:
+a crutch. Removal hurts. Present from the start: internalized. Remove the
+scaffold and the discipline stays in the weights, at almost no cost. When a layer
+arrives changes what it becomes.
 
 **10/**
-That adds a rung the original framework did not have. Not just constraint versus
-consequence, but a middle step: a system can be genuinely changed by how it was
-formed. Its being is different. And still nothing matters to it. Constitution and
-consequence-bearing turn out to be separable.
+That adds a rung the framework lacked. Not just constraint versus consequence,
+but a middle step. A system can be genuinely changed by how it was formed. Its
+being is different. And still nothing matters to it. Constitution and
+consequence-bearing are separable.
 
 **11/**
-The retrofit finding is the sharpest. Adapt a bolted-on layer for longer and
-longer and it approaches the grown-in version but never reaches it. In every
-regime tested it keeps about threefold the dependence. Path dependence with no
-convergence. When you were built is not erasable by more training.
+The sharpest finding. Adapt a bolted-on layer for longer and longer and it
+approaches the grown-in version but never reaches it. In every regime it keeps
+about threefold the dependence. Path dependence with no convergence. When you
+were built is not erased by more training.
 
 **12/**
 The honest part, and the point. Nothing measured crosses the wall. The grown-in
