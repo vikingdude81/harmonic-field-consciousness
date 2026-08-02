@@ -30,16 +30,27 @@ result. This adds the second-substrate finding and tightens the prediction.*
 > acted, not by selecting resources suited to its particular constitution.
 > Survival required sufficient total intake rather than constitution-appropriate
 > intake, so bearer-specific selectivity carried no advantage, and bearer identity
-> could not become load-bearing through it. Prediction 2 is therefore refined. The
-> self-versus-yoked gap grows with bearer indexing only where the bearer-indexed
-> component of the outcome drives a selectivity that the task rewards. Where a
-> bearer-neutral policy suffices to satisfy the bearer-relative outcome, the gap
-> can remain flat even though the constitution function `V` genuinely differs
-> across bearers. This is consistent with the criterion-internal qualification
-> above: an advantage that appears only under the agent's own developed lights,
-> and only when those lights are made to matter for coupling, is a demonstration
-> that bearer identity can become causally load-bearing, not a general performance
-> law.
+> could not become load-bearing through it.
+>
+> A constitution-strength dose curve tested whether making the wrong resources
+> actively harmful would restore the effect. The strength of the private
+> constitution was raised across a fourfold range, so that some resources became
+> strong own-poison. It did not restore the effect. At every strength the agent's
+> realized diet remained at or below the value a random diet would give under its
+> own constitution, and the self-versus-yoked gap did not grow. The agent absorbed
+> the stronger poison by consuming more of the beneficial resources rather than by
+> avoiding the harmful ones, a bearer-neutral response.
+>
+> Prediction 2 is therefore refined in a strong form. The self-versus-yoked gap
+> grows with bearer indexing only where the task admits no bearer-neutral strategy
+> that keeps the bearer viable, so that the agent is forced to act on its own
+> private constitution. Where a quantity or timing policy suffices, the gap can
+> remain flat at every constitution strength even though the constitution function
+> `V` differs sharply across bearers. This is consistent with the criterion-internal
+> qualification above. An advantage that appears only under the agent's own
+> developed lights, and only when the task forecloses every bearer-neutral route to
+> viability, is a demonstration that bearer identity can become causally
+> load-bearing, not a general performance law.
 
 ---
 

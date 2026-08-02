@@ -180,12 +180,25 @@ of locating the scale at which each relation closes. It predicts where the effec
 returns: raise the private constitution strength so eating the wrong resources is
 harmful, making selectivity necessary (the untested dose curve, Section 7).
 
+The constitution-strength dose curve was then run as the last chance to produce
+the effect: raise const_sigma so some resources become strong own-poison, which
+should force bearer-specific selectivity. It was falsified. Across const_sigma =
+0.5, 1.0, 2.0, self diet_quality never crossed 1.0 (0.63, 0.75, 0.58) and the
+self-versus-wrong gap never turned positive (-0.15, -0.11, -0.26 at lambda = 1).
+Even when the environment made selectivity survival-relevant, the agent kept a
+bearer-neutral strategy: eat enough good to offset the poison, regulate by timing
+and quantity. The refinement is therefore stronger than a load-bearing-selectivity
+condition. The gap requires a task in which no bearer-neutral strategy suffices,
+so the agent is forced to act on its own private constitution. Where a
+quantity-or-timing policy keeps the bearer viable, the gap stays flat at every
+constitution strength, even though V differs sharply across bearers.
+
 The continuant probe's +0.909 is best read as near-tautological criterion-internal
 alignment: the agent was scored on the very quantity its self-condition was
 trained to maximize. The forager decouples regulation from selectivity, so no
-such alignment exists and the effect vanishes. Two substrates agree on the robust
-claim (bearer-neutral null) and disagree on the fragile one, exactly the
-criterion-internal picture the theory already commits to.
+such alignment exists and the effect vanishes. Two substrates and a full dose
+curve now agree on the robust claim (bearer-neutral null) and locate the fragile
+one, exactly the criterion-internal picture the theory already commits to.
 
 ---
 
@@ -217,9 +230,10 @@ GPU batched evaluator is the tool that makes such curve families cheap.
 
 - **Individual closure with intrinsic stakes.** Absent by design. Nothing crosses
   from functional consequence to stakes-bearing consequence. This is the wall.
-- **The constitution-strength dose curve.** The one place the forager null could
-  turn positive. Raise const_sigma, retrain per strength, sweep. Direct test of
-  the Section 5 refinement.
+- **The constitution-strength dose curve.** Now run (const_sigma 0.5, 1.0, 2.0)
+  and negative: the effect did not appear at any strength. The remaining lever is
+  a task with obligate selectivity, where eating own-poison is fatal and cannot
+  be offset by quantity, so no bearer-neutral strategy survives.
 - **Independent replication.** All probes are one research lineage. The second
   substrate reduces single-design risk for the bearer-neutral null but is
   in-house.
