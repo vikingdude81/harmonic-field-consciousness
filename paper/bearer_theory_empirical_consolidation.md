@@ -114,11 +114,60 @@ any escape that exists, so the task, not the learner, must close the door. The
 forager program is complete; it has produced a design law and named the one
 construction that could satisfy it.
 
-## 7. Status line for the manuscript
+## 7. The Constitutive GPT: the window reached and Prediction 2 confirmed
 
-The CCA program confirms bearer-relative constitution and historical incorporation,
-and it establishes, through nine designs and two capacity levers, that a
-bearer-identity performance advantage is observable only under an obligate task with
-no bearer-neutral escape at threshold. This is a positive structural result about
-when identity is load-bearing, not a failure to find an effect. It motivates the
-Constitutive GPT as the substrate where the obligate construction is achievable.
+The design law was then built and tested on a sequence model, in three milestones.
+This is the positive half of the program: the forager showed when a bearer effect
+cannot be observed, the Constitutive GPT shows it when the escape is foreclosed by
+construction.
+
+**M1, the obligate task and gate zero.** A stochastic bandit-identification task is
+the sequence-model analogue of the private-metabolism forager. Each instance has a
+hidden correct arm, the correct arm pays slightly above one half and the rest exactly
+one half, so identifying it requires integrating noisy outcomes over a horizon far
+longer than any short context. Gate zero, computed as an information bound rather than
+a trained model, is the decisive check: a context-only learner restricted to the last
+L outcomes must stay near chance while the full horizon is solvable. At the locked
+calibration (eight arms, L equal to thirty two, horizon four thousand) a context-only
+learner reaches 0.170 against a chance of 0.125, while the full horizon reaches 0.874,
+a five-fold separation. The context window, which is the sequence model's most
+powerful escape, is foreclosed by construction. This is Prediction 4 with the
+sharpest edge: a record, here the context, is a retrievable source, and the task is
+built so no retrievable source suffices.
+
+**M2, the incorporated model.** The incorporated state is a fast-weight associative
+memory, the sequence-model form of the bearer fast weights: learned arm embeddings, a
+reward-gated Hebbian write on the agent's own outcome, and a bilinear read that
+returns a per-arm value estimate. Nothing is hand-indexed; evolutionary search learns
+the embeddings, the read and write vectors, the gains, and the policy. It reaches
+0.732 held-out at horizon two thousand and 0.858 at the full horizon, against the
+0.874 ceiling. The ablation gate is decisive: freezing the write collapses accuracy to
+exact chance, 0.125, a drop of 0.607. The incorporated state does essentially all the
+work. This is the first time the program occupies the observability window, viable and
+on the incorporated pathway and learnable at once, which the forager never reached.
+
+**M3, self versus wrong-bearer.** The sharpened Prediction 2, in the same lambda-sweep
+form as the forager. The write is a lambda-mix of the instance's own outcome stream
+and a different instance's, and accuracy is scored on the instance's own private code.
+Self, at lambda zero, reaches 0.633 and falls monotonically to 0.118, chance, at
+lambda one, a gap of 0.515. The falsifier, where the alt stream carries the same code,
+does not collapse: it stays at 0.605 at lambda one, isolating the bearer effect by
+0.487. Writing the incorporated state with a different bearer's outcomes is nonviable
+for this instance; writing it with the same bearer's outcomes is fine. With the M2
+ablation gate showing the memory is load-bearing, the flat falsifier showing the gap
+is the bearer difference and not generic updating, and matched information volume
+across conditions, the criterion-internal reading is ruled out. The gap is a real
+consequence of bearer-relative incorporation.
+
+## 8. Status line for the manuscript
+
+The CCA program confirms bearer-relative constitution (Prediction 1) and historical
+incorporation (Prediction 3), and it establishes, through nine designs and two
+capacity levers, that a bearer-identity performance advantage is observable only under
+an obligate task with no bearer-neutral escape at threshold, a positive structural
+result about when identity is load-bearing. The Constitutive GPT then satisfies that
+law and confirms the sharpened Prediction 2 directly: on a task whose escape is
+foreclosed by construction, the incorporated state is load-bearing and bearer-specific,
+with a self versus wrong-bearer gap of 0.515 and a falsifier that isolates it. The
+program thus has both halves, the boundary condition and the positive effect, on two
+independent substrates.
