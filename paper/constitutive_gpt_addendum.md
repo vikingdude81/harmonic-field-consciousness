@@ -166,25 +166,44 @@ sharp: the record is retrievable and is built to be insufficient, so only the
 incorporated state suffices. The self versus wrong-bearer comparison is the sharpened
 Prediction 2, and it is confirmed.
 
+A dual-channel model demonstrates the record-versus-bearer distinction inside a single
+sequence model rather than from the gate-zero bound alone. A real single-head
+attention over the last L action and reward tokens, a bounded transformer context, is
+added alongside the incorporated memory, with learned per-channel weights, and the
+search is free to lean on either. The result is a clean double dissociation. Ablating
+the context, which removes the record, drops accuracy only from 0.732 to 0.703, so the
+record is idle. Freezing the incorporated memory, which removes the bearer, drops
+accuracy to 0.160, a fall of 0.572, and 0.160 is the gate-zero context-only bound of
+0.170, so the context on its own reaches exactly its information ceiling and no more.
+The learned context weight, 0.44, is small next to the memory weight, 1.72. The model
+has attention, could use the record, and does not; the incorporated state carries the
+task. With M3, where that state is bearer-specific and non-transferable, both halves
+of Prediction 4 now hold: a record cannot substitute for the bearer, and the bearer
+cannot be swapped for another.
+
 ## 7. Methods and reproducibility
 
 All code is in the continuant-probe repository, cca directory. The task and gate zero
 are in constitutive_gpt_m1.py, the incorporated model in constitutive_gpt_m2.py, and
 the self versus wrong-bearer sweep in constitutive_gpt_m3.py, with the trained policy
-saved as champ_m3.npz. Training is evolutionary search: population ninety six, mirror
-sampling, centered-rank utilities, at width thirty two and training horizon two
+saved as champ_m3.npz. The dual-channel model is in constitutive_gpt_dual.py, with its
+policy saved as champ_dual.npz. Training is evolutionary search: population ninety six,
+mirror sampling, centered-rank utilities, at width thirty two and training horizon two
 thousand, evaluated on held-out instances. The gate-zero bound is a Monte Carlo of the
 optimal decoder and requires no training. Results are recorded in RESULTS_M1.md,
-RESULTS_M2.md, and RESULTS_M3.md.
+RESULTS_M2.md, RESULTS_M3.md, and RESULTS_DUAL.md.
 
 ## 8. Limitations and next steps
 
 The task is a single hidden scalar per instance, the simplest obligate code, and the
-incorporated memory is a single fast-weight matrix. The attention over the context
-window is present in principle but idle for this task by gate zero; a fuller model
-would demonstrate it stays idle under a richer input. Evolutionary search was noisy
-late in training and the returned policy is the best held-out checkpoint; a smaller
-step size or a larger population would stabilize the curve. M4, scale, is the natural
+incorporated memory is a single fast-weight matrix. A richer, structured private code
+is the natural next probe of whether the effect is genuine identity rather than a
+one-dimensional lookup. The attention channel, shown idle here on a bounded context,
+would face a stronger test under a longer context or a task where the record carries
+partial but tempting information. Evolutionary search was noisy late in training and
+the returned policy is the best held-out checkpoint; seed replicates with error bars
+on the self versus wrong-bearer gap, a smaller step size, or a larger population would
+harden the numbers. M4, scale, is the natural
 successor, and it is warranted precisely because the causal relations are now
 established, the precondition Chapter 9.9 sets before scaling. The result to carry
 forward is that the incorporated state is load-bearing and bearer-specific once the
