@@ -181,29 +181,54 @@ task. With M3, where that state is bearer-specific and non-transferable, both ha
 of Prediction 4 now hold: a record cannot substitute for the bearer, and the bearer
 cannot be swapped for another.
 
-## 7. Methods and reproducibility
+## 7. Robustness: replicates and a multi-dimensional code
+
+Two checks harden the result against the two obvious objections.
+
+**Seed replicates.** The M3 headline rested on one trained policy, and evolutionary
+search was noisy late, so the effect might be a lucky seed. Six policies trained from
+independent search-noise streams and evaluated on a common held-out set give a self
+versus wrong-bearer gap of 0.509 with a standard deviation of 0.049 and a
+ninety-five percent interval of 0.469 to 0.548. Wrong-bearer lands on exact chance
+every time, standard deviation 0.009, and all six seeds show the gap. The original
+gap of 0.515 is representative, not a lucky seed.
+
+**A richer code.** The single hidden arm invites the objection that this is a
+one-dimensional lookup rather than identity. A second task makes the private code a
+vector w_i in R^m, with an observable context x_t each step and a correct action
+equal to the sign of w_i dot x_t, so acting well requires recovering the whole
+profile. The incorporated state is a running estimate of w_i, updated by a
+reward-gated perceptron rule. At m equal to four the incorporated model reaches
+0.900 against a context estimator near chance, and the self versus wrong-bearer sweep
+falls from 0.897 to exact chance, 0.498, a gap of 0.398, with the falsifier holding
+high. A continuous multi-dimensional identity is therefore learnable only through the
+incorporated state and remains non-transferable, so the effect is not an artifact of
+a one-bit code.
+
+## 8. Methods and reproducibility
 
 All code is in the continuant-probe repository, cca directory. The task and gate zero
 are in constitutive_gpt_m1.py, the incorporated model in constitutive_gpt_m2.py, and
 the self versus wrong-bearer sweep in constitutive_gpt_m3.py, with the trained policy
 saved as champ_m3.npz. The dual-channel model is in constitutive_gpt_dual.py, with its
-policy saved as champ_dual.npz. Training is evolutionary search: population ninety six,
+policy saved as champ_dual.npz. The seed replicates are in
+constitutive_gpt_replicates.py and the multi-dimensional code in
+constitutive_gpt_richer.py. Training is evolutionary search: population ninety six,
 mirror sampling, centered-rank utilities, at width thirty two and training horizon two
 thousand, evaluated on held-out instances. The gate-zero bound is a Monte Carlo of the
 optimal decoder and requires no training. Results are recorded in RESULTS_M1.md,
 RESULTS_M2.md, RESULTS_M3.md, and RESULTS_DUAL.md.
 
-## 8. Limitations and next steps
+## 9. Limitations and next steps
 
-The task is a single hidden scalar per instance, the simplest obligate code, and the
-incorporated memory is a single fast-weight matrix. A richer, structured private code
-is the natural next probe of whether the effect is genuine identity rather than a
-one-dimensional lookup. The attention channel, shown idle here on a bounded context,
+The tasks remain small: a single hidden arm, and a four-dimensional profile. The
+incorporated state is a single fast-weight matrix or vector. The seed replicates and
+the multi-dimensional code close the two first objections, robustness and
+one-dimensionality, but the attention channel, shown idle here on a bounded context,
 would face a stronger test under a longer context or a task where the record carries
-partial but tempting information. Evolutionary search was noisy late in training and
-the returned policy is the best held-out checkpoint; seed replicates with error bars
-on the self versus wrong-bearer gap, a smaller step size, or a larger population would
-harden the numbers. M4, scale, is the natural
+partial but tempting information. The richer task's context estimator sits a little
+above chance, at 0.612, so a cleaner gate-zero margin there would want a larger
+dimension or a smaller gap. M4, scale, is the natural
 successor, and it is warranted precisely because the causal relations are now
 established, the precondition Chapter 9.9 sets before scaling. The result to carry
 forward is that the incorporated state is load-bearing and bearer-specific once the
