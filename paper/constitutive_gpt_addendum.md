@@ -205,6 +205,17 @@ high. A continuous multi-dimensional identity is therefore learnable only throug
 incorporated state and remains non-transferable, so the effect is not an artifact of
 a one-bit code.
 
+**Scale.** The whole result reproduces at a hundred times the parameters. The toy
+model was width 32 with a pooling context, about 650 parameters. A scaled model adds
+a genuine transformer block, single-head attention with learned Q, K, V, O
+projections and an MLP with residuals, at width 128, for 133,637 parameters, still
+trained by evolutionary search. It reaches held-out 0.789. The double dissociation
+holds, removing the attention record drops accuracy by 0.003 while freezing the
+incorporated memory collapses it to the context bound, and the self versus
+wrong-bearer gap is 0.611, if anything larger than at toy scale. The causal
+relations therefore survive at scale and with a real attention block, though the
+full language-model version remains a separate, gradient-trained program.
+
 ## 8. Methods and reproducibility
 
 All code is in the continuant-probe repository, cca directory. The task and gate zero
@@ -212,8 +223,9 @@ are in constitutive_gpt_m1.py, the incorporated model in constitutive_gpt_m2.py,
 the self versus wrong-bearer sweep in constitutive_gpt_m3.py, with the trained policy
 saved as champ_m3.npz. The dual-channel model is in constitutive_gpt_dual.py, with its
 policy saved as champ_dual.npz. The seed replicates are in
-constitutive_gpt_replicates.py and the multi-dimensional code in
-constitutive_gpt_richer.py. Training is evolutionary search: population ninety six,
+constitutive_gpt_replicates.py, the multi-dimensional code in
+constitutive_gpt_richer.py, and the scaled transformer model in
+constitutive_gpt_scale.py. Training is evolutionary search: population ninety six,
 mirror sampling, centered-rank utilities, at width thirty two and training horizon two
 thousand, evaluated on held-out instances. The gate-zero bound is a Monte Carlo of the
 optimal decoder and requires no training. Results are recorded in RESULTS_M1.md,
@@ -228,9 +240,10 @@ one-dimensionality, but the attention channel, shown idle here on a bounded cont
 would face a stronger test under a longer context or a task where the record carries
 partial but tempting information. The richer task's context estimator sits a little
 above chance, at 0.612, so a cleaner gate-zero margin there would want a larger
-dimension or a smaller gap. M4, scale, is the natural
-successor, and it is warranted precisely because the causal relations are now
-established, the precondition Chapter 9.9 sets before scaling. The result to carry
-forward is that the incorporated state is load-bearing and bearer-specific once the
-task forecloses every bearer-neutral route, which is the positive form of the
-program's design law.
+dimension or a smaller gap. Scale within evolutionary search is now shown viable to
+133,637 parameters with a real attention block, but the full language-model version,
+gradient-trained on a tokenized task, remains the larger successor, and evolutionary
+search will not carry it. The result to carry forward is that the incorporated state
+is load-bearing and bearer-specific once the task forecloses every bearer-neutral
+route, which is the positive form of the program's design law, and it holds from a
+650-parameter cell to a 133,000-parameter transformer.
