@@ -65,7 +65,7 @@ another variable (there the observable-state shortcut, here the manifold), so it
 not isolate whether the incorporated state is load-bearing. The program already knows
 the fix.
 
-## 4. The convergence, and the one experiment that completes it
+## 4. The self versus wrong-bearer test, run: the escape principle is substrate-independent
 
 At the structural level the correspondence is strong and now threefold. The bearer loop
 is implemented in an RL forager (CCA), a sequence model (Constitutive GPT), and a
@@ -73,16 +73,41 @@ competitive-fatigue dynamical system (FourD), and the developmental-capture or
 persistence signature (Prediction 3) is measured in all three. That is genuine
 substrate independence for the loop and for incorporation.
 
-The load-bearing and non-transferability result (Prediction 2, and the sharp form of
-Prediction 4) is confirmed in the GPT and is not yet isolated in FourD, because FourD
-has run only the on/off ablation, which its own geometry confounds. The decisive
-experiment is the self versus wrong-bearer test lifted directly from M3: run a
-BearerEngine whose b_t is driven, in matched volume, by a different engine's activity
-stream, and measure the competency vector on its own task. If competencies degrade under
-the wrong bearer while the falsifier (its own bearer, independent noise) holds, FourD
-joins the GPT in showing the incorporated state is not just persistent but specifically
-this bearer's and non-transferable. FourD already has the infrastructure for it: a
-pluggable perturbation source and the competency vector. It is a cheap run.
+The decisive test was then run in FourD (`fourd_self_vs_wrong_bearer.py`). A body A is
+run under three bearer streams: its own (self), a different body B's incorporated bearer
+trajectory transplanted step by step (wrong), and a second same-body instance's bearer
+with independent noise (falsifier). Competency is self-maintenance (clarity stability)
+and basin divergence from the self run. Result, six bodies, s3/cyclic, N=96, 1500 steps:
+
+    self-maintenance    self 2.714    wrong 2.716    falsifier 2.716   (all +/-0.006)
+    basin divergence     wrong 0.003            falsifier 0.003
+
+A clean null. Transplanting a completely different body's bearer changes A's competency
+by about 0.002, within noise, and no more than transplanting a same-body bearer. The
+incorporated bearer is not body-specific here.
+
+The reason is structural and familiar. In FourD the body is its fixed subsystem
+preferences and macro-centers, and the bearer enters only as a weak additive bias
+(bearer_weight 0.6) that fatigue and normalization wash out. The body's own fixed
+machinery is a non-incorporated route to its behavior, so the incorporated bearer is not
+load-bearing. This is the Generic-Policy Escape Principle from the forager, now seen in a
+dynamical system: the bearer is idle exactly because the task leaves a bearer-neutral
+route. The escape principle is therefore itself substrate-independent, confirmed in two
+unrelated formalisms.
+
+This reframes the convergence. Three things are now substrate-independent: the bearer
+loop and incorporation (Prediction 3), demonstrated in all three substrates; the escape
+principle (the bearer is not load-bearing while a non-incorporated route survives),
+demonstrated in the forager and FourD; and, in the one substrate that forecloses the
+escape by construction, the Constitutive GPT, the positive result that the incorporated
+state becomes load-bearing and non-transferable (Prediction 2, sharp Prediction 4). The
+design law holds across substrates in both directions.
+
+The motivated next step in FourD, not run here to avoid the researcher's trap, is the
+foreclosure: weaken or remove the fixed preferences so behavior must route through b_t,
+the FourD analogue of the obligate task, and repeat the self versus wrong-bearer test.
+The prediction is that non-transferability then appears, as it did once the GPT closed
+the escape.
 
 ## 5. Two more connections
 
@@ -103,9 +128,10 @@ instrument should be imported into the GPT and CCA ablation gates.
 
 A third independent substrate for the bearer loop and for incorporation (Prediction 3),
 which strengthens the substrate-independence claim from two formalisms to three. A
-concrete bifurcation model for the wall. A better ablation instrument to bring back into
-the core experiments. And a single, cheap, well-specified next experiment, self versus
-wrong-bearer in FourD, that would extend the non-transferability result (Prediction 2
-and the sharp Prediction 4) to the dynamical-systems substrate and make the convergence
-paper airtight. The honest current status is structural convergence confirmed,
-load-bearing specificity in FourD still to be shown.
+second independent confirmation of the escape principle, now in a dynamical system,
+which strengthens the design law. A concrete bifurcation model for the wall. And a
+better ablation instrument to bring back into the core experiments. The honest current
+status: the bearer loop, incorporation, and the escape principle are substrate-
+independent; the positive load-bearing non-transferability result holds in the one
+substrate that forecloses the escape (the GPT); and the FourD foreclosure is the clear
+next experiment if that direction is pursued.
