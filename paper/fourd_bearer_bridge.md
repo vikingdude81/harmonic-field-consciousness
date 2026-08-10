@@ -103,11 +103,25 @@ escape by construction, the Constitutive GPT, the positive result that the incor
 state becomes load-bearing and non-transferable (Prediction 2, sharp Prediction 4). The
 design law holds across substrates in both directions.
 
-The motivated next step in FourD, not run here to avoid the researcher's trap, is the
-foreclosure: weaken or remove the fixed preferences so behavior must route through b_t,
-the FourD analogue of the obligate task, and repeat the self versus wrong-bearer test.
-The prediction is that non-transferability then appears, as it did once the GPT closed
-the escape.
+The foreclosure was then attempted, once, timeboxed (`fourd_foreclosure.py`). All
+bodies were made physically identical (shared seed, so identical preferences), the
+preference channel was weakened (prefs scaled to 0.15) and the bearer channel
+strengthened (bearer_weight 2.5), and each body's identity was seeded into b_t and left
+to be sustained only by the incorporation loop. At short horizon the effect appeared, a
+clear basin divergence under the wrong bearer (0.103) against a held falsifier (0.008),
+but at the full horizon measured on the tail it vanished (wrong 0.004, falsifier 0.004,
+six bodies). The seeded identity is a transient. Without an ongoing objective anchoring
+it, the loop converges to a generic attractor and the body-specific identity washes out
+before the measurement window.
+
+This is the difficulty valley again, and it is itself substrate-independent. It shows
+precisely why the Constitutive GPT reached the positive result and FourD does not yet: a
+seeded identity is not enough, the bearer must be adaptive and task-driven, integrating a
+body-specific parameter from its own outcomes that behavior then requires, which is the
+forager's obligate arc ported into FourD. That is a genuine build, not a quick run, and
+it is left as stated future work. The honest status stands: FourD confirms the bearer
+loop, incorporation, and the escape principle, and a sustained, load-bearing,
+non-transferable bearer in FourD awaits an adaptive mechanism.
 
 ## 5. Two more connections
 
