@@ -152,7 +152,13 @@ incorporated outcome history, and the bearer is capable of adapting to carry it.
 non-incorporated viable policy remains, optimization preferentially exploits that route
 instead.
 
-The law separates into three regimes, which the substrates instantiate:
+The law separates into three regimes, which the substrates instantiate (Figure 1):
+
+![Figure 1](fig_designlaw.png)
+*Figure 1: The design law as a 2D design space, escape (open to foreclosed) against
+bearer adaptivity (static to adaptive). The bearer is load-bearing and non-transferable
+only in the top-right cell, where the escape is foreclosed and the bearer is adaptive.
+With an escape open, capacity only deepens its exploitation.*
 
 | Task structure | Bearer | Result |
 |---|---|---|
