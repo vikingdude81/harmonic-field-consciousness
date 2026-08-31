@@ -192,10 +192,13 @@ The claim is structural, about when an incorporated state does causal work and c
 transferred. It is agnostic on the phenomenal question by design, as each substrate's own
 write-up is. The convergence strengthens the near-side result, that a developmental bearer
 can be built, foreclosed, and measured, and it says nothing about the far side, which is
-the correct division of labor for the program. Randomness quality, including quantum
-random number generation tested in the dynamical system, was found not to drive the
-incorporation effect: perturbation shape does, not entropy source. Incorporation is a
-structural property of the loop, not of the noise.
+the correct division of labor for the program. Randomness quality was tested in the
+dynamical system, a pseudo-random source against the operating system's cryptographic
+source under a two-one-sided-tests equivalence check, and was found not to drive the
+incorporation effect: perturbation shape does, not entropy source. A hardware quantum
+source was deliberately not claimed, since none was run, and an early apparent
+quantum-randomness effect was traced to a shared-RNG-stream artifact and corrected.
+Incorporation is a structural property of the loop, not of the noise.
 
 ## 11. Methods and reproducibility
 
