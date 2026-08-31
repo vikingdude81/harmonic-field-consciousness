@@ -149,22 +149,34 @@ hr { border: 0.5px solid #999; margin: 8px 0; }
 """
 
 
-def insert_figure_page(doc, md_text):
+def insert_figures(doc, md_text):
+    """Place each ![Figure N](file) on its own page after the page bearing '(Figure N)'."""
     mlines = md_text.splitlines()
-    start = next(i for i, l in enumerate(mlines) if re.match(r"^\*Figure 1:", l))
-    capbuf = []
-    for l in mlines[start:]:
-        capbuf.append(l.strip())
-        if l.rstrip().endswith("*"):
-            break
-    cap = " ".join(capbuf).strip("*")
-    ref_page = next((i for i, p in enumerate(doc)
-                     if p.search_for("instantiate (Figure 1)")), 0)
-    page = doc.new_page(pno=ref_page + 1, width=612, height=792)
-    # landscape image 1872x1440 (1.30:1); width 500 -> height ~385
-    page.insert_image(fitz.Rect(56, 150, 556, 535), filename=str(FIG))
-    page.insert_textbox(fitz.Rect(70, 552, 542, 660), sanitize(cap),
-                        fontname="tiit", fontsize=9, align=3, color=(0.07, 0.07, 0.07))
+    figs = []
+    for i, l in enumerate(mlines):
+        m = re.match(r"!\[Figure (\d+)\]\((.+?)\)", l.strip())
+        if not m:
+            continue
+        num, img = int(m.group(1)), m.group(2)
+        cap = ""
+        for j in range(i + 1, len(mlines)):
+            if re.match(rf"^\*Figure {num}:", mlines[j].strip()):
+                buf = []
+                for k in mlines[j:]:
+                    buf.append(k.strip())
+                    if k.rstrip().endswith("*"):
+                        break
+                cap = " ".join(buf).strip("*")
+                break
+        figs.append((num, img, cap))
+    for num, img, cap in figs:                     # re-search each time (page indices shift)
+        ref = next((i for i, p in enumerate(doc) if p.search_for(f"(Figure {num})")), len(doc) - 1)
+        page = doc.new_page(pno=ref + 1, width=612, height=792)
+        pm = fitz.Pixmap(str(HERE / img)); asp = pm.width / pm.height
+        bw = 500.0; bh = bw / asp; x0 = (612 - bw) / 2; y0 = 150.0
+        page.insert_image(fitz.Rect(x0, y0, x0 + bw, y0 + bh), filename=str(HERE / img))
+        page.insert_textbox(fitz.Rect(70, y0 + bh + 18, 542, y0 + bh + 130), sanitize(cap),
+                            fontname="tiit", fontsize=9, align=3, color=(0.07, 0.07, 0.07))
 
 
 def main():
@@ -182,7 +194,7 @@ def main():
     writer.close()
 
     doc = fitz.open(str(OUT))
-    insert_figure_page(doc, md_text)
+    insert_figures(doc, md_text)
     doc.saveIncr()
     doc.close()
 

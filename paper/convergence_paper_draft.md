@@ -21,9 +21,11 @@ give operational definitions of these terms and show the mechanism across three 
 that share nothing but the loop: a reinforcement-learning forager, a transformer with a
 fast-weight memory, and a competitive-fatigue dynamical system. The loop and delayed
 incorporation appear in all three; the escape principle in two; the difficulty valley in
-two; and load-bearing non-transferability in the one substrate that forecloses the escape
+two; and load-bearing non-transferability in the substrates that foreclose the escape
 with an adaptive bearer, where a self versus wrong-bearer gap of 0.51, replicated with
-tight error bars, dissociated from attention, and holding at scale, establishes it. A
+tight error bars, dissociated from attention, and holding at scale, establishes it, and
+where the same result reproduces under gradient descent in a language model, recall of a
+private map being perfect with the bearer and at chance without it. A
 counterintuitive corollary follows for scaling: a more capable optimizer does not discover
 its bearer identity, it exploits the escape better. The claim is structural and agnostic on
 the phenomenal question by design.
@@ -231,6 +233,26 @@ of section 4.
   it holds at scale, reproducing at 133,637 parameters with a genuine transformer block, the
   gap if anything larger.
 
+**The same result under gradient descent, in a language model.** The foregoing was trained by
+evolutionary search on an abstract task. The positive cell also holds under gradient descent
+on token sequences in a real decoder transformer (Figure 2). The task is associative recall of
+a private per-sequence key-to-value map: study pairs, then a filler that pushes the study
+block outside a windowed attention of size L, then queries. The bounded window is the record
+and cannot reach the study block; a delta-rule fast-weight memory, a fixed-size matrix written
+online, is the bearer. Trained end to end with cross-entropy, the transformer recalls the map
+perfectly (query accuracy 1.000). Ablating the bearer, by zeroing its read, drops accuracy to
+chance (0.064); reading one sequence's queries against a different sequence's bearer likewise
+drops to chance (0.056). Load-bearing and non-transferability, at near-perfect separation, in
+the substrate the term language model names. The escape had to be foreclosed here too: a
+bijection map leaked a process-of-elimination route within the window and left the bearer
+idle, and a random-with-replacement map closed it, the same lesson a fourth time.
+
+![Figure 2](fig_demo_lm.png)
+*Figure 2: The design law's positive cell in a gradient-trained language model. A decoder
+transformer with windowed attention (the record) and a delta-rule fast-weight bearer recalls
+a private key-value map perfectly; ablating the bearer or reading against another sequence's
+bearer collapses accuracy to chance.*
+
 ## 8. The difficulty valley
 
 Foreclosure is necessary but not sufficient, which is the middle row of the regime table. On
@@ -258,6 +280,11 @@ the middle variable, adaptivity, was missing.
 | foreclosure + adaptive -> load-bearing | not reached | yes, freeze -> chance | not reached |
 | bearer-specific (non-transferable) | not reached | yes, gap 0.509 +/- 0.049 | not reached |
 
+The transformer column holds two ways. Under evolutionary search on the abstract task it gives
+the numbers above; under gradient descent on token sequences (the demo language model, section
+7 and Figure 2) it gives perfect recall with the bearer and chance without it, so the positive
+cell is established across both training regimes.
+
 ## 10. Falsifiable predictions
 
 - Any substrate with a surviving non-incorporated route shows an idle bearer, a null self
@@ -271,11 +298,12 @@ the middle variable, adaptivity, was missing.
 ## 11. Discussion, limitations, and the three-paper program
 
 The tasks are deliberately minimal so that the causal structure is legible; that is a
-strength for a law and a limit for claims about rich behavior. The positive result's
-substrate is a real attention model at 133,637 parameters, not a language model; the natural
-next step is a gradient-trained language model with the same incorporated memory on an
-obligate language task, where the escape to foreclose is again the context window. The
-dynamical system remains an escape demonstration until its bearer is made adaptive.
+strength for a law and a limit for claims about rich behavior. The positive result now holds
+both under evolutionary search at 133,637 parameters and under gradient descent in a
+token-sequence transformer with a delta-rule memory (Figure 2); the remaining step toward
+scale is a natural-language model on a natural obligate task, where the escape to foreclose is
+again the context window. The dynamical system remains an escape demonstration until its
+bearer is made adaptive.
 Evolutionary search was noisy at the larger sizes; the self-versus-wrong result is reported
 with across-seed error bars for that reason. The law is about causal load and
 transferability, not experience.
@@ -305,9 +333,11 @@ github.com/vikingdude81/constitutive-gpt, with the milestone map and trained pol
 the forager foundation in the same repository. The entropy-decay probe is public at
 github.com/vikingdude81/gabriels-horn. The dynamical system is the FourD repository, with the
 bearer loop in bearer_state_competency.py and the self versus wrong-bearer and foreclosure
-tests in fourd_self_vs_wrong_bearer.py and fourd_foreclosure.py. Training in the forager and
-transformer is evolutionary search; the dynamical system is a fixed integrator; the gate-zero
-bound is a Monte Carlo of the optimal decoder and needs no training. Per-experiment numbers
+tests in fourd_self_vs_wrong_bearer.py and fourd_foreclosure.py. The gradient-trained demo
+language model is in demo_lm.py. Training in the forager and the evolutionary-search
+transformer is evolutionary search; the demo language model is trained by gradient descent
+(AdamW, cross-entropy); the dynamical system is a fixed integrator; the gate-zero bound is a
+Monte Carlo of the optimal decoder and needs no training. Per-experiment numbers
 are in the RESULTS files of each repository.
 
 ## 14. References
