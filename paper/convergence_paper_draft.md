@@ -71,32 +71,37 @@ history as somebody else's history, or as no history at all.
 
 ## 2. Related work
 
-The bearer loop is a fast-weight architecture in the sense of Hinton and Plaut and of
-Schmidhuber's fast-weight programmers: a slow network sets, and a fast state carries,
-information that changes within a single episode. Our incorporated memory is a learned-write
-fast weight, close in mechanism to modern fast-weight and linear-attention memories, but the
-question we ask is different. That literature asks whether such a memory improves
-performance. We ask when it becomes the only viable carrier of a behavior and therefore
-non-transferable, which is a question about task structure, not memory capacity.
+The bearer loop is a fast-weight architecture in the sense of Hinton and Plaut (1987) and
+of Schmidhuber's fast-weight programmers (Schmidhuber, 1992): a slow network sets, and a
+fast state carries, information that changes within a single episode. Our incorporated
+memory is a learned-write fast weight, close in mechanism to modern fast-weight and
+linear-attention memories (Ba et al., 2016; Schlag et al., 2021), but the question we ask
+is different. That literature asks whether such a memory improves performance. We ask when
+it becomes the only viable carrier of a behavior and therefore non-transferable, which is a
+question about task structure, not memory capacity.
 
 The self-versus-yoked comparison is the meta-learning setup of learning to reinforcement
-learn (RL-squared and relatives), in which a recurrent state adapts within an episode. Our
-result explains a failure mode of that setup: when the environment leaves a bearer-neutral
-route, the adapting state is idle, and a more capable meta-learner exploits the route more.
-This is a caution for reading emergent in-context adaptation as a sign of a persistent self.
+learn (Duan et al., 2016; Wang et al., 2016), in which a recurrent state adapts within an
+episode, a lineage that runs back through learning to learn by gradient descent (Hochreiter
+et al., 2001; Finn et al., 2017). Our result explains a failure mode of that setup: when the
+environment leaves a bearer-neutral route, the adapting state is idle, and a more capable
+meta-learner exploits the route more. This is a caution for reading emergent in-context
+adaptation as a sign of a persistent self.
 
 The record-versus-bearer distinction is the episodic-memory-versus-weights distinction made
-sharp. Retrieval-augmented and long-context models treat history as a record that is read;
-our foreclosure result shows that when the needed information cannot be held in a bounded
-context, an incorporated state carries it and a record cannot, framed as a structural
-necessity rather than an efficiency.
+sharp. Retrieval-augmented and long-context models treat history as a record that is read
+(Lewis et al., 2020), and such records have known limits as they lengthen (Liu et al.,
+2023); our foreclosure result shows that when the needed information cannot be held in a
+bounded context, an incorporated state carries it and a record cannot, framed as a
+structural necessity rather than an efficiency.
 
 Philosophically the target is the developmental and constitutive component of personal
-identity, the Lockean intuition that a self is constituted by an appropriated history,
-rendered as a non-transferability property rather than a memory-continuity criterion. We
-part from psychological-continuity accounts by locating identity in an incorporated state
-that cannot be copied into another actor without failing, and we take no position on the
-phenomenal question.
+identity, the Lockean intuition that a self is constituted by an appropriated history
+(Locke, 1689), rendered as a non-transferability property rather than a
+memory-continuity criterion. We part from psychological-continuity accounts (Parfit, 1984)
+by locating identity in an incorporated state that cannot be copied into another actor
+without failing, and we take no position on the phenomenal question (Nagel, 1974), keeping
+company with skeptical treatments of near-future machine consciousness (Schwitzgebel, 2026).
 
 ## 3. The bearer loop and the four loci
 
@@ -276,10 +281,10 @@ with across-seed error bars for that reason. The law is about causal load and
 transferability, not experience.
 
 This paper sits in the middle of a three-layer program, and the layers should be read as
-distinct: Bearer Theory supplies the formal object and the developmental loop; this paper
-supplies the empirical design law governing when that object becomes causally necessary; and
-Life Before Language supplies the philosophical interpretation of how far such engineering
-reaches toward consequence and subjectivity. Keeping the empirical layer free of the
+distinct: Bearer Theory (Bone, 2026a) supplies the formal object and the developmental loop;
+this paper supplies the empirical design law governing when that object becomes causally
+necessary; and Life Before Language (Bone, 2026b) supplies the philosophical interpretation
+of how far such engineering reaches toward consequence and subjectivity. Keeping the empirical layer free of the
 phenomenal question is what makes it hard to dismiss as metaphysics dressed as machine
 learning: here is a measurable property, bearer-specific developmental dependence, and its
 governing conditions; what it means is a separate question, asked elsewhere.
@@ -304,3 +309,37 @@ tests in fourd_self_vs_wrong_bearer.py and fourd_foreclosure.py. Training in the
 transformer is evolutionary search; the dynamical system is a fixed integrator; the gate-zero
 bound is a Monte Carlo of the optimal decoder and needs no training. Per-experiment numbers
 are in the RESULTS files of each repository.
+
+## 14. References
+
+Ba, J., Hinton, G. E., Mnih, V., Leibo, J. Z., and Ionescu, C. (2016). Using fast weights to attend to the recent past. Advances in Neural Information Processing Systems 29.
+
+Bone, A. (2026a). Bearer Theory: A Formal Theory of Developmental Experience and Intelligence. Manuscript.
+
+Bone, A. (2026b). Life Before Language: Separating the Engineering Gap from the Metaphysical Gap in Debates on Machine Consciousness. Preprint.
+
+Duan, Y., Schulman, J., Chen, X., Bartlett, P. L., Sutskever, I., and Abbeel, P. (2016). RL2: Fast reinforcement learning via slow reinforcement learning. arXiv:1611.02779.
+
+Finn, C., Abbeel, P., and Levine, S. (2017). Model-agnostic meta-learning for fast adaptation of deep networks. International Conference on Machine Learning.
+
+Hinton, G. E., and Plaut, D. C. (1987). Using fast weights to deblur old memories. Proceedings of the 9th Annual Conference of the Cognitive Science Society.
+
+Hochreiter, S., Younger, A. S., and Conwell, P. R. (2001). Learning to learn using gradient descent. International Conference on Artificial Neural Networks.
+
+Lewis, P., Perez, E., Piktus, A., et al. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. Advances in Neural Information Processing Systems 33.
+
+Liu, N. F., Lin, K., Hewitt, J., et al. (2023). Lost in the middle: How language models use long contexts. arXiv:2307.03172.
+
+Locke, J. (1689). An Essay Concerning Human Understanding, Book II, Chapter 27 (Of Identity and Diversity).
+
+Nagel, T. (1974). What is it like to be a bat? The Philosophical Review, 83(4), 435-450.
+
+Parfit, D. (1984). Reasons and Persons. Oxford University Press.
+
+Schlag, I., Irie, K., and Schmidhuber, J. (2021). Linear Transformers are secretly fast weight programmers. International Conference on Machine Learning.
+
+Schmidhuber, J. (1992). Learning to control fast-weight memories: An alternative to dynamic recurrent networks. Neural Computation, 4(1), 131-139.
+
+Schwitzgebel, E. (2026). AI and Consciousness: A Skeptical Overview. arXiv:2510.09858.
+
+Wang, J. X., Kurth-Nelson, Z., Tirumala, D., et al. (2016). Learning to reinforcement learn. arXiv:1611.05763.
