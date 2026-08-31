@@ -8,28 +8,30 @@ Independent Researcher, Long Beach, CA
 
 ## Abstract
 
-An incorporated developmental state, a bearer that both biases behavior and is updated
-by the behavior's own outcomes, is central to Bearer Theory's account of when a system
-has an identity that is its own. We ask when that state actually does causal work rather
-than sitting idle, and we answer with a single design law demonstrated across three
-substrates that share nothing but the loop. An incorporated bearer becomes load-bearing
-and non-transferable exactly on tasks that admit no non-incorporated route to viability
-at the operating threshold; on all other tasks it is idle, and increasing capacity
-increases the escape rather than the incorporation. We show three things are
-substrate-independent. First, the bearer loop and delayed incorporation (Prediction 3)
-appear in a reinforcement-learning forager, a transformer with a fast-weight memory, and
-a competitive-fatigue dynamical system. Second, the Generic-Policy Escape Principle, that
-the bearer stays idle while any non-incorporated route survives, is confirmed in the
-forager and independently in the dynamical system. Third, in the one substrate that
-forecloses the escape by construction, a transformer on an obligate task, the
-incorporated state becomes load-bearing (freezing it collapses performance to chance) and
-bearer-specific (updating it on another individual's outcomes fails on one's own
-criterion, a self versus wrong-bearer gap of 0.51 with tight error bars, replicated,
-dissociated from attention, and holding at scale). We also find the difficulty valley,
-the failure that appears when an escape is foreclosed on a substrate whose bearer is not
-adaptive, in two substrates. The claim is structural, about when an incorporated state
-does work and cannot be transferred, and it is agnostic on the phenomenal question by
-design.
+An incorporated developmental state, a bearer that both biases behavior and is updated by
+that behavior's own outcomes, is central to Bearer Theory's account of when a system has
+an identity that is its own. We ask when that state actually does causal work rather than
+sitting idle, and we answer with a single design law demonstrated across three substrates
+that share nothing but the loop. An incorporated bearer becomes load-bearing and
+non-transferable exactly on tasks that admit no non-incorporated route to viability at the
+operating threshold; on all other tasks it is idle, and increasing capacity increases the
+escape rather than the incorporation. We establish three substrate-independent facts.
+First, the bearer loop and delayed incorporation appear in a reinforcement-learning
+forager, a transformer with a fast-weight memory, and a competitive-fatigue dynamical
+system. Second, the Generic-Policy Escape Principle, that the bearer stays idle while any
+non-incorporated route survives, is confirmed in the forager and independently in the
+dynamical system. Third, in the one substrate that forecloses the escape by construction,
+a transformer on an obligate task, the incorporated state becomes load-bearing (freezing
+it collapses performance to chance) and bearer-specific (updating it on another
+individual's outcomes fails on one's own criterion, a self versus wrong-bearer gap of 0.51
+with tight error bars, replicated, dissociated from attention, and holding at scale). We
+also find the difficulty valley, the failure that appears when an escape is foreclosed on
+a substrate whose bearer is not adaptive, in two substrates. The claim is structural,
+about when an incorporated state does work and cannot be transferred, and it is agnostic
+on the phenomenal question by design.
+
+**Keywords:** developmental state, fast weights, meta-learning, personal identity,
+substrate independence, incorporated memory, non-transferability, machine consciousness
 
 ---
 
@@ -54,7 +56,55 @@ program. The dynamical system, FourD, was built independently for a different pu
 arrived at the bearer loop on its own. What transfers between them is not code. It is a
 loop and a law.
 
-## 2. The bearer loop and the four loci
+**Contributions.**
+
+1. A single design law: an incorporated bearer is load-bearing and non-transferable
+   exactly when the task forecloses every non-incorporated route to viability, and idle
+   otherwise, with capacity favoring the escape.
+2. Three substrate-independent facts supporting it: the bearer loop and incorporation in
+   all three substrates, the escape principle in two, and load-bearing non-transferability
+   in the one that forecloses the escape.
+3. The difficulty valley as a second, distinct substrate-independent phenomenon, which
+   explains why foreclosure is necessary but not sufficient.
+4. A set of falsifiable predictions for new substrates, and a concrete stated experiment
+   that would convert the dynamical system from an escape demonstration into a positive
+   one.
+
+## 2. Related work
+
+The bearer loop is a fast-weight architecture in the sense of Hinton and Plaut and of
+Schmidhuber's fast-weight programmers: a slow network sets, and a fast state carries,
+information that changes within a single episode. Our incorporated memory is a
+learned-write fast weight, close in mechanism to modern fast-weight and linear-attention
+memories, but the question we ask of it is different. The fast-weight literature asks
+whether such a memory improves performance. We ask when it becomes the only viable carrier
+of a behavior and therefore non-transferable, which is a question about the task structure
+around the memory, not about the memory's capacity.
+
+The self-versus-yoked comparison is the meta-learning setup of learning to reinforcement
+learn (RL-squared and its relatives), in which a recurrent state adapts within an episode.
+Our result explains a failure mode of that setup: when the environment leaves a
+bearer-neutral route, the adapting state is idle and a more capable meta-learner exploits
+the route more, so scaling the learner works against the appearance of within-episode
+identity. This is a caution for interpreting emergent in-context adaptation as a sign of a
+persistent self.
+
+The record-versus-bearer distinction is the episodic-memory-versus-weights distinction
+made sharp. Retrieval-augmented and long-context models treat history as a record that is
+read; our Prediction 4 result shows that when the needed information cannot be held in a
+bounded context, an incorporated state carries it and a record cannot, a claim adjacent to
+work on the limits of context length but framed as a structural necessity rather than an
+efficiency.
+
+Philosophically the target is the developmental and constitutive component of personal
+identity, the Lockean intuition that a self is constituted by an appropriated history,
+rendered as a non-transferability property rather than a memory-continuity criterion. We
+part from psychological-continuity accounts by locating identity in an incorporated state
+that cannot be copied into another actor without failing, rather than in retrievable
+memories, which can. We take no position on the phenomenal question and keep company with
+skeptical treatments of machine consciousness on that boundary.
+
+## 3. The bearer loop and the four loci
 
 Write the loop as
 
@@ -74,11 +124,11 @@ over one continuant b. Each substrate instantiates all four loci.
   b_t then resolved into subsystem activities; V is the outcome the system registers,
   filtered through b_t; U is b_{t+1} = (1 - decay) b_t + gain activities_t.
 
-The correspondence is exact, not analogical. FourD's own description of the property,
-that b_t is a closed loop and not a passive log, is Bearer Theory's Prediction 4, the
+The correspondence is exact, not analogical. FourD's own description of the property, that
+b_t is a closed loop and not a passive log, is Bearer Theory's Prediction 4, the
 incorporated bearer versus the retrievable record.
 
-## 3. Result one: the bearer loop and incorporation are substrate-independent
+## 4. Result one: the bearer loop and incorporation are substrate-independent
 
 Delayed incorporation, Prediction 3, is that a specific outcome leaves a residue in the
 continuant that persists after its cue. It is measured in all three substrates.
@@ -93,7 +143,7 @@ continuant that persists after its cue. It is measured in all three substrates.
 
 The loop and its incorporation are therefore not features of one architecture.
 
-## 4. Result two: the escape principle is substrate-independent
+## 5. Result two: the escape principle is substrate-independent
 
 The bearer stays idle whenever the task leaves a non-incorporated route to viability.
 
@@ -112,13 +162,13 @@ The bearer stays idle whenever the task leaves a non-incorporated route to viabi
 
 Two unrelated formalisms, one escape.
 
-## 5. Result three: foreclosure yields load-bearing non-transferability
+## 6. Result three: foreclosure yields load-bearing non-transferability
 
 The transformer is the one substrate that forecloses the escape by construction. Its task
 is stochastic bandit identification: a hidden per-instance code, weakly informative
 outcomes, so identifying the code requires integrating outcomes over a horizon far longer
-than any bounded context. Gate zero is an information bound, computed with no training:
-a context-only learner restricted to the last L outcomes stays near chance (0.170 at the
+than any bounded context. Gate zero is an information bound, computed with no training: a
+context-only learner restricted to the last L outcomes stays near chance (0.170 at the
 locked calibration) while the full horizon is solvable (0.874). The context window, the
 sequence model's most powerful escape, is foreclosed.
 
@@ -137,7 +187,7 @@ On that task the incorporated memory becomes load-bearing and bearer-specific.
   non-transferability. And it holds at scale, reproducing at 133,637 parameters with a
   genuine transformer block, the gap if anything larger.
 
-## 6. The design law
+## 7. The design law
 
 The three results combine into a biconditional with a mechanism.
 
@@ -150,22 +200,22 @@ This predicts idleness (the forager and the dynamical system) and load-bearing s
 substrates that share only the loop. It is the positive form of the program's earlier
 finding, which could only report the negative half.
 
-## 7. The difficulty valley is also substrate-independent
+## 8. The difficulty valley is also substrate-independent
 
 Foreclosing the escape is necessary but not sufficient. On a substrate whose bearer is not
 adaptive, foreclosing the escape can leave the identity unsustainable. In the forager, an
-obligate task with the escape closed became unlearnable at the smallest scales, the
-difficulty valley. In the dynamical system, a foreclosure attempt that made the body's
-identity live only in the bearer produced the effect at short horizon (a basin divergence
-of 0.103 under the wrong bearer against 0.008 for the falsifier) but lost it at the full
-horizon (0.004 versus 0.004): a seeded identity is transient, and without an ongoing
-objective the loop converges to a generic attractor and the identity washes out. The
-lesson is the same in both: a bearer must be adaptive and task-driven, integrating a
-body-specific parameter from its own outcomes that behavior then requires, for the
-incorporated identity to be sustained. The transformer had exactly this, an adaptive
-learned memory and an obligate task, which is why it alone reaches the positive result.
+obligate task with the escape closed became unlearnable at the smallest scales. In the
+dynamical system, a foreclosure attempt that made the body's identity live only in the
+bearer produced the effect at short horizon (a basin divergence of 0.103 under the wrong
+bearer against 0.008 for the falsifier) but lost it at the full horizon (0.004 versus
+0.004): a seeded identity is transient, and without an ongoing objective the loop
+converges to a generic attractor and the identity washes out. The lesson is the same in
+both: a bearer must be adaptive and task-driven, integrating a body-specific parameter from
+its own outcomes that behavior then requires, for the incorporated identity to be
+sustained. The transformer had exactly this, an adaptive learned memory and an obligate
+task, which is why it alone reaches the positive result.
 
-## 8. Falsifiable predictions for new substrates
+## 9. Falsifiable predictions for new substrates
 
 - Any substrate with a surviving non-incorporated route will show an idle bearer, a null
   self versus wrong-bearer, regardless of capacity.
@@ -176,7 +226,22 @@ learned memory and an obligate task, which is why it alone reaches the positive 
   the self versus wrong-bearer test. The prediction is that non-transferability then
   appears, as it did once the transformer closed the escape.
 
-## 9. Relation to the manuscripts
+## 10. Discussion and limitations
+
+The tasks are deliberately minimal, a hidden arm and a low-dimensional profile, so that
+the causal structure is legible. That is a strength for establishing a law and a limit for
+claims about rich behavior. The demonstration substrate for the positive result is a
+transformer at 133,637 parameters, which is a real attention model but not a language
+model; the natural next step is a gradient-trained language model with the same
+incorporated memory on an obligate language task, where the escape to foreclose is again
+the context window. The dynamical system remains an escape demonstration until its bearer
+is made adaptive, the stated experiment of section 9. Evolutionary search was noisy at the
+larger sizes and returned best-checkpoint policies; the self-versus-wrong result is
+reported with across-seed error bars precisely to answer that. Finally, the law is a
+biconditional about causal load and transferability, not about experience; the phenomenal
+question is out of scope by design, and nothing here should be read as bearing on it.
+
+## 11. Relation to the manuscripts
 
 This is the empirical core of Bearer Theory's Prediction 2 and its criterion-internal
 qualification, generalized across substrates, and it grounds Life Before Language's claim
@@ -186,7 +251,7 @@ of the embedding manifold, additionally offers a concrete dynamical model for th
 the determinate threshold the framework posits between a graded engineering approach and
 what lies past it.
 
-## 10. Honest scope
+## 12. Honest scope
 
 The claim is structural, about when an incorporated state does causal work and cannot be
 transferred. It is agnostic on the phenomenal question by design, as each substrate's own
@@ -200,7 +265,7 @@ source was deliberately not claimed, since none was run, and an early apparent
 quantum-randomness effect was traced to a shared-RNG-stream artifact and corrected.
 Incorporation is a structural property of the loop, not of the noise.
 
-## 11. Methods and reproducibility
+## 13. Methods and reproducibility
 
 The transformer code and results are public under MIT at
 github.com/vikingdude81/constitutive-gpt, with the milestone map and the trained policies.
