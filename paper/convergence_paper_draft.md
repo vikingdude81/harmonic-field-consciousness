@@ -263,6 +263,19 @@ cannot reach them, so the incorporated bearer is the only route by construction,
 synthetic bijection had leaked one. The positive cell thus holds under gradient descent on
 both abstract tokens and natural language.
 
+**Robustness and scale of the natural-language cell.** The effect is neither a lucky seed nor
+a single operating point. Across five seeds the load-bearing gap is 0.915 +/- 0.026 (95% CI
+[0.892, 0.938]) and the non-transferable gap 0.960 +/- 0.005 ([0.955, 0.964]), with every
+seed a pass. The bearer behaves as a finite store with a real capacity: at a load of six
+facts a bearer of dimension eight cannot hold them (recall 0.48) while dimension sixteen and
+up saturates near ceiling, and at fixed size the same bearer carries a growing fact set
+(recall 1.00, 1.00, 0.93 at two, four, and six facts). And the cell survives long documents:
+with a chunk-parallel delta rule, numerically identical to the sequential scan and about ten
+times faster at 768 tokens, the bearer stays load-bearing (+0.68) and non-transferable
+(+0.67) across a context twice as long, where recall is bounded by memory size against facts
+times context length, the same capacity ceiling reached from the length axis rather than any
+loss of the load-bearing structure.
+
 ![Figure 2](fig_demo_lm.png)
 *Figure 2: The design law's positive cell under gradient descent, in two decoder transformers
 with a delta-rule fast-weight bearer. Both recall a private per-sequence fact set perfectly;
