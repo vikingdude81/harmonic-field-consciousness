@@ -25,7 +25,8 @@ two; and load-bearing non-transferability in the substrates that foreclose the e
 with an adaptive bearer, where a self versus wrong-bearer gap of 0.51, replicated with
 tight error bars, dissociated from attention, and holding at scale, establishes it, and
 where the same result reproduces under gradient descent in a language model, recall of a
-private map being perfect with the bearer and at chance without it. A
+private fact set being perfect with the bearer and at chance without it, on both an abstract
+key-value map and natural-language persona documents over real byte-pair tokens. A
 counterintuitive corollary follows for scaling: a more capable optimizer does not discover
 its bearer identity, it exploits the escape better. The claim is structural and agnostic on
 the phenomenal question by design.
@@ -247,11 +248,27 @@ the substrate the term language model names. The escape had to be foreclosed her
 bijection map leaked a process-of-elimination route within the window and left the bearer
 idle, and a random-with-replacement map closed it, the same lesson a fourth time.
 
+**And on natural language.** The same architecture holds when the task is rendered in
+English over real byte-pair tokens rather than abstract symbols (Figure 2, right). Each
+document is a private persona: a block of natural-language facts (a favorite color, a city, a
+pet, a job), then a stretch of ordinary filler sentences that pushes the fact block outside
+the attention window, then natural questions ("Q: What is Maria's favorite color? A:"), all
+tokenized with the GPT-2 byte-pair encoder. Trained end to end, the transformer recalls the
+persona's facts perfectly (answer accuracy 1.000); ablating the delta-rule bearer drops it to
+chance (0.129, chance 0.100) and answering one document's questions against a different
+persona's accumulated bearer drops it to chance (0.094). Load-bearing gap +0.871,
+non-transferable gap +0.906, in the substrate of ordinary text. Here the escape needed no
+special foreclosure: natural filler carries no systematic cue to the facts and the window
+cannot reach them, so the incorporated bearer is the only route by construction, where the
+synthetic bijection had leaked one. The positive cell thus holds under gradient descent on
+both abstract tokens and natural language.
+
 ![Figure 2](fig_demo_lm.png)
-*Figure 2: The design law's positive cell in a gradient-trained language model. A decoder
-transformer with windowed attention (the record) and a delta-rule fast-weight bearer recalls
-a private key-value map perfectly; ablating the bearer or reading against another sequence's
-bearer collapses accuracy to chance.*
+*Figure 2: The design law's positive cell under gradient descent, in two decoder transformers
+with a delta-rule fast-weight bearer. Both recall a private per-sequence fact set perfectly;
+ablating the bearer or reading against another sequence's bearer collapses accuracy to chance.
+Left: an abstract key-value map (chance 1/16). Right: natural-language personas over real
+GPT-2 byte-pair text (chance 1/10). Load-bearing and non-transferable in both.*
 
 ## 8. The difficulty valley
 
@@ -280,10 +297,13 @@ the middle variable, adaptivity, was missing.
 | foreclosure + adaptive -> load-bearing | not reached | yes, freeze -> chance | not reached |
 | bearer-specific (non-transferable) | not reached | yes, gap 0.509 +/- 0.049 | not reached |
 
-The transformer column holds two ways. Under evolutionary search on the abstract task it gives
-the numbers above; under gradient descent on token sequences (the demo language model, section
-7 and Figure 2) it gives perfect recall with the bearer and chance without it, so the positive
-cell is established across both training regimes.
+The transformer column holds three ways. Under evolutionary search on the abstract task it
+gives the numbers above; under gradient descent on abstract token sequences (the demo language
+model, section 7 and Figure 2, left) it gives perfect recall with the bearer and chance
+without it; and under gradient descent on natural-language persona documents over real GPT-2
+byte-pair tokens (Figure 2, right) it gives the same, load-bearing +0.871 and non-transferable
++0.906. The positive cell is thus established across both training regimes and on ordinary
+text.
 
 ## 10. Falsifiable predictions
 
@@ -299,11 +319,13 @@ cell is established across both training regimes.
 
 The tasks are deliberately minimal so that the causal structure is legible; that is a
 strength for a law and a limit for claims about rich behavior. The positive result now holds
-both under evolutionary search at 133,637 parameters and under gradient descent in a
-token-sequence transformer with a delta-rule memory (Figure 2); the remaining step toward
-scale is a natural-language model on a natural obligate task, where the escape to foreclose is
-again the context window. The dynamical system remains an escape demonstration until its
-bearer is made adaptive.
+under evolutionary search at 133,637 parameters, under gradient descent in an abstract
+token-sequence transformer with a delta-rule memory, and under gradient descent on
+natural-language persona documents over real GPT-2 byte-pair tokens (Figure 2), where the
+foreclosed escape is the context window and the natural filler closes it by construction. The
+remaining step toward scale is a larger model trained on a general corpus, where the obligate
+task is drawn from the text itself rather than constructed. The dynamical system remains an
+escape demonstration until its bearer is made adaptive.
 Evolutionary search was noisy at the larger sizes; the self-versus-wrong result is reported
 with across-seed error bars for that reason. The law is about causal load and
 transferability, not experience.
