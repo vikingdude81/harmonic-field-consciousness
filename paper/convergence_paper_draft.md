@@ -26,7 +26,9 @@ with an adaptive bearer, where a self versus wrong-bearer gap of 0.51, replicate
 tight error bars, dissociated from attention, and holding at scale, establishes it, and
 where the same result reproduces under gradient descent in a language model, recall of a
 private fact set being perfect with the bearer and at chance without it, on both an abstract
-key-value map and natural-language persona documents over real byte-pair tokens. A
+key-value map and natural-language persona documents over real byte-pair tokens, and where a
+general-corpus language model reproduces the escape principle itself by a single knob, the
+attention window turning the bearer from idle to load-bearing as it is narrowed. A
 counterintuitive corollary follows for scaling: a more capable optimizer does not discover
 its bearer identity, it exploits the escape better. The claim is structural and agnostic on
 the phenomenal question by design.
@@ -283,6 +285,29 @@ ablating the bearer or reading against another sequence's bearer collapses accur
 Left: an abstract key-value map (chance 1/16). Right: natural-language personas over real
 GPT-2 byte-pair text (chance 1/10). Load-bearing and non-transferable in both.*
 
+**And on a general corpus, where the escape can be opened and closed at will.** The persona
+task forecloses the window by construction. A plain language model trained on a real corpus
+lets us test the escape principle directly, by changing only the window size. We trained a
+42.8M-parameter model on 90M tokens of TinyStories (ordinary next-token loss, held-out
+perplexity 4.3) with a windowed-attention record and a delta-rule bearer, and measured the
+cost of ablating the bearer as a function of token position (Figure 3). With a wide 96-token
+window the ablation cost is flat at about 0.20 at every position: TinyStories' dependencies fit
+inside the window, the escape is open, and the bearer does no long-range work, exactly the idle
+bearer the principle predicts. Retraining with the window shrunk to 24 tokens, so that
+cross-sentence dependencies now exceed it, the flat curve becomes a rising one: the ablation
+cost is +0.33 within the window and roughly doubles to +0.68 beyond it, and reading against
+another document's bearer rises the same way, +0.68 within to +1.30 beyond. Nothing changed but
+the window. Open the escape and the bearer is idle; close it and the bearer becomes the
+load-bearing, document-specific carrier of the context the window cannot reach. It is the
+escape principle turned by a single knob on a real-corpus language model.
+
+![Figure 3](fig_corpus_foreclosure.png)
+*Figure 3: The escape principle on natural text, by a single-variable manipulation. Cost of
+ablating the bearer, per token position, in a language model trained on TinyStories. Wide
+window (blue, L=96): flat at 0.20, the escape is open and the bearer is idle for long range.
+Narrow window (green, L=24): the cost rises past the window edge, the escape is foreclosed and
+the bearer carries what the window cannot reach.*
+
 ## 8. The difficulty valley
 
 Foreclosure is necessary but not sufficient, which is the middle row of the regime table. On
@@ -305,7 +330,7 @@ the middle variable, adaptivity, was missing.
 |---|---|---|---|
 | bearer loop (four loci) | yes | yes | yes |
 | incorporation (Prediction 3) | ||db|| = 5.76 | horizon > context | memory horizon 0 -> 120 |
-| escape principle (idle) | yes, 9 designs + 2 levers | n/a (foreclosed) | yes, self ~= wrong null |
+| escape principle (idle) | yes, 9 designs + 2 levers | yes, corpus window knob (Fig 3) | yes, self ~= wrong null |
 | difficulty valley | yes (obligate unlearnable) | avoided | yes (seeded identity transient) |
 | foreclosure + adaptive -> load-bearing | not reached | yes, freeze -> chance | not reached |
 | bearer-specific (non-transferable) | not reached | yes, gap 0.509 +/- 0.049 | not reached |
@@ -316,7 +341,9 @@ model, section 7 and Figure 2, left) it gives perfect recall with the bearer and
 without it; and under gradient descent on natural-language persona documents over real GPT-2
 byte-pair tokens (Figure 2, right) it gives the same, load-bearing +0.871 and non-transferable
 +0.906. The positive cell is thus established across both training regimes and on ordinary
-text.
+text. And on a general corpus (Figure 3) the escape principle itself is reproduced by a single
+knob: the same bearer is idle for long range when the window covers the context and
+load-bearing beyond the window when it does not.
 
 ## 10. Falsifiable predictions
 
@@ -335,10 +362,13 @@ strength for a law and a limit for claims about rich behavior. The positive resu
 under evolutionary search at 133,637 parameters, under gradient descent in an abstract
 token-sequence transformer with a delta-rule memory, and under gradient descent on
 natural-language persona documents over real GPT-2 byte-pair tokens (Figure 2), where the
-foreclosed escape is the context window and the natural filler closes it by construction. The
-remaining step toward scale is a larger model trained on a general corpus, where the obligate
-task is drawn from the text itself rather than constructed. The dynamical system remains an
-escape demonstration until its bearer is made adaptive.
+foreclosed escape is the context window and the natural filler closes it by construction. It
+also holds on a general-corpus language model trained with ordinary next-token loss (Figure 3),
+where shrinking the attention window turns the bearer from idle to load-bearing beyond the
+window, the escape principle by a single knob on real text. What remains open at scale is a
+model large enough for rich behavior, and a bearer effect measured on downstream competence
+rather than on held-out loss. The dynamical system remains an escape demonstration until its
+bearer is made adaptive.
 Evolutionary search was noisy at the larger sizes; the self-versus-wrong result is reported
 with across-seed error bars for that reason. The law is about causal load and
 transferability, not experience.
