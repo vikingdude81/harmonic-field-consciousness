@@ -308,6 +308,28 @@ window (blue, L=96): flat at 0.20, the escape is open and the bearer is idle for
 Narrow window (green, L=24): the cost rises past the window edge, the escape is foreclosed and
 the bearer carries what the window cannot reach.*
 
+**And on a pretrained model, retrofitted for minutes.** The same result holds when the bearer is
+added to an existing pretrained language model rather than trained from scratch (Figure 4). We
+took a pretrained 124M-parameter GPT (TinyStories, GPT-2 byte-pair tokens, held-out loss 1.51),
+windowed its attention to foreclose the escape, and added a delta-rule bearer with a
+zero-initialized read, so the model begins exactly at the pretrained-but-windowed behavior.
+Training only the windowed attention and the bearer, everything else frozen, for about thirteen
+minutes reproduces the localization: the cost of ablating the bearer is near zero within the
+24-token window (0.024, the adapted attention handles it) and rises about sixfold beyond it
+(0.160), and a different document's bearer costs more and rises the same way (0.032 within, 0.28
+beyond). The retrofit also re-teaches the escape principle in its own procedure: fine-tuning the
+whole model instead leaves the bearer idle, because retraining the base is itself a
+non-incorporated route to lower loss, and only freezing that route recruits the bearer. So a
+pretrained model can be given a load-bearing, non-transferable, beyond-window bearer cheaply,
+which is the practical form of the scaling corollary.
+
+![Figure 4](fig_retrofit_localization.png)
+*Figure 4: The localization reproduces on a pretrained model. Cost of ablating the bearer by
+token position at window L=24, for a from-scratch 42.8M model (green, left axis) and a pretrained
+124M model retrofitted by training only its windowed attention and a bearer (purple, right axis).
+Both are near zero within the window and rise beyond it; the magnitudes differ because the
+retrofit trains far fewer parameters, but the localization is the same.*
+
 ## 8. The difficulty valley
 
 Foreclosure is necessary but not sufficient, which is the middle row of the regime table. On
@@ -365,7 +387,9 @@ natural-language persona documents over real GPT-2 byte-pair tokens (Figure 2), 
 foreclosed escape is the context window and the natural filler closes it by construction. It
 also holds on a general-corpus language model trained with ordinary next-token loss (Figure 3),
 where shrinking the attention window turns the bearer from idle to load-bearing beyond the
-window, the escape principle by a single knob on real text. What remains open at scale is a
+window, the escape principle by a single knob on real text. That result holds two ways, from
+scratch and retrofitted onto a pretrained 124M model for minutes of training (Figure 4), so the
+step from a from-scratch cell to a real pretrained base is taken. What remains open at scale is a
 model large enough for rich behavior, and a bearer effect measured on downstream competence
 rather than on held-out loss. The dynamical system remains an escape demonstration until its
 bearer is made adaptive.
