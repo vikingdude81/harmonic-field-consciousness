@@ -81,17 +81,29 @@ Metrics live beside each in `results.json` / `training_history.json` / `ablation
 
 ## Notes for organizing and retrofitting
 
-**Retrofit path (saves training time).** The paper's one open limitation is a larger model with
-a downstream-competence metric. Rather than train from scratch, add a delta-rule bearer channel
-and a short attention window to an existing pretrained LM and fine-tune. Best bases, by cost:
-`bpe_tinystories.pt` (163M, val 1.51, cheap) or `checkpoints/best.pt` (406M, stronger). A 1B
-spectral baseline (`.../phase1_baseline/best_model.pt`) is possible but hot and heavy.
+**Retrofit path (DONE, 2026-09-02).** The paper's open limitation was a larger model from a real
+base. We retrofitted `bpe_tinystories.pt` (124M, GPT-2 BPE, val 1.51): loaded it into a
+key-matched architecture, windowed its attention to foreclose the escape, added a zero-init
+delta-rule bearer, and trained only the attention + bearer at L=24 for about 13 minutes. Result:
+clean beyond-window localization (ablate cost 0.024 within the window, 0.160 beyond; wrong-bearer
+0.032 within, 0.28 beyond), the same signature as the from-scratch corpus LM, now on a pretrained
+124M model. Code and result: `continuant-probe/cca/corpus_lm_retrofit.py`, `RESULTS_RETROFIT.md`,
+`fig_retrofit_localization.png`. Folded into the convergence paper as Figure 4. Lesson: a
+retrofit only recruits the bearer if both escapes are closed, a narrow window and freezing the
+base parts that would otherwise absorb the adaptation (a full fine-tune leaves the bearer idle).
+Larger bases (`checkpoints/best.pt` 406M, or a 1B spectral baseline) remain available if a bigger
+demonstration is wanted; they are heavier and hotter.
+
+**Registry.** A junction-based registry (no admin, no files moved) is at
+`C:\Users\akbon\model_registry\`, grouping every thread (bearer, harmonic LMs, spectral 1B,
+helios, small E: GPTs) with a README and a copy of this manifest. Windows symlinks need admin;
+directory junctions (`New-Item -ItemType Junction`) do not.
 
 **Disk.** The 31 spectral 1B checkpoints (~356 GB) carry full optimizer state, which is only
 needed to resume training. Stripping it (keep `model_state_dict`, drop `optimizer_state_dict`)
-shrinks each roughly 3x. That is the single biggest space win and is lossless for inference,
-evaluation, and retrofitting.
+shrinks each roughly 3x, reclaiming ~230 GB. That is the single biggest space win and is lossless
+for inference, evaluation, and retrofitting. Not yet done.
 
 **Do not physically move these in bulk without care.** They live under OneDrive (moving churns
-sync) and the experiment code references their paths. Prefer this manifest plus, if wanted, a
-symlink registry, over relocating the files.
+sync) and the experiment code references their paths. Prefer this manifest and the junction
+registry over relocating the files.
