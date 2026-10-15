@@ -66,7 +66,7 @@ L5 (science: storage, memory, formation) sits between L4 (records without a bear
 
 ## §7 — Experiments to complete before submission
 
-1. **Seeds:** M3/M2b at ≥3 seeds (CPU ~5 h/arm — or GPU port).
+1. **Seeds:** M3/M2b at ≥3 seeds — **IN FLIGHT 2026-10-15**: seeds 2234/3234 training on CPU (~14–15 h), friction probe auto-runs per seed; see `l5_program_findings.md` §5 for protocol and success criteria.
 2. **M3-erased-from-start control:** trains with channel present but record disabled, separating record-tax from channel-training confound.
 3. ~~**Friction-probe port to L5 checkpoints**~~ **DONE** — see `l5_friction_flow_construction_order.md`: prediction confirmed (M2b ≈ M1 retrofit floor in flow profile; M3 healed root, L0 anti-damping −1.48, L3 braking +0.96).
 4. **Channel-capacity sweep** (rank 16/64/256) to map tax vs incorporation depth.
