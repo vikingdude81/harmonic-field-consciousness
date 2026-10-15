@@ -55,6 +55,7 @@ Full report: `paper/l5_memory_construction_order_report.md`.
 ## §5 — Instruments: state-matched vs history-bearing
 
 - The motion-lgi power-run null: instantaneous friction (ξ-gap) is bearer-blind, tracks the live-slot token (1536 pairs, interaction −0.0003 CI [−0.0009,+0.0002], events 12.6% two-sided, direction-symmetric, Fisher p=1).
+- **Completed follow-up (`l5_friction_flow_construction_order.md`, motion-lgi commit 6d6a7e2):** the same instrument ported to the L5 arms *does* see construction order — M3 vs M2b ξ-profile differs at L0 (tmd −0.615, p=5e-65) and L3 (tmd +0.741, p=4e-16), while M2b ≈ M1 everywhere. The 2×2 completes: flow instrument null on state-matched contrasts, decisive on history-bearing contrasts.
 - The G3 occupancy invariant: C3/C1 = 0.534 ± 0.059 across 9 substrates — grown-in construction reorganizes basin geometry cross-substrate.
 - The L5 tax: the same construction order shows up in NLL-domain record cost.
 - **Synthesis:** state-matched instruments (per-token flow, snapshot behavior) are bearer-blind by construction; history-bearing instruments (record erasure, construction order) are where bearer structure lives. This section converts two nulls and one positive into a methodology claim.
@@ -67,7 +68,7 @@ L5 (science: storage, memory, formation) sits between L4 (records without a bear
 
 1. **Seeds:** M3/M2b at ≥3 seeds (CPU ~5 h/arm — or GPU port).
 2. **M3-erased-from-start control:** trains with channel present but record disabled, separating record-tax from channel-training confound.
-3. **Friction-probe port to L5 checkpoints** (motion-lgi `src/` auto-Q, 4L/256d): prediction — M2b shows retrofit floor in layer-flow profile, M3 shows healed root. First candidate non-bearer-blind motion-lgi signal.
+3. ~~**Friction-probe port to L5 checkpoints**~~ **DONE** — see `l5_friction_flow_construction_order.md`: prediction confirmed (M2b ≈ M1 retrofit floor in flow profile; M3 healed root, L0 anti-damping −1.48, L3 braking +0.96).
 4. **Channel-capacity sweep** (rank 16/64/256) to map tax vs incorporation depth.
 5. **Wrong-vs-wrong control** (already specced in power-run notes) to close the mechanism question on the 12.6% events.
 
