@@ -70,6 +70,22 @@ Single-seed results are the program's main reviewer exposure. Replication protoc
 - Success criterion: M3−M2b L0 tmd < −0.3 and L3 tmd > +0.3 in each seed; M2b−M1 |tmd| < 0.15 at L3. Cross-seed consistency of the *sign pattern* (root pump / top brake) is the headline; per-seed p-values secondary.
 - If a seed breaks the pattern, the claim narrows to "construction-order effects are seed-dependent" — which the M3 stage-4 seed-heterogeneity result from the earlier friction work already hints at.
 
+## 5b. Replication outcome + spread calibration (2026-10-16, verified against raw arrays)
+
+**Pre-registered verdict stands:** seed 1234 PASS, seed 3234 PASS, seed 2234 FAILS the floor gate by 0.005 (M2b−M1 L3 tmd −0.1552 vs |0.15| limit).
+
+**Determinism:** same-seed GPU reruns are bit-identical (checkpoints ≤3e-6, gate statistic identical). The earlier CPU-vs-GPU gap (−0.032 vs −0.065 for seed 1234) is different random streams, not measurement noise. Repeats therefore required *new training seeds*.
+
+**30 new-seed M2b repeats** (10 per base seed, `l5_results_gpu_m2b_repeats/`): floor statistic mean −0.084, sd 0.066, range −0.202…+0.084; **4/30 fail** the 0.15 limit (13%, 95% CI 3–27%); 7/30 within 0.02 of the line. ⇒ one failing seed out of three is unremarkable (P(≥1 fail in 3) ≈ 34%). Seed 2234's floor miss is an ordinary draw, not a property of that seed.
+
+**M2b is not centered on M1.** L3 sits systematically *below* vanilla (26/30 negative, mean −0.084); L0 systematically *above* (30/30 positive, mean +0.089). "Retrofit ≈ vanilla" holds only loosely: retrofit carries its own small, consistent signature — an **inverted mirror of the M3 pattern at both boundaries** (~1/7 the magnitude). Three distinguishable flow geometries: vanilla, grown-in (pump/brake), retrofitted (mild anti-pump/anti-brake).
+
+**M3-vs-30-M2b sensitivity** (fixed M3 per seed vs all 30 M2b draws): L0 gate 30/30 pass for all seeds. L3 gate: 1234 30/30, 3234 30/30, **2234 22/30 (73%)**. Seed 2234's M3 shifts L3 only +0.235 above vanilla (vs +0.71 / +0.65) — its original +0.414 pass leaned partly on its M2b dipping deep. **Correction to earlier claim:** "passes by a wide margin on all three seeds" is false for 2234's L3 gate.
+
+**Claim status:** construction order is *shown* — L0 replicates solidly on 3/3; L3 replicates strongly on 2/3, real-but-thin on the third. Carries the un-checked convergence confound (M3 val_nll 1.7–2.3 vs M2b 0.53): ξ differences could partly reflect convergence level, not formation order. Bearer-specificity is *not* from this probe (power run null); it lives in the constructed substrates.
+
+**Next (pre-register before running):** (i) M3 repeats with new seeds — is 2234's +0.235 a weak draw or is M3 L3 magnitude seed-sensitive; (ii) convergence control — immature M1 checkpoint at M3-matched val_nll: if early-M1 shows M3-like ξ, the construction-order reading collapses into a convergence artifact; (iii) any new criterion written down before the batch, not tuned to these numbers.
+
 ## 6. Standing caveats & lessons (program-wide)
 
 - Event definitions must be two-sided unless asymmetry is pre-registered (the "always wrong-colder" artifact: 12.6% two-sided events, sign-symmetric).
