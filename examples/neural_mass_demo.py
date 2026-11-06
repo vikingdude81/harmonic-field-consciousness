@@ -65,7 +65,7 @@ external_input = 0.5 * np.ones(int(duration / oscillator.dt))
 print(f"\nSimulating for {duration} ms with constant input...")
 result = oscillator.simulate(duration, external_input=external_input)
 
-print(f"✓ Simulation complete")
+print("✓ Simulation complete")
 print(f"  Final E activity: {result['e_activity'][-1]:.3f}")
 print(f"  Final I activity: {result['i_activity'][-1]:.3f}")
 
@@ -111,7 +111,7 @@ for i, freq in enumerate(scale_freqs):
 
 # Get cross-frequency coupling
 coupling_matrix = multi_osc.get_cross_frequency_coupling()
-print(f"\nCross-scale coupling matrix:")
+print("\nCross-scale coupling matrix:")
 print(f"  Shape: {coupling_matrix.shape}")
 print(f"  Mean off-diagonal coupling: {np.mean(coupling_matrix[~np.eye(multi_osc.n_scales, dtype=bool)]):.3f}")
 

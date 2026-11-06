@@ -5,7 +5,6 @@ Converts harmonic mode amplitudes to spike trains and vice versa.
 """
 
 import numpy as np
-from typing import Tuple
 
 
 class SpikeEncoder:
@@ -93,8 +92,8 @@ class SpikeEncoder:
         Returns:
             Decoded amplitudes (n_modes,)
         """
-        n_modes = spike_trains.shape[0]
-        n_steps = spike_trains.shape[1]
+        spike_trains.shape[0]
+        spike_trains.shape[1]
         
         # Compute firing rates
         window_steps = int(window / self.dt)

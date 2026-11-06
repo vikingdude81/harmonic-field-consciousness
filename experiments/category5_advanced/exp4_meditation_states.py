@@ -14,7 +14,6 @@ Compares to baseline states and psychedelics.
 import numpy as np
 import networkx as nx
 import sys
-import os
 import matplotlib.pyplot as plt
 from pathlib import Path
 
@@ -272,7 +271,7 @@ def run_meditation_analysis():
     
     # Find interesting comparisons
     meditation_states = {k: v for k, v in results.items() if v['category'] in ['meditation', 'jhana']}
-    baseline_states = {k: v for k, v in results.items() if v['category'] == 'baseline'}
+    {k: v for k, v in results.items() if v['category'] == 'baseline'}
     
     # Highest consciousness meditation
     best_med = max(meditation_states.items(), key=lambda x: x[1]['C_t'])
@@ -281,34 +280,34 @@ def run_meditation_analysis():
     
     # Compare to wake
     wake_C = results['Wake']['C_t']
-    print(f"\n2. MEDITATION vs WAKE COMPARISON:")
+    print("\n2. MEDITATION vs WAKE COMPARISON:")
     for name, data in sorted(meditation_states.items(), key=lambda x: x[1]['C_t'], reverse=True)[:5]:
         diff = data['C_t'] - wake_C
         sign = "+" if diff > 0 else ""
         print(f"   {name}: {sign}{diff:.3f} ({sign}{100*diff/wake_C:.1f}%)")
     
     # Stability vs consciousness
-    print(f"\n3. NON-DUAL AWARENESS ANALYSIS:")
+    print("\n3. NON-DUAL AWARENESS ANALYSIS:")
     nd = results['Non-dual']
     print(f"   C(t) = {nd['C_t']:.3f} (very high)")
     print(f"   PR = {nd['PR']:.3f} (maximum participation)")
     print(f"   Lyapunov = {nd.get('lyapunov_exponent', 0):.4f} (stable, not chaotic)")
-    print(f"   → Unlike psychedelics, achieves high consciousness WITHOUT chaos!")
+    print("   → Unlike psychedelics, achieves high consciousness WITHOUT chaos!")
     
     # Jhana progression
-    print(f"\n4. JHANA PROGRESSION:")
+    print("\n4. JHANA PROGRESSION:")
     jhanas = [(k, v) for k, v in results.items() if 'Jhana' in k]
     for name, data in sorted(jhanas, key=lambda x: x[0]):
         print(f"   {name}: C(t) = {data['C_t']:.3f}, PR = {data['PR']:.3f}, R = {data['R']:.3f}")
-    print(f"   → Consciousness INCREASES through jhanas despite narrowing focus!")
+    print("   → Consciousness INCREASES through jhanas despite narrowing focus!")
     
     # FA vs OM comparison
-    print(f"\n5. FOCUSED ATTENTION vs OPEN MONITORING:")
+    print("\n5. FOCUSED ATTENTION vs OPEN MONITORING:")
     fa_deep = results['FA Deep']
     om_deep = results['OM Deep']
     print(f"   FA Deep: C(t) = {fa_deep['C_t']:.3f}, H_mode = {fa_deep['H_mode']:.3f}")
     print(f"   OM Deep: C(t) = {om_deep['C_t']:.3f}, H_mode = {om_deep['H_mode']:.3f}")
-    print(f"   → OM has HIGHER entropy (open awareness) but similar consciousness")
+    print("   → OM has HIGHER entropy (open awareness) but similar consciousness")
     
     # Create visualizations
     create_visualizations(results, sorted_states)
@@ -432,7 +431,7 @@ def create_visualizations(results, sorted_states):
     ax = axes[0, 0]
     values = [meditation_only[n]['C_t'] for n in names]
     colors = [meditation_only[n]['color'] for n in names]
-    bars = ax.barh(names, values, color=colors)
+    ax.barh(names, values, color=colors)
     ax.axvline(results['Wake']['C_t'], color='green', linestyle='--', label='Wake baseline')
     ax.set_xlabel('Consciousness C(t)')
     ax.set_title('Consciousness by Meditation Type')
@@ -441,7 +440,7 @@ def create_visualizations(results, sorted_states):
     # PR
     ax = axes[0, 1]
     values = [meditation_only[n]['PR'] for n in names]
-    bars = ax.barh(names, values, color=colors)
+    ax.barh(names, values, color=colors)
     ax.axvline(results['Wake']['PR'], color='green', linestyle='--', label='Wake baseline')
     ax.set_xlabel('Participation Ratio')
     ax.set_title('Mode Participation')
@@ -450,7 +449,7 @@ def create_visualizations(results, sorted_states):
     # Lyapunov
     ax = axes[1, 0]
     values = [meditation_only[n].get('lyapunov_exponent', 0) for n in names]
-    bars = ax.barh(names, values, color=colors)
+    ax.barh(names, values, color=colors)
     ax.axvline(0, color='black', linestyle='-', linewidth=2)
     ax.axvline(results['Psychedelic'].get('lyapunov_exponent', 0), color='red', linestyle='--', label='Psychedelic')
     ax.set_xlabel('Lyapunov Exponent')
@@ -460,7 +459,7 @@ def create_visualizations(results, sorted_states):
     # Sheaf consistency  
     ax = axes[1, 1]
     values = [meditation_only[n].get('sheaf_consistency', 0) for n in names]
-    bars = ax.barh(names, values, color=colors)
+    ax.barh(names, values, color=colors)
     ax.axvline(results['Wake'].get('sheaf_consistency', 0), color='green', linestyle='--', label='Wake')
     ax.axvline(results['Anesthesia'].get('sheaf_consistency', 0), color='purple', linestyle='--', label='Anesthesia')
     ax.set_xlabel('Sheaf Consistency')

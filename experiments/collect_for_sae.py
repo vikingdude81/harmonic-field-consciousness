@@ -339,7 +339,7 @@ def main():
         token_positions = -1  # Last token only
     
     # Collect activations
-    print(f"\n=== Collecting Activations ===")
+    print("\n=== Collecting Activations ===")
     print(f"Batch size: {args.batch_size} (use --batch-size to adjust for VRAM)")
     activations, metadata = collect_activations(
         model=model,
@@ -356,7 +356,7 @@ def main():
     save_for_sae(activations, metadata, args.output, args.model)
     
     # Print statistics
-    print(f"\n=== Statistics ===")
+    print("\n=== Statistics ===")
     for layer_idx, acts in activations.items():
         scores = [m['consciousness_score'] for m in metadata[layer_idx] if m['consciousness_score'] is not None]
         if scores:
@@ -364,9 +364,9 @@ def main():
         else:
             print(f"Layer {layer_idx}: {acts.shape[0]} samples")
     
-    print(f"\n=== Ready for SAE Training ===")
+    print("\n=== Ready for SAE Training ===")
     print(f"Load with: data = np.load('{args.output}')")
-    print(f"Access layer 48: data['layer_48'].shape")
+    print("Access layer 48: data['layer_48'].shape")
 
 
 if __name__ == "__main__":

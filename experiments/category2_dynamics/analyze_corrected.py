@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 mega = pd.read_csv('results/mega/results_batched.csv')
 print('Analyzing CORRECTED mega results...')

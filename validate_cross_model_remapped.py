@@ -17,7 +17,7 @@ We can remap them by proportional scaling: dim_new = (dim_old / 5120) * hidden_s
 import torch
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from typing import Dict, List, Tuple
+from typing import Dict
 import json
 from datetime import datetime
 
@@ -134,7 +134,7 @@ class RemappedValidator:
             
             # Remap dimensions for this model
             remapped_dims = remap_dimensions(CONSCIOUS_DIMS_ORIGINAL, ORIGINAL_HIDDEN_DIM, hidden_dim)
-            print(f"Remapped dimensions:")
+            print("Remapped dimensions:")
             for orig_dim, info in CONSCIOUS_DIMS_ORIGINAL.items():
                 remapped_dim = [d for d in remapped_dims.keys() 
                               if remapped_dims[d]['name'] == info['name']][0]

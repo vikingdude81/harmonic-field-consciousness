@@ -17,7 +17,7 @@ import torch
 import numpy as np
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -356,7 +356,7 @@ def main():
             model, tokenizer, args.prompt, vec, alpha=args.alpha
         )
         
-        print(f"\n=== Results ===")
+        print("\n=== Results ===")
         print(f"Baseline consciousness: {baseline_score:.3f}")
         print(f"Steered consciousness: {steered_score:.3f}")
         print(f"Delta: {steered_score - baseline_score:+.3f}")

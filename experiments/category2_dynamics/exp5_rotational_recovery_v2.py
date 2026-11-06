@@ -26,23 +26,15 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
 from pathlib import Path
 from tqdm import tqdm
-from scipy import stats
 import time
 
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
 from utils.rotational_dynamics import (
-    analyze_rotational_dynamics, compute_rotation_angle,
-    compute_angular_velocity, compute_trajectory_circularity,
-    compute_recovery_percentage, jpca
-)
-from utils.traveling_waves import (
-    comprehensive_wave_analysis, detect_traveling_wave_correlation,
-    analyze_wave_correspondence_to_rotation
+    analyze_rotational_dynamics, compute_recovery_percentage
 )
 
 # ==============================================================================
@@ -363,7 +355,7 @@ for trial in range(5):
 
 df_exp3 = pd.DataFrame(exp3_results)
 df_exp3.to_csv(OUTPUT_DIR / 'exp3_wave_rotation_correspondence.csv', index=False)
-print(f"\n[OK] Placeholder results saved for Experiment 3 (deferred)")
+print("\n[OK] Placeholder results saved for Experiment 3 (deferred)")
 n_waves = 0
 n_trials = 5
 

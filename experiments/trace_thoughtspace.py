@@ -25,7 +25,7 @@ from dataclasses import dataclass, asdict
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from consciousness_circuit.circuit import ConsciousnessCircuit, REFERENCE_HIDDEN_DIM
+from consciousness_circuit.circuit import ConsciousnessCircuit
 
 
 @dataclass
@@ -67,7 +67,6 @@ def trace_generation(
                 device = "cuda" if torch.cuda.is_available() else "cpu"
     
     if circuit is None:
-        hidden_dim = model.config.hidden_size
         circuit = ConsciousnessCircuit()
     
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
@@ -219,7 +218,7 @@ def main():
     print(f"\n=== Generated ({len(trace)} tokens) ===")
     print(text)
     
-    print(f"\n=== Consciousness Trajectory ===")
+    print("\n=== Consciousness Trajectory ===")
     for t in trace[:10]:
         print(f"  Step {t.step}: '{t.token}' → {t.consciousness_score:.3f}")
     if len(trace) > 10:

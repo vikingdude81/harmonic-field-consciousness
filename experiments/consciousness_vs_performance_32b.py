@@ -57,7 +57,7 @@ def parse_args():
 def load_gsm8k(n_samples: int, seed: int = 42) -> list:
     """Load n samples from GSM8K test set."""
     from datasets import load_dataset
-    log(f"Loading GSM8K test set...")
+    log("Loading GSM8K test set...")
     ds = load_dataset("openai/gsm8k", "main", split="test")
     ds = ds.shuffle(seed=seed)
     samples = []
@@ -210,7 +210,7 @@ def analyze_results(results: list, output_dir: Path):
     correct_scores = scores[correct == 1]
     incorrect_scores = scores[correct == 0]
 
-    log(f"\nConsciousness Scores:")
+    log("\nConsciousness Scores:")
     log(f"  Correct answers:   mean={np.mean(correct_scores):.3f} "
           f"(std={np.std(correct_scores):.3f}, n={len(correct_scores)})")
     if len(incorrect_scores) > 0:
@@ -222,9 +222,9 @@ def analyze_results(results: list, output_dir: Path):
         t_stat, p_value = stats.ttest_ind(correct_scores, incorrect_scores)
         log(f"\n  T-test: t={t_stat:.3f}, p={p_value:.4f}")
         if p_value < 0.05:
-            log(f"  ** SIGNIFICANT: Consciousness scores differ!")
+            log("  ** SIGNIFICANT: Consciousness scores differ!")
         else:
-            log(f"  Not significant at p=0.05")
+            log("  Not significant at p=0.05")
 
         pooled_std = np.sqrt((np.std(correct_scores)**2 + np.std(incorrect_scores)**2) / 2)
         if pooled_std > 0:
@@ -237,7 +237,7 @@ def analyze_results(results: list, output_dir: Path):
         log(f"\n  Point-biserial correlation: r={r_pb:.3f}, p={p_pb:.4f}")
 
     # Binned accuracy
-    log(f"\nAccuracy by Consciousness Level:")
+    log("\nAccuracy by Consciousness Level:")
     bins = [(0, 0.35, "Low"), (0.35, 0.50, "Medium-Low"),
             (0.50, 0.65, "Medium-High"), (0.65, 1.0, "High")]
     for lo, hi, label in bins:
@@ -252,7 +252,7 @@ def analyze_results(results: list, output_dir: Path):
         dim_names.update(r.get("dimension_scores", {}).keys())
 
     if dim_names:
-        log(f"\nDimension Analysis (correct vs incorrect):")
+        log("\nDimension Analysis (correct vs incorrect):")
         for dim_name in sorted(dim_names):
             c_vals = [r["dimension_scores"][dim_name] for r in results
                       if r["correct"] and dim_name in r.get("dimension_scores", {})]
@@ -352,7 +352,7 @@ def main():
     log("=" * 70)
     log("EXPERIMENT: Oracle Engine 32B - Consciousness vs Performance")
     log("=" * 70)
-    log(f"Model: Oracle Engine 32B (via HuggingFace Space)")
+    log("Model: Oracle Engine 32B (via HuggingFace Space)")
     log(f"Problems: {args.n}")
     log(f"Max tokens: {args.max_tokens}")
     log()

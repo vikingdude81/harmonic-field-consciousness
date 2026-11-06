@@ -15,7 +15,6 @@ Usage:
     python experiments/bottleneck_analysis.py --model mistralai/Mistral-7B-Instruct-v0.3 --device cuda:0 --quantize
 """
 import sys
-import os
 import argparse
 import json
 import time
@@ -343,7 +342,7 @@ def main():
     # 4. Category separation in PR space
     log()
     log("--- CATEGORY SEPARATION IN PR SPACE ---")
-    log(f"  (ANOVA F-stat of PR across categories at each layer)")
+    log("  (ANOVA F-stat of PR across categories at each layer)")
     for layer_idx in range(1, num_layers + 1, max(1, num_layers // 8)):
         groups = []
         for cat in CATEGORIES:

@@ -15,9 +15,8 @@ Usage:
 
 import torch
 import numpy as np
-from typing import Tuple, Dict, Optional, List
+from typing import Tuple, Dict, Optional
 from dataclasses import dataclass
-import math
 
 
 @dataclass
@@ -59,7 +58,7 @@ class ConsciousnessAwareGen:
         # Token diversity → hierarchy (unique tokens / total tokens)
         unique_tokens = len(np.unique(token_list))
         total_tokens = len(token_list)
-        token_diversity = unique_tokens / max(total_tokens, 1)
+        unique_tokens / max(total_tokens, 1)
         
         # Entropy of token distribution → rotation angle
         token_counts = np.bincount(token_list.astype(int), minlength=vocab_size)
@@ -89,7 +88,7 @@ class ConsciousnessAwareGen:
         High coherence = peaked distribution (model confident in next token).
         """
         probs = torch.softmax(logits[-1, :], dim=-1)
-        top_prob = probs.max().item()
+        probs.max().item()
         entropy = -(probs * torch.log(probs + 1e-10)).sum().item()
         
         # Coherence = 1 - normalized entropy

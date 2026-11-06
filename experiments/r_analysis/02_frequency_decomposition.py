@@ -7,7 +7,6 @@ Compute R in different frequency bands and test which best predicts C.
 import numpy as np
 from scipy import signal
 from scipy import stats
-from pathlib import Path
 
 print("=" * 70)
 print("FREQUENCY DECOMPOSITION: BAND-SPECIFIC R -> C")

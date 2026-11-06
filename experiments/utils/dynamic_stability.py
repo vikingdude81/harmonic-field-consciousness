@@ -16,9 +16,9 @@ Key concepts:
 """
 
 import numpy as np
-from scipy import linalg, signal
+from scipy import linalg
 from scipy.spatial.distance import euclidean
-from typing import Dict, Tuple, Optional, List
+from typing import Dict, Optional, List
 
 
 def compute_lyapunov_spectrum(trajectory: np.ndarray,

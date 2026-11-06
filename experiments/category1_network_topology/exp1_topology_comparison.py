@@ -23,7 +23,6 @@ from tqdm import tqdm
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
-from utils import visualization as viz
 
 # Configuration
 SEED = 42
@@ -128,7 +127,7 @@ ax.legend(loc='upper right')
 ax.grid(True, alpha=0.3, axis='y')
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'c_comparison_bar.png')
-print(f"  Saved: c_comparison_bar.png")
+print("  Saved: c_comparison_bar.png")
 
 # 2. Heatmap of all 5 components
 components = ['H_mode', 'PR', 'R', 'S_dot', 'kappa']
@@ -182,7 +181,7 @@ axes[-1].axis('off')
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'network_topologies.png')
-print(f"  Saved: network_topologies.png")
+print("  Saved: network_topologies.png")
 
 # 4. Statistical analysis
 print("\n" + "="*60)

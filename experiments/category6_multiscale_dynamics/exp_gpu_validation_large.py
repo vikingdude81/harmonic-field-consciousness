@@ -42,7 +42,7 @@ def create_lattice_gpu(side=70):
 
 def compute_multiscale_metrics(laplacian, time_scale):
     """Compute metrics at different temporal scales."""
-    n_nodes = laplacian.shape[0]
+    laplacian.shape[0]
     eigenvalues, eigenvectors = torch.linalg.eigh(laplacian)
     
     modes = torch.randn(len(eigenvalues), device=device) * 0.1
@@ -82,7 +82,7 @@ print("=" * 80)
 print("CATEGORY 6: MULTISCALE DYNAMICS VALIDATION")
 print("=" * 80)
 print(f"Network size: {N_NODES} nodes")
-print(f"Analysis: Hierarchical temporal dynamics")
+print("Analysis: Hierarchical temporal dynamics")
 print("=" * 80)
 
 laplacian = create_lattice_gpu(side=70)

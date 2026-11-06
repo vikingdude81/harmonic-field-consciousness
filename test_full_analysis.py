@@ -38,20 +38,6 @@ from consciousness_circuit import (
     # Core analysis
     analyze_dimension_activations,
     ConsciousnessTrajectoryAnalyzer,
-    UniversalCircuit,
-    
-    # Trajectory classification
-    SignalClass,
-    
-    # TAME metrics
-    TAMEMetrics,
-    compute_agency_score,
-    detect_attractor_convergence,
-    
-    # Plugins
-    AttractorLockPlugin,
-    CoherenceBoostPlugin,
-    GoalDirectorPlugin,
 )
 
 print('\n' + '=' * 70)

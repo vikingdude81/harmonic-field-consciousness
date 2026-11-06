@@ -18,7 +18,7 @@ Key concepts:
 import numpy as np
 from scipy import signal, stats
 from scipy.spatial.distance import pdist, squareform
-from typing import Dict, Tuple, Optional, List
+from typing import Dict, Optional
 import networkx as nx
 
 

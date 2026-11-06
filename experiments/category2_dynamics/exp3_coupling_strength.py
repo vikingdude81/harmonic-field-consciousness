@@ -30,10 +30,7 @@ warnings.filterwarnings('ignore')
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
-from utils import visualization as viz
-from utils.gpu_utils import get_device_info, get_array_module, to_cpu, print_gpu_status
-from utils.chaos_metrics import estimate_lyapunov_exponent, compute_branching_ratio
-from utils.category_theory_metrics import compute_integration_phi
+from utils.gpu_utils import get_device_info, print_gpu_status
 
 # Configuration - supports environment variable overrides for RTX 5090 scaling
 SEED = 42
@@ -60,7 +57,7 @@ print("=" * 60)
 print("Category 2, Experiment 3: Coupling Strength")
 print(f"Configuration: {N_NODES} nodes, {N_MODES} modes, {N_COUPLING_STEPS} coupling steps")
 if USE_PYTORCH_GPU:
-    print(f"Acceleration: PyTorch CUDA (RTX 5090)")
+    print("Acceleration: PyTorch CUDA (RTX 5090)")
 print("=" * 60)
 
 # Check GPU availability
@@ -85,7 +82,7 @@ if USE_PYTORCH_GPU and N_NODES > 500:
     L = L_sparse
     del L_torch, eigenvalues_torch, eigenvectors_torch
     torch.cuda.empty_cache()
-    print(f"  Eigendecomposition on GPU complete")
+    print("  Eigendecomposition on GPU complete")
 else:
     L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
     eigenvalues = eigenvalues[:N_MODES]
@@ -461,7 +458,7 @@ for idx, K in enumerate(coupling_examples):
     ax.hist(sim['final_phases'], bins=20, density=True, alpha=0.7, color='steelblue', edgecolor='black')
     ax.set_xlabel('Phase (rad)', fontsize=10)
     ax.set_ylabel('Density', fontsize=10)
-    ax.set_title(f'Final Phase Distribution', fontsize=10)
+    ax.set_title('Final Phase Distribution', fontsize=10)
     ax.set_xlim(0, 2*np.pi)
 
 plt.suptitle('Time Evolution at Different Coupling Strengths', fontsize=14, fontweight='bold', y=1.02)

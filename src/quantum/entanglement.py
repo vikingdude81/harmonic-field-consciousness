@@ -13,7 +13,6 @@ Key concepts:
 
 import numpy as np
 from typing import List, Tuple, Dict, Optional
-from scipy.linalg import svd, logm
 from .reality_register import QuantumConsciousnessState
 
 
@@ -38,10 +37,10 @@ def compute_entanglement_entropy(
     subsystem_modes = np.asarray(subsystem_modes, dtype=int)
     
     # Create density matrix (assume pure state: ρ = |ψ⟩⟨ψ|)
-    rho = np.outer(state.amplitudes, np.conj(state.amplitudes))
+    np.outer(state.amplitudes, np.conj(state.amplitudes))
     
     # Trace out complement to get reduced density matrix
-    complement_modes = np.setdiff1d(np.arange(n_modes), subsystem_modes)
+    np.setdiff1d(np.arange(n_modes), subsystem_modes)
     
     # For pure states, use Schmidt decomposition
     # Reshape state vector into subsystem × complement

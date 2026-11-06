@@ -28,10 +28,7 @@ from tqdm import tqdm
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
-from utils import visualization as viz
 from utils.gpu_utils import get_device_info, gpu_eigendecomposition, print_gpu_status
-from utils.chaos_metrics import estimate_lyapunov_exponent, compute_branching_ratio, compute_all_chaos_metrics
-from utils.category_theory_metrics import compute_sheaf_consistency, compute_integration_phi
 
 # Configuration
 SEED = 42

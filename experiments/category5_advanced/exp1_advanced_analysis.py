@@ -26,7 +26,7 @@ from tqdm import tqdm
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
-from utils.chaos_metrics import compute_all_chaos_metrics, estimate_lyapunov_exponent
+from utils.chaos_metrics import compute_all_chaos_metrics
 from utils.advanced_networks import (
     generate_hierarchical_modular,
     generate_rich_club,
@@ -35,11 +35,7 @@ from utils.advanced_networks import (
     compute_network_metrics
 )
 from utils.category_theory_metrics import (
-    compute_all_category_metrics,
-    compute_sheaf_consistency,
-    compute_integration_phi,
-    build_simplicial_complex,
-    compute_betti_numbers
+    compute_all_category_metrics
 )
 
 # Configuration
@@ -269,7 +265,7 @@ ax2.legend()
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'advanced_comparison.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: advanced_comparison.png")
+print("  Saved: advanced_comparison.png")
 
 # Figure 2: Chaos metrics by state
 fig, axes = plt.subplots(1, 3, figsize=(15, 5))
@@ -302,7 +298,7 @@ ax.tick_params(axis='x', rotation=45)
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'chaos_metrics_by_state.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: chaos_metrics_by_state.png")
+print("  Saved: chaos_metrics_by_state.png")
 
 # Figure 3: Category theory metrics correlation
 fig, ax = plt.subplots(figsize=(8, 6))
@@ -325,7 +321,7 @@ ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'phi_vs_consciousness.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: phi_vs_consciousness.png")
+print("  Saved: phi_vs_consciousness.png")
 
 # Figure 4: Topological features (Betti numbers)
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -346,7 +342,7 @@ ax.legend()
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'topological_features.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: topological_features.png")
+print("  Saved: topological_features.png")
 
 # Save results
 df_networks.to_csv(OUTPUT_DIR / 'network_comparison.csv', index=False)

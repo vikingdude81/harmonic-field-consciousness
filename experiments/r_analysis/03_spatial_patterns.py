@@ -7,7 +7,6 @@ Compute local R for network communities and test if heterogeneity matters.
 import numpy as np
 import networkx as nx
 from scipy import stats
-from pathlib import Path
 
 print("=" * 70)
 print("SPATIAL R PATTERNS: LOCAL VS GLOBAL SYNCHRONIZATION")

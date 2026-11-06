@@ -4,7 +4,6 @@ Does Type 3 (random) really produce 100% waves, or is there a bug?
 """
 
 import pandas as pd
-import numpy as np
 
 # Load mega results
 mega = pd.read_csv('results/mega/results_batched.csv')

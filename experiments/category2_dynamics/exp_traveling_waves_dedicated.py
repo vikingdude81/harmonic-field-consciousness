@@ -10,7 +10,6 @@ Changes from v2 Experiment 3:
 """
 
 import numpy as np
-import networkx as nx
 import matplotlib.pyplot as plt
 import pandas as pd
 from pathlib import Path
@@ -20,11 +19,9 @@ import sys
 # Add utils to path
 sys.path.append('../../experiments')
 from utils import graph_generators as gg
-from utils import state_generators as sg
 from utils.rotational_dynamics import analyze_rotational_dynamics
 from utils.traveling_waves import (
     comprehensive_wave_analysis,
-    detect_traveling_wave_correlation,
     compute_wave_speed
 )
 
@@ -44,7 +41,7 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 print("="*80)
 print("DEDICATED TRAVELING WAVES EXPERIMENT")
 print("="*80)
-print(f"Extended parameter space:")
+print("Extended parameter space:")
 print(f"  Network sizes: {NETWORK_SIZES}")
 print(f"  Lattice types: {LATTICE_CONNECTIVITIES}-connected")
 print(f"  Trials per config: {N_TRIALS_PER_CONFIG}")
@@ -234,24 +231,24 @@ print("SUMMARY STATISTICS")
 print(f"{'='*80}")
 
 # Overall wave detection rates
-print(f"\nOverall wave detection:")
+print("\nOverall wave detection:")
 print(f"  Comprehensive method: {df_results['has_wave_comprehensive'].sum()}/{len(df_results)} ({df_results['has_wave_comprehensive'].mean()*100:.1f}%)")
 print(f"  Simple method: {df_results['has_wave_simple'].sum()}/{len(df_results)} ({df_results['has_wave_simple'].mean()*100:.1f}%)")
 
 # By network size
-print(f"\nBy network size:")
+print("\nBy network size:")
 for size in NETWORK_SIZES:
     subset = df_results[df_results['network_size'] == size]
     print(f"  N={size}: {subset['has_wave_simple'].mean()*100:.1f}% waves detected ({subset['has_wave_simple'].sum()}/{len(subset)} trials)")
 
 # By connectivity
-print(f"\nBy connectivity:")
+print("\nBy connectivity:")
 for conn in LATTICE_CONNECTIVITIES:
     subset = df_results[df_results['connectivity'] == conn]
     print(f"  {conn}-connected: {subset['has_wave_simple'].mean()*100:.1f}% waves detected ({subset['has_wave_simple'].sum()}/{len(subset)} trials)")
 
 # By wave type
-print(f"\nBy initial condition:")
+print("\nBy initial condition:")
 wave_types = ['Gaussian', 'Plane wave', 'Spiral', 'Random patch']
 for wt in range(4):
     subset = df_results[df_results['wave_type'] == wt]
@@ -260,7 +257,7 @@ for wt in range(4):
 # Wave-rotation correspondence
 waves_detected = df_results[df_results['has_wave_simple']]
 if len(waves_detected) > 0:
-    print(f"\nWave-rotation correspondence (for trials with waves):")
+    print("\nWave-rotation correspondence (for trials with waves):")
     print(f"  Mean correspondence: {waves_detected['wave_rotation_correspondence'].mean():.3f}")
     print(f"  Mean wave speed: {waves_detected['wave_speed_simple'].mean():.3f}")
     print(f"  Mean rotation velocity: {waves_detected['mean_rotation_velocity'].mean():.3f}")

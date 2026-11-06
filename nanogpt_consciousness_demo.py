@@ -8,16 +8,13 @@ Usage:
     python nanogpt_consciousness_demo.py --model <path> --mode <train|inference>
 """
 
-import torch
 import argparse
-from pathlib import Path
-import json
 import numpy as np
 
 # Import our consciousness module
 try:
     from consciousness_regression_module import ConsciousnessRegressor, ConsciousnessAssessor
-    from nanogpt_consciousness import ConsciousnessAwareGen, ConsciousnessTrainingCallback
+    from nanogpt_consciousness import ConsciousnessAwareGen, ConsciousnessTrainingCallback  # noqa: F401 (availability check)
 except ImportError as e:
     print(f"[!] Missing consciousness modules: {e}")
     print("[!] Make sure consciousness_regression_module.py and nanogpt_consciousness.py are in path")
@@ -156,7 +153,7 @@ class NanoGPTConsciousnessDemo:
                 
                 # This would require actual NanoGPT model
                 print(f"  [Would generate text aiming for C(t)={target_c:.2f}]")
-                print(f"  [Requires trained NanoGPT model]")
+                print("  [Requires trained NanoGPT model]")
     
     def demo_training_consciousness_loss(self):
         """Demonstrate consciousness loss in training."""

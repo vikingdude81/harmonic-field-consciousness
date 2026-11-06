@@ -21,10 +21,8 @@ Usage:
     # Routes to: trading + consciousness experts
 """
 
-import os
 import time
 import torch
-import numpy as np
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple, Any
 from dataclasses import dataclass, field
@@ -314,11 +312,11 @@ class MoEAgent:
                 trust_remote_code=True
             )
 
-            print(f"[MoE Agent] Model loaded successfully")
+            print("[MoE Agent] Model loaded successfully")
 
         except Exception as e:
             print(f"[MoE Agent] Error loading model: {e}")
-            print(f"[MoE Agent] Falling back to mock mode for testing")
+            print("[MoE Agent] Falling back to mock mode for testing")
             self.base_model = "MOCK"  # Mock for testing
 
     def _load_adapter(self, expert_name: str):
@@ -337,7 +335,7 @@ class MoEAgent:
 
         # Load adapter using PEFT
         try:
-            from peft import PeftModel
+            from peft import PeftModel  # noqa: F401 (availability check)
 
             if expert.adapter_path and expert.adapter_path.exists():
                 print(f"[MoE Agent] Loading adapter: {expert_name}")
@@ -435,7 +433,7 @@ class MoEAgent:
             Synthesized response
         """
         # Simple synthesis for now
-        synthesis = f"[Multi-Expert Response]\n\n"
+        synthesis = "[Multi-Expert Response]\n\n"
         synthesis += f"Query: {query}\n\n"
 
         for expert_name, response, confidence in responses:
@@ -474,7 +472,7 @@ def demo():
 
         result = agent.process(query)
 
-        print(f"\n[RESPONSE]")
+        print("\n[RESPONSE]")
         print(result['response'])
 
         print(f"\n[EXPERTS USED]: {', '.join(result['experts_used'])}")

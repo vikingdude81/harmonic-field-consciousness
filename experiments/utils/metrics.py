@@ -15,7 +15,6 @@ Plus additional complexity measures:
 
 import numpy as np
 from typing import Optional, Dict, Tuple
-from scipy import signal
 
 
 def compute_mode_entropy(power: np.ndarray, normalize: bool = True) -> float:
@@ -307,10 +306,8 @@ def compute_lempel_ziv_complexity(sequence: np.ndarray, binary: bool = True) -> 
     
     n = len(s)
     c = 1
-    l = 1
     i = 0
     k = 1
-    k_max = 1
     
     while True:
         if i + k > n:
@@ -444,7 +441,7 @@ if __name__ == "__main__":
     lz = compute_lempel_ziv_complexity(signal_data)
     mse_vals, mse_mean = compute_multiscale_entropy(signal_data)
     
-    print(f"\nAdditional metrics:")
+    print("\nAdditional metrics:")
     print(f"  LZ complexity: {lz:.3f}")
     print(f"  MSE (mean):    {mse_mean:.3f}")
     

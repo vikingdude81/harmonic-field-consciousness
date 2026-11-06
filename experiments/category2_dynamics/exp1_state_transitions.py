@@ -25,7 +25,6 @@ from matplotlib.animation import FuncAnimation, PillowWriter
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
-from utils import visualization as viz
 
 # Configuration - supports environment variable overrides for RTX 5090 scaling
 SEED = 42
@@ -53,9 +52,9 @@ print("="*60)
 print("Category 2, Experiment 1: State Transitions")
 print(f"Configuration: {N_NODES} nodes, {N_MODES} modes, {N_STEPS} steps")
 if USE_GPU:
-    print(f"Acceleration: PyTorch CUDA (RTX 5090)")
+    print("Acceleration: PyTorch CUDA (RTX 5090)")
 else:
-    print(f"Acceleration: NumPy CPU")
+    print("Acceleration: NumPy CPU")
 print("="*60)
 
 # Generate network
@@ -171,7 +170,7 @@ axes[0].legend(loc='upper right', fontsize=9)
 axes[0].set_title('State Transitions: Wake → NREM → Dream → Wake', fontsize=13, fontweight='bold')
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'timeseries_all_metrics.png')
-print(f"  Saved: timeseries_all_metrics.png")
+print("  Saved: timeseries_all_metrics.png")
 
 # 2. Phase space trajectory (3D)
 fig = plt.figure(figsize=(12, 10))
@@ -201,7 +200,7 @@ ax.legend(loc='upper right')
 plt.colorbar(scatter, ax=ax, label='Time', shrink=0.8)
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'phase_space_3d.png')
-print(f"  Saved: phase_space_3d.png")
+print("  Saved: phase_space_3d.png")
 
 # 3. 2D phase space projections
 fig, axes = plt.subplots(1, 3, figsize=(15, 5))
@@ -232,7 +231,7 @@ for ax, (x_metric, y_metric, title) in zip(axes, projections):
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'phase_space_2d_projections.png')
-print(f"  Saved: phase_space_2d_projections.png")
+print("  Saved: phase_space_2d_projections.png")
 
 # 4. Mode power evolution over time
 fig, ax = plt.subplots(figsize=(12, 6))
@@ -258,7 +257,7 @@ for i in range(1, len(state_sequence)):
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'mode_power_evolution.png')
-print(f"  Saved: mode_power_evolution.png")
+print("  Saved: mode_power_evolution.png")
 
 # 5. Create simple animation of C(t) evolution
 print("\nCreating animation...")
@@ -297,7 +296,7 @@ anim = FuncAnimation(fig, animate, frames=frames, interval=100, repeat=True)
 anim_path = OUTPUT_DIR / 'state_transition_animation.gif'
 writer = PillowWriter(fps=10)
 anim.save(anim_path, writer=writer)
-print(f"  Saved: state_transition_animation.gif")
+print("  Saved: state_transition_animation.gif")
 
 plt.close('all')
 

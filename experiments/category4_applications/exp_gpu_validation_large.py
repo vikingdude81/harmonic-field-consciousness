@@ -61,7 +61,6 @@ def simulate_with_intervention(laplacian, intervention_type, intensity=0.1):
         # Apply intervention
         if intervention_type == 'stimulation' and t > 100:
             # Focal stimulation
-            focal_idx = 50
             modes += torch.randn(len(modes), device=device) * intensity * (1 if t < 200 else 0)
         
         elif intervention_type == 'pharmacological' and t > 50:
@@ -94,7 +93,7 @@ print("=" * 80)
 print("CATEGORY 4: APPLICATIONS VALIDATION")
 print("=" * 80)
 print(f"Network size: {N_NODES} nodes")
-print(f"Interventions: stimulation, pharmacological, cognitive")
+print("Interventions: stimulation, pharmacological, cognitive")
 print("=" * 80)
 
 laplacian = create_lattice_gpu(side=70)
@@ -134,7 +133,7 @@ df = pd.DataFrame(all_results)
 df.to_csv(output_dir / 'results.csv', index=False)
 
 print(f"\nResults saved: {output_dir / 'results.csv'}")
-print(f"\nSummary:")
+print("\nSummary:")
 print(f"  Total trials: {len(df)}")
 print(f"  Interventions: {df['intervention'].unique()}")
 print(f"  Mean baseline: {df['baseline'].mean():.6f}")

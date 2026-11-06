@@ -23,17 +23,13 @@ import pandas as pd
 from pathlib import Path
 from tqdm import tqdm
 from scipy import stats
-from scipy.optimize import curve_fit
 import warnings
 warnings.filterwarnings('ignore')
 
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
-from utils import visualization as viz
-from utils.gpu_utils import get_device_info, get_array_module, batch_compute_metrics_gpu, print_gpu_status
-from utils.chaos_metrics import estimate_lyapunov_exponent, detect_avalanches, fit_power_law
-from utils.category_theory_metrics import compute_sheaf_consistency
+from utils.gpu_utils import get_device_info, get_array_module, print_gpu_status
 
 # Configuration - supports environment variable overrides for RTX 5090 scaling
 SEED = 42
@@ -60,7 +56,7 @@ print("=" * 60)
 print("Category 2, Experiment 4: Criticality Tuning")
 print(f"Configuration: {N_NODES} nodes, {N_MODES} modes, {N_ALPHA_STEPS} alpha steps")
 if USE_PYTORCH_GPU:
-    print(f"Acceleration: PyTorch CUDA (RTX 5090)")
+    print("Acceleration: PyTorch CUDA (RTX 5090)")
 print("=" * 60)
 
 # Check GPU availability
@@ -87,7 +83,7 @@ if USE_PYTORCH_GPU and N_NODES > 500:
     L = L_sparse
     del L_torch, eigenvalues_torch, eigenvectors_torch
     torch.cuda.empty_cache()
-    print(f"  Eigendecomposition on GPU complete")
+    print("  Eigendecomposition on GPU complete")
 else:
     L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
     eigenvalues = eigenvalues[:N_MODES]
@@ -514,7 +510,7 @@ optimal_alpha = df_exponent.loc[optimal_idx, 'alpha']
 optimal_C = df_exponent.loc[optimal_idx, 'C']
 optimal_kappa = df_exponent.loc[optimal_idx, 'kappa']
 
-print(f"\nOptimal Criticality:")
+print("\nOptimal Criticality:")
 print(f"  alpha* = {optimal_alpha:.3f}")
 print(f"  C* = {optimal_C:.4f}")
 print(f"  kappa* = {optimal_kappa:.4f}")

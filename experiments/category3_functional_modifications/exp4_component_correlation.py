@@ -18,7 +18,6 @@ from tqdm import tqdm
 
 from utils import graph_generators as gg
 from utils import metrics as met
-from utils import state_generators as sg
 
 SEED = 42
 N_NODES = 100
@@ -77,6 +76,6 @@ plt.colorbar(scatter, ax=ax, label='C(t)')
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'pca_analysis.png')
 
-print(f"\nCorrelation Matrix:")
+print("\nCorrelation Matrix:")
 print(corr_matrix)
 print(f"\nExperiment completed! Results saved to: {OUTPUT_DIR}")

@@ -12,7 +12,7 @@ The RealityRegister class represents the observer's "reality register" where:
 """
 
 import numpy as np
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass
 from enum import Enum
 

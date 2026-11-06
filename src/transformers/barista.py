@@ -6,7 +6,7 @@ Note: Full PyTorch-based transformer can be added later as optional enhancement.
 """
 
 import numpy as np
-from typing import List, Tuple, Dict, Optional
+from typing import Tuple, Dict
 
 
 class BaRISTAModel:
@@ -89,7 +89,7 @@ class BaRISTAModel:
         # Query, Key, Value projections
         Q = tokens @ self.W_q
         K = tokens @ self.W_k
-        V = tokens @ self.W_v
+        tokens @ self.W_v
         
         # Scaled dot-product attention
         scores = Q @ K.T / np.sqrt(self.n_features)

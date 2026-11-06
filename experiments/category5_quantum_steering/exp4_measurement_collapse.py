@@ -26,13 +26,11 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import numpy as np
 import matplotlib.pyplot as plt
-from tqdm import tqdm
 
 from src.quantum import (
     RealityRegister,
     QuantumMeasurement,
-    SteeringProtocol,
-    measure_consciousness_state
+    SteeringProtocol
 )
 from utils import metrics as met
 
@@ -204,7 +202,7 @@ no_measure_overlaps = np.array(no_measure_overlaps)
 moderate_measure_overlaps = np.array(moderate_measure_overlaps)
 frequent_measure_overlaps = np.array(frequent_measure_overlaps)
 
-print(f"\nFinal overlap with wake state:")
+print("\nFinal overlap with wake state:")
 print(f"  No measurements:      {no_measure_overlaps[-1]:.3f}")
 print(f"  Moderate measurements: {moderate_measure_overlaps[-1]:.3f}")
 print(f"  Frequent measurements: {frequent_measure_overlaps[-1]:.3f}")
@@ -374,7 +372,7 @@ print("-"*80)
 
 print("\nProjective Measurement:")
 print(f"  Superposition collapsed to: {measured_state}")
-print(f"  Measurement statistics over 30 trials:")
+print("  Measurement statistics over 30 trials:")
 for state, count in counts.most_common():
     print(f"    {state:15s}: {count/30:.1%}")
 

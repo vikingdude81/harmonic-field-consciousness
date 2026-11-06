@@ -2,7 +2,6 @@
 Debug: What do the correlations actually look like?
 """
 import torch
-import numpy as np
 
 # Simulate different activity patterns
 torch.manual_seed(42)

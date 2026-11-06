@@ -47,7 +47,7 @@ print("="*60)
 print("Category 2, Experiment 2: Perturbation Recovery")
 print(f"Configuration: {N_NODES} nodes, {N_MODES} modes, {RECOVERY_STEPS} recovery steps")
 if USE_GPU:
-    print(f"Acceleration: PyTorch CUDA (RTX 5090)")
+    print("Acceleration: PyTorch CUDA (RTX 5090)")
 print("="*60)
 
 # Generate network
@@ -64,7 +64,7 @@ if USE_GPU and N_NODES > 500:
     L = L_sparse
     del L_torch, eigenvalues_torch, eigenvectors_torch
     torch.cuda.empty_cache()
-    print(f"  Eigendecomposition on GPU complete")
+    print("  Eigendecomposition on GPU complete")
 else:
     G = gg.generate_small_world(N_NODES, k_neighbors=6, seed=SEED)
     L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)

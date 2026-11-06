@@ -13,7 +13,6 @@ Usage:
 """
 
 import sys
-import os
 import argparse
 import json
 import time
@@ -35,10 +34,8 @@ from consciousness_circuit.plugins import (
     TrajectoryPlugin,
     ChaosPlugin,
     AgencyPlugin,
-    CompressibilityPlugin,
     PluginRegistry,
 )
-from consciousness_circuit.model_adapters import create_adapter
 
 
 # ── Prompt categories ────────────────────────────────────────────
@@ -410,7 +407,7 @@ def analyze_results(results):
         direction = "MORE" if r_cc > 0 else "LESS"
         log(f"   ** SIGNIFICANT: Higher consciousness = {direction} compressible")
     else:
-        log(f"   Not significant (need more samples or larger effects)")
+        log("   Not significant (need more samples or larger effects)")
 
     # 2. Consciousness vs Spectral Entropy
     r_cse, p_cse = stats.pearsonr(all_cs, all_se)
@@ -423,7 +420,7 @@ def analyze_results(results):
     r_cl, p_cl = stats.pearsonr(all_comp, all_lyap)
     log(f"\n3. Compressibility vs Lyapunov: r={r_cl:+.3f}, p={p_cl:.4f}")
     if p_cl < 0.05:
-        log(f"   ** Compressibility linked to chaos level")
+        log("   ** Compressibility linked to chaos level")
 
     # 4. Compressibility vs Agency
     r_ca, p_ca = stats.pearsonr(all_comp, all_agency)
@@ -433,7 +430,7 @@ def analyze_results(results):
         log(f"   ** More compressible = {direction} goal-directed")
 
     # 5. Category-level compressibility comparison
-    log(f"\n5. Compressibility by Category:")
+    log("\n5. Compressibility by Category:")
     for cat in categories:
         m = metrics_by_cat[cat]
         log(f"   {cat:<12}: C={np.mean(m['compressibility']):.3f} "
@@ -445,11 +442,11 @@ def analyze_results(results):
         f_stat, p_anova = stats.f_oneway(*cat_comp_groups)
         log(f"   ANOVA: F={f_stat:.3f}, p={p_anova:.4f}")
         if p_anova < 0.05:
-            log(f"   ** Compressibility differs significantly across prompt types!")
+            log("   ** Compressibility differs significantly across prompt types!")
 
     # Correlation analysis
     if "correlation_compression" in results[0].get("plugins", {}).get("compressibility", {}):
-        log(f"\n6. Correlation Compression Insights:")
+        log("\n6. Correlation Compression Insights:")
         for cat in categories:
             cat_results = [r for r in results if r["category"] == cat]
             cc_data = [r["plugins"]["compressibility"].get("correlation_compression", {})

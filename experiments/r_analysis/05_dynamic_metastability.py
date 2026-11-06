@@ -7,7 +7,6 @@ Analyze R variance over time and state transition patterns.
 import numpy as np
 import pandas as pd
 from scipy import stats
-from scipy import signal as sig
 
 print("=" * 70)
 print("DYNAMIC R ANALYSIS: METASTABILITY & STATE TRANSITIONS")
@@ -47,7 +46,7 @@ def detect_transitions(R_series, threshold=0.1):
 def compute_dwell_times(R_series, R_threshold=0.5):
     """Compute dwell times in high/low R states."""
     high_state = R_series > R_threshold
-    changes = np.diff(high_state.astype(int))
+    np.diff(high_state.astype(int))
     
     # Find dwell times
     high_dwells = []
@@ -115,8 +114,8 @@ print("\n### DYNAMIC R METRICS vs CONSCIOUSNESS ###")
 metrics = ['mean_R', 'metastability', 'transitions', 'high_dwell']
 for metric in metrics:
     r, p = stats.pearsonr(df[metric], df['C'])
-    sig = "***" if p < 0.1 else ""
-    print(f"  {metric:<15} vs C: r = {r:+.3f} (p = {p:.3f}) {sig}")
+    stars = "***" if p < 0.1 else ""
+    print(f"  {metric:<15} vs C: r = {r:+.3f} (p = {p:.3f}) {stars}")
 
 # Optimal metastability
 print("\n### METASTABILITY SWEET SPOT ###")

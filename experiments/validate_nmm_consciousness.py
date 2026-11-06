@@ -174,7 +174,7 @@ corr_rich_score = np.corrcoef(richness_values, score_values)[0, 1]
 corr_part_score = np.corrcoef(participation_values, score_values)[0, 1]
 corr_rich_part = np.corrcoef(richness_values, participation_values)[0, 1]
 
-print(f"\nMetric correlations:")
+print("\nMetric correlations:")
 print(f"  Richness ↔ Score: {corr_rich_score:.3f}")
 print(f"  Participation ↔ Score: {corr_part_score:.3f}")
 print(f"  Richness ↔ Participation: {corr_rich_part:.3f}")

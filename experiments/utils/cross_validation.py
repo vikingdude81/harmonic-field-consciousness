@@ -12,12 +12,9 @@ K-fold and other validation strategies for:
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from datetime import datetime
 from typing import Any, Dict, List, Callable, Optional, Union, Tuple
-from dataclasses import dataclass, field, asdict
-from itertools import combinations
+from dataclasses import dataclass, asdict
 from tqdm import tqdm
-import warnings
 
 # Optional imports
 try:
@@ -27,7 +24,7 @@ except ImportError:
     HAS_SCIPY = False
 
 try:
-    from sklearn.model_selection import KFold, StratifiedKFold, LeaveOneOut
+    from sklearn.model_selection import KFold, StratifiedKFold, LeaveOneOut  # noqa: F401 (availability check)
     HAS_SKLEARN = True
 except ImportError:
     HAS_SKLEARN = False
@@ -698,7 +695,7 @@ class MetricRobustnessTester:
         
         if save:
             fig.savefig(self.output_dir / 'robustness_plots.png', dpi=150)
-            print(f"Saved: robustness_plots.png")
+            print("Saved: robustness_plots.png")
         
         plt.close()
 

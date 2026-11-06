@@ -5,7 +5,7 @@ Computes consciousness metrics (H_mode, PR, R, S_dot, kappa) from spiking neuron
 """
 
 import numpy as np
-from typing import Dict, Tuple
+from typing import Dict
 
 
 def compute_spike_metrics(spike_trains: np.ndarray, dt: float = 0.1) -> Dict[str, float]:

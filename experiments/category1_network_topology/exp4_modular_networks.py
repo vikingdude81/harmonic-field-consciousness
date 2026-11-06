@@ -23,15 +23,11 @@ import pandas as pd
 import networkx as nx
 from pathlib import Path
 from tqdm import tqdm
-import seaborn as sns
 
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
-from utils import visualization as viz
 from utils.gpu_utils import get_device_info, gpu_eigendecomposition, print_gpu_status
-from utils.chaos_metrics import detect_avalanches, compute_branching_ratio, fit_power_law
-from utils.category_theory_metrics import compute_sheaf_consistency, compute_integration_phi
 
 # Configuration
 SEED = 42

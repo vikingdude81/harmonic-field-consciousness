@@ -27,7 +27,7 @@ model = AutoModelForCausalLM.from_pretrained(
 model.eval()
 print(f'Loaded! Hidden size: {model.config.hidden_size}')
 
-from consciousness_circuit import analyze_dimension_activations, SignalClass
+from consciousness_circuit import analyze_dimension_activations
 from consciousness_circuit.metrics.lyapunov import compute_lyapunov
 from consciousness_circuit.metrics.hurst import compute_hurst
 

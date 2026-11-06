@@ -97,9 +97,9 @@ def main():
     print("\n" + "="*80)
     print("VALIDATION-SCALE GPU EXPERIMENTS (LARGE CONFIG)")
     print("="*80)
-    print(f"Config: 4,900 nodes (70×70), 800 modes, 5,000 steps, 200 trials")
-    print(f"Batch size: 16 (parallel)")
-    print(f"Expected runtime: ~100s per category")
+    print("Config: 4,900 nodes (70×70), 800 modes, 5,000 steps, 200 trials")
+    print("Batch size: 16 (parallel)")
+    print("Expected runtime: ~100s per category")
     print(f"Categories to run: {categories_to_run}")
     print("="*80)
     

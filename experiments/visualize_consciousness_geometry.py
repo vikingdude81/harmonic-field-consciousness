@@ -19,8 +19,6 @@ sys.stdout.reconfigure(encoding="utf-8")
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
-from matplotlib.patches import FancyBboxPatch
 
 # ── Color palette ────────────────────────────────────────────────────
 CAT_COLORS = {

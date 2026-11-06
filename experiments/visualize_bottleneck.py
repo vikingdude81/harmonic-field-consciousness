@@ -148,14 +148,14 @@ def fig_main_comparison(data):
         (f"  Min PR: {q_min_pr:.1f} ({q_min_pr/q_hidden*100:.3f}% of dims)", "#333", 11),
         (f"  Max PR: {q_max_pr:.1f} ({q_max_pr/q_hidden*100:.2f}% of dims)", "#333", 11),
         (f"  Compression: {q_max_pr/q_min_pr:.0f}x", "#333", 11),
-        (f"  Pattern: High -> Collapse at L4 -> 1D until L27 -> Expand", "#333", 10),
+        ("  Pattern: High -> Collapse at L4 -> 1D until L27 -> Expand", "#333", 10),
         ("", "#333", 8),
         ("Mistral-7B Architecture", "#EF4444", 14),
         (f"  Hidden dim: {m_hidden}", "#333", 11),
         (f"  Min PR: {m_min_pr:.1f} ({m_min_pr/m_hidden*100:.3f}% of dims)", "#333", 11),
         (f"  Max PR: {m_max_pr:.1f} ({m_max_pr/m_hidden*100:.2f}% of dims)", "#333", 11),
         (f"  Compression: {m_max_pr/m_min_pr:.0f}x", "#333", 11),
-        (f"  Pattern: Low -> Compressed L2-L17 -> Gradual expansion -> Wide L32", "#333", 10),
+        ("  Pattern: Low -> Compressed L2-L17 -> Gradual expansion -> Wide L32", "#333", 10),
         ("", "#333", 8),
         ("Key Insight:", "#000", 13),
         ("Both architectures compress to ~1 effective dimension", "#333", 11),
@@ -238,7 +238,7 @@ def fig_compression_lifecycle(data):
 
         # Annotate min and max
         min_idx = np.argmin(pr_frac)
-        max_idx = np.argmax(pr_frac)
+        np.argmax(pr_frac)
         ax.annotate(f"Min: {pr_frac[min_idx]:.3f}%\n({lp[min_idx]['mean_pr']:.1f} dims)",
                     xy=(depths[min_idx], pr_frac[min_idx]),
                     xytext=(depths[min_idx] + 8, pr_frac[min_idx] + 0.2),

@@ -10,7 +10,6 @@ Advanced Cross-Experiment Analysis with Statistical Tests
 import pandas as pd
 import numpy as np
 from scipy import stats
-from pathlib import Path
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -185,7 +184,7 @@ df_rc = pd.DataFrame(r_c_data)
 
 # Overall correlation
 r_corr, p_corr = stats.pearsonr(df_rc['R'], df_rc['C'])
-print(f"\nOverall R-C correlation:")
+print("\nOverall R-C correlation:")
 print(f"  Pearson r: {r_corr:.4f}")
 print(f"  p-value: {p_corr:.2e}")
 

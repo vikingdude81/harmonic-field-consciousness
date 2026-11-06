@@ -1,6 +1,5 @@
 """Quick test of Moltbook posting"""
 import requests
-import json
 from datetime import datetime
 
 print("=" * 50)

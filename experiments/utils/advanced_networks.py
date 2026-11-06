@@ -55,7 +55,7 @@ def generate_hierarchical_modular(
     # Assign nodes to modules at each level
     hierarchy = {}
     for level in range(n_levels):
-        n_modules = modules_per_level[level]
+        modules_per_level[level]
         module_size = nodes_per_module[level]
         
         hierarchy[level] = {}

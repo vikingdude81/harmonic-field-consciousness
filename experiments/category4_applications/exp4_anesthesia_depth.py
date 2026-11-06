@@ -113,7 +113,7 @@ axes[1].grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'clinical_correlation.png')
 
-print(f"\nCorrelations with clinical scales:")
+print("\nCorrelations with clinical scales:")
 print(f"  C(t) vs BIS:    r = {df[['C', 'bis_score']].corr().iloc[0, 1]:.3f}")
 print(f"  C(t) vs Ramsay: r = {df[['C', 'ramsay_score']].corr().iloc[0, 1]:.3f}")
 print(f"\nExperiment completed! Results saved to: {OUTPUT_DIR}")

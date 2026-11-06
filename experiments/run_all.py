@@ -6,7 +6,6 @@ Run all experiments in the framework with a single command.
 Provides options for parallel execution, progress tracking, and result aggregation.
 """
 
-import os
 import sys
 import subprocess
 from pathlib import Path
@@ -72,7 +71,7 @@ def run_experiment(exp_info, verbose=True):
         }
     
     except subprocess.TimeoutExpired:
-        print(f"ERROR: Experiment timed out")
+        print("ERROR: Experiment timed out")
         return {
             'success': False,
             'error': 'timeout',
@@ -134,7 +133,7 @@ def main():
     
     # Run experiments
     print("\n" + "="*60)
-    print(f"Experimental Framework Runner")
+    print("Experimental Framework Runner")
     print(f"Running {len(experiments)} experiments")
     print(f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("="*60)

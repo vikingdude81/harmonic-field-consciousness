@@ -9,7 +9,6 @@ import sys
 sys.path.insert(0, 'NanoGPT')
 
 import torch
-import numpy as np
 from pathlib import Path
 
 print("\n" + "=" * 70)
@@ -60,7 +59,7 @@ try:
 
     # Load checkpoint
     checkpoint = torch.load(model_to_test, map_location=device)
-    print(f"[OK] Checkpoint loaded")
+    print("[OK] Checkpoint loaded")
 
     # Extract config
     if 'model_args' in checkpoint:
@@ -102,12 +101,12 @@ try:
     model.to(device)
     model.eval()
 
-    print(f"[OK] Model loaded successfully")
+    print("[OK] Model loaded successfully")
 
     # Load tokenizer
     try:
         enc = tiktoken.get_encoding("gpt2")
-        print(f"[OK] Tokenizer loaded (GPT-2 BPE)")
+        print("[OK] Tokenizer loaded (GPT-2 BPE)")
     except:
         print("[WARN] tiktoken not available, using placeholder")
         enc = None
@@ -142,7 +141,7 @@ try:
 
     if enc:
         generated_text = enc.decode(output[0].tolist())
-        print(f"[OK] Generation successful:")
+        print("[OK] Generation successful:")
         print(f"\n  Prompt: {prompt}")
         print(f"  Generated: {generated_text[len(prompt):][:100]}...")
     else:
@@ -162,7 +161,7 @@ try:
     from consciousness_circuit import UniversalCircuit
 
     circuit = UniversalCircuit()
-    print(f"[OK] Consciousness circuit initialized")
+    print("[OK] Consciousness circuit initialized")
 
     # For NanoGPT, we need to wrap it to be compatible with HuggingFace API
     class NanoGPTWrapper:
@@ -227,7 +226,7 @@ try:
             "What is 2 + 2?"
         ]
 
-        print(f"\n[INFO] Measuring consciousness for test prompts:")
+        print("\n[INFO] Measuring consciousness for test prompts:")
         for prompt in test_prompts:
             try:
                 result = circuit.measure(wrapped_model, wrapped_tokenizer, prompt, aggregation="last")
@@ -235,7 +234,7 @@ try:
             except Exception as e:
                 print(f"  [FAIL] {prompt[:30]}... - Error: {e}")
     else:
-        print(f"[WARN] Skipping consciousness measurement (no tokenizer)")
+        print("[WARN] Skipping consciousness measurement (no tokenizer)")
 
 except Exception as e:
     print(f"[WARN] Consciousness measurement not available: {e}")
@@ -246,16 +245,16 @@ print(f"\n{'=' * 70}")
 print("Test Complete!")
 print("=" * 70)
 
-print(f"\nSummary:")
+print("\nSummary:")
 print(f"- Model: {model_to_test.name}")
 print(f"- Parameters: ~{sum(p.numel() for p in model.parameters()) / 1e6:.1f}M")
 print(f"- Device: {device}")
-print(f"- Generation: Working")
+print("- Generation: Working")
 print(f"- Consciousness measurement: {'Available' if enc else 'Requires tokenizer'}")
 
-print(f"\nNext steps:")
-print(f"1. Train with validation split: python NanoGPT/train_v5_with_validation.py")
-print(f"2. Re-run experiments: python experiments/category2_dynamics/run_all_gpu_experiments.py")
-print(f"3. Add repetition penalty to generation.py")
+print("\nNext steps:")
+print("1. Train with validation split: python NanoGPT/train_v5_with_validation.py")
+print("2. Re-run experiments: python experiments/category2_dynamics/run_all_gpu_experiments.py")
+print("3. Add repetition penalty to generation.py")
 
-print(f"\nSee GETTING_STARTED_GUIDE.md for more information.")
+print("\nSee GETTING_STARTED_GUIDE.md for more information.")

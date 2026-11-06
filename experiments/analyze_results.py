@@ -6,8 +6,6 @@ Analyzes all experimental results and generates key insights.
 """
 
 import pandas as pd
-import numpy as np
-from pathlib import Path
 
 print("=" * 70)
 print("KEY INSIGHTS FROM ALL EXPERIMENTS")

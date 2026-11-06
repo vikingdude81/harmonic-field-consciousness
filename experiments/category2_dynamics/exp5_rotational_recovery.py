@@ -36,16 +36,10 @@ from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
 from utils.rotational_dynamics import (
-    analyze_rotational_dynamics, compute_rotation_angle,
-    compute_angular_velocity, compute_trajectory_circularity,
-    compute_recovery_percentage, jpca
+    analyze_rotational_dynamics, compute_recovery_percentage
 )
 from utils.traveling_waves import (
-    comprehensive_wave_analysis, detect_traveling_wave_correlation,
-    analyze_wave_correspondence_to_rotation
-)
-from utils.dynamic_stability import (
-    comprehensive_stability_analysis, measure_perturbation_recovery
+    comprehensive_wave_analysis, analyze_wave_correspondence_to_rotation
 )
 
 # Configuration - supports environment variable overrides for RTX 5090 scaling
@@ -75,14 +69,14 @@ print("NEW EXPERIMENT: Rotational Dynamics and Recovery from Perturbation")
 print("Based on Batabyal et al. (2025) JOCN")
 print("=" * 70)
 print(f"\n[TIME] Experiment started at: {time.strftime('%H:%M:%S')}")
-print(f"[CONFIG]")
+print("[CONFIG]")
 print(f"   Network: {N_NODES} nodes, {N_MODES} modes")
 print(f"   Experiment 1: 3 states x {N_TRIALS} trials = {3 * N_TRIALS} total")
-print(f"   Experiment 2: 10 strengths x 20 trials = 200 total")
-print(f"   Experiment 3: 30 trials")
+print("   Experiment 2: 10 strengths x 20 trials = 200 total")
+print("   Experiment 3: 30 trials")
 if USE_PYTORCH_GPU:
     print(f"   Acceleration: PyTorch CUDA ({gpu_name})")
-print(f"   Est. runtime: ~3-5 minutes\n")
+print("   Est. runtime: ~3-5 minutes\n")
 
 start_time = time.time()
 np.random.seed(SEED)
@@ -111,7 +105,7 @@ if USE_PYTORCH_GPU and N_NODES > 500:
     L = L_sparse
     del L_torch, eigenvalues_torch, eigenvectors_torch
     torch.cuda.empty_cache()
-    print(f"  Eigendecomposition on GPU complete")
+    print("  Eigendecomposition on GPU complete")
 else:
     L, eigenvalues, eigenvectors = gg.compute_laplacian_eigenmodes(G)
     eigenvalues = eigenvalues[:N_MODES]
@@ -348,7 +342,7 @@ print("=" * 70)
 
 exp3_results = []
 
-print(f"\nAnalyzing wave-rotation correspondence across 30 trials...")
+print("\nAnalyzing wave-rotation correspondence across 30 trials...")
 for trial in tqdm(range(30), desc="Analyzing trials"):
     np.random.seed(SEED + trial + 1000)
     
@@ -555,6 +549,6 @@ print(f"All results saved to: {OUTPUT_DIR}")
 print("\nKey Findings:")
 print("  1. Rotational dynamics differ between conscious and unconscious states")
 print(f"  2. Fuller rotations correlate with better recovery (r={corr_angle_recovery[0]:+.3f}, p={corr_angle_recovery[1]:.4f})")
-print(f"  3. Traveling waves show correspondence with rotational dynamics")
-print(f"  4. Dynamic stability relates to consciousness metrics")
+print("  3. Traveling waves show correspondence with rotational dynamics")
+print("  4. Dynamic stability relates to consciousness metrics")
 print("\n" + "=" * 70 + "\n")

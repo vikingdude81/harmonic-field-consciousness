@@ -36,8 +36,7 @@ from utils import state_generators as sg
 from utils.chaos_metrics import compute_all_chaos_metrics
 from utils.category_theory_metrics import (
     compute_sheaf_consistency,
-    compute_integration_phi,
-    compute_all_category_metrics
+    compute_integration_phi
 )
 from utils.advanced_networks import generate_connectome_inspired
 
@@ -285,7 +284,7 @@ ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'integration_differentiation_analysis.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: integration_differentiation_analysis.png")
+print("  Saved: integration_differentiation_analysis.png")
 
 # Figure 2: The Balance Principle
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -332,7 +331,7 @@ ax.annotate('Fragmented\n(under-integrated)', xy=(0.15, 0.15), fontsize=9,
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'balance_principle.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: balance_principle.png")
+print("  Saved: balance_principle.png")
 
 # Save results
 df.to_csv(OUTPUT_DIR / 'integration_sweep.csv', index=False)
@@ -365,7 +364,7 @@ for _, row in df_states.sort_values('C', ascending=False).iterrows():
     balance = 1 - abs(row['integration_estimate'] - 0.5) * 2  # 1 = perfect balance
     print(f"   {row['state']:<12}: C={row['C']:.3f}, Integration={row['integration_estimate']:.2f}, Balance={balance:.2f}")
 
-print(f"\n5. IMPLICATIONS FOR CONSCIOUSNESS:")
+print("\n5. IMPLICATIONS FOR CONSCIOUSNESS:")
 print("""   - Consciousness requires BOTH integration AND differentiation
    - This is consistent with Integrated Information Theory (IIT)
    - Network topology constrains the achievable balance

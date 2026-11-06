@@ -261,26 +261,26 @@ q_r50, q_p50 = stats.pearsonr(
 
 print("  Key Findings:")
 print()
-print(f"  1. Mistral-7B CS-SE correlation:")
+print("  1. Mistral-7B CS-SE correlation:")
 print(f"     n=15: r={m_r15:+.3f}, p={m_p15:.4f} → {'SIGNIFICANT' if m_p15 < 0.05 else 'NOT significant'}")
 print(f"     n=50: r={m_r50:+.3f}, p={m_p50:.4f} → {'SIGNIFICANT' if m_p50 < 0.05 else 'NOT significant'}")
 if m_p15 >= 0.05 and m_p50 < 0.05:
-    print(f"     → n=15 WAS underpowered for Mistral. The CS-SE link exists but needed more data.")
+    print("     → n=15 WAS underpowered for Mistral. The CS-SE link exists but needed more data.")
 elif m_p15 < 0.05 and m_p50 < 0.05:
-    print(f"     → Both significant. n=15 was adequate.")
+    print("     → Both significant. n=15 was adequate.")
 else:
-    print(f"     → No CS-SE signal even with n=50.")
+    print("     → No CS-SE signal even with n=50.")
 
 print()
-print(f"  2. Qwen-7B CS-SE correlation:")
+print("  2. Qwen-7B CS-SE correlation:")
 print(f"     n=15: r={q_r15:+.3f}, p={q_p15:.4f} → {'SIGNIFICANT' if q_p15 < 0.05 else 'NOT significant'}")
 print(f"     n=50: r={q_r50:+.3f}, p={q_p50:.4f} → {'SIGNIFICANT' if q_p50 < 0.05 else 'NOT significant'}")
 if q_p15 < 0.05 and q_p50 >= 0.05:
-    print(f"     → n=15 result may have been a type I error (false positive)")
+    print("     → n=15 result may have been a type I error (false positive)")
 elif q_p15 >= 0.05 and q_p50 >= 0.05:
-    print(f"     → Consistently not significant. Qwen-7B SE variation is too low at 7B scale.")
+    print("     → Consistently not significant. Qwen-7B SE variation is too low at 7B scale.")
 else:
-    print(f"     → Signal consistent across sample sizes.")
+    print("     → Signal consistent across sample sizes.")
 
 print()
 
@@ -290,18 +290,18 @@ m_se_cov50 = np.std([m["se"] for m in datasets["Mistral-7B (n=50)"]]) / np.mean(
 q_se_cov15 = np.std([m["se"] for m in datasets["Qwen-7B (n=15)"]]) / np.mean([m["se"] for m in datasets["Qwen-7B (n=15)"]])
 q_se_cov50 = np.std([m["se"] for m in datasets["Qwen-7B (n=50)"]]) / np.mean([m["se"] for m in datasets["Qwen-7B (n=50)"]])
 
-print(f"  3. SE Variation (CoV):")
+print("  3. SE Variation (CoV):")
 print(f"     Mistral: {m_se_cov15:.3f} (n=15) → {m_se_cov50:.3f} (n=50) — {'increased' if m_se_cov50 > m_se_cov15 else 'decreased'}")
 print(f"     Qwen:    {q_se_cov15:.3f} (n=15) → {q_se_cov50:.3f} (n=50) — {'increased' if q_se_cov50 > q_se_cov15 else 'decreased'}")
 print()
 
-print(f"  4. Implications for the Consciousness-Compressibility Hypothesis:")
+print("  4. Implications for the Consciousness-Compressibility Hypothesis:")
 if m_p50 < 0.05:
     print(f"     - Mistral DOES show CS-SE correlation when given enough prompts (r={m_r50:+.3f})")
-    print(f"     - The original 'Mistral anomaly' was a power issue, not an architecture difference")
+    print("     - The original 'Mistral anomaly' was a power issue, not an architecture difference")
 else:
-    print(f"     - Mistral still shows no CS-SE correlation with n=50")
-    print(f"     - The architecture-dependent SE ceiling is real and not a power issue")
+    print("     - Mistral still shows no CS-SE correlation with n=50")
+    print("     - The architecture-dependent SE ceiling is real and not a power issue")
 
 print()
 print("Done!")

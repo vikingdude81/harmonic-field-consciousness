@@ -69,7 +69,7 @@ print("wake-like and sleep-like (quantum indeterminacy).")
 superpos = register.create_superposition(['wake', 'nrem_sleep'])
 register.set_state(superpos)
 
-print(f"\n✓ Created wake-sleep superposition")
+print("\n✓ Created wake-sleep superposition")
 print(f"  State norm: {superpos.norm:.6f}")
 
 # Show decomposition
@@ -91,13 +91,13 @@ register.set_state(register.get_basis_state('wake'))
 protocol = SteeringProtocol(register)
 
 print("\nSteering parameters:")
-print(f"  Target state: NREM Sleep")
-print(f"  Number of steps: 30")
-print(f"  Steering strength: 1.0 (total)")
+print("  Target state: NREM Sleep")
+print("  Number of steps: 30")
+print("  Steering strength: 1.0 (total)")
 
 states = protocol.gradual_steering('nrem_sleep', n_steps=30, total_strength=1.0)
 
-print(f"\n✓ Steering complete")
+print("\n✓ Steering complete")
 print(f"  Initial overlap with sleep: {states[0].overlap_probability(register.get_basis_state('nrem_sleep')):.3f}")
 print(f"  Final overlap with sleep: {states[-1].overlap_probability(register.get_basis_state('nrem_sleep')):.3f}")
 
@@ -123,7 +123,7 @@ for state_name in ['wake', 'nrem_sleep', 'rem_sleep']:
 # Perform measurement
 measured_state, prob, collapsed = measurement.measure_consciousness_state(collapse=True)
 
-print(f"\n✓ Measurement performed")
+print("\n✓ Measurement performed")
 print(f"  Measured state: {measured_state}")
 print(f"  Measurement probability: {prob:.3f}")
 
@@ -162,7 +162,7 @@ final_global_overlap = register.current_state.overlap_probability(
     register.get_basis_state('nrem_sleep')
 )
 
-print(f"\n✓ Local steering complete")
+print("\n✓ Local steering complete")
 print(f"  Initial global overlap with sleep: {initial_global_overlap:.3f}")
 print(f"  Final global overlap with sleep: {final_global_overlap:.3f}")
 print(f"  Change: {final_global_overlap - initial_global_overlap:+.3f}")

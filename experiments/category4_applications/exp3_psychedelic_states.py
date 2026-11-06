@@ -22,7 +22,6 @@ from tqdm import tqdm
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
-from utils import visualization as viz
 
 # Configuration
 SEED = 42
@@ -132,7 +131,7 @@ plt.suptitle('Mode Power Distributions Across Psychedelic Intensities',
             fontsize=14, fontweight='bold', y=0.995)
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'power_distributions.png')
-print(f"  Saved: power_distributions.png")
+print("  Saved: power_distributions.png")
 
 # 2. Metrics vs intensity
 fig, axes = plt.subplots(2, 3, figsize=(15, 10))
@@ -169,7 +168,7 @@ plt.suptitle('Consciousness Metrics vs Psychedelic Intensity',
             fontsize=14, fontweight='bold')
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'metrics_vs_intensity.png')
-print(f"  Saved: metrics_vs_intensity.png")
+print("  Saved: metrics_vs_intensity.png")
 
 # 3. "Ego dissolution" visualization (low-mode power reduction)
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -197,7 +196,7 @@ ax.legend(fontsize=11)
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'ego_dissolution.png')
-print(f"  Saved: ego_dissolution.png")
+print("  Saved: ego_dissolution.png")
 
 # 4. Mode balance (high/low ratio)
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -217,7 +216,7 @@ ax.legend(fontsize=11)
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'mode_balance.png')
-print(f"  Saved: mode_balance.png")
+print("  Saved: mode_balance.png")
 
 # 5. Phase space trajectory (H_mode vs Low-mode power)
 fig, ax = plt.subplots(figsize=(10, 8))
@@ -254,7 +253,7 @@ ax.legend(fontsize=11)
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'phase_space_trajectory.png')
-print(f"  Saved: phase_space_trajectory.png")
+print("  Saved: phase_space_trajectory.png")
 
 plt.close('all')
 
@@ -262,19 +261,19 @@ plt.close('all')
 print("\n" + "="*60)
 print("Summary Statistics:")
 print("="*60)
-print(f"\nWake baseline:")
+print("\nWake baseline:")
 wake_row = df[df['intensity'] < 0].iloc[0]
 print(f"  H_mode: {wake_row['H_mode']:.3f}")
 print(f"  C(t):   {wake_row['C']:.3f}")
 print(f"  Low-mode power: {wake_row['low_mode_power']:.3f}")
 
-print(f"\nPeak psychedelic (intensity=1.0):")
+print("\nPeak psychedelic (intensity=1.0):")
 peak_row = df[df['intensity'] == 1.0].iloc[0]
 print(f"  H_mode: {peak_row['H_mode']:.3f}")
 print(f"  C(t):   {peak_row['C']:.3f}")
 print(f"  Low-mode power: {peak_row['low_mode_power']:.3f}")
 
-print(f"\nChanges from wake to peak:")
+print("\nChanges from wake to peak:")
 print(f"  ΔH_mode: {peak_row['H_mode'] - wake_row['H_mode']:+.3f}")
 print(f"  ΔC(t):   {peak_row['C'] - wake_row['C']:+.3f}")
 print(f"  ΔLow-mode: {peak_row['low_mode_power'] - wake_row['low_mode_power']:+.3f}")

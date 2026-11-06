@@ -145,7 +145,7 @@ print("PHASE 3: Compare with current Self dimension (1372)")
 print("="*70 + "\n")
 
 dim_1372 = 1372
-print(f"Current Self dim (1372):")
+print("Current Self dim (1372):")
 print(f"  Self statements:    {self_mean[dim_1372]:>+10.3f}")
 print(f"  Other statements:   {other_mean[dim_1372]:>+10.3f}")
 print(f"  Neutral statements: {neutral_mean[dim_1372]:>+10.3f}")
@@ -211,8 +211,8 @@ if passed_dims:
     print(f"RECOMMENDED NEW SELF DIMENSION: {best_dim}")
     print(f"  - Training differential: {best_train:+.3f}")
     print(f"  - Test differential:     {best_test:+.3f}")
-    print(f"\nThis dimension fires HIGHER when model speaks as 'I/my/myself'")
-    print(f"and LOWER when speaking about users/people/facts.")
+    print("\nThis dimension fires HIGHER when model speaks as 'I/my/myself'")
+    print("and LOWER when speaking about users/people/facts.")
 else:
     print("No strong candidates found. Top option:")
     best_dim = top_indices[0]

@@ -34,13 +34,7 @@ warnings.filterwarnings('ignore')
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
-from utils import visualization as viz
 from utils.gpu_utils import get_device_info, get_array_module, print_gpu_status
-from utils.chaos_metrics import estimate_lyapunov_exponent, compute_branching_ratio, detect_avalanches
-from utils.category_theory_metrics import (
-    compute_sheaf_consistency, compute_integration_phi,
-    compute_persistence_diagram, compute_betti_numbers
-)
 
 # Configuration - Enhanced for comprehensive metric comparison
 SEED = 42

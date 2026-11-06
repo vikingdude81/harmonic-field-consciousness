@@ -5,7 +5,7 @@ Tools for visualizing attention patterns in transformer models.
 """
 
 import numpy as np
-from typing import Optional, Tuple
+from typing import Optional
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt

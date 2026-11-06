@@ -15,7 +15,6 @@ sys.stdout.reconfigure(encoding="utf-8")
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyBboxPatch
 import matplotlib.gridspec as gridspec
 
 CAT_COLORS = {
@@ -54,7 +53,7 @@ def fig_correlation_profile(sweeps):
     for ax, (name, sweep) in zip([ax1, ax2], sweeps.items()):
         lc = sweep["layer_correlations"]
         layers = [l["layer"] for l in lc]
-        depths = [l["depth_pct"] for l in lc]
+        [l["depth_pct"] for l in lc]
         rs = [l["cs_se_r"] for l in lc]
         ps = [l["cs_se_p"] for l in lc]
 

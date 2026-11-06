@@ -13,7 +13,6 @@ Usage:
     python experiments/layer_sweep.py --model mistralai/Mistral-7B-Instruct-v0.3 --device cuda:0 --quantize
 """
 import sys
-import os
 import argparse
 import json
 import time
@@ -27,7 +26,6 @@ sys.stdout.reconfigure(encoding="utf-8")
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from consciousness_circuit import UniversalCircuit, CompressibilityPlugin
-from consciousness_circuit.plugins import PluginRegistry
 
 # ── Prompts (same 15 as the standard analysis) ──────────────────────
 PROMPTS = {
@@ -268,7 +266,7 @@ def main():
     log("--- TRANSITION ANALYSIS ---")
 
     rs = np.array([lc["cs_se_r"] for lc in layer_corrs])
-    ps = np.array([lc["cs_se_p"] for lc in layer_corrs])
+    np.array([lc["cs_se_p"] for lc in layer_corrs])
 
     # First layer where CS-SE becomes significant (p < 0.05)
     sig_layers = [lc for lc in layer_corrs if lc["cs_se_p"] < 0.05]
@@ -277,7 +275,7 @@ def main():
         log(f"  First significant CS-SE layer: L{first_sig['layer']} ({first_sig['depth_pct']:.0f}% depth)")
         log(f"    r={first_sig['cs_se_r']:+.3f}, p={first_sig['cs_se_p']:.6f}")
     else:
-        log(f"  No layer reaches significance (p<0.05)")
+        log("  No layer reaches significance (p<0.05)")
 
     # Strongest CS-SE layer
     best_idx = np.argmin(rs)  # most negative
@@ -294,7 +292,7 @@ def main():
     # 3. By-category layer profiles
     log()
     log("--- CATEGORY-LEVEL LAYER PROFILES ---")
-    log(f"  Showing CS-SE r at key depths:")
+    log("  Showing CS-SE r at key depths:")
     key_layers = [1, num_layers//4, num_layers//2, int(num_layers*0.75), num_layers]
     header = f"  {'Category':<12}"
     for kl in key_layers:

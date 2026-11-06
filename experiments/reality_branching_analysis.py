@@ -20,9 +20,7 @@ from itertools import combinations
 from src.quantum import (
     RealityRegister,
     SteeringProtocol,
-    QuantumMeasurement,
-    compute_entanglement_entropy,
-    compute_mutual_information
+    compute_entanglement_entropy
 )
 from src.neural_mass.harmonic_bridge import (
     compute_harmonic_richness,

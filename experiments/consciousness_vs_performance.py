@@ -23,7 +23,6 @@ Usage:
     python experiments/consciousness_vs_performance.py --device cuda:0
 """
 
-import os
 import sys
 import re
 import json
@@ -72,7 +71,7 @@ def load_gsm8k(n_samples: int, seed: int = 42) -> list:
     """Load n samples from GSM8K test set."""
     from datasets import load_dataset
 
-    print(f"Loading GSM8K test set...")
+    print("Loading GSM8K test set...")
     ds = load_dataset("openai/gsm8k", "main", split="test")
 
     # Shuffle deterministically and take n samples
@@ -271,7 +270,7 @@ def analyze_results(results: list, output_dir: Path):
     scores = np.array([r["consciousness_score"] for r in results])
     correct = np.array([r["correct"] for r in results], dtype=float)
     confidence = np.array([r["confidence"] for r in results])
-    diversity = np.array([r["dimension_diversity"] for r in results])
+    np.array([r["dimension_diversity"] for r in results])
 
     n_total = len(results)
     n_correct = int(correct.sum())
@@ -287,7 +286,7 @@ def analyze_results(results: list, output_dir: Path):
     correct_scores = scores[correct == 1]
     incorrect_scores = scores[correct == 0]
 
-    print(f"\nConsciousness Scores:")
+    print("\nConsciousness Scores:")
     print(f"  Correct answers:   mean={np.mean(correct_scores):.3f} "
           f"(std={np.std(correct_scores):.3f}, n={len(correct_scores)})")
     print(f"  Incorrect answers: mean={np.mean(incorrect_scores):.3f} "
@@ -298,9 +297,9 @@ def analyze_results(results: list, output_dir: Path):
         t_stat, p_value = stats.ttest_ind(correct_scores, incorrect_scores)
         print(f"\n  T-test: t={t_stat:.3f}, p={p_value:.4f}")
         if p_value < 0.05:
-            print(f"  ** SIGNIFICANT (p < 0.05): Consciousness scores differ between correct/incorrect")
+            print("  ** SIGNIFICANT (p < 0.05): Consciousness scores differ between correct/incorrect")
         else:
-            print(f"  Not significant at p=0.05")
+            print("  Not significant at p=0.05")
 
         # Effect size (Cohen's d)
         pooled_std = np.sqrt(
@@ -315,7 +314,7 @@ def analyze_results(results: list, output_dir: Path):
     print(f"\n  Point-biserial correlation: r={r_pb:.3f}, p={p_pb:.4f}")
 
     # Bin analysis: accuracy at different consciousness levels
-    print(f"\nAccuracy by Consciousness Level:")
+    print("\nAccuracy by Consciousness Level:")
     bins = [(0, 0.35, "Low"), (0.35, 0.50, "Medium-Low"),
             (0.50, 0.65, "Medium-High"), (0.65, 1.0, "High")]
 
@@ -327,7 +326,7 @@ def analyze_results(results: list, output_dir: Path):
                   f"{bin_acc*100:5.1f}% ({mask.sum():3d} problems)")
 
     # Confidence analysis
-    print(f"\nConfidence Metrics:")
+    print("\nConfidence Metrics:")
     high_conf = confidence >= 0.7
     low_conf = confidence < 0.7
     if high_conf.sum() > 0:
@@ -338,7 +337,7 @@ def analyze_results(results: list, output_dir: Path):
               f"(n={low_conf.sum()})")
 
     # Dimension analysis: which dimensions predict correctness?
-    print(f"\nDimension Analysis (mean activation for correct vs incorrect):")
+    print("\nDimension Analysis (mean activation for correct vs incorrect):")
     dim_names = set()
     for r in results:
         dim_names.update(r.get("dimension_scores", {}).keys())
@@ -408,7 +407,7 @@ def generate_plots(results: list, scores: np.ndarray, correct: np.ndarray, outpu
             bin_accs.append(correct[mask].mean() * 100)
             bin_counts.append(mask.sum())
 
-    bars = ax.bar(range(len(bin_centers)), bin_accs,
+    ax.bar(range(len(bin_centers)), bin_accs,
                   color=["#EF4444" if a < 50 else "#F59E0B" if a < 70 else "#10B981" for a in bin_accs])
     ax.set_xticks(range(len(bin_centers)))
     ax.set_xticklabels([f"{c:.2f}\n(n={n})" for c, n in zip(bin_centers, bin_counts)])

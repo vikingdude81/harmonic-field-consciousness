@@ -21,7 +21,7 @@ def test_basic_functionality():
     if torch.cuda.is_available():
         print(f"\n[OK] Using GPU: {torch.cuda.get_device_name(0)}")
     else:
-        print(f"\n[WARN] Using CPU (slower)")
+        print("\n[WARN] Using CPU (slower)")
 
     # Test with small model first (faster download)
     print("\n" + "-" * 60)
@@ -80,7 +80,7 @@ def test_basic_functionality():
     print("Step 3: Analyzing results")
     print("-" * 60)
 
-    print(f"\nScores:")
+    print("\nScores:")
     print(f"  High:   {results['high']:.3f}")
     print(f"  Medium: {results['medium']:.3f}")
     print(f"  Low:    {results['low']:.3f}")
@@ -88,9 +88,9 @@ def test_basic_functionality():
     # Check if scores are in reasonable range
     all_scores = list(results.values())
     if all(0.0 <= s <= 1.0 for s in all_scores):
-        print(f"\n[OK] All scores in valid range [0, 1]")
+        print("\n[OK] All scores in valid range [0, 1]")
     else:
-        print(f"\n[WARN]  Some scores out of range")
+        print("\n[WARN]  Some scores out of range")
 
     # Check variance (scores shouldn't all be identical)
     score_variance = np.var(all_scores)
@@ -148,8 +148,8 @@ def test_different_aggregations(model, tokenizer, circuit):
             print(f"[FAIL] {agg.upper():6} failed: {e}")
 
     if len(results) == 3:
-        print(f"\n[OK] All aggregation methods work!")
-        print(f"   Audit found 'last' gives best discrimination (+0.246)")
+        print("\n[OK] All aggregation methods work!")
+        print("   Audit found 'last' gives best discrimination (+0.246)")
 
 
 if __name__ == "__main__":

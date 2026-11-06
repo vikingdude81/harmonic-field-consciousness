@@ -14,7 +14,6 @@ import numpy as np
 import torch
 from pathlib import Path
 import pandas as pd
-from tqdm import tqdm
 import time
 
 # GPU Selection
@@ -105,7 +104,7 @@ print("CATEGORY 1: NETWORK TOPOLOGY VALIDATION")
 print("=" * 80)
 print(f"Network size: {N_NODES} nodes")
 print(f"Trials per topology: {N_TRIALS_PER_TOPOLOGY}")
-print(f"Topologies: Small-World variants")
+print("Topologies: Small-World variants")
 print("=" * 80)
 
 all_results = []
@@ -114,7 +113,7 @@ start = time.time()
 for k_param in [4, 6, 8]:
     for p_param in [0.1, 0.3, 0.5]:
         print(f"\nSmall-World (k={k_param}, p={p_param})...")
-        print(f"  Creating Laplacian...")
+        print("  Creating Laplacian...")
         laplacian = create_small_world_gpu(N_NODES, k=k_param, p=p_param)
         
         print(f"  Running {N_TRIALS_PER_TOPOLOGY} trials...", flush=True)
@@ -126,7 +125,7 @@ for k_param in [4, 6, 8]:
             r['p'] = p_param
             all_results.append(r)
         
-        print(f"  [OK]")
+        print("  [OK]")
 
 elapsed = time.time() - start
 print(f"\n[OK] All topologies completed in {elapsed:.1f}s")
@@ -139,7 +138,7 @@ df = pd.DataFrame(all_results)
 df.to_csv(output_dir / 'results.csv', index=False)
 
 print(f"\nResults saved: {output_dir / 'results.csv'}")
-print(f"\nSummary:")
+print("\nSummary:")
 print(f"  Total trials: {len(df)}")
 print(f"  Mean entropy: {df['entropy'].mean():.4f} ± {df['entropy'].std():.4f}")
 print(f"  Mean activity: {df['mean_activity'].mean():.6f}")

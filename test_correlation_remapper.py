@@ -96,7 +96,7 @@ try:
     )
     source_model.eval()
 
-    print(f"[OK] Source model loaded")
+    print("[OK] Source model loaded")
     print(f"  Hidden size: {source_model.config.hidden_size}")
 
 except Exception as e:
@@ -113,7 +113,7 @@ print("-"*80)
 try:
     import tiktoken
     nanogpt_tokenizer = tiktoken.get_encoding("gpt2")
-    print(f"[OK] Using GPT-2 tokenizer (tiktoken)")
+    print("[OK] Using GPT-2 tokenizer (tiktoken)")
     print(f"  Vocab size: {nanogpt_tokenizer.n_vocab}")
 except Exception as e:
     print(f"[ERROR] Could not load tiktoken: {e}")
@@ -169,7 +169,7 @@ try:
         min_correlation=0.3
     )
 
-    print(f"\n[OK] Mapping learned!")
+    print("\n[OK] Mapping learned!")
     print(f"  Confidence: {mapping.confidence:.3f}")
 
     # Save mapping
@@ -297,31 +297,31 @@ improvement_pct = (improvement / abs(proportional_discrimination)) * 100 if prop
 print(f"  Discrimination improvement: {improvement:+.3f} ({improvement_pct:+.1f}%)")
 
 if abs(correlation_discrimination) > abs(proportional_discrimination):
-    print(f"  [SUCCESS] Correlation-based mapping is better!")
+    print("  [SUCCESS] Correlation-based mapping is better!")
 else:
-    print(f"  [INFO] Proportional mapping is currently better")
-    print(f"  This might mean:")
-    print(f"    - Need more test prompts for learning")
-    print(f"    - Model hasn't learned consciousness-relevant features yet")
-    print(f"    - May need to train with V6 consciousness-aware training")
+    print("  [INFO] Proportional mapping is currently better")
+    print("  This might mean:")
+    print("    - Need more test prompts for learning")
+    print("    - Model hasn't learned consciousness-relevant features yet")
+    print("    - May need to train with V6 consciousness-aware training")
 
 # Summary
 print("\n" + "="*80)
 print("SUMMARY")
 print("="*80)
 
-print(f"\nMapping Quality:")
+print("\nMapping Quality:")
 print(f"  Confidence: {mapping.confidence:.3f}")
 print(f"  Mapped dimensions: {len(mapping.source_to_target)}/{len(source_dims)}")
 print(f"  Mean correlation: {np.mean([abs(c) for c in mapping.correlations.values()]):.3f}")
 
-print(f"\nSaved:")
+print("\nSaved:")
 print(f"  Mapping: {mapping_path}")
 
-print(f"\nNext Steps:")
-print(f"  1. If discrimination is low, consider V6 training for better features")
+print("\nNext Steps:")
+print("  1. If discrimination is low, consider V6 training for better features")
 print(f"  2. Try with more test prompts (currently using {len(test_prompts[:3])})")
-print(f"  3. Test on different prompts to validate mapping")
-print(f"  4. Compare with other models")
+print("  3. Test on different prompts to validate mapping")
+print("  4. Compare with other models")
 
 print("\n" + "="*80)

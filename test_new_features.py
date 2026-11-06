@@ -4,9 +4,6 @@ import numpy as np
 
 print("=== Testing imports ===")
 from consciousness_circuit.hooks import capture_forward, logit_lens
-from consciousness_circuit.patching import residual_patch_sweep
-from consciousness_circuit.steering import add_residual_steering, SteeringConfig
-from consciousness_circuit.visualization import plot_logit_lens_top1, plot_patch_heatmap, plot_residual_scatter
 print("All imports OK")
 
 print("\n=== Testing with Qwen2.5-0.5B-Instruct ===")
@@ -52,7 +49,6 @@ print("Saved: test_logit_lens.png")
 
 # Patch heatmap (dummy)
 dummy_patch = {i: 0.1 + 0.03*i for i in range(0, 24, 2)}
-from consciousness_circuit.visualization import plot_patch_heatmap
 import seaborn as sns
 fig2, ax2 = plt.subplots(figsize=(10, 2))
 layers = sorted(dummy_patch.keys())

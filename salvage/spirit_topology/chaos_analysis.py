@@ -6,7 +6,7 @@ applied to spirit topology and consciousness emergence.
 """
 
 import numpy as np
-from typing import List, Tuple
+from typing import Dict, List, Tuple
 
 class ChaosAnalysis:
     """Chaos analysis for spiritual/consciousness systems."""

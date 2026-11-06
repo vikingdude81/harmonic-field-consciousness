@@ -42,7 +42,7 @@ def create_lattice_gpu(side=70):
 
 def compute_predictability(laplacian, horizon=50):
     """Measure trajectory predictability at different horizons."""
-    n_nodes = laplacian.shape[0]
+    laplacian.shape[0]
     eigenvalues, eigenvectors = torch.linalg.eigh(laplacian)
     
     modes = torch.randn(len(eigenvalues), device=device) * 0.1
@@ -80,7 +80,7 @@ print("=" * 80)
 print("CATEGORY 7: SPATIOTEMPORAL TRANSFORMERS VALIDATION")
 print("=" * 80)
 print(f"Network size: {N_NODES} nodes")
-print(f"Analysis: Trajectory predictability and temporal structure")
+print("Analysis: Trajectory predictability and temporal structure")
 print("=" * 80)
 
 laplacian = create_lattice_gpu(side=70)

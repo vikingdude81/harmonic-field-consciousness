@@ -44,15 +44,13 @@ References:
 import numpy as np
 import networkx as nx
 import sys
-import os
 import json
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from matplotlib.gridspec import GridSpec
 from matplotlib.colors import LinearSegmentedColormap
 from pathlib import Path
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict, List, Tuple, Optional
 
 # Add parent to path
@@ -60,16 +58,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from utils.state_generators import generate_wake_state, generate_psychedelic_state
 from utils.metrics import (
-    compute_mode_entropy,
-    compute_participation_ratio,
-    compute_phase_coherence,
-    compute_entropy_production,
-    compute_criticality_index,
     compute_consciousness_functional,
     compute_all_metrics,
     compute_lempel_ziv_complexity,
 )
-from utils.chaos_metrics import compute_all_chaos_metrics
 from utils.graph_generators import generate_small_world
 
 # Output directory
@@ -456,7 +448,7 @@ def simulate_dmt_experience(
         List of DMTTimepoint objects
     """
     print(f"\n{'='*70}")
-    print(f"  DMT EXPERIENCE SIMULATION")
+    print("  DMT EXPERIENCE SIMULATION")
     print(f"  Dose: {dose_mg}mg smoked | Duration: {duration_s}s | Modes: {n_modes}")
     print(f"{'='*70}\n")
     
@@ -693,7 +685,6 @@ def compare_consciousness_states(
         generate_wake_state,
         generate_nrem_unconscious,
         generate_anesthesia_state,
-        generate_psychedelic_state,
         generate_focused_attention_meditation,
         generate_open_monitoring_meditation,
     )
@@ -794,7 +785,7 @@ def plot_dmt_experience(timeline: List[DMTTimepoint], save_dir: Path = RESULTS_D
     fig.savefig(save_dir / 'dmt_temporal_evolution.png', dpi=150, bbox_inches='tight',
                 facecolor=fig.get_facecolor())
     plt.close()
-    print(f"  Saved: dmt_temporal_evolution.png")
+    print("  Saved: dmt_temporal_evolution.png")
     
     # ── Figure 2: Mode power distribution evolution ──
     fig, ax = plt.subplots(figsize=(14, 8), facecolor='#0f172a')
@@ -826,7 +817,7 @@ def plot_dmt_experience(timeline: List[DMTTimepoint], save_dir: Path = RESULTS_D
     fig.savefig(save_dir / 'dmt_mode_evolution.png', dpi=150, bbox_inches='tight',
                 facecolor=fig.get_facecolor())
     plt.close()
-    print(f"  Saved: dmt_mode_evolution.png")
+    print("  Saved: dmt_mode_evolution.png")
     
     # ── Figure 3: Visual hallucination progression ──
     vis_indices = [idx for idx in snapshot_indices if timeline[idx].visual_pattern is not None]
@@ -871,7 +862,7 @@ def plot_dmt_experience(timeline: List[DMTTimepoint], save_dir: Path = RESULTS_D
         fig.savefig(save_dir / 'dmt_visual_hallucinations.png', dpi=150,
                     bbox_inches='tight', facecolor=fig.get_facecolor())
         plt.close()
-        print(f"  Saved: dmt_visual_hallucinations.png")
+        print("  Saved: dmt_visual_hallucinations.png")
 
 
 def plot_dose_response(results: Dict[str, np.ndarray], save_dir: Path = RESULTS_DIR):
@@ -917,7 +908,7 @@ def plot_dose_response(results: Dict[str, np.ndarray], save_dir: Path = RESULTS_
     fig.savefig(save_dir / 'dmt_dose_response.png', dpi=150, bbox_inches='tight',
                 facecolor=fig.get_facecolor())
     plt.close()
-    print(f"  Saved: dmt_dose_response.png")
+    print("  Saved: dmt_dose_response.png")
 
 
 def plot_state_comparison(results: Dict, save_dir: Path = RESULTS_DIR):
@@ -974,7 +965,7 @@ def plot_state_comparison(results: Dict, save_dir: Path = RESULTS_DIR):
     fig.savefig(save_dir / 'dmt_state_comparison_radar.png', dpi=150,
                 bbox_inches='tight', facecolor=fig.get_facecolor())
     plt.close()
-    print(f"  Saved: dmt_state_comparison_radar.png")
+    print("  Saved: dmt_state_comparison_radar.png")
 
 
 # ═══════════════════════════════════════════════════════════════════

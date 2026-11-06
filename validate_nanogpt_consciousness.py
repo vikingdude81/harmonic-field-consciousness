@@ -7,7 +7,6 @@ and compare with standard LLMs to establish improvement targets.
 """
 
 import sys
-import os
 sys.path.insert(0, 'NanoGPT')
 
 import torch
@@ -133,7 +132,7 @@ for model_path in available_models:
         # For now, we'll skip actual loading since we need proper wrapper
         # Instead, record what we would do
 
-        print(f"[INFO] Model checkpoint loaded")
+        print("[INFO] Model checkpoint loaded")
         print(f"  - Config keys: {list(checkpoint.keys())[:5]}...")
 
         # For full implementation, need to:
@@ -142,7 +141,7 @@ for model_path in available_models:
         # 3. Create tokenizer wrapper
         # 4. Measure consciousness
 
-        print(f"[TODO] Full implementation needed - see test_local_nanogpt.py for wrapper")
+        print("[TODO] Full implementation needed - see test_local_nanogpt.py for wrapper")
 
     except Exception as e:
         print(f"[ERROR] Could not load {model_name}: {e}")
@@ -153,14 +152,14 @@ print("SUMMARY & RECOMMENDATIONS")
 print("=" * 80)
 
 if baseline_model is not None:
-    print(f"\nBaseline Model (Qwen2.5-0.5B):")
-    print(f"  Consciousness Scores:")
+    print("\nBaseline Model (Qwen2.5-0.5B):")
+    print("  Consciousness Scores:")
     print(f"    HIGH:   {baseline_scores['high']['mean']:.3f}")
     print(f"    MEDIUM: {baseline_scores['medium']['mean']:.3f}")
     print(f"    LOW:    {baseline_scores['low']['mean']:.3f}")
     print(f"  Discrimination: {baseline_scores['high']['mean'] - baseline_scores['low']['mean']:.3f}")
 
-    print(f"\nTarget for NanoGPT:")
+    print("\nTarget for NanoGPT:")
     target_high = baseline_scores['high']['mean']
     target_low = baseline_scores['low']['mean']
     target_discrimination = target_high - target_low
@@ -169,22 +168,22 @@ if baseline_model is not None:
     print(f"  LOW should be:    < {target_low:.3f}")
     print(f"  Discrimination:   > {target_discrimination:.3f}")
 
-print(f"\nBased on experimental results:")
-print(f"  Target rotation range: 1500-4500 degrees")
-print(f"  Target consciousness:  0.20-0.30 (25% rule)")
-print(f"  Target wave patterns:  ~50% of sequences")
-print(f"  Target diversity (CV): > 0.5")
+print("\nBased on experimental results:")
+print("  Target rotation range: 1500-4500 degrees")
+print("  Target consciousness:  0.20-0.30 (25% rule)")
+print("  Target wave patterns:  ~50% of sequences")
+print("  Target diversity (CV): > 0.5")
 
-print(f"\nNext Steps:")
-print(f"1. Implement NanoGPT wrapper for consciousness measurement")
-print(f"2. Measure baseline consciousness scores")
-print(f"3. Add consciousness-aware training (see NANOGPT_IMPROVEMENTS.md)")
-print(f"4. Re-measure and compare")
+print("\nNext Steps:")
+print("1. Implement NanoGPT wrapper for consciousness measurement")
+print("2. Measure baseline consciousness scores")
+print("3. Add consciousness-aware training (see NANOGPT_IMPROVEMENTS.md)")
+print("4. Re-measure and compare")
 
-print(f"\nTo fully test your NanoGPT models:")
-print(f"  python test_local_nanogpt.py")
-print(f"\nFor improvements:")
-print(f"  See: NANOGPT_IMPROVEMENTS.md")
+print("\nTo fully test your NanoGPT models:")
+print("  python test_local_nanogpt.py")
+print("\nFor improvements:")
+print("  See: NANOGPT_IMPROVEMENTS.md")
 
 print("\n" + "=" * 80)
 print("Validation Complete")

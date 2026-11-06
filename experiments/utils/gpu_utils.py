@@ -11,7 +11,7 @@ Supports:
 """
 
 import numpy as np
-from typing import Optional, Tuple, Union, Any
+from typing import Tuple, Any
 import warnings
 
 # Try to import GPU libraries

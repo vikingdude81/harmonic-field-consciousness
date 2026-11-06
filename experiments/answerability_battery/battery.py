@@ -41,7 +41,6 @@ forbidden-energy gate on/off).
 from __future__ import annotations
 
 import json
-import math
 import random
 from dataclasses import dataclass, field, asdict
 from datetime import datetime

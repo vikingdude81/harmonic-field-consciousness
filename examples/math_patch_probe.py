@@ -9,7 +9,7 @@ This script:
 Prereqs: torch, transformers, your model + tokenizer.
 """
 import argparse
-from typing import Any, Dict
+from typing import Dict
 
 import torch
 
@@ -36,7 +36,7 @@ def main():
 
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
-    device = args.device or ("cuda" if torch.cuda.is_available() else "cpu")
+    args.device or ("cuda" if torch.cuda.is_available() else "cpu")
     tok = AutoTokenizer.from_pretrained(args.model)
     model = AutoModelForCausalLM.from_pretrained(args.model, torch_dtype=torch.bfloat16, device_map="auto")
 

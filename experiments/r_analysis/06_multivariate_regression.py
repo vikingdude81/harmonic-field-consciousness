@@ -6,7 +6,6 @@ Build comprehensive models: C ~ R + R^2 + R*kappa + R*H_mode
 
 import numpy as np
 import pandas as pd
-from scipy import stats
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -66,28 +65,28 @@ y = df['C'].values
 # Model 1: R only
 X1 = df[['R_z']].values
 beta1, r2_1, adj_r2_1, aic_1 = fit_ols(X1, y)
-print(f"Model 1: C ~ R")
+print("Model 1: C ~ R")
 print(f"  R^2 = {r2_1:.4f}, Adj R^2 = {adj_r2_1:.4f}, AIC = {aic_1:.1f}")
 print(f"  beta_R = {beta1[1]:.4f}")
 
 # Model 2: R + R^2
 X2 = df[['R_z', 'R_squared']].values
 beta2, r2_2, adj_r2_2, aic_2 = fit_ols(X2, y)
-print(f"\nModel 2: C ~ R + R^2")
+print("\nModel 2: C ~ R + R^2")
 print(f"  R^2 = {r2_2:.4f}, Adj R^2 = {adj_r2_2:.4f}, AIC = {aic_2:.1f}")
 print(f"  beta_R = {beta2[1]:.4f}, beta_R2 = {beta2[2]:.4f}")
 
 # Model 3: R + kappa + H_mode
 X3 = df[['R_z', 'kappa_z', 'H_mode_z']].values
 beta3, r2_3, adj_r2_3, aic_3 = fit_ols(X3, y)
-print(f"\nModel 3: C ~ R + kappa + H_mode")
+print("\nModel 3: C ~ R + kappa + H_mode")
 print(f"  R^2 = {r2_3:.4f}, Adj R^2 = {adj_r2_3:.4f}, AIC = {aic_3:.1f}")
 print(f"  beta_R = {beta3[1]:.4f}, beta_kappa = {beta3[2]:.4f}, beta_H = {beta3[3]:.4f}")
 
 # Model 4: Full model with interactions
 X4 = df[['R_z', 'R_squared', 'kappa_z', 'H_mode_z', 'R_kappa', 'R_H_mode']].values
 beta4, r2_4, adj_r2_4, aic_4 = fit_ols(X4, y)
-print(f"\nModel 4: C ~ R + R^2 + kappa + H_mode + R*kappa + R*H_mode")
+print("\nModel 4: C ~ R + R^2 + kappa + H_mode + R*kappa + R*H_mode")
 print(f"  R^2 = {r2_4:.4f}, Adj R^2 = {adj_r2_4:.4f}, AIC = {aic_4:.1f}")
 print(f"  beta_R = {beta4[1]:.4f}, beta_R2 = {beta4[2]:.4f}")
 print(f"  beta_kappa = {beta4[3]:.4f}, beta_H = {beta4[4]:.4f}")
@@ -108,7 +107,6 @@ print(f"  AIC = {best[1]:.1f}, R^2 = {best[2]:.4f}")
 
 # Relative importance
 print("\n### RELATIVE IMPORTANCE OF PREDICTORS ###")
-from sklearn.preprocessing import StandardScaler
 
 X_full = df[['R', 'kappa', 'H_mode', 'PR']].values
 X_scaled = (X_full - X_full.mean(axis=0)) / X_full.std(axis=0)

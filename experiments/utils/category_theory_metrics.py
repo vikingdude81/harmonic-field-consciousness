@@ -10,10 +10,7 @@ Mathematical structures for consciousness analysis:
 """
 
 import numpy as np
-from typing import Optional, List, Tuple, Dict, Set
-from itertools import combinations
-from scipy.spatial.distance import pdist, squareform
-from collections import defaultdict
+from typing import Optional, List, Tuple, Dict
 
 
 # ==============================================================================
@@ -377,7 +374,7 @@ def compute_compositional_score(
         return 0.0
     
     modules = list(module_activities.keys())
-    n_modules = len(modules)
+    len(modules)
     
     # Compute within-module coherence
     within_coherence = []
@@ -532,7 +529,7 @@ def compute_all_category_metrics(
     if activity.ndim == 1:
         activity = activity.reshape(-1, 1)
     
-    n_nodes = activity.shape[0]
+    activity.shape[0]
     
     # Compute correlation matrix if not provided
     if correlation_matrix is None:
@@ -1075,7 +1072,7 @@ def compute_monad_structure(
     Returns:
         Dictionary with monad law satisfaction scores
     """
-    n = len(state)
+    len(state)
     
     # Normalize
     state = state / (np.linalg.norm(state) + 1e-10)

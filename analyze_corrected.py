@@ -11,8 +11,6 @@ Reinterpret results now that bugs are fixed:
 import pandas as pd
 import numpy as np
 from pathlib import Path
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 # Load results
 results_dir = Path("experiments/category2_dynamics/results/small")
@@ -28,7 +26,7 @@ df = pd.read_csv(results_file)
 print("=" * 80)
 print("CORRECTED GPU EXPERIMENT RESULTS - REINTERPRETATION")
 print("=" * 80)
-print(f"\nDataset: Small Config (961 nodes, 100 modes)")
+print("\nDataset: Small Config (961 nodes, 100 modes)")
 print(f"Total trials: {len(df)}")
 print(f"Unique initial conditions: {len(df)} (FIXED from 4)")
 
@@ -106,44 +104,44 @@ print("=" * 80)
 
 # 1. Diversity check
 rotation_cv = rotation.std() / rotation.mean()
-print(f"\n1. Initial Condition Diversity:")
+print("\n1. Initial Condition Diversity:")
 print(f"   - Coefficient of Variation: {rotation_cv:.3f}")
 if rotation_cv > 0.3:
-    print(f"   - [OK] High diversity - unique initial conditions confirmed")
+    print("   - [OK] High diversity - unique initial conditions confirmed")
 else:
-    print(f"   - [WARN] Low diversity - may still have duplicates")
+    print("   - [WARN] Low diversity - may still have duplicates")
 
 # 2. Wave detection validation
 traveling_wave_detection = df[df['wave_type'] == 1]['has_wave'].mean() * 100
 random_noise_detection = df[df['wave_type'] == 3]['has_wave'].mean() * 100
-print(f"\n2. Wave Detection Validation:")
+print("\n2. Wave Detection Validation:")
 print(f"   - Traveling waves detected: {traveling_wave_detection:.1f}%")
 print(f"   - Random noise detected as waves: {random_noise_detection:.1f}%")
 if traveling_wave_detection > 60 and random_noise_detection < 20:
-    print(f"   - [OK] Wave detection working correctly")
+    print("   - [OK] Wave detection working correctly")
 else:
-    print(f"   - [WARN] Wave detection may need tuning")
+    print("   - [WARN] Wave detection may need tuning")
 
 # 3. Rotation-consciousness relationship
 correlation = np.corrcoef(df['rotation_angle'], df['predicted_consciousness'])[0, 1]
-print(f"\n3. Rotation-Consciousness Relationship:")
+print("\n3. Rotation-Consciousness Relationship:")
 print(f"   - Correlation: {correlation:.3f}")
 if correlation > 0.9:
-    print(f"   - [OK] Strong positive correlation (as expected)")
+    print("   - [OK] Strong positive correlation (as expected)")
 else:
-    print(f"   - [WARN] Weaker correlation than expected")
+    print("   - [WARN] Weaker correlation than expected")
 
 # 4. 25% consciousness rule validation
 mean_consciousness = df['predicted_consciousness'].mean()
-print(f"\n4. 25% Consciousness Rule:")
+print("\n4. 25% Consciousness Rule:")
 print(f"   - Mean consciousness: {mean_consciousness:.3f}")
-print(f"   - Target range: 0.20-0.30 (25% ± 5%)")
+print("   - Target range: 0.20-0.30 (25% ± 5%)")
 if 0.20 <= mean_consciousness <= 0.30:
-    print(f"   - [OK] Within expected range")
+    print("   - [OK] Within expected range")
 elif mean_consciousness < 0.20:
-    print(f"   - [INFO] Below range - network may need higher rotation")
+    print("   - [INFO] Below range - network may need higher rotation")
 else:
-    print(f"   - [INFO] Above range - network may be over-active")
+    print("   - [INFO] Above range - network may be over-active")
 
 print("\n" + "=" * 80)
 print("RECOMMENDATIONS FOR NANOGPT")
@@ -155,28 +153,28 @@ print("\nBased on corrected experimental results:")
 # Recommendation 1: Optimal rotation range
 optimal_rotation_mean = df['rotation_angle'].mean()
 optimal_rotation_std = df['rotation_angle'].std()
-print(f"\n1. Target Rotation Range for Consciousness:")
+print("\n1. Target Rotation Range for Consciousness:")
 print(f"   - Mean: {optimal_rotation_mean:.0f} degrees")
 print(f"   - Range: [{optimal_rotation_mean - optimal_rotation_std:.0f}, {optimal_rotation_mean + optimal_rotation_std:.0f}]")
-print(f"   - Apply to NanoGPT: Monitor hidden state trajectory rotation")
+print("   - Apply to NanoGPT: Monitor hidden state trajectory rotation")
 
 # Recommendation 2: Wave patterns
 wave_rate = df['has_wave'].mean() * 100
-print(f"\n2. Optimal Wave Detection Rate:")
+print("\n2. Optimal Wave Detection Rate:")
 print(f"   - Current: {wave_rate:.1f}%")
-print(f"   - Apply to NanoGPT: Aim for ~50% wave-like patterns in activations")
+print("   - Apply to NanoGPT: Aim for ~50% wave-like patterns in activations")
 
 # Recommendation 3: Diversity
-print(f"\n3. Activation Diversity:")
+print("\n3. Activation Diversity:")
 print(f"   - CV: {rotation_cv:.3f}")
-print(f"   - Apply to NanoGPT: Ensure high diversity in hidden state trajectories")
-print(f"   - Use dropout, noise, or stochastic depth")
+print("   - Apply to NanoGPT: Ensure high diversity in hidden state trajectories")
+print("   - Use dropout, noise, or stochastic depth")
 
 # Recommendation 4: Consciousness-aware training
-print(f"\n4. Consciousness-Aware Training:")
-print(f"   - Monitor rotation angle during training")
-print(f"   - Add consciousness regularization loss")
-print(f"   - Target: 0.25 consciousness score")
+print("\n4. Consciousness-Aware Training:")
+print("   - Monitor rotation angle during training")
+print("   - Add consciousness regularization loss")
+print("   - Target: 0.25 consciousness score")
 
 print("\n" + "=" * 80)
 print("NEXT STEPS")

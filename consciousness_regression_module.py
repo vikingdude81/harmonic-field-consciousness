@@ -19,7 +19,7 @@ from pathlib import Path
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import r2_score, mean_squared_error
-from typing import Dict, Tuple, List, Optional
+from typing import Dict, Optional
 import json
 import pickle
 
@@ -51,7 +51,6 @@ class ConsciousnessRegressor:
     ) -> pd.DataFrame:
         """Load mega/ultra/max results and prepare for regression."""
         
-        dfs = []
         configs = [
             {"name": "mega", "path": mega_csv, "timesteps": 10000, "hierarchy": 2.5},
             {"name": "ultra", "path": ultra_csv, "timesteps": 15000, "hierarchy": 2.6},
@@ -165,12 +164,12 @@ class ConsciousnessRegressor:
         self.metadata["intercept"] = float(self.regression_model.intercept_)
         
         print(f"\n{'='*60}")
-        print(f"CONSCIOUSNESS REGRESSION MODEL FITTED")
+        print("CONSCIOUSNESS REGRESSION MODEL FITTED")
         print(f"{'='*60}")
         print(f"Samples: {len(X)}")
         print(f"R² Score: {r2:.4f}")
         print(f"RMSE: {rmse:.4f}")
-        print(f"\nCoefficients:")
+        print("\nCoefficients:")
         for name, coef in zip(self.feature_names, self.regression_model.coef_):
             print(f"  {name:30s}: {coef:8.5f}")
         print(f"  {'intercept':30s}: {self.regression_model.intercept_:8.5f}")

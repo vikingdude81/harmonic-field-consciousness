@@ -2,9 +2,7 @@
 Extract actual correlation patterns from saved activity data
 Need to look at what correlations the detector saw
 """
-import torch
 import pandas as pd
-import numpy as np
 
 # Load a mega results file
 mega = pd.read_csv('results/mega/results_batched.csv')
@@ -53,7 +51,7 @@ print("="*60)
 
 # Check if Type 1 (explicit traveling wave) shows waves
 type1 = mega[mega['wave_type'] == 1]
-print(f"\nType 1 (Traveling Wave initialization):")
+print("\nType 1 (Traveling Wave initialization):")
 print(f"  Wave detection: {type1['has_wave'].sum()}/{len(type1)} ({100*type1['has_wave'].mean():.1f}%)")
 print(f"  Rotation angles: {type1['rotation_angle'].values[:5]}")
 

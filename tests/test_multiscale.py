@@ -134,7 +134,7 @@ class TestRealtimeDecoder:
         
         for i in range(30):
             sample = np.random.randn(10)
-            metrics = decoder.update(sample)
+            decoder.update(sample)
             
             # After 20 samples, buffer should be full
             if i >= 20:

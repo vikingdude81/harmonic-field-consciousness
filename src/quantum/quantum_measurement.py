@@ -9,7 +9,7 @@ Implements quantum measurement operations for consciousness states including:
 """
 
 import numpy as np
-from typing import Optional, Tuple, Dict, List
+from typing import Tuple, Dict, List
 from .reality_register import RealityRegister, QuantumConsciousnessState
 
 
@@ -200,7 +200,7 @@ class QuantumMeasurement:
             amplitudes=new_amplitudes,
             phases=np.angle(new_amplitudes),
             power=np.abs(new_amplitudes) ** 2,
-            label=f"weak_measured"
+            label="weak_measured"
         )
         
         self.register.set_state(new_state)

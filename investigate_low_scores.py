@@ -7,7 +7,6 @@ Deep analysis of what's limiting scores on:
 """
 
 import torch
-import numpy as np
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 print("Loading model...")
@@ -105,11 +104,11 @@ def analyze_prompt(prompt):
     print(f"Total: {negative_contrib + positive_contrib:+.3f}")
     
     if C < 0.5:
-        print(f"\n⚠️  This prompt scores BELOW BASELINE (0.5)")
+        print("\n⚠️  This prompt scores BELOW BASELINE (0.5)")
         print(f"   Reason: Negative contributions ({abs(negative_contrib):.3f}) overwhelm positive ones ({positive_contrib:.3f})")
         print(f"   Largest bottleneck: {min_contrib[0]} ({min_contrib[1]['contrib']:+.3f})")
     elif C < 0.1:
-        print(f"\n❌ This prompt scores NEAR ZERO")
+        print("\n❌ This prompt scores NEAR ZERO")
         print(f"   Clamped from {0.5 + negative_contrib + positive_contrib:.3f} to 0.000")
         
     return C, contributions, sorted_contribs

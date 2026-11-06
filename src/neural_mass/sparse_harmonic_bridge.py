@@ -93,7 +93,7 @@ class SparseHarmonicBridge:
             nnz = self.W.nnz
             sparsity = 100 * (1 - nnz / (self.n_nodes * self.n_nodes))
             mem_mb = self.W.data.nbytes / 1024 / 1024
-            print(f"Sparse Harmonic Bridge initialized:")
+            print("Sparse Harmonic Bridge initialized:")
             print(f"  - Nodes: {self.n_nodes:,}")
             print(f"  - Non-zeros: {nnz:,} ({sparsity:.2f}% sparse)")
             print(f"  - Memory: {mem_mb:.1f} MB")
@@ -139,7 +139,7 @@ class SparseHarmonicBridge:
         self._harmonics_computed = True
 
         if self.verbose:
-            print(f"[OK] Harmonic decomposition complete!")
+            print("[OK] Harmonic decomposition complete!")
             print(f"  - Top eigenvalue: {eigenvalues[-1]:.6f}")
             print(f"  - Bottom eigenvalue: {eigenvalues[0]:.6f}")
             print(f"  - Eigenvalue range: {eigenvalues[-1] - eigenvalues[0]:.6f}")

@@ -16,7 +16,6 @@ Run:  python run_battery_demo.py
 import random
 import re
 
-from competence_suite import build_suite, score_generation
 from battery import run_ablation_test
 
 

@@ -16,9 +16,8 @@ os.environ['GRADIO_ALLOW_FLAGGING'] = 'never'
 
 import gradio as gr
 import torch
-import numpy as np
 from dataclasses import dataclass
-from typing import Dict, List, Tuple
+from typing import Dict, Tuple
 import time
 import spaces
 
@@ -255,7 +254,6 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import io
-import base64
 from PIL import Image
 
 EXAMPLES = [

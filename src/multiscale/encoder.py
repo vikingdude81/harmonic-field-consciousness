@@ -6,7 +6,7 @@ temporal resolutions for consciousness state modeling.
 """
 
 import numpy as np
-from typing import List, Tuple, Optional, Dict
+from typing import List, Dict
 from scipy import signal
 
 
@@ -54,7 +54,7 @@ class MultiscaleEncoder:
         if mode_indices is None:
             mode_indices = np.arange(self.n_modes)
         
-        n_timepoints = time_series.shape[1] if time_series.ndim > 1 else len(time_series)
+        time_series.shape[1] if time_series.ndim > 1 else len(time_series)
         
         encoded = {}
         for scale in self.scales:

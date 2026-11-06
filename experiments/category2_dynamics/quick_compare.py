@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 # Load mega results
 old = pd.read_csv('results_backup_buggy/mega/results_batched.csv')

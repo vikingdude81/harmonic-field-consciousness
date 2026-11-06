@@ -393,7 +393,7 @@ def generate_jhana_state(
         # Form jhanas: progressively simpler but still conscious
         
         # Concentration on fewer modes as jhana deepens
-        concentration = 1 + (jhana_level - 1) * 0.5  # 1.0 to 2.5
+        1 + (jhana_level - 1) * 0.5  # 1.0 to 2.5
         
         # Central peak (not low like sleep, not high like psychedelic)
         center = n_modes * 0.35 - (jhana_level - 1) * 0.05 * n_modes

@@ -13,7 +13,7 @@ The steering protocol models:
 """
 
 import numpy as np
-from typing import Optional, Tuple, Dict, Callable
+from typing import Optional, Dict
 from scipy.linalg import expm
 from .reality_register import RealityRegister, QuantumConsciousnessState
 

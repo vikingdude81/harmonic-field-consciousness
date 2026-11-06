@@ -281,7 +281,7 @@ log_params = np.log2(all_params)
 
 # Does CS-SE |r| increase with log(params)?
 r_meta, p_meta, star_meta = pearson(log_params, np.abs(all_r_values))
-print(f"  Meta-correlation: |CS-SE r| vs log2(params) across 9 models:")
+print("  Meta-correlation: |CS-SE r| vs log2(params) across 9 models:")
 print(f"    r={r_meta:+.3f}, p={p_meta:.4f} {star_meta}")
 if r_meta > 0:
     print("    -> Larger models show STRONGER CS-SE coupling (universal trend)")

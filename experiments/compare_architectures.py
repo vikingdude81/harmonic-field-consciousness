@@ -238,6 +238,6 @@ for name in ["Qwen-7B", "Mistral-7B", "Llama-8B", "Yi-9B"]:
     tl = results[0].get("target_layer", "?")
     print(f"    {name}: hidden_dim={hd}, target_layer={tl}")
 
-print(f"    Qwen-32B: hidden_dim=5120, target_layer=48")
+print("    Qwen-32B: hidden_dim=5120, target_layer=48")
 print()
 print("Done!")

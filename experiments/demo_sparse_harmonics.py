@@ -41,7 +41,7 @@ def demo_basic_usage(n_nodes: int = 10000, n_modes: int = 50):
     W = create_sparse_network(n_nodes, density=0.01, distribution='random', seed=42)
 
     # Initialize bridge
-    print(f"\nInitializing Sparse Harmonic Bridge...")
+    print("\nInitializing Sparse Harmonic Bridge...")
     bridge = SparseHarmonicBridge(
         adjacency_matrix=W,
         n_modes=n_modes,
@@ -51,13 +51,13 @@ def demo_basic_usage(n_nodes: int = 10000, n_modes: int = 50):
     )
 
     # Compute harmonics
-    print(f"\nComputing harmonics...")
+    print("\nComputing harmonics...")
     eigenvalues, eigenvectors = bridge.compute_harmonics()
 
     # Get harmonic modes
     harmonics = bridge.get_harmonic_modes()
 
-    print(f"\nHarmonic Mode Summary:")
+    print("\nHarmonic Mode Summary:")
     print(f"  - Eigenvalues range: [{eigenvalues[0]:.3f}, {eigenvalues[-1]:.3f}]")
     print(f"  - Frequencies range: [{harmonics['frequencies'][0]:.3f}, {harmonics['frequencies'][-1]:.3f}]")
     print(f"  - Mean participation: {np.mean(harmonics['mode_participation']):.1f} nodes")
@@ -106,7 +106,7 @@ def demo_consciousness_analysis(bridge: SparseHarmonicBridge):
     print(f"   Complexity: {metrics_local['complexity']:.6f}")
 
     # Pattern 4: Oscillatory (structured consciousness)
-    harmonics = bridge.get_harmonic_modes()
+    bridge.get_harmonic_modes()
     mode_amplitudes = np.zeros(bridge.n_modes)
     mode_amplitudes[10:20] = np.random.randn(10)  # Activate mid-range modes
     activity_osc = bridge.reconstruct_from_modes(mode_amplitudes)
@@ -184,7 +184,7 @@ def demo_scalability(sizes: list = [5000, 10000, 20000, 30000], n_modes: int = 5
 
     import time
 
-    print(f"\nTesting sparse solver on networks of increasing size...")
+    print("\nTesting sparse solver on networks of increasing size...")
     print(f"(All with {n_modes} modes, 1% density)\n")
 
     for n in sizes:
@@ -216,7 +216,7 @@ def demo_scalability(sizes: list = [5000, 10000, 20000, 30000], n_modes: int = 5
 def demo_gpu_acceleration(n_nodes: int = 20000, n_modes: int = 50):
     """Demonstrate GPU acceleration (if available)."""
     try:
-        import cupy as cp
+        import cupy as cp  # noqa: F401 (availability check)
 
         print("\n" + "="*80)
         print("DEMO 5: GPU Acceleration")
@@ -250,7 +250,7 @@ def demo_gpu_acceleration(n_nodes: int = 20000, n_modes: int = 50):
         speedup = cpu_time / gpu_time
         error = np.abs(eigenvalues_cpu[-1] - eigenvalues_gpu[-1])
 
-        print(f"\n[Comparison]")
+        print("\n[Comparison]")
         print(f"  Speedup: {speedup:.2f}x")
         print(f"  Eigenvalue error: {error:.2e}")
 

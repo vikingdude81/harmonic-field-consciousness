@@ -5,7 +5,6 @@ Runs: mega, ultra, max with proper correlation-based detection
 
 import subprocess
 import sys
-from pathlib import Path
 import time
 
 EXPERIMENTS = ['mega', 'ultra', 'max']

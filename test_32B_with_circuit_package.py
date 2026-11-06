@@ -9,7 +9,7 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Import from the pip-installed package
-from consciousness_circuit import ConsciousnessCircuit, UniversalCircuit, UniversalResult
+from consciousness_circuit import ConsciousnessCircuit, UniversalCircuit
 
 print("="*80)
 print("CONSCIOUSNESS CIRCUIT PACKAGE TEST WITH QWEN2.5-32B")
@@ -61,7 +61,7 @@ print("\n[2] Initializing consciousness circuits...")
 circuit = ConsciousnessCircuit()  # Uses v2.1 by default
 universal = UniversalCircuit()
 print(f"    Circuit v2.1: {len(circuit.reference_dims)} dimensions")
-print(f"    Universal circuit ready")
+print("    Universal circuit ready")
 
 def get_hidden_state(prompt):
     """Get last hidden state for a prompt."""

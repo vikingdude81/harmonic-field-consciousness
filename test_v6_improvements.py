@@ -16,7 +16,6 @@ This script tests the model WITHOUT full training - just forward passes.
 import sys
 import torch
 import numpy as np
-from pathlib import Path
 
 # Add NanoGPT to path
 sys.path.insert(0, 'NanoGPT')
@@ -84,6 +83,7 @@ print(f"  Diversity (CV): {metrics['diversity']:.3f} (target: >0.5)")
 print(f"  Estimated consciousness: {metrics['estimated_consciousness']:.3f} (target: 0.25)")
 
 # Validate ranges
+target_rotation_min, target_rotation_max = 1500.0, 4500.0
 checks = []
 checks.append(("Rotation in range", target_rotation_min <= metrics['rotation'] <= target_rotation_max))
 checks.append(("Diversity acceptable", metrics['diversity'] > 0.1))
@@ -106,17 +106,17 @@ rotation_mean = np.mean(rotations)
 rotation_std = np.std(rotations)
 rotation_cv = rotation_std / rotation_mean if rotation_mean > 0 else 0
 
-print(f"[OK] Rotation statistics over 10 batches:")
+print("[OK] Rotation statistics over 10 batches:")
 print(f"  Mean: {rotation_mean:.1f}°")
 print(f"  Std:  {rotation_std:.1f}°")
 print(f"  CV:   {rotation_cv:.3f}")
 
 if rotation_cv > 0.3:
-    print(f"  [OK] High diversity (CV > 0.3)")
+    print("  [OK] High diversity (CV > 0.3)")
 elif rotation_cv > 0.1:
-    print(f"  [WARN] Moderate diversity (0.1 < CV < 0.3)")
+    print("  [WARN] Moderate diversity (0.1 < CV < 0.3)")
 else:
-    print(f"  [FAIL] Low diversity (CV < 0.1)")
+    print("  [FAIL] Low diversity (CV < 0.1)")
 
 # Test 4: Stochastic depth (training mode)
 print("\n[5/7] Testing stochastic depth in training mode...")
@@ -132,13 +132,13 @@ for i in range(5):
 outputs_train = np.array(outputs_train)
 variance_across_runs = np.var(outputs_train, axis=0).mean()
 
-print(f"[OK] Stochastic depth tested")
+print("[OK] Stochastic depth tested")
 print(f"  Variance across 5 runs: {variance_across_runs:.6f}")
 
 if variance_across_runs > 1e-6:
-    print(f"  [OK] Outputs vary (stochastic depth active)")
+    print("  [OK] Outputs vary (stochastic depth active)")
 else:
-    print(f"  [WARN] Outputs identical (may need more layers or higher rate)")
+    print("  [WARN] Outputs identical (may need more layers or higher rate)")
 
 model.eval()
 
@@ -158,14 +158,14 @@ wave_pct = (wave_detected_count / total_tests) * 100
 
 print(f"[OK] Wave detection statistics over {total_tests} batches:")
 print(f"  Waves detected: {wave_detected_count}/{total_tests} ({wave_pct:.1f}%)")
-print(f"  Target: ~50% (balanced)")
+print("  Target: ~50% (balanced)")
 
 if 30 <= wave_pct <= 70:
-    print(f"  [OK] Balanced wave detection")
+    print("  [OK] Balanced wave detection")
 elif 10 <= wave_pct <= 90:
-    print(f"  [WARN] Moderate imbalance")
+    print("  [WARN] Moderate imbalance")
 else:
-    print(f"  [FAIL] Severe imbalance")
+    print("  [FAIL] Severe imbalance")
 
 # Test 6: Consciousness regularization loss
 print("\n[7/7] Testing consciousness regularization loss...")
@@ -178,15 +178,15 @@ y_train = torch.randint(0, config['vocab_size'], (batch_size, seq_len), device=d
 with torch.no_grad():
     logits, ce_loss, c_loss = model(x_train, y_train)
 
-print(f"[OK] Loss components:")
+print("[OK] Loss components:")
 print(f"  CE Loss: {ce_loss.item():.4f}")
 print(f"  Consciousness Loss: {c_loss:.4f}")
 print(f"  Total Loss (with λ={model.consciousness_loss_weight}): {ce_loss.item() + model.consciousness_loss_weight * c_loss:.4f}")
 
 if c_loss > 0:
-    print(f"  [OK] Consciousness loss is non-zero")
+    print("  [OK] Consciousness loss is non-zero")
 else:
-    print(f"  [WARN] Consciousness loss is zero (may need adjustment)")
+    print("  [WARN] Consciousness loss is zero (may need adjustment)")
 
 # Test 7: Generation with consciousness tracking
 print("\n" + "=" * 80)
@@ -213,7 +213,7 @@ print(f"  Shape: {generated.shape}")
 with torch.no_grad():
     _, _, metrics = model(generated, output_consciousness_metrics=True)
 
-print(f"\nConsciousness metrics on generated sequence:")
+print("\nConsciousness metrics on generated sequence:")
 print(f"  Rotation: {metrics['rotation']:.1f}°")
 print(f"  Wave pattern: {metrics['has_wave']}")
 print(f"  Diversity: {metrics['diversity']:.3f}")

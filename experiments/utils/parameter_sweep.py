@@ -17,10 +17,10 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
-from typing import Any, Dict, List, Callable, Optional, Union, Tuple
+from typing import Dict, List, Callable, Optional, Union, Tuple
 from itertools import product
 from dataclasses import dataclass, field, asdict
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from tqdm import tqdm
 import warnings
 
@@ -32,7 +32,7 @@ except ImportError:
     HAS_SCIPY_QMC = False
 
 try:
-    from scipy.optimize import minimize
+    from scipy.optimize import minimize  # noqa: F401 (availability check)
     HAS_SCIPY_OPTIM = True
 except ImportError:
     HAS_SCIPY_OPTIM = False

@@ -46,7 +46,7 @@ def test_sparse_eigsh(
         elapsed = time.time() - start_time
         return eigenvalues, eigenvectors, elapsed
     except ArpackNoConvergence as e:
-        print(f"Warning: ARPACK did not converge. Returning partial results.")
+        print("Warning: ARPACK did not converge. Returning partial results.")
         eigenvalues = e.eigenvalues
         eigenvectors = e.eigenvectors
         elapsed = time.time() - start_time
@@ -61,10 +61,10 @@ def benchmark_sparse_solver(
     print("="*80)
     print("SPARSE EIGENSOLVER BENCHMARK")
     print("="*80)
-    print(f"\nConfiguration:")
+    print("\nConfiguration:")
     print(f"  - Number of eigenvalues (k): {k}")
     print(f"  - Network density: {density}")
-    print(f"  - Method: ARPACK (via scipy.sparse.linalg.eigsh)")
+    print("  - Method: ARPACK (via scipy.sparse.linalg.eigsh)")
     print("\n" + "-"*80)
 
     results = []
@@ -73,7 +73,7 @@ def benchmark_sparse_solver(
         print(f"\n[{n:,} nodes]")
 
         # Generate network
-        print(f"  Generating sparse network... ", end="", flush=True)
+        print("  Generating sparse network... ", end="", flush=True)
         gen_start = time.time()
         A = generate_test_network(n, density=density)
         gen_time = time.time() - gen_start
@@ -150,7 +150,7 @@ def test_gpu_eigensolvers():
         print(f"  - Speed: {n / gpu_time:.1f} nodes/sec")
 
         # Compare to CPU
-        print(f"\nComparing to CPU...")
+        print("\nComparing to CPU...")
         start_time = time.time()
         eigenvalues_cpu, _, cpu_time = test_sparse_eigsh(A_cpu, k=k)
 

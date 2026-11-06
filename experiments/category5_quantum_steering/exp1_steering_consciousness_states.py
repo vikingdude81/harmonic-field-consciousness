@@ -25,13 +25,11 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import numpy as np
 import matplotlib.pyplot as plt
-from tqdm import tqdm
 
 # Import quantum modules
 from src.quantum import (
     RealityRegister,
-    SteeringProtocol,
-    compute_steering_probability
+    SteeringProtocol
 )
 
 # Import existing utilities for consciousness metrics

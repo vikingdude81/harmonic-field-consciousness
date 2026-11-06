@@ -23,7 +23,6 @@ import itertools
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
-from utils import visualization as viz
 
 # Configuration
 SEED = 42
@@ -120,7 +119,7 @@ best_separation = df.loc[best_idx, 'separation']
 print("\n" + "="*60)
 print("Optimization Results:")
 print("="*60)
-print(f"\nBest weights:")
+print("\nBest weights:")
 print(f"  w_H:     {best_weights[0]:.3f}")
 print(f"  w_PR:    {best_weights[1]:.3f}")
 print(f"  w_R:     {best_weights[2]:.3f}")
@@ -153,7 +152,7 @@ ax.legend()
 ax.grid(True, alpha=0.3, axis='y')
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'separation_distribution.png')
-print(f"  Saved: separation_distribution.png")
+print("  Saved: separation_distribution.png")
 
 # 2. Weight importance
 fig, axes = plt.subplots(2, 3, figsize=(15, 10))
@@ -175,7 +174,7 @@ for idx, (ax, weight_name) in enumerate(zip(axes[:5], weight_names)):
 axes[-1].axis('off')
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'weight_vs_separation.png')
-print(f"  Saved: weight_vs_separation.png")
+print("  Saved: weight_vs_separation.png")
 
 # 3. Pairwise weight interactions (top 3 most important)
 # Find most important weights by correlation
@@ -197,7 +196,7 @@ for idx, (w1, w2) in enumerate(itertools.combinations(top_weights, 2)):
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'weight_interactions.png')
-print(f"  Saved: weight_interactions.png")
+print("  Saved: weight_interactions.png")
 
 # 4. Comparison of best vs equal weights
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -224,7 +223,7 @@ ax.legend()
 ax.grid(True, alpha=0.3, axis='y')
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'weight_comparison.png')
-print(f"  Saved: weight_comparison.png")
+print("  Saved: weight_comparison.png")
 
 # 5. Feature importance ranking
 print("\nFeature importance (by correlation with separation):")

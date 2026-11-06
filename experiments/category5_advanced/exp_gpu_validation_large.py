@@ -43,7 +43,7 @@ def create_lattice_gpu(side=70):
 
 def analyze_bifurcation(laplacian, coupling_strength):
     """Analyze critical behavior as coupling varies."""
-    n_nodes = laplacian.shape[0]
+    laplacian.shape[0]
     eigenvalues, eigenvectors = torch.linalg.eigh(laplacian)
     
     modes = torch.randn(len(eigenvalues), device=device) * 0.1
@@ -77,7 +77,7 @@ print("=" * 80)
 print("CATEGORY 5: ADVANCED PHENOMENA VALIDATION")
 print("=" * 80)
 print(f"Network size: {N_NODES} nodes")
-print(f"Analysis: Bifurcations and critical transitions")
+print("Analysis: Bifurcations and critical transitions")
 print("=" * 80)
 
 laplacian = create_lattice_gpu(side=70)

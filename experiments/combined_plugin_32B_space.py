@@ -204,7 +204,7 @@ def main():
                 elapsed = time.time() - t0
 
                 if result is None:
-                    log(f"    SKIPPED (API failure)")
+                    log("    SKIPPED (API failure)")
                     continue
 
                 # Enrich with metadata
@@ -266,7 +266,7 @@ def main():
                     sig_pairs.append((metric_names[i], metric_names[j], r, p))
 
         if sig_pairs:
-            log(f"\n  Significant correlations (p < 0.05):")
+            log("\n  Significant correlations (p < 0.05):")
             for m1, m2, r, p in sorted(sig_pairs, key=lambda x: x[3]):
                 star = "***" if p < 0.001 else "**" if p < 0.01 else "*"
                 log(f"    {m1} <-> {m2}: r={r:.3f}, p={p:.4f} {star}")

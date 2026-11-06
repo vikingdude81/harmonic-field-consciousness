@@ -14,10 +14,9 @@ This module enables:
 
 import numpy as np
 from typing import Dict, Tuple, Optional, List
-from scipy.signal import welch, find_peaks
 from scipy.fft import fft, fftfreq
 
-from .push_pull_oscillator import PushPullOscillator, MultiScalePushPull
+from .push_pull_oscillator import MultiScalePushPull
 
 
 def oscillation_to_harmonic_mode(

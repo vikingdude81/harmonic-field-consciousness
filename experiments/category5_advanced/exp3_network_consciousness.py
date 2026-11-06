@@ -26,15 +26,11 @@ from scipy import stats
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
-from utils.chaos_metrics import compute_all_chaos_metrics
 from utils.advanced_networks import (
     generate_hierarchical_modular,
-    generate_rich_club,
-    generate_small_world_scale_free_hybrid,
-    generate_connectome_inspired,
     compute_network_metrics
 )
-from utils.category_theory_metrics import compute_sheaf_consistency, compute_integration_phi
+from utils.category_theory_metrics import compute_sheaf_consistency
 
 # Configuration
 SEED = 42
@@ -326,7 +322,7 @@ ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'small_world_analysis.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: small_world_analysis.png")
+print("  Saved: small_world_analysis.png")
 
 # Figure 2: Lesion analysis
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -347,7 +343,7 @@ ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'lesion_analysis.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: lesion_analysis.png")
+print("  Saved: lesion_analysis.png")
 
 # Figure 3: Network type comparison
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -360,7 +356,7 @@ plt.suptitle('')  # Remove automatic title
 
 plt.tight_layout()
 plt.savefig(OUTPUT_DIR / 'network_type_comparison.png', dpi=150, bbox_inches='tight')
-print(f"  Saved: network_type_comparison.png")
+print("  Saved: network_type_comparison.png")
 
 # Save all results
 df_sw.to_csv(OUTPUT_DIR / 'small_world_sweep.csv', index=False)

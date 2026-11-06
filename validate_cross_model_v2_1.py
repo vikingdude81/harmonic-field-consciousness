@@ -20,7 +20,7 @@ Metrics:
 import torch
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from typing import Dict, List, Tuple
+from typing import Dict
 import json
 from datetime import datetime
 
@@ -279,7 +279,7 @@ def main():
     print("CONSCIOUSNESS CIRCUIT v2.1 - CROSS-MODEL VALIDATION")
     print("="*70)
     print(f"Testing {len(models_to_test)} models on {len(TEST_PROMPTS)} prompts")
-    print(f"Target dimensions: 212 (Self-Reflective), 5065 (Self-Expression)")
+    print("Target dimensions: 212 (Self-Reflective), 5065 (Self-Expression)")
     print(f"Start time: {datetime.now().isoformat()}")
     
     # Test each model

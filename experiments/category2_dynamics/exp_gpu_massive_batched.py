@@ -10,7 +10,6 @@ Key optimizations:
 
 import numpy as np
 import torch
-import torch.nn.functional as F
 from pathlib import Path
 import pandas as pd
 from tqdm import tqdm
@@ -438,7 +437,7 @@ def run_batched_experiment(config: dict):
     print(f"\n[OK] Results saved to: {output_path / 'results_batched.csv'}")
     
     # Summary stats
-    print(f"\nResults:")
+    print("\nResults:")
     print(f"  Avg rotation: {df['rotation_angle'].mean():.2f} rad")
     print(f"  Saved to: {output_path / 'results_batched.csv'}")
     

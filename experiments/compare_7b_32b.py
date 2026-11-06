@@ -125,8 +125,8 @@ print()
 
 # Architecture
 print("--- ARCHITECTURE ---")
-print(f"  7B:  hidden_dim=3584, target_layer=21 (75% of 28)")
-print(f"  32B: hidden_dim=5120, target_layer=48 (75% of 64)")
+print("  7B:  hidden_dim=3584, target_layer=21 (75% of 28)")
+print("  32B: hidden_dim=5120, target_layer=48 (75% of 64)")
 seq7 = [r["seq_len"] for r in r7]
 seq32 = [r["compressibility"].get("seq_len", 0) for r in r32]
 print(f"  7B seq_len:  mean={np.mean(seq7):.0f}, range=[{min(seq7)}, {max(seq7)}]")

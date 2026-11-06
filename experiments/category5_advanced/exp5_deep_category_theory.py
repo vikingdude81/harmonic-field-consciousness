@@ -16,9 +16,8 @@ Mathematical framework connecting consciousness to modern algebra.
 
 import numpy as np
 import sys
-import matplotlib.pyplot as plt
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict
 
 # Add parent to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -31,24 +30,14 @@ from utils.state_generators import (
     generate_nondual_awareness,
     generate_focused_attention_meditation
 )
-from utils.metrics import (
-    compute_mode_entropy,
-    compute_participation_ratio,
-    compute_phase_coherence,
-    compute_consciousness_functional
-)
 from utils.category_theory_metrics import (
-    compute_all_category_metrics,
-    compute_all_advanced_category_metrics,
     compute_natural_transformation_distance,
-    compute_colimit_consciousness,
     compute_adjoint_functor_measure,
     compute_topos_structure,
     compute_grothendieck_construction,
     compute_yoneda_embedding_richness,
     compute_monad_structure,
-    compute_kan_extension,
-    compute_enriched_category_measure
+    compute_kan_extension
 )
 from utils.graph_generators import generate_small_world
 
@@ -428,7 +417,6 @@ Monad laws model how attention COMPOSES and BINDS.
     
     np.random.seed(42)
     n_modes = 20
-    n_time = 100
     n_nodes = 40
     
     G, adj = generate_small_world(n_nodes, k=6, p=0.3)

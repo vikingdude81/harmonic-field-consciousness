@@ -14,10 +14,9 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
-from typing import Any, Dict, List, Callable, Optional, Union, Tuple
+from typing import Dict, List, Callable, Optional, Union, Tuple
 from dataclasses import dataclass, field
 import json
-import warnings
 
 # Optional imports
 try:
@@ -794,7 +793,7 @@ class BenchmarkSuite:
         lines = [
             f"# Benchmark Report: {self.name}",
             f"\nGenerated: {datetime.now().isoformat()}",
-            f"\n## Summary",
+            "\n## Summary",
             f"\nTotal benchmarks: {len(self.results)}",
             ""
         ]

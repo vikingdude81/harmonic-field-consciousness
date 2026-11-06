@@ -23,7 +23,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from pathlib import Path
 from tqdm import tqdm
-from scipy import stats
 
 from utils import metrics as met
 
@@ -315,28 +314,28 @@ local_heavy = df_results[df_results['profile'].str.contains('Local-Heavy')].iloc
 sparse = df_results[df_results['profile'].str.contains('Sparse')].iloc[0]
 balanced = df_results[df_results['profile'].str.contains('Balanced')].iloc[0]
 
-print(f"\nLong-range Dominant (Neurotypical-like):")
+print("\nLong-range Dominant (Neurotypical-like):")
 print(f"  - Mean degree: {long_range['mean_degree']:.2f} (high global connectivity)")
 print(f"  - Clustering: {long_range['clustering']:.4f} (low local structure)")
 print(f"  - R_dyn: {long_range['R_dyn']:.4f} (phase coherence)")
 print(f"  - H_mode: {long_range['H_mode']:.4f} (complexity)")
 print(f"  - C: {long_range['C']:.4f} (consciousness metric)")
 
-print(f"\nLocal-Heavy (Autism-like):")
+print("\nLocal-Heavy (Autism-like):")
 print(f"  - Mean degree: {local_heavy['mean_degree']:.2f} (strong local connections)")
 print(f"  - Clustering: {local_heavy['clustering']:.4f} (high local structure)")
 print(f"  - R_dyn: {local_heavy['R_dyn']:.4f} (phase coherence)")
 print(f"  - H_mode: {local_heavy['H_mode']:.4f} (complexity)")
 print(f"  - C: {local_heavy['C']:.4f} (consciousness metric)")
 
-print(f"\nSparse Random (Fragmented):")
+print("\nSparse Random (Fragmented):")
 print(f"  - Mean degree: {sparse['mean_degree']:.2f} (minimal connectivity)")
 print(f"  - Clustering: {sparse['clustering']:.4f} (no coherent structure)")
 print(f"  - R_dyn: {sparse['R_dyn']:.4f} (phase coherence)")
 print(f"  - H_mode: {sparse['H_mode']:.4f} (complexity)")
 print(f"  - C: {sparse['C']:.4f} (consciousness metric)")
 
-print(f"\nBalanced (Intermediate):")
+print("\nBalanced (Intermediate):")
 print(f"  - Mean degree: {balanced['mean_degree']:.2f} (moderate connectivity)")
 print(f"  - Clustering: {balanced['clustering']:.4f} (moderate local structure)")
 print(f"  - R_dyn: {balanced['R_dyn']:.4f} (phase coherence)")

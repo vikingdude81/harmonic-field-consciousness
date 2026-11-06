@@ -16,7 +16,6 @@ Strategy:
 """
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
-import numpy as np
 
 print("Loading model...")
 model = AutoModelForCausalLM.from_pretrained(
@@ -171,7 +170,7 @@ top_k = 30
 vals, idxs = torch.topk(diff, top_k)
 
 print(f"\nTop {top_k} dimensions where SELF > NEUTRAL:")
-print(f"(These fire MORE when model generates 'I', 'my', etc.)")
+print("(These fire MORE when model generates 'I', 'my', etc.)")
 print(f"\n{'Dim':>6} {'Self':>10} {'Neutral':>10} {'Diff':>10}")
 print("-"*40)
 
@@ -187,7 +186,7 @@ for i in range(top_k):
 # Also find bottom (where neutral > self)
 vals_bot, idxs_bot = torch.topk(-diff, top_k)
 print(f"\n\nTop {top_k} dimensions where NEUTRAL > SELF:")
-print(f"(These fire LESS when model generates self-referential tokens)")
+print("(These fire LESS when model generates self-referential tokens)")
 print(f"\n{'Dim':>6} {'Self':>10} {'Neutral':>10} {'Diff':>10}")
 print("-"*40)
 
@@ -237,7 +236,7 @@ print("PHASE 5: Compare with current Self dimension (1372)")
 print("="*70)
 
 current_self = 1372
-print(f"\nCurrent Self dim (1372):")
+print("\nCurrent Self dim (1372):")
 print(f"  Self mean:    {self_mean[current_self].item():+.3f}")
 print(f"  Neutral mean: {neutral_mean[current_self].item():+.3f}")
 print(f"  Difference:   {diff[current_self].item():+.3f}")
@@ -250,7 +249,7 @@ print(f"  Difference:   {candidates[0][1]:+.3f}")
 print("\n" + "="*70)
 print("RECOMMENDATIONS")
 print("="*70)
-print(f"\nTop 5 candidate dimensions for 'Self-Expression' in chat mode:")
+print("\nTop 5 candidate dimensions for 'Self-Expression' in chat mode:")
 for i, (dim, diff_val) in enumerate(candidates[:5]):
     print(f"  {i+1}. Dim {dim}: diff = {diff_val:+.3f}")
 

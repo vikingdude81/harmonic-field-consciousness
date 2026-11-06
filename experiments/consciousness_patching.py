@@ -19,7 +19,7 @@ import json
 import torch
 import numpy as np
 from pathlib import Path
-from typing import Dict, List, Optional, Callable
+from typing import Dict, List, Optional
 from dataclasses import dataclass, asdict
 
 import sys
@@ -266,7 +266,7 @@ def plot_patch_impact(results: List[PatchResult], save_path: Optional[str] = Non
     # Mark most impactful layers
     if deltas:
         min_idx = np.argmin(deltas)
-        max_idx = np.argmax(deltas)
+        np.argmax(deltas)
         ax1.annotate(f'Most disruptive: L{layers[min_idx]}', 
                     xy=(layers[min_idx], deltas[min_idx]),
                     xytext=(layers[min_idx], deltas[min_idx] - 0.05),
@@ -328,7 +328,7 @@ def main():
     
     layers_to_test = list(range(0, num_layers + 1, args.layer_step))  # +1 for embedding layer
     
-    print(f"\n=== Consciousness Patching ===")
+    print("\n=== Consciousness Patching ===")
     print(f"High prompt: {prompt_high[:80]}...")
     print(f"Low prompt: {prompt_low[:80]}...")
     print(f"Testing {len(layers_to_test)} layers\n")

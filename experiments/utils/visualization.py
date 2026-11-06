@@ -15,8 +15,6 @@ import matplotlib.pyplot as plt
 import networkx as nx
 from typing import Optional, List, Dict, Tuple
 import seaborn as sns
-from matplotlib.patches import Circle
-from mpl_toolkits.mplot3d import Axes3D
 
 
 # Set publication-quality style

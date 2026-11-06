@@ -90,7 +90,7 @@ if len(valid_df) >= 3:
     alpha = coeffs[0]
     
     print(f'Rotation Rate ~ Nodes^{alpha:.3f}')
-    print(f'  (Expected from theory: ~N^0.5 for sqrt scaling)')
+    print('  (Expected from theory: ~N^0.5 for sqrt scaling)')
     
     # Wave speed scaling
     wave_df = valid_df[valid_df['wave_speed'] > 0]
@@ -132,4 +132,4 @@ print()
 
 # Save summary
 df_summary.to_csv('results/scaling_analysis_summary.csv', index=False)
-print(f'Summary saved to: results/scaling_analysis_summary.csv')
+print('Summary saved to: results/scaling_analysis_summary.csv')

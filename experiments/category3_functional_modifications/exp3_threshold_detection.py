@@ -22,17 +22,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from pathlib import Path
 from tqdm import tqdm
-from scipy import stats
 import warnings
 warnings.filterwarnings('ignore')
 
 from utils import graph_generators as gg
 from utils import metrics as met
 from utils import state_generators as sg
-from utils import visualization as viz
-from utils.gpu_utils import get_device_info, batch_compute_metrics_gpu, print_gpu_status
-from utils.chaos_metrics import compute_branching_ratio
-from utils.category_theory_metrics import compute_integration_phi, compute_sheaf_consistency
+from utils.gpu_utils import get_device_info, print_gpu_status
 
 # Configuration - Enhanced for clinical-grade threshold detection
 SEED = 42
@@ -133,7 +129,7 @@ def compute_roc_curve(y_true, y_score):
     """
     # Sort by score
     sorted_indices = np.argsort(y_score)[::-1]
-    y_true_sorted = y_true[sorted_indices]
+    y_true[sorted_indices]
     y_score_sorted = y_score[sorted_indices]
     
     # Compute thresholds
@@ -210,7 +206,7 @@ print("\n2. Performing ROC analysis for C(t)...")
 
 roc_C = compute_roc_curve(df_samples['label'].values, df_samples['C'].values)
 
-print(f"\n  C(t) Classification Performance:")
+print("\n  C(t) Classification Performance:")
 print(f"    AUC: {roc_C['auc']:.4f}")
 print(f"    Optimal threshold: {roc_C['optimal_threshold']:.4f}")
 print(f"    Sensitivity (TPR): {roc_C['optimal_tpr']:.4f}")
@@ -528,7 +524,7 @@ for metric in sorted(metric_cols, key=lambda x: roc_results[x]['auc'], reverse=T
 print("\nClinical Recommendations:")
 print(f"  - Use C(t) > {roc_C['optimal_threshold']:.3f} as consciousness indicator")
 print(f"  - Best single predictor: {max(metric_cols, key=lambda x: roc_results[x]['auc'])} (AUC={max(roc_results[x]['auc'] for x in metric_cols):.3f})")
-print(f"  - Combined C(t) provides best overall performance")
+print("  - Combined C(t) provides best overall performance")
 
 print("\n" + "=" * 60)
 print(f"Experiment completed! Results saved to: {OUTPUT_DIR}")

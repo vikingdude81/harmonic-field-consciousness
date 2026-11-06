@@ -27,7 +27,7 @@ Usage:
 import torch
 import torch.nn as nn
 import numpy as np
-from typing import Optional, Tuple, List
+from typing import Optional
 
 
 class RotationConsciousnessMonitor(nn.Module):
@@ -185,7 +185,7 @@ class ConsciousnessAwareGeneration:
             logits = logits[:, -1, :]
             
             # Update consciousness monitor
-            rotation = self.monitor.update(hidden_state)
+            self.monitor.update(hidden_state)
             consciousness = self.monitor.get_consciousness()
             consciousness_history.append(consciousness)
             

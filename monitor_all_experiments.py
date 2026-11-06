@@ -5,7 +5,6 @@ Tracks both LLM training and eigensolver experiments
 """
 
 import subprocess
-import time
 import os
 from datetime import datetime, timedelta
 

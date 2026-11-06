@@ -107,8 +107,8 @@ def check_pytorch_cuda():
             # Verify we can use GPU 0
             device = torch.device('cuda:0')
             x = torch.randn(100, 100, device=device)
-            y = torch.matmul(x, x)
-            print(f"\n[OK] GPU 0 test passed")
+            torch.matmul(x, x)
+            print("\n[OK] GPU 0 test passed")
             return True
         else:
             print("[ERROR] CUDA not available!")

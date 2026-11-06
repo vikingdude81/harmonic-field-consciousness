@@ -22,12 +22,12 @@ import pandas as pd
 from tqdm import tqdm
 import time
 import sys
-from typing import Tuple, Optional
+from typing import Tuple
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from src.neural_mass.sparse_harmonic_bridge import SparseHarmonicBridge, create_sparse_network
+from src.neural_mass.sparse_harmonic_bridge import SparseHarmonicBridge
 
 # GPU setup (for dynamics simulation, not eigendecomposition)
 if torch.cuda.is_available():
@@ -37,7 +37,7 @@ if torch.cuda.is_available():
         print(f"  GPU {gpu_id}: {torch.cuda.get_device_name(gpu_id)} ({props.total_memory / 1e9:.2f} GB)")
 
     device = torch.device('cuda:0')  # Use GPU 0 for dynamics
-    print(f"\n[OK] Using GPU 0 for dynamics simulation")
+    print("\n[OK] Using GPU 0 for dynamics simulation")
 else:
     device = torch.device('cpu')
     print("CUDA not available, using CPU")
@@ -96,7 +96,7 @@ def compute_eigenmodes_sparse(laplacian: sp.csr_matrix, n_modes: int,
         eigenvalues: (n_modes,) smallest eigenvalues
         eigenvectors: (N, n_modes) corresponding eigenvectors
     """
-    N = laplacian.shape[0]
+    laplacian.shape[0]
 
     # Use SparseHarmonicBridge for decomposition
     device_str = 'cuda' if use_gpu else 'cpu'
@@ -181,7 +181,7 @@ def run_sparse_experiment(side: int, n_modes: int, n_trials: int,
     N = side * side
 
     print("="*80)
-    print(f"SPARSE EIGENSOLVER EXPERIMENT")
+    print("SPARSE EIGENSOLVER EXPERIMENT")
     print("="*80)
     print(f"Network size: {side}×{side} = {N:,} nodes")
     print(f"Modes: {n_modes}")
@@ -267,11 +267,11 @@ def run_sparse_experiment(side: int, n_modes: int, n_trials: int,
     print(f"  - Simulations: {sim_time:.2f}s")
     print(f"  - Throughput: {n_trials / sim_time:.2f} trials/sec")
 
-    print(f"\nPattern Detection:")
+    print("\nPattern Detection:")
     print(f"  - Wave patterns: {df['has_wave'].sum()} / {n_trials} ({100*df['has_wave'].mean():.1f}%)")
     print(f"  - Rotations: {df['has_rotation'].sum()} / {n_trials} ({100*df['has_rotation'].mean():.1f}%)")
 
-    print(f"\nMetrics:")
+    print("\nMetrics:")
     print(f"  - Mean final energy: {df['final_energy'].mean():.4f} ± {df['final_energy'].std():.4f}")
     print(f"  - Mean max amplitude: {df['max_amplitude'].mean():.4f} ± {df['max_amplitude'].std():.4f}")
 

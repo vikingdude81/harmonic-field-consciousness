@@ -3,10 +3,8 @@ Statistical analysis of full 180-trial Experiment 2 dataset
 """
 from typing import cast
 import pandas as pd
-import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 # Load full dataset
 df = pd.read_csv('results/exp_rotational_recovery_v2/exp2_rotation_recovery_correlation.csv')
@@ -58,13 +56,13 @@ print(f'Continuous angles: {continuous}/{len(df)} ({continuous/len(df)*100:.1f}%
 
 # Distribution analysis
 print('\n--- DISTRIBUTION STATISTICS ---')
-print(f'\nRotation angles:')
+print('\nRotation angles:')
 print(f'  Mean: {df["rotation_angle"].mean():.2f}°')
 print(f'  Median: {df["rotation_angle"].median():.2f}°')
 print(f'  Std: {df["rotation_angle"].std():.2f}°')
 print(f'  Range: [{df["rotation_angle"].min():.2f}, {df["rotation_angle"].max():.2f}]°')
 
-print(f'\nNormalized recovery:')
+print('\nNormalized recovery:')
 print(f'  Mean: {df["normalized_recovery"].mean():.3f}')
 print(f'  Median: {df["normalized_recovery"].median():.3f}')
 print(f'  Std: {df["normalized_recovery"].std():.3f}')
@@ -133,4 +131,4 @@ ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.savefig('results/exp_rotational_recovery_v2/exp2_full_analysis.png', dpi=150, bbox_inches='tight')
-print(f'\n✓ Enhanced visualization saved to: results/exp_rotational_recovery_v2/exp2_full_analysis.png')
+print('\n✓ Enhanced visualization saved to: results/exp_rotational_recovery_v2/exp2_full_analysis.png')

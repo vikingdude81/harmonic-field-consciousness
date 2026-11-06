@@ -7,7 +7,6 @@ Includes diverse prompts designed to push wider SE variation:
   - Simple vs complex reasoning
   - Concrete vs abstract topics
 """
-import os
 import sys
 import json
 import time
@@ -305,7 +304,7 @@ def analyze_results(results):
             f"{r_c:>+8.3f} {p_c:>8.4f}{star}")
 
     # SE variation statistics
-    log(f"\n--- SE VARIATION ---\n")
+    log("\n--- SE VARIATION ---\n")
     log(f"  Overall:  mean={se.mean():.4f}  std={se.std():.4f}  "
         f"range={se.max()-se.min():.4f}  CoV={se.std()/se.mean():.3f}")
 

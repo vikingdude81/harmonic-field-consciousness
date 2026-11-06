@@ -6,7 +6,7 @@ from streaming harmonic mode data.
 """
 
 import numpy as np
-from typing import Tuple, Optional, Dict
+from typing import Dict
 import time
 
 
@@ -161,7 +161,7 @@ class RealtimeDecoder:
         """
         C_t = metrics.get('C_t', 0)
         H_mode = metrics.get('H_mode', 0)
-        PR = metrics.get('PR', 0)
+        metrics.get('PR', 0)
         
         # Simple threshold-based classification
         if C_t > 0.6 and H_mode > 0.6:

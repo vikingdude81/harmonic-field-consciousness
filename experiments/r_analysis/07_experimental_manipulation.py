@@ -39,7 +39,7 @@ def simulate_consciousness_functional(adj, coupling, noise_level=0.1, steps=200)
     a = np.random.randn(n_modes) * 0.1
     
     # Natural frequencies
-    omega = eigenvalues[1:n_modes+1] ** 0.5
+    eigenvalues[1:n_modes+1] ** 0.5
     
     # Simulate dynamics
     dt = 0.05
@@ -163,7 +163,7 @@ a_coupling = stats.pearsonr(df_coupling['K'], df_coupling['R'])[0]
 # Path c: Total effect (Manipulation -> C)
 c_coupling = stats.pearsonr(df_coupling['K'], df_coupling['C'])[0]
 
-print(f"\n  Coupling manipulation:")
+print("\n  Coupling manipulation:")
 print(f"    Path a (K -> R): {a_coupling:.3f}")
 print(f"    Path b (R -> C): {r_rc:.3f}")
 print(f"    Total (K -> C):  {c_coupling:.3f}")
