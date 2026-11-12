@@ -35,6 +35,21 @@ Key files under `paper/`:
 
 **Stale/duplicate copies to NOT treat as canonical:** `C:\Users\akbon\Downloads\Bearer_Theory_*.pdf|.docx`, `H:\AI PAPERS-20260802T182408Z-1-001\AI PAPERS\Bearer_Theory_*`. Canonical = hub `paper/`.
 
+## Corrections from the Nov-11 audit pass (AUDIT_NOV2026.md, branch `audit/nov2026`)
+- `bearer_theory_proposed_insertions_part2.md` **does exist** in the vault (`theology-philosophy-archive/papers/drafts/`) — its letters E–H collide with the hub's E–G; re-letter one set before merging.
+- `FTTF-fournier (1)` is a **different project**, not a duplicate checkout.
+- The Bearer Theory chapters 1–9 have **no markdown source on this machine** — PDFs only (md5 `2cba0233…`); source likely lives in ChatGPT canvases. Hub `paper/` is canonical only for LBL/convergence PDFs.
+- `motion-lgi` has a remote; `oracle` remote in hub is a fork — **never push to it**.
+- C-series `best_model.pt` weights were deleted 2026-11-01 (retrained 2026-11-11 → `E:\bearer_backups\cseries_retrain_2026-11`); L5 weights lived only in AppData → now backed up to `E:\bearer_backups\l5_experiment_2026-11-11` (113 ckpts, SHA-256 verified).
+
+## HEADLINE REVERSAL (verified by Hermes recompute of audit_nov2026/l5_erasure_realtoken.json, 2026-11-11)
+L5 erasure metric scored pad targets (pad=id 0, `ignore_index=-100` mismatch). On REAL tokens:
+- **RECORD_IS_TAX is WITHDRAWN.** M3 grown-in ΔNLL flips to **positive, 15/15 seeds, all CIs > 0** (median +0.049; canonical −0.2638 → +0.0367; orig-column fidelity exact: −0.8421 reproduced).
+- M2b retrofit real-token effect ≈ 0 (≤0.002) — retrofit record functionally idle. Reading: grown-in **load-bearing**, retrofit **available but idle** (memory-stratum analogue of FTTF "available, not constitutive").
+- ξ friction instrument survives pad-free rescoring; M3 L3 braking ~⅓ smaller; inverted-mirror reading stronger.
+- C-series ladder tax→crutch→internalized survives real tokens (n=12 retrain); replace "threefold" with plateau gap +0.0011 [+0.0006, +0.0016]; occupancy is NOT a grown-in signature (adapted retrofit matches ~0.46× chance).
+- Withdraw everywhere: "grown-in tax" (paper 3 claim 3), "erasing improves performance", "permanently reshapes 1.80≫0.52", G7 liability-trough bridge.
+
 ## 3. Audit checklist (things to check)
 1. **Insertion merge state:** A–G insertion files vs current manuscript — which are still proposals vs already merged? (HEAD c7aa384 added E–G as proposals.)
 2. **Claim→artifact closure:** every empirical claim in `bearer_theory_empirical_consolidation.md` + `bearer_theory_experiment_mapping.md` must resolve to a results file at the paths above; list any claim with no artifact.
